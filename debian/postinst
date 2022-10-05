@@ -1,0 +1,49 @@
+#!/bin/sh
+# postinst script 
+# see: dh_installdeb(1)
+
+set -e
+
+case "$1" in
+    configure|upgrade|update|reconfigure|triggered)
+        
+        update-rc.d hamonikr-system defaults
+        
+        if which glib-compile-schemas >/dev/null 2>&1
+        then
+            glib-compile-schemas /usr/share/glib-2.0/schemas
+        fi
+
+        if which systemctl >/dev/null 2>&1
+        then
+            systemctl daemon-reload || true
+            systemctl reenable hamonikr-system.service || true
+        fi
+
+        /usr/lib/hamonikr/hamonikr-system/hamonikr-adjust.py
+
+        # Apply HamoniKR OS infomation in system
+        cp /etc/issue /etc/hamonikr/issue.bak
+        cp /etc/issue.net /etc/hamonikr/issue.bak
+        cp /etc/lsb-release /etc/hamonikr/lsb-release.bak
+        cp /etc/os-release /etc/hamonikr/os-release.bak
+
+        cp -f /etc/hamonikr/issue /etc/issue
+        cp -f /etc/hamonikr/issue.net /etc/issue.net
+        cp -f /etc/hamonikr/lsb-release /etc/lsb-release
+        cp -f /etc/hamonikr/os-release /etc/os-release
+        cp -f /etc/hamonikr/os-release /usr/lib/os-release
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+    
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+exit 0

@@ -1,0 +1,2 @@
+exec /usr/share/applications/naver-whale.desktop /usr/bin/naver-whale-stable %U --password-store=basic
+exec /usr/share/applications/com.github.maoschanz.drawing.desktop drawing --new-tab

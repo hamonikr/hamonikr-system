@@ -1,0 +1,11 @@
+[Nemo Action]
+Name=_Next Workspace
+Name[ko]=다음 작업공간으로 이동(_N)
+Comment=Goto to next workspace
+Comment[ko]=다음 작업공간으로 이동합니다.
+Exec=sh -c 'dbus-send --dest=org.Cinnamon --print-reply /org/Cinnamon org.Cinnamon.switchWorkspaceRight >/dev/null'
+Selection=None
+Extensions=any;
+Icon-Name=go-next-symbolic
+Dependencies=xdotool;
+Conditions=desktop;

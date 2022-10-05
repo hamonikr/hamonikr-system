@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Change to RTC
+Comment=Change to RTC
+Type=Application
+Exec=timedatectl set-local-rtc 1 --adjust-system-clock
+Terminal=false
+Type=Application
+StartupNotify=false
+Terminal=false

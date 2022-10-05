@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=System Shutdown
+Name[ko]=시스템 종료
+Comment[ko]=시스템 재시작 또는 종료
+Comment=System Shutdown
+Icon=system-shutdown
+Exec=cinnamon-session-quit --power-off
+Categories=GNOME;GTK;Utility;
+Keywords=reboot;poweroff;
+Keywords[ko]=재시작;종료;reboot;poweroff;
+NoDisplay=true
+NotShowIn=gnome;cinnamon

@@ -1,0 +1,32 @@
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:          hamonikr-system
+# Required-Start:    $local_fs
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+case $1 in
+    start|restart|force-reload)
+		if which systemctl >/dev/null 2>&1
+		then
+			systemctl disable ubuntu-system-adjustments
+		fi	
+		/usr/lib/hamonikr/hamonikr-system/hamonikr-adjust.py
+		;;
+    stop)
+		;;
+    status)
+		exit 0
+		;;
+    *)
+	echo "Usage: $0 {start|stop|status|restart|force-reload}" >&2
+	exit 3
+	;;
+esac
+
+exit 0

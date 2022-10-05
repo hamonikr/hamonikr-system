@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+    # Update HamoniKR OS translations
+    TARGET_DIR=/usr/share/locale/ko/LC_MESSAGES
+    HAMONIKR_DIR=/usr/share/hamonikr/locale/ko/LC_MESSAGES
+
+    for src in $(ls $HAMONIKR_DIR/*.mo); do
+        cp $src $TARGET_DIR
+    done
+
+    # Grub Korean message
+    if [ -e $HAMONIKR_DIR/grub.mo ]; then
+        cp $HAMONIKR_DIR/grub.mo \
+        /boot/grub/locale/ko.mo
+    fi
+
+fi

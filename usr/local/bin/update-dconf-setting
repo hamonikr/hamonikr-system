@@ -1,0 +1,50 @@
+#!/bin/bash
+touch $HOME/.hamonikr/${0##*/}.log
+echo "$(date +%Y-%m-%d_%H:%M) : ${0##*/} $1 running." | tee $HOME/.hamonikr/${0##*/}.log
+
+file1="/etc/skel/.hamonikr/default_dconf"
+file2="$HOME/.hamonikr/default_dconf"        
+
+if [ ! -f "$file2" ] ; then
+    echo "Could not found $file2. Copying $file1 ..."    
+    cp -af $file1 $file2
+fi
+
+file3="/etc/skel/.hamonikr/hamonikr-terminal.dconf"
+file4="$HOME/.hamonikr/hamonikr-terminal.dconf"        
+
+if [ ! -f "$file4" ] ; then
+    echo "Could not found $file4. Copying $file3 ..."    
+    cp -af $file3 $file4
+fi
+
+if [ -n "$(cmp $file1 $file2)" ] ; then
+    printf 'The file "%s" is different from "%s"\n' "$file1" "$file2"        
+    rm -f $file2
+    cp -af $file1 $file2                  
+fi
+
+if [ -n "$(cmp $file3 $file4)" ] ; then
+    printf 'The file "%s" is different from "%s"\n' "$file3" "$file4"        
+    rm -f $file4
+    cp -af $file3 $file4
+fi
+
+# 이전 설정으로 복원할 때
+if [ X"$1" == "Xrestore" ] ; then
+    echo "Restore previous settings..."    
+    RUID=$(who | awk 'FNR == 1 {print $1}')
+    RUSER_UID=$(id -u ${RUID})
+    dconf load / < /home/${RUID}/.hamonikr/backup_dconf
+fi
+
+if [[ X"$1" == "Xapply" ]] || [[ X"$1" == "X" ]] ; then
+    echo "Dump current settings..."
+    dconf dump / > $HOME/.hamonikr/backup_dconf
+    if [ -f "$HOME/.hamonikr/default_dconf" ] ; then        
+        echo "Execute : $HOME/.hamonikr/default_dconf"
+        bash "$HOME/.hamonikr/default_dconf"
+    fi
+fi
+
+exit 0

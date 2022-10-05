@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ -f "/etc/hamonikr/issue.bak" ] ; then
+    # Apply HamoniKR OS infomation in system
+    cp -f /etc/hamonikr/issue.bak /etc/issue
+    cp -f /etc/hamonikr/issue.net.bak /etc/issue.net
+    cp -f /etc/hamonikr/lsb-release.bak /etc/lsb-release
+    cp -f /etc/hamonikr/os-release.bak /etc/os-release
+    cp -f /etc/hamonikr/os-release.bak /usr/lib/os-release
+
+    rm -f /etc/hamonikr/issue.bak
+    rm -f /etc/hamonikr/issue.bak
+    rm -f /etc/hamonikr/lsb-release.bak
+    rm -f /etc/hamonikr/os-release.bak
+fi

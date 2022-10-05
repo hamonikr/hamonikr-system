@@ -1,0 +1,15 @@
+Package: *
+Pin: origin *.hamonikr.org
+Pin-Priority: 900
+
+Package: *
+Pin: release o=HamoniKR
+Pin-Priority: 900
+
+Package: *
+Pin: release o=linuxmint
+Pin-Priority: 600
+
+Package: *
+Pin: release o=Ubuntu
+Pin-Priority: 500

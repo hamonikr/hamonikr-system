@@ -1,0 +1,6 @@
+{
+    "pinned-apps": {
+        "type": "generic",
+        "default": ["naver-whale.desktop", "org.gnome.Terminal.desktop", "nemo.desktop"]
+      }    
+}

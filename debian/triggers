@@ -1,0 +1,5 @@
+interest-noawait /etc/lsb-release
+interest-noawait /etc/os-release
+interest-noawait /etc/issue
+interest-noawait /etc/issue.net
+interest-noawait /etc/hamonikr/adjustments

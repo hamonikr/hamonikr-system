@@ -1,0 +1,11 @@
+[Nemo Action]
+Name=Display Setting
+Comment=Display Setting
+Exec=cinnamon-settings display
+Selection=None
+Icon-Name=cs-display
+Extensions=any;
+Dependencies=cinnamon-settings;
+Conditions=desktop;dbus org.Cinnamon;
+Name[ko]=디스플레이 설정
+Comment[ko]=디스플레이 설정을 변경

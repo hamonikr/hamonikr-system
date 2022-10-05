@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+    if [ -d "/opt/zoom/platforminputcontexts" ] \
+        && [ -f "/usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libqt5im-nimf.so" ] ; then
+        ln -s /usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libqt5im-nimf.so /opt/zoom/platforminputcontexts
+    fi
+
+fi

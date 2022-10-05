@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+    TARGET_DIR=/usr/share/mime/packages
+
+    for src in $(ls /usr/share/hamonikr/mime/packages//*.xml); do
+        cp $src $TARGET_DIR
+    done
+
+fi

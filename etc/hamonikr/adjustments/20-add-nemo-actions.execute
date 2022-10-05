@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+    TARGET_DIR=/usr/share/nemo/actions
+
+    for src in $(ls /usr/share/hamonikr/nemo/actions/*.nemo_action); do
+        cp $src $TARGET_DIR
+    done
+
+fi

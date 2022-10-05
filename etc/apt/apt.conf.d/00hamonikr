@@ -1,0 +1,26 @@
+# Settings specific to HamoniKR
+APT
+{
+  NeverAutoRemove
+  {
+        "^hamonikr*";
+        "^grub-theme-hamonikr*";
+        "^plymouth-theme-hamonikr-logo*";
+        "^syslinux-themes-hamonikr*";
+        "^nimf*";
+        "^libnimf*";
+        "^albert*";
+        "^boot-select*";        
+        "^cinnamon*";        
+        "^stacer*";        
+        "^unalz*";             
+        "^neofetch*";        
+        "^qt-fsarchiver*";        
+        "^fonts-inconsolata*";        
+        "^fonts-noto-cjk-extra*";                
+        "^spacefm*";        
+        "^xdotool*";                        
+        "main";
+  };
+
+};

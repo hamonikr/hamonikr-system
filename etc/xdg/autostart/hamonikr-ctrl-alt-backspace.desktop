@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=Ctrl Alt Backspace
+Comment=Allows Ctrl+Alt+Backspace to restart Xorg
+Exec=setxkbmap -option terminate:ctrl_alt_bksp
+Terminal=false
+Type=Application
+StartupNotify=false
+Terminal=false

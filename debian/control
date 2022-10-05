@@ -1,0 +1,22 @@
+Source: hamonikr-system
+Section: admin
+Priority: optional
+Maintainer: HamoniKR <root@hamonikr.org>
+XSBC-Original-Maintainer: Clement Lefebvre <clem@linuxmint.com>
+Build-Depends: debhelper (>= 9),
+               fonts-naver-d2coding,
+               grub-common
+Standards-Version: 3.9.5
+Homepage: https://www.hamonikr.org
+Vcs-Git: https://github.com/hamonikr/hamonikr-system.git
+Vcs-Browser: https://github.com/hamonikr/hamonikr-system
+
+Package: hamonikr-system
+Architecture: all
+Depends: ${misc:Depends},
+         libglib2.0-bin,
+         aptitude,
+         python           
+Description: HamoniKR OS Base Package
+ Used by the desktop and other tools to gather
+ information and process common system tasks.

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+    #remove spacefm context menu when select folder
+    if [ -f "/usr/share/applications/spacefm.desktop" ] ; then
+        sed -i '/MimeType=/d' /usr/share/applications/spacefm-folder-handler.desktop 
+        sed -i '/MimeType=/d' /usr/share/applications/spacefm-find.desktop
+        sed -i '/MimeType=/d' /usr/share/applications/spacefm.desktop 
+    fi
+
+fi

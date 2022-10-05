@@ -1,0 +1,10 @@
+[Nemo Action]
+Active=true
+Name=PDF to PNG here
+Name[ko]=PDF를 이미지로 변환
+Comment=PDF to PNG here
+Comment[ko]=PDF 문서를 PNG 이미지로 현재폴더에 변환
+Exec=pdftoppm "%F" "%F" -png
+Icon-Name=gnome-mime-application-pdf
+Selection=s
+Extensions=pdf;

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+    if [ -d /usr/share/cinnamon ] ; then
+        cp -ar /usr/share/hamonikr/cinnamon/* /usr/share/cinnamon
+    fi
+
+fi

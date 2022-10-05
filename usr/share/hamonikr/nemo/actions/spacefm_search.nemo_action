@@ -1,0 +1,13 @@
+[Nemo Action]
+# Requires spacefm to be installed (apt install spacefm).
+# Spacefm allows for search by file contents ;-)
+Name=_Search Here with Contents
+Name[ko]=현재 폴더 상세 검색(_S)
+Comment=Search %F with spacefm
+Comment=선택한 폴더 %F 의 파일명과 내용을 검색합니다.
+Exec=spacefm --find-files %F
+Icon-Name=search-symbolic
+Selection=any
+Extensions=dir;
+EscapeSpaces=true
+Dependencies=spacefm;

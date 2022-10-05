@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+   <mime-type type="application/x-alz">
+      <comment>Alzip Compress File</comment>
+      <comment xml:lang="en">Alzip Compress File</comment>
+      <comment xml:lang="ko">alz 압축 파일</comment>      
+      <glob pattern="*.alz"/>
+      <icon name="alzip"/>
+   </mime-type>  
+</mime-info>

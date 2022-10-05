@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# initialize
+rm -rf /etc/hamonikr/adjustments

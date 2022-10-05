@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=dconf setting
+Comment=Apply HamoniKR Desktop Settings
+Exec=update-dconf-setting apply
+Terminal=false
+Type=Application
+StartupNotify=false

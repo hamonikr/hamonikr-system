@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+    TARGET_DIR=/usr/share/applications
+
+    for src in $(ls /usr/share/hamonikr/add-applications/*.desktop); do
+        cp $src $TARGET_DIR
+    done
+
+fi

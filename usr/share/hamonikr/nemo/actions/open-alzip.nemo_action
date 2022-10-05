@@ -1,0 +1,10 @@
+[Nemo Action]
+Active=true
+Name=Extract here with unalz
+Name[ko]=현재 위치에 Alz 압축 풀기
+Comment=Extract here with unalz
+Comment[ko]=현재 위치에 Alz 압축 파일 풀기
+Exec=gnome-terminal --working-directory=%P -e "/usr/bin/unalz %F"
+Icon-Name=gnome-mime-application-x-zip
+Selection=s
+Extensions=alz;
