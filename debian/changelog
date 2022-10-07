@@ -1,3 +1,13 @@
+hamonikr-system (6.0.3) taebaek; urgency=medium
+  
+  [Kevin Kim]
+  * Update mint mirror
+    - Update from upstream mirror list
+  * Add vitrualbox group
+   - Causes virtualbox share folder permission error
+
+ -- HamoniKR <pkg@hamonikr.org>  Sat, 08 Oct 2022 01:41:48 +0900
+
 hamonikr-system (6.0.2) taebaek; urgency=medium
   
   [Kevin Kim]
