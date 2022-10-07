@@ -1,5 +1,17 @@
 #!/bin/bash
 
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
 if [ -f "/etc/hamonikr/info" ] ; then
 
     SRC_FILE=/usr/share/hamonikr/etc/ImageMagick-6/policy.xml
@@ -8,5 +20,6 @@ if [ -f "/etc/hamonikr/info" ] ; then
     if [[ -e $SRC_FILE ]] && [[ -e $TARGET_FILE ]]; then
         cp $SRC_FILE $TARGET_FILE
     fi
+    log "Update ImageMagic policy"
 
 fi

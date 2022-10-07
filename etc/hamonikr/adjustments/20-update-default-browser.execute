@@ -1,10 +1,21 @@
 #!/bin/bash
 
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
 if [ -f "/etc/hamonikr/info" ] ; then
 
-    status="$(dpkg-query -W --showformat='${db:Status-Status}' naver-whale-stable 2>&1)"
-    if [ ! $? = 0 ] || [ ! "$status" = installed ]; then
-
+    if [ "$(dpkg-query -W --showformat='${db:Status-Status}' naver-whale-stable 2>&1)" = "installed" ] ; then
+    
         if [ -e /usr/bin/x-www-browser ]; then
             update-alternatives --list x-www-browser | grep -qw "/usr/bin/naver-whale-stable"
 
@@ -12,6 +23,7 @@ if [ -f "/etc/hamonikr/info" ] ; then
                 update-alternatives --install /usr/bin/x-www-browser \
                                             x-www-browser \
                                             /usr/bin/naver-whale-stable 9999
+                log "Update default web browser"
             fi
         fi
 

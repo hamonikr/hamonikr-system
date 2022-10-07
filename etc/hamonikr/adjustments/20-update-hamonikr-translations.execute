@@ -1,5 +1,17 @@
 #!/bin/bash
 
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
 if [ -f "/etc/hamonikr/info" ] ; then
 
     # Update HamoniKR OS translations
@@ -9,6 +21,7 @@ if [ -f "/etc/hamonikr/info" ] ; then
     for src in $(ls $HAMONIKR_DIR/*.mo); do
         cp $src $TARGET_DIR
     done
+    log "Update translation"
 
     # Grub Korean message
     if [ -e $HAMONIKR_DIR/grub.mo ]; then

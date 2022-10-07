@@ -1,5 +1,17 @@
 #!/bin/bash
 
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
 if [ -f "/etc/hamonikr/info" ] ; then
 
     # add running user count
@@ -19,6 +31,7 @@ if [ -f "/etc/hamonikr/info" ] ; then
 
         if ping -q -c 1 -W 1 pms.invesume.com >/dev/null; then
             curl -XPOST "http://pms.invesume.com:8086/write?db=hamonikr" --data-binary "machineid,codename=$CODENAME,version=$RELEASE value=\"$RD\""
+            log "Update hamonikr user status"
         fi   
 
     fi    
