@@ -15,8 +15,8 @@ Package: hamonikr-system
 Architecture: all
 Depends: ${misc:Depends},
          imagemagick-6-common,
-         libglib2.0-bin,
-         aptitude
+         spacefm,
+         unalz
 Description: HamoniKR OS Base Package
  Used by the desktop and other tools to gather
  information and process common system tasks.

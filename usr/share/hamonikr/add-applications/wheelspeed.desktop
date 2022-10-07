@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Application
+Version=1.3
+Name=Wheel Speed
+Name[ko]=마우스 휠 속도 설정
+GenericName=Wheel Speed
+GenericName[ko]=마우스 휠 속도 조정 프로그램
+Comment=Wheel Speed
+Comment[ko]=마우스 휠 속도 조정 프로그램
+Icon=wheelspeed
+Exec=wheelspeed
+Terminal=false
+Categories=Utility;
+Keywords=wheel;마우스;휠;mouse;imwheel;속도;speed;
+X-Ubuntu-Gettext-Domain=wheelspeed

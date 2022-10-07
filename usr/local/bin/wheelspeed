@@ -1,0 +1,66 @@
+#!/bin/bash
+#
+# Update for HamoniKR
+# Fri, 02 Jul 2021 16:50:50 +0900
+# Kevin Kim (root@hamonikr.org)
+#
+# Version 0.1 Tuesday, 07 May 2013
+# Comments and complaints http://www.nicknorton.net
+# GUI for mouse wheel speed using imwheel in Gnome
+# imwheel needs to be installed for this script to work
+# sudo apt-get install imwheel
+# Pretty much hard wired to only use a mouse with
+# left, right and wheel in the middle.
+# If you have a mouse with complications or special needs,
+# use the command xev to find what your wheel does.
+#
+
+
+################################################
+#		TRANSLATIONS
+#-----------------------------------------------
+case $LANG in
+	######## Korean by Kevin Kim ########
+	ko* )
+		title="마우스 휠 속도 설정"
+		text="슬라이드바를 조정해서 원하는 휠 속도를 설정하고 [적용] 버튼을 누르세요 \n\n(숫자가 클수록 빠르게 스크롤 됩니다)"        
+        ok_label="적용"
+        ;;
+	* )
+		title="Mouse Wheel Speed"
+		text="Set the wheel speed and press the [Apply] button \n\n(higher numbers mean faster scrolling)"        
+        ok_label="Apply"
+        ;;
+esac
+
+### see if imwheel config exists, if not create it ###
+if [ ! -f ~/.imwheelrc ]
+then
+
+cat >~/.imwheelrc<<EOF
+".*"
+None,      Up,   Button4, 1
+None,      Down, Button5, 1
+Control_L, Up,   Control_L|Button4
+Control_L, Down, Control_L|Button5
+Shift_L,   Up,   Shift_L|Button4
+Shift_L,   Down, Shift_L|Button5
+EOF
+
+fi
+##########################################################
+
+CURRENT_VALUE=$(awk -F 'Button4,' '{print $2}' ~/.imwheelrc)
+
+NEW_VALUE=$(zenity --scale --window-icon=info --ok-label=${ok_label} --title="${title}" --text "${text}" --min-value=1 --max-value=10 --value="$CURRENT_VALUE" --step 1)
+
+if [ "$NEW_VALUE" == "" ];
+then exit 0
+fi
+
+sed -i "s/\($TARGET_KEY *Button4, *\).*/\1$NEW_VALUE/" ~/.imwheelrc # find the string Button4, and write new value.
+sed -i "s/\($TARGET_KEY *Button5, *\).*/\1$NEW_VALUE/" ~/.imwheelrc # find the string Button5, and write new value.
+
+cat ~/.imwheelrc
+imwheel -kill
+
