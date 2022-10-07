@@ -2,14 +2,19 @@
 
 if [ -f "/etc/hamonikr/info" ] ; then
 
-    if [ -e /usr/bin/x-www-browser ]; then
-        update-alternatives --list x-www-browser | grep -qw "/usr/bin/naver-whale-stable"
+    status="$(dpkg-query -W --showformat='${db:Status-Status}' naver-whale-stable 2>&1)"
+    if [ ! $? = 0 ] || [ ! "$status" = installed ]; then
 
-        if [ $? -ne 0 ]; then
-            update-alternatives --install /usr/bin/x-www-browser \
-                                        x-www-browser \
-                                        /usr/bin/naver-whale-stable 9999
+        if [ -e /usr/bin/x-www-browser ]; then
+            update-alternatives --list x-www-browser | grep -qw "/usr/bin/naver-whale-stable"
+
+            if [ $? -ne 0 ]; then
+                update-alternatives --install /usr/bin/x-www-browser \
+                                            x-www-browser \
+                                            /usr/bin/naver-whale-stable 9999
+            fi
         fi
+
     fi
 
 fi

@@ -15,8 +15,7 @@ Package: hamonikr-system
 Architecture: all
 Depends: ${misc:Depends},
          libglib2.0-bin,
-         aptitude,
-         python           
+         aptitude
 Description: HamoniKR OS Base Package
  Used by the desktop and other tools to gather
  information and process common system tasks.

@@ -124,7 +124,6 @@ lock-on-suspend=true
 name='HamoniKR'
 
 [org.cinnamon]
-desktop-effects-minimize-effect="traditional"
 panel-scale-text-icons=true
 workspace-expo-view-as-grid=true
 app-menu-icon-name="linuxmint-logo-5"

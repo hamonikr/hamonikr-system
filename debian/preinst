@@ -1,4 +1,6 @@
 #!/bin/bash
 
-# initialize
-rm -rf /etc/hamonikr/adjustments
+if [ -d /etc/hamonikr/adjustments ] ; then
+    # initialize
+    rm -rf /etc/hamonikr/adjustments
+fi

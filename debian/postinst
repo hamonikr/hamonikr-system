@@ -17,14 +17,14 @@ case "$1" in
         if which systemctl >/dev/null 2>&1
         then
             systemctl daemon-reload || true
-            systemctl reenable hamonikr-system.service || true
+            systemctl enable hamonikr-system.service || true
         fi
 
         /usr/lib/hamonikr/hamonikr-system/hamonikr-adjust.py
 
         # Apply HamoniKR OS infomation in system
         cp /etc/issue /etc/hamonikr/issue.bak
-        cp /etc/issue.net /etc/hamonikr/issue.bak
+        cp /etc/issue.net /etc/hamonikr/issue.net.bak
         cp /etc/lsb-release /etc/hamonikr/lsb-release.bak
         cp /etc/os-release /etc/hamonikr/os-release.bak
 

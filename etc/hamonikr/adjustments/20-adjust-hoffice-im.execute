@@ -2,10 +2,15 @@
 
 if [ -f "/etc/hamonikr/info" ] ; then
 
-    if [ "$(dpkg-query --showformat='${Version}' --show hoffice-hwp )" = "11.20.0.989" ] ; then
-        if [ ! -d "/opt/hnc/hoffice11/Bin/qt.bak" ] && [ -d "/opt/hnc/hoffice11/Bin/qt" ] ; then
-            mv /opt/hnc/hoffice11/Bin/qt /opt/hnc/hoffice11/Bin/qt.bak
-        fi    
+    if [ "$(dpkg-query -W --showformat='${db:Status-Status}' hoffice-hwp 2>&1)" = "installed" ] && \
+        [ "$(dpkg-query -W --showformat='${db:Status-Status}' nimf 2>&1)" = "installed" ]; then
+
+        if [ "$(dpkg-query --showformat='${Version}' --show hoffice-hwp )" = "11.20.0.989" ] ; then
+            if [ ! -d "/opt/hnc/hoffice11/Bin/qt.bak" ] && [ -d "/opt/hnc/hoffice11/Bin/qt" ] ; then
+                mv /opt/hnc/hoffice11/Bin/qt /opt/hnc/hoffice11/Bin/qt.bak
+            fi
+        fi 
+        
     fi
 
 fi
