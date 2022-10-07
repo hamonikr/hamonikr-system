@@ -1,7 +1,3 @@
 Package: *
 Pin: origin *.hamonikr.org
 Pin-Priority: 900
-
-Package: *
-Pin: release o=HamoniKR
-Pin-Priority: 900

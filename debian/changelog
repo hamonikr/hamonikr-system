@@ -1,3 +1,11 @@
+hamonikr-system (6.0.6) taebaek; urgency=medium
+  
+  [Kevin Kim]
+  * Changed APT Pinning setting
+   - Causes update manager error
+
+ -- HamoniKR <pkg@hamonikr.org>  Sat, 08 Oct 2022 02:55:11 +0900
+
 hamonikr-system (6.0.5) taebaek; urgency=medium
   
   [Kevin Kim]
