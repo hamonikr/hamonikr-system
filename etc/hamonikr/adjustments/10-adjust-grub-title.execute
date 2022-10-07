@@ -8,7 +8,7 @@ try:
     with open(info_file) as f:
         for line in f:
             if ("GRUB_TITLE" in line):
-                grub_title = line.strip().split("=")[1]
+                grub_title = line.strip().split("=")[1].replace('"', '')
             else:
                 grub_title = "HamoniKR"
 except Exception as e:

@@ -8,8 +8,9 @@ case "$1" in
 
         if which systemctl >/dev/null 2>&1
         then
-            systemctl is-enabled ubuntu-system-adjustments
-            [ $? != 0 ] && systemctl enable ubuntu-system-adjustments
+            if [ $(systemctl is-enabled ubuntu-system-adjustments) = "disabled" ] ; then
+                systemctl enable ubuntu-system-adjustments
+            fi        
             systemctl daemon-reload
         fi
 

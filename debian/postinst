@@ -16,8 +16,9 @@ case "$1" in
 
         if which systemctl >/dev/null 2>&1
         then
-            systemctl is-enabled ubuntu-system-adjustments
-            [ $? = 0 ] && systemctl disable ubuntu-system-adjustments        
+            if [ $(systemctl is-enabled ubuntu-system-adjustments) = "enabled" ] ; then
+                systemctl disable ubuntu-system-adjustments
+            fi
             systemctl enable hamonikr-system.service
             systemctl daemon-reload
         fi
