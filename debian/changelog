@@ -1,3 +1,12 @@
+hamonikr-system (6.0.1) taebaek; urgency=medium
+  
+  [Kevin Kim]
+  * Removed cinnamon resources
+    - Causes Cinnamon Applet Error
+    - Removed theme releated resources
+
+ -- HamoniKR <pkg@hamonikr.org>  Sat, 08 Oct 2022 00:40:22 +0900
+
 hamonikr-system (6.0.0) stable; urgency=medium
 
   * Release for HamoniKR 6.0
