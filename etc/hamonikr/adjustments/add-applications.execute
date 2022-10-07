@@ -20,6 +20,7 @@ if [ -f "/etc/hamonikr/info" ] ; then
         cp $src $TARGET_DIR
     done
 
-    log "Installed new app in /usr/share/applications"
+    # log "Installed new app in /usr/share/applications"
+    echo "Installed new app in /usr/share/applications"
 
 fi

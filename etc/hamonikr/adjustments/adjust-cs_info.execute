@@ -19,7 +19,8 @@ if [ -f "/etc/hamonikr/info" ] ; then
         if [ -f "/usr/share/cinnamon/cinnamon-settings/modules/cs_info.py" ] ; then
             # 시스템 정보에서 하모니카 정보 보여주도록 수정
             sed -i 's|/etc/linuxmint/info|/etc/hamonikr/info|g' /usr/share/cinnamon/cinnamon-settings/modules/cs_info.py
-            log "Updated /usr/share/cinnamon/cinnamon-settings/modules/cs_info.py"
+            # log "Updated /usr/share/cinnamon/cinnamon-settings/modules/cs_info.py"
+            echo "Updated /usr/share/cinnamon/cinnamon-settings/modules/cs_info.py"
         fi
         
     fi

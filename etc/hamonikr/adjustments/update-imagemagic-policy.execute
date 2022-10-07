@@ -20,6 +20,7 @@ if [ -f "/etc/hamonikr/info" ] ; then
     if [[ -e $SRC_FILE ]] && [[ -e $TARGET_FILE ]]; then
         cp $SRC_FILE $TARGET_FILE
     fi
-    log "Update ImageMagic policy"
+    # log "Update ImageMagic policy"
+    echo "Update ImageMagic policy"
 
 fi

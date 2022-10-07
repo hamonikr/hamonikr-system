@@ -19,7 +19,8 @@ if [ -f "/etc/hamonikr/info" ] ; then
         sed -i '/MimeType=/d' /usr/share/applications/spacefm-folder-handler.desktop 
         sed -i '/MimeType=/d' /usr/share/applications/spacefm-find.desktop
         sed -i '/MimeType=/d' /usr/share/applications/spacefm.desktop 
-        log "Updated spacefm info"
+        # log "Updated spacefm info"
+        echo "Updated spacefm info"
     fi
 
 fi

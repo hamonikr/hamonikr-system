@@ -23,7 +23,8 @@ if [ -f "/etc/hamonikr/info" ] ; then
                 update-alternatives --install /usr/bin/x-www-browser \
                                             x-www-browser \
                                             /usr/bin/naver-whale-stable 9999
-                log "Update default web browser"
+                # log "Update default web browser"
+                echo "Update default web browser"
             fi
         fi
 
