@@ -15,18 +15,14 @@ case "$1" in
         fi
 
         # Apply HamoniKR OS infomation in system
-        cp -f /etc/hamonikr/issue.bak /etc/issue
-        cp -f /etc/hamonikr/issue.net.bak /etc/issue.net
-        cp -f /etc/hamonikr/lsb-release.bak /etc/lsb-release
-        cp -f /etc/hamonikr/os-release.bak /etc/os-release
-        cp -f /etc/hamonikr/os-release.bak /usr/lib/os-release
+        cp -f /etc/hamonikr/.bak/issue.bak /etc/issue
+        cp -f /etc/hamonikr/.bak/issue.net.bak /etc/issue.net
+        cp -f /etc/hamonikr/.bak/lsb-release.bak /etc/lsb-release
+        cp -f /etc/hamonikr/.bak/os-release.bak /etc/os-release
+        cp -f /etc/hamonikr/.bak/os-release.bak /usr/lib/os-release
 
-        rm -f /etc/hamonikr/issue.bak
-        rm -f /etc/hamonikr/issue.net.bak
-        rm -f /etc/hamonikr/lsb-release.bak
-        rm -f /etc/hamonikr/os-release.bak
-
-        rm -f /etc/grub.d/40_hamonikr
+        [ -d "/etc/hamonikr/.bak" ] && rm -rf "/etc/hamonikr/.bak"
+        [ -f "/etc/grub.d/40_hamonikr" ] && rm -f /etc/grub.d/40_hamonikr
 
         ;;
     failed-upgrade)

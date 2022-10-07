@@ -36,10 +36,11 @@ case "$1" in
         /usr/lib/hamonikr/hamonikr-system/hamonikr-adjust.py
 
         # Apply HamoniKR OS infomation in system
-        cp /etc/issue /etc/hamonikr/issue.bak
-        cp /etc/issue.net /etc/hamonikr/issue.net.bak
-        cp /etc/lsb-release /etc/hamonikr/lsb-release.bak
-        cp /etc/os-release /etc/hamonikr/os-release.bak
+        [ ! -d "/etc/hamonikr/.bak" ] && mkdir -p "/etc/hamonikr/.bak"
+        cp /etc/issue /etc/hamonikr/.bak/issue.bak
+        cp /etc/issue.net /etc/hamonikr/.bak/issue.net.bak
+        cp /etc/lsb-release /etc/hamonikr/.bak/lsb-release.bak
+        cp /etc/os-release /etc/hamonikr/.bak/os-release.bak
 
         cp -f /etc/hamonikr/issue /etc/issue
         cp -f /etc/hamonikr/issue.net /etc/issue.net
