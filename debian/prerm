@@ -6,6 +6,13 @@ case "$1" in
     remove|upgrade|deconfigure)
 		update-rc.d -f hamonikr-system remove
 
+        if which systemctl >/dev/null 2>&1
+        then
+            systemctl is-enabled ubuntu-system-adjustments
+            [ $? != 0 ] && systemctl enable ubuntu-system-adjustments
+            systemctl daemon-reload
+        fi
+
         # Apply HamoniKR OS infomation in system
         cp -f /etc/hamonikr/issue.bak /etc/issue
         cp -f /etc/hamonikr/issue.net.bak /etc/issue.net

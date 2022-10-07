@@ -16,8 +16,10 @@ case "$1" in
 
         if which systemctl >/dev/null 2>&1
         then
-            systemctl daemon-reload || true
-            systemctl enable hamonikr-system.service || true
+            systemctl is-enabled ubuntu-system-adjustments
+            [ $? = 0 ] && systemctl disable ubuntu-system-adjustments        
+            systemctl enable hamonikr-system.service
+            systemctl daemon-reload
         fi
 
         /usr/lib/hamonikr/hamonikr-system/hamonikr-adjust.py
