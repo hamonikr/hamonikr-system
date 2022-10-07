@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+    SRC_FILE=/usr/share/hamonikr/etc/ImageMagick-6/policy.xml
+    TARGET_FILE=/etc/ImageMagick-6/policy.xml
+
+    if [[ -e $DEFAULT_TESTPAGE_SRC_FILE ]] && [[ -e $DEFAULT_TESTPAGE_TARGET_FILE ]]; then
+        cp $DEFAULT_TESTPAGE_SRC_FILE $DEFAULT_TESTPAGE_TARGET_FILE
+    fi
+
+fi

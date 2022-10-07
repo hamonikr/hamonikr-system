@@ -14,6 +14,7 @@ Vcs-Browser: https://github.com/hamonikr/hamonikr-system
 Package: hamonikr-system
 Architecture: all
 Depends: ${misc:Depends},
+         imagemagick-6-common,
          libglib2.0-bin,
          aptitude
 Description: HamoniKR OS Base Package
