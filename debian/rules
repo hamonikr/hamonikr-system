@@ -1,14 +1,7 @@
 #!/usr/bin/make -f
 
-GRUB_FONT=D2Coding-Ver1.3.2-20180524-all.ttc
-
 %:
 	dh $@
-
-override_dh_auto_configure:
-	mkdir -p boot/grub/fonts
-	grub-mkfont -s 20 -o boot/grub/fonts/d2coding-font.pf2 \
-						/usr/share/fonts/truetype/naver-d2coding/$(GRUB_FONT)
 
 override_dh_usrlocal:
 	# remove this override when there aren't

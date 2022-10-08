@@ -23,8 +23,6 @@ case "$1" in
 
         [ -d "/etc/hamonikr/.bak" ] && rm -rf "/etc/hamonikr/.bak"
         rm -f "/etc/hamonikr/adjustments/*.execute-done" || true
-        [ -f "/etc/grub.d/40_hamonikr" ] && rm -f /etc/grub.d/40_hamonikr
-
         ;;
     failed-upgrade)
         ;;
