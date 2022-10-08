@@ -1,3 +1,13 @@
+hamonikr-system (6.1.1) taebaek; urgency=medium
+  
+  [Kevin Kim]
+  * Changes some adjustmes script
+   - once to repeat for hoffice and zoom
+  * Changed to prerm
+   - remove execute-done files
+ 
+ -- HamoniKR <pkg@hamonikr.org>  Sat, 08 Oct 2022 10:56:27 +0900
+
 hamonikr-system (6.1.0) taebaek; urgency=medium
   
   [Kevin Kim]
