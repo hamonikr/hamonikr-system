@@ -15,6 +15,7 @@ Package: hamonikr-system
 Architecture: all
 Depends: ${misc:Depends},
          imagemagick-6-common,
+         python-is-python3,
          spacefm,
          unalz
 Description: HamoniKR OS Base Package
