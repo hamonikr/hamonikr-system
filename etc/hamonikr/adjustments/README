@@ -2,6 +2,11 @@
 .execute files define file which are to be execute.
 This file nessary execute permission (+x or chmod 755)
 
+### .execute-once
+.execute-once files define file which are to be execute once.
+This file nessary execute permission (+x or chmod 755)
+File extension will be change to .execute-once after execute. 
+
 ### .overwrite
 .overwrite files define files which are to be overwritten. 
 Each line in these files trigger the overwriting of the destination by the source, with the line following the format: 

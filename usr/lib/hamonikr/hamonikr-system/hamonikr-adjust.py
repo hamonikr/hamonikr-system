@@ -16,9 +16,10 @@ class HamoniKRSystem():
 
     def __init__(self):
         self.start_time = datetime.datetime.now()
-        self.logfile = open("/var/log/hamonikr-system.log", "w")
+        self.logfile = open("/var/log/hamonikr-system.log", "a")
         self.time_log("hamonikr system started")
         self.executed = []
+        self.executed_once = []
         self.overwritten = []
         self.skipped = []
         self.edited = []
@@ -117,6 +118,15 @@ class HamoniKRSystem():
                     full_path = os.path.join(adjustment_directory, filename)
                     os.system(full_path)
                     self.executed.append(full_path)
+
+            # For a script that runs once and does not repeat 
+            for filename in os.listdir(adjustment_directory):
+                basename, extension = os.path.splitext(filename)
+                if extension == ".execute-once":
+                    full_path = os.path.join(adjustment_directory, filename)
+                    os.system(full_path)
+                    os.system("mv -f " + full_path + " " + adjustment_directory + basename + ".execute-done" )
+                    self.executed_once.append(full_path)
 
             # Perform file overwriting adjustments
             array_preserves = []
@@ -221,6 +231,10 @@ class HamoniKRSystem():
             for filename in sorted(self.executed):
                 self.log("  %s" % filename)
 
+            self.log("Executed Once:")
+            for filename in sorted(self.executed_once):
+                self.log("  %s" % filename)
+
             self.log("Replaced:")
             for filename in sorted(self.overwritten):
                 self.log("  %s" % filename)
@@ -232,6 +246,8 @@ class HamoniKRSystem():
             self.log("Skipped:")
             for filename in sorted(self.skipped):
                 self.log("  %s" % filename)
+            
+            self.log("--------------------")
 
             if self.timestamps_changed:
                 self.write_timestamps()

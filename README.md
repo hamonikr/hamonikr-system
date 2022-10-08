@@ -54,7 +54,8 @@ etc/hamonikr/adjustments 안에 수정을 원하는 파일을 작성하면 시�
 
 여기 포함된 파일들은 아래와 같은 확장자로 구분해서 각각의 동작이 실행됩니다.
 
- * .execute : 실행이 되는 파일이며 실행권한 필요
+ * .execute : 실행이 되는 파일이며 실행권한 필요 (매번 반복)
+ * .execute-once : 1회만 실행이 되는 파일이며 실행권한 필요
  * .overwrite : 공백으로 구분된 2개의 필드로 원본과 덮어쓰기 할 대상을 입력하면 적용. 대상이 없는 경우 패스
  * .preserve : 덮어쓰기 하지 않을 파일을 한줄씩 입력하면 시스템 변경시 제외된다.
  * .menu : 데스크톱에 나오는 메뉴를 조정하는 파일로 'exec, hide, show, onlyshowin, rename, categories' 같은 지시어를 사용
@@ -64,6 +65,28 @@ etc/hamonikr/adjustments 안에 수정을 원하는 파일을 작성하면 시�
     hide /usr/shar/applications/xfce-file-manager.desktop;
     categories /usr/shar/applications/libreoffice-draw.desktop Office;
     ```
+
+### 디버깅
+실행 기록은 /var/log/hamonikr-system.log 파일에 기록되며 아래와 같은 내용이 남습니다.
+```
+--------------------
+Execution time: 0:00:00.657935
+2022-10-08 10:21:46 - hamonikr system started
+Executed:
+  /etc/hamonikr/adjustments/adjust-grub-title.execute
+  /etc/hamonikr/adjustments/count-user.execute
+Executed Once:
+Replaced:
+Edited:
+Skipped:
+  /usr/share/applications/firefox.desktop
+  /usr/share/applications/xed.desktop
+  /usr/share/cups/data/default-testpage.pdf
+```
+
+또는
+
+/var/log/syslog 안에서 hamonikr-system 로그를 확인할 수도 있습니다.
 
 ### 개별 사용자 환경을 변경하는 방법
 

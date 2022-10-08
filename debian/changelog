@@ -1,3 +1,14 @@
+hamonikr-system (6.1.0) taebaek; urgency=medium
+  
+  [Kevin Kim]
+  * The process that can run only once is changed so that it does not run every time.
+   - Added 'EXECUTE-ONCE' function for performance
+  * Changed to log append in hamonikr-system.log
+   - Keep previous action log for DEBUG
+  * Fixed missing wheelspeed icon
+
+ -- HamoniKR <pkg@hamonikr.org>  Sat, 08 Oct 2022 10:32:17 +0900
+
 hamonikr-system (6.0.6) taebaek; urgency=medium
   
   [Kevin Kim]

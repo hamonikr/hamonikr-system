@@ -1,38 +1,4 @@
 /etc/hamonikr/templates/default-testpage.pdf /usr/share/cups/data/default-testpage.pdf
-
 /usr/share/hamonikr/mint-mirrors/linuxmint.list /usr/share/mint-mirrors/linuxmint.list
-/usr/share/hamonikr/glib-2.0/schemas/mint-artwork.gschema.override /usr/share/glib-2.0/schemas/mint-artwork.gschema.override
-
-/usr/share/hamonikr/icons/hicolor/scalable/apps/hamonikr-logo.svg /usr/share/icons/hicolor/scalable/apps/hamonikr-logo.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/hamonikr-logo2.svg /usr/share/icons/hicolor/scalable/apps/hamonikr-logo2.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/linuxmint-logo-ring-symbolic.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-ring-symbolic.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/linuxmint-logo-ring.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-ring.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/linuxmint-logo-simple-symbolic.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-simple-symbolic.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/hamonikr-logo.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-2.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/hamonikr-logo.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-3.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/hamonikr-logo.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-4.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/hamonikr-logo.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-5.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/hamonikr-logo.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-badge-symbolic.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/hamonikr-logo.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-badge.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/hamonikr-logo.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-filled-badge.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/hamonikr-logo.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-filled-leaf-badge.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/hamonikr-logo.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-filled-leaf.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/hamonikr-logo.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-filled-ring.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/hamonikr-logo.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-leaf-badge-symbolic.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/hamonikr-logo.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-leaf-badge.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/hamonikr-logo.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-leaf-symbolic.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/hamonikr-logo.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-leaf.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/hamonikr-logo.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-neon-symbolic.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/hamonikr-logo.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-neon.svg
-/usr/share/hamonikr/icons/hicolor/scalable/apps/hamonikr-logo.svg /usr/share/icons/hicolor/scalable/apps/linuxmint-logo-simple.svg
-
-/usr/share/hamonikr/mint-artwork/logos/16.png /usr/share/mint-artwork/logos/16.png
-/usr/share/hamonikr/mint-artwork/logos/22.png /usr/share/mint-artwork/logos/22.png
-/usr/share/hamonikr/mint-artwork/logos/24.png /usr/share/mint-artwork/logos/24.png
-/usr/share/hamonikr/mint-artwork/logos/32.png /usr/share/mint-artwork/logos/32.png
-/usr/share/hamonikr/mint-artwork/logos/48.png /usr/share/mint-artwork/logos/48.png
-/usr/share/hamonikr/mint-artwork/logos/scalable.png /usr/share/mint-artwork/logos/scalable.png
-/usr/share/hamonikr/mint-artwork/logos/scalable.svg /usr/share/mint-artwork/logos/scalable.svg
-
 /usr/share/hamonikr/edit-applications/firefox.desktop /usr/share/applications/firefox.desktop
 /usr/share/hamonikr/edit-applications/xed.desktop /usr/share/applications/xed.desktop
