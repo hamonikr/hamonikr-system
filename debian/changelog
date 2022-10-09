@@ -1,3 +1,11 @@
+hamonikr-system (6.1.5) taebaek; urgency=medium
+  
+  [Kevin Kim]
+  * Add logo overwrite scripts
+   - etc/hamonikr/adjustments/hamonikr-logo.overwrite
+
+ -- HamoniKR <pkg@hamonikr.org>  Sun, 09 Oct 2022 14:26:34 +0900
+
 hamonikr-system (6.1.4) taebaek; urgency=medium
   
   [Kevin Kim]
