@@ -131,8 +131,10 @@ case "$1" in
             if [ -f "/usr/share/applications/hamonikrorg.desktop" ]; then
                 if [ -d "$HOME/Desktop" ]; then
                     cp /usr/share/applications/hamonikrorg.desktop $HOME/Desktop/hamonikrorg.desktop
+                    chmod +x $HOME/Desktop/hamonikrorg.desktop
                 else
                     cp /usr/share/applications/hamonikrorg.desktop "$HOME/바탕화면/hamonikrorg.desktop"
+                    chmod +x "$HOME/바탕화면/hamonikrorg.desktop"
                 fi
                 log "Update hamonikr community link icon"
             fi

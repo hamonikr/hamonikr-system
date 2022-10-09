@@ -6,7 +6,7 @@ hamonikr-system (6.1.8) taebaek; urgency=medium
    - logging : HOME/.hamonikr/log/set-user-env.log
   * Removed update_dconf, updagte-dconf-setting
 
- -- HamoniKR <pkg@hamonikr.org>  Sun, 09 Oct 2022 15:00:32 +0900
+ -- HamoniKR <pkg@hamonikr.org>  Mon, 10 Oct 2022 01:17:26 +0900
 
 hamonikr-system (6.1.7) taebaek; urgency=medium
   
