@@ -88,7 +88,14 @@ Skipped:
 
 /var/log/syslog 안에서 hamonikr-system 로그를 확인할 수도 있습니다.
 
-### 개별 사용자 환경을 변경하는 방법
+### 개별 사용자 환경 설정
 
-데스크톱 환경으로 진입하면 /etc/xdg/autostart/hamonikr-dconf-setting.desktop 파일이 실행되고, 
-실제 수정은 /usr/local/bin/update-dconf-setting 파일이 사용자 레벨 설정을 적용합니다.
+데스크톱 환경으로 진입하면 `/etc/xdg/autostart/hamonikr-user-env.desktop` 파일이 실행되고, 
+실제 수정은 `/usr/local/bin/set-user-env` 파일이 사용자 환경 설정을 적용합니다.
+사용자 환경이 적용된 로그파일은 `HOME/.hamonikr/log/set-user-env.log` 파일을 확인하세요. 
+
+이전 환경으로 복원하시려면 아래와 같이 터미널에 입력하세요.
+
+```
+set-user-env restore
+```
