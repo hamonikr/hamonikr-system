@@ -22,7 +22,7 @@ case "$1" in
         cp -f /etc/hamonikr/.bak/os-release.bak /usr/lib/os-release
 
         [ -d "/etc/hamonikr/.bak" ] && rm -rf "/etc/hamonikr/.bak"
-        rm -f "/etc/hamonikr/adjustments/*.execute-done" || true
+        [ -d "/etc/hamonikr/adjustments" ] && rm -rf "/etc/hamonikr/adjustments"
         ;;
     failed-upgrade)
         ;;

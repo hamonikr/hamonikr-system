@@ -1,0 +1,159 @@
+#!/bin/bash
+#
+# Setting default user desktop enviroment for HamoniKR OS
+# 
+# 이 프로그램은 하모니카OS 사용자의 기본 환경을 설정하는 프로그램 이기 때문에, root 권한이 아니라 사용자 권한으로 실행되어야 합니다.
+# Since this program is a program that sets the basic environment of HamoniKR OS users, it should be executed as user rights, not root privileges. 
+#
+# Usage : set-user-env apply | restore
+# 
+# Copyright 2022 HamoniKR Team. All rights reserved.
+# See LICENSE.md in the project root for license information.
+
+[ "$EUID" = 0 ] && echo "Run with user authority. (EUID : $EUID)" && exit
+
+log() {
+    # stdout
+    echo "$@"
+    # write to logfile
+    mkdir -p $HOME/.hamonikr/log
+    exec 3>&1 1>>$HOME/.hamonikr/log/${0##*/}.log 2>&1 && echo "$(date +%Y-%m-%d_%H:%M_%S) ${0##*/} : $@"
+    # stdout reset
+    exec 1>&3 3>&-
+}
+
+log "Started..."
+
+case "$1" in
+    apply)
+        [ -f "$HOME/.hamonikr/set-user-env.done" ] && isrun="run";
+
+        if [ x$isrun != "xrun" ] ; then
+
+            # backup previous env
+            dconf dump / > $HOME/.hamonikr/backup_user_env.dconf
+            if [ $? -eq 0 ] ; then
+                log "Succeed backup from previous settings."
+            else
+                log "Failed : Backup from previous settings."
+            fi
+            
+            # change menu icon to hamonikr logo
+            if [ -f "$HOME/.cinnamon/configs/menu@cinnamon.org/0.json" ] ; then
+                sed -i 's/"value": "linuxmint-logo-ring-symbolic"/"value": "hamonikr"/g' $HOME/.cinnamon/configs/menu@cinnamon.org/0.json
+                log "Update hamonikr default logo setting"
+            fi
+
+            # delete cache
+            [ -d "$HOME/.cache" ] && rm -rf $HOME/.cache/* && log "Deleted cache"
+
+            # copy applet to user home
+            if [ -d "/home/$USER/.cinnamon/configs" ] ; then
+                cp -af /usr/share/cinnamon/applets/expo@cinnamon.org /home/$USER/.cinnamon/configs/
+                cp -af /usr/share/cinnamon/applets/scale@cinnamon.org /home/$USER/.cinnamon/configs/        
+                cp -af /usr/share/cinnamon/applets/user@cinnamon.org /home/$USER/.cinnamon/configs/                
+                cp -af /usr/share/cinnamon/applets/xrandr@cinnamon.org /home/$USER/.cinnamon/configs/
+                log "Copy applets"
+            fi
+
+            # Albert Launcher Settings
+            if [ -d "/etc/skel/.config/albert" ] ; then
+                cp -af /etc/skel/.config/albert $HOME/.config/
+                log "Copy albert launcher setting"
+            fi  
+   
+            # gnome-terminal 설정
+            if [ -f /etc/hamonikr/templates/hamonikr-terminal.dconf ] ; then
+                log "Update default terminal settings"
+                dconf load /org/gnome/terminal/legacy/profiles:/:`gsettings list-recursively org.gnome.Terminal.ProfilesList | grep default | cut -d' ' -f3 | tr -d "'"`/ < /etc/hamonikr/templates/hamonikr-terminal.dconf
+            fi
+
+            # nimf 입력기 설정
+            if command -v nimf &> /dev/null ; then
+                im-config -n nimf
+                log "Update default nimf settings"   
+            fi
+            
+            # 단축키
+            if command -v shutter &> /dev/null ; then
+                if ! command -v fsearch &> /dev/null ; then
+                    log "update default keyboard shortcut settings for shutter"       
+                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ binding "['<Primary><Shift>p']"
+                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ command 'shutter -s'
+                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ name '특정영역 화면캡처'
+                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ binding "['<Primary><Alt>p']"
+                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ command 'shutter -w'
+                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ name '선택한 윈도우 화면캡처'
+                    gsettings set org.cinnamon.desktop.keybindings custom-list "['custom0','custom1']"
+                else
+                    log "update default keyboard shortcut settings for shutter and fsearch"              
+                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ binding "['<Primary><ALT><Shift>p']"
+                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ command 'shutter -s'
+                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ name '특정영역 화면캡처'
+                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ binding "['<Primary><Alt>p']"
+                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ command 'shutter -w'
+                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ name '선택한 윈도우 화면캡처'
+                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom2/ binding "['<Primary><Shift>f']"
+                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom2/ command 'fsearch'
+                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom2/ name '데스크탑 검색'
+                    gsettings set org.cinnamon.desktop.keybindings custom-list "['custom0','custom1','custom2']"
+                fi
+            else
+                if command -v fsearch &> /dev/null ; then    
+                    log "update default keyboard shortcut settings for fsearch"               
+                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ binding "['<Primary><Shift>f']"
+                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ command 'fsearch'
+                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ name '데스크탑 검색'
+                    gsettings set org.cinnamon.desktop.keybindings custom-list "['custom0']"
+                fi
+            fi
+
+            # search provider   
+            cp -a /usr/share/cinnamon/search_providers/google@hamonikr.org $HOME/.local/share/cinnamon/search_providers/google@hamonikr.org
+            gsettings set org.cinnamon enabled-search-providers [\"google@hamonikr.org\"]
+            log "update search provider settings"
+
+            # fix asbru-cm font
+            if [ -f "$HOME/.config/asbru/asbru.yml" ] ; then
+                sed -i 's/Monospace/Droid Sans Mono/g' $HOME/.config/asbru/asbru.yml
+                log "Update asbru font seting"
+            fi
+
+            # figlet LOGO
+            if [ -f "$HOME/.bashrc" ]; then
+                if [ -z "`cat $HOME/.bashrc | grep figlet`" ]; then
+                    echo 'figlet "$HOSTNAME"' >> $HOME/.bashrc
+                    log "Update figlet setting"
+                fi
+            fi
+
+            # Desktop Community Icon
+            if [ -f "/usr/share/applications/hamonikrorg.desktop" ]; then
+                if [ -d "$HOME/Desktop" ]; then
+                    cp /usr/share/applications/hamonikrorg.desktop $HOME/Desktop/hamonikrorg.desktop
+                else
+                    cp /usr/share/applications/hamonikrorg.desktop "$HOME/바탕화면/hamonikrorg.desktop"
+                fi
+                log "Update hamonikr community link icon"
+            fi
+            
+            touch /home/$USER/.hamonikr/set-user-env.done
+            log "Created set-user-env.done file"
+
+        fi
+    ;;
+    restore)
+        if [ -f "$HOME/.hamonikr/backup_user_env.dconf" ] ; then            
+            dconf load / < $HOME/.hamonikr/backup_user_env.dconf
+            if [ $? -eq 0 ] ; then
+                log "Successful restored previous settings." 
+            else
+                log "Failed : Restore previous settings."
+            fi
+        fi         
+    ;;
+    *)
+        echo "This program required patameter."
+        echo "Usage : set-user-env apply | restore"
+    ;;
+esac

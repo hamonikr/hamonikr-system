@@ -1,0 +1,37 @@
+#!/bin/bash
+
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+  cp -f /usr/share/icons/hicolor/scalable/apps/hamonikr-16.png /usr/share/icons/*/16x16/places/distributor-logo.png &>/dev/null
+  cp -f /usr/share/icons/hicolor/scalable/apps/hamonikr-16.png /usr/share/icons/*/16x16/places/gnome-main-menu.png &>/dev/null
+  cp -f /usr/share/icons/hicolor/scalable/apps/hamonikr-16.png /usr/share/icons/*/16x16/places/start-here.png &>/dev/null
+  cp -f /usr/share/icons/hicolor/scalable/apps/hamonikr-24.png /usr/share/icons/*/22x22/places/distributor-logo.png &>/dev/null
+  cp -f /usr/share/icons/hicolor/scalable/apps/hamonikr-24.png /usr/share/icons/*/22x22/places/gnome-main-menu.png &>/dev/null
+  cp -f /usr/share/icons/hicolor/scalable/apps/hamonikr-24.png /usr/share/icons/*/22x22/places/start-here.png &>/dev/null
+  cp -f /usr/share/icons/hicolor/scalable/apps/hamonikr-24.png /usr/share/icons/*/24x24/places/distributor-logo.png &>/dev/null
+  cp -f /usr/share/icons/hicolor/scalable/apps/hamonikr-24.png /usr/share/icons/*/24x24/places/gnome-main-menu.png &>/dev/null
+  cp -f /usr/share/icons/hicolor/scalable/apps/hamonikr-24.png /usr/share/icons/*/24x24/places/start-here.png &>/dev/null
+  cp -f /usr/share/icons/hicolor/scalable/apps/hamonikr-32.png /usr/share/icons/*/32x32/places/distributor-logo.png &>/dev/null
+  cp -f /usr/share/icons/hicolor/scalable/apps/hamonikr-32.png /usr/share/icons/*/32x32/places/gnome-main-menu.png &>/dev/null
+  cp -f /usr/share/icons/hicolor/scalable/apps/hamonikr-32.png /usr/share/icons/*/32x32/places/start-here.png &>/dev/null
+  cp -f /usr/share/icons/hicolor/scalable/apps/hamonikr-48.png /usr/share/icons/*/48x48/places/distributor-logo.png &>/dev/null
+  cp -f /usr/share/icons/hicolor/scalable/apps/hamonikr-48.png /usr/share/icons/*/48x48/places/gnome-main-menu.png &>/dev/null
+  cp -f /usr/share/icons/hicolor/scalable/apps/hamonikr-48.png /usr/share/icons/*/48x48/places/start-here.png &>/dev/null
+  cp -f /usr/share/icons/hicolor/scalable/apps/hamonikr.svg /usr/share/icons/*/scalable/places/distributor-logo.svg &>/dev/null
+  cp -f /usr/share/icons/hicolor/scalable/apps/hamonikr.svg /usr/share/icons/*/scalable/places/start-here.svg &>/dev/null
+
+  echo "Update HamoniKR logo"
+
+fi

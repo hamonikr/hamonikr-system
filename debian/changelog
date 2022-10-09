@@ -1,3 +1,30 @@
+hamonikr-system (6.1.8) taebaek; urgency=medium
+  
+  [Kevin Kim]
+  * Rewrite user enviroment setting program
+   - Add usr/local/bin/set-user-env
+   - logging : HOME/.hamonikr/log/set-user-env.log
+  * Removed update_dconf, updagte-dconf-setting
+
+ -- HamoniKR <pkg@hamonikr.org>  Sun, 09 Oct 2022 15:00:32 +0900
+
+hamonikr-system (6.1.7) taebaek; urgency=medium
+  
+  [Kevin Kim]
+  * Moved overwrite to execute-once
+   - Causes reduce execution time
+   - removed error message when copy faild
+
+ -- HamoniKR <pkg@hamonikr.org>  Sun, 09 Oct 2022 15:00:32 +0900
+
+hamonikr-system (6.1.6) taebaek; urgency=medium
+  
+  [Kevin Kim]
+  * Clean dir after remove package
+   - Removed /etc/hamonikr/adjustments directory
+
+ -- HamoniKR <pkg@hamonikr.org>  Sun, 09 Oct 2022 14:47:40 +0900
+
 hamonikr-system (6.1.5) taebaek; urgency=medium
   
   [Kevin Kim]
