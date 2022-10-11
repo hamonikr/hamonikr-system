@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/sh
+
+set -e
 
 case "$1" in
     remove|upgrade|deconfigure)
@@ -13,30 +15,14 @@ case "$1" in
         fi
 
         # Apply HamoniKR OS infomation in system
-        [ -f /etc/hamonikr/.bak/issue.bak ] && \
         cp -f /etc/hamonikr/.bak/issue.bak /etc/issue
-        [ -f /etc/hamonikr/.bak/issue.net.bak ] && \
         cp -f /etc/hamonikr/.bak/issue.net.bak /etc/issue.net
-        [ -f /etc/hamonikr/.bak/lsb-release.bak ] && \
         cp -f /etc/hamonikr/.bak/lsb-release.bak /etc/lsb-release
-        [ -f /etc/hamonikr/.bak/os-release.bak ] && \
         cp -f /etc/hamonikr/.bak/os-release.bak /etc/os-release
-        [ -f /etc/hamonikr/.bak/os-release.bak ] && \
         cp -f /etc/hamonikr/.bak/os-release.bak /usr/lib/os-release
 
         [ -d "/etc/hamonikr/.bak" ] && rm -rf "/etc/hamonikr/.bak"
         [ -d "/etc/hamonikr/adjustments" ] && rm -rf "/etc/hamonikr/adjustments"
-
-        # remove unused files in user home
-        RUID=$(who | awk 'FNR == 1 {print $1}')
-        [ -f /home/${RUID}/.config/user-dirs.dirs ] && \
-        XDG_DESKTOP_DIR=$(grep 'XDG_DESKTOP_DIR' /home/${RUID}/.config/user-dirs.dirs | awk -F= {'print $2'} | sed 's/"//g')
-        [ -z $XDG_DESKTOP_DIR ] && XDG_DESKTOP_DIR="/home/${RUID}/Desktop"        
-        [ -f /home/${RUID}/.hamonikr/set-user-env.done ] && rm -f /home/${RUID}/.hamonikr/set-user-env.done
-        [ -f /home/${RUID}/.hamonikr/backup_user_env.dconf ] && rm -f /home/${RUID}/.hamonikr/backup_user_env.dconf
-        [ -f /home/${RUID}/.hamonikr/set-user-env.log ] && rm -f /home/${RUID}/.hamonikr/set-user-env.log
-        [ -f $XDG_DESKTOP_DIR/hamonikr-community.desktop ] && rm -f $XDG_DESKTOP_DIR/hamonikr-community.desktop
-
         ;;
     failed-upgrade)
         ;;
