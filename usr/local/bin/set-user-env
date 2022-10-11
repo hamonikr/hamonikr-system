@@ -62,7 +62,17 @@ case "$1" in
             if [ -d "/etc/skel/.config/albert" ] ; then
                 cp -af /etc/skel/.config/albert $HOME/.config/
                 log "Copy albert launcher setting"
-            fi  
+            fi
+
+            # plank Settings When installed hamonikr-theme
+            if [ -d "/etc/skel/.config/plank" ] ; then
+                [ ! -z $(pidof plank | grep '[0-9]') ] && killall plank &>/dev/null
+                rm -rf $HOME/.config/plank
+                cp -af /etc/skel/.config/plank $HOME/.config/
+                dconf load /net/launchpad/plank/docks/ < /etc/skel/.config/plank/dock1/launchers/plank-dconf
+                [ -z $(pidof plank | grep '[0-9]') ] && plank & &>/dev/null
+                log "Copy plank dock setting"
+            fi            
    
             # gnome-terminal 설정
             if [ -f /etc/hamonikr/templates/hamonikr-terminal.dconf ] ; then
@@ -135,12 +145,15 @@ case "$1" in
             
             if [ -f "/usr/share/applications/hamonikr-community.desktop" ] && \
                 [ ! -f "$XDG_DESKTOP_DIR/hamonikr-community.desktop" ]; then
-                cp /usr/share/applications/hamonikr-community.desktop $XDG_DESKTOP_DIR/hamonikr-community.desktop
+                install -m 755 /usr/share/applications/hamonikr-community.desktop $XDG_DESKTOP_DIR/hamonikr-community.desktop
                 log "Update hamonikr community link"
             fi
             
-            touch /home/$USER/.hamonikr/set-user-env.done
+            touch $HOME/.hamonikr/set-user-env.done
             log "Created set-user-env.done file"
+
+            # Fix nemo bug : https://github.com/hamonikr/hamonikr-system/issues/4
+            sudo usermod -aG sambashare $USER
 
         fi
     ;;
