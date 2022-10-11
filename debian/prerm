@@ -23,6 +23,16 @@ case "$1" in
 
         [ -d "/etc/hamonikr/.bak" ] && rm -rf "/etc/hamonikr/.bak"
         [ -d "/etc/hamonikr/adjustments" ] && rm -rf "/etc/hamonikr/adjustments"
+
+        # remove unused files in user home
+        RUID=$(who | awk 'FNR == 1 {print $1}')
+        [ -f /home/${RUID}/.config/user-dirs.dirs ] && source /home/${RUID}/.config/user-dirs.dirs
+        [ -z $XDG_DESKTOP_DIR ] && XDG_DESKTOP_DIR="/home/${RUID}/Desktop"        
+        [ -f /home/${RUID}/.hamonikr/set-user-env.done ] && rm -f /home/${RUID}/.hamonikr/set-user-env.done
+        [ -f /home/${RUID}/.hamonikr/backup_user_env.dconf ] && rm -f /home/${RUID}/.hamonikr/backup_user_env.dconf
+        [ -f /home/${RUID}/.hamonikr/set-user-env.log ] && rm -f /home/${RUID}/.hamonikr/set-user-env.log
+        [ -f $XDG_DESKTOP_DIR/hamonikr-community.desktop ] && rm -f $XDG_DESKTOP_DIR/hamonikr-community.desktop
+
         ;;
     failed-upgrade)
         ;;
