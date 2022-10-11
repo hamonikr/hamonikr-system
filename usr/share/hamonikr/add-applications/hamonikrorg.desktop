@@ -2,6 +2,8 @@
 Encoding=UTF-8
 Name=HamoniKR Community
 Name[ko]=하모니카 커뮤니티
+Comment=Visit to HamoniKR Community
+Comment[ko]=하모니카 커뮤니티 바로가기
 Type=Link
 URL=https://hamonikr.org/
-Icon=hamonikr-logo
+Icon=hamonikr-community
