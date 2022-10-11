@@ -1,3 +1,11 @@
+hamonikr-system (6.2.0) taebaek; urgency=medium
+  
+  [Kevin Kim]
+  * Changed set-user-env for i18n desktop name
+   - Used XDG_DESKTOP_DIR in ~/.config/user-dirs.dirs
+
+ -- HamoniKR <pkg@hamonikr.org>  Tue, 11 Oct 2022 13:56:05 +0900
+
 hamonikr-system (6.1.9) taebaek; urgency=medium
   
   [Kevin Kim]

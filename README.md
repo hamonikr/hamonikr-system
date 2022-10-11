@@ -48,7 +48,12 @@ enable = False
 - /etc/hamonikr/issue
 - /etc/hamonikr/issue.net
 
-### 시스템 전역 설정을 변경하는 방법
+## For Developer
+
+설정을 변경하는 것은 `시스템 전역적으로 root 권한으로 해야하는 일`과 `개별 사용자의 환경에서 해야 하는 일`이 구분되어야 합니다.
+반드시 아래의 방법을 준수하세요.
+
+### `시스템 전역적으로 root 권한으로 해야하는 일` 을 변경하는 방법
 
 etc/hamonikr/adjustments 안에 수정을 원하는 파일을 작성하면 시스템 시작시 적용됩니다.
 
@@ -66,7 +71,7 @@ etc/hamonikr/adjustments 안에 수정을 원하는 파일을 작성하면 시�
     categories /usr/shar/applications/libreoffice-draw.desktop Office;
     ```
 
-### 디버깅
+#### 시스템 전역 변경사항 디버깅
 실행 기록은 /var/log/hamonikr-system.log 파일에 기록되며 아래와 같은 내용이 남습니다.
 ```
 --------------------
@@ -88,7 +93,7 @@ Skipped:
 
 /var/log/syslog 안에서 hamonikr-system 로그를 확인할 수도 있습니다.
 
-### 개별 사용자 환경 설정
+### `개별 사용자의 환경에서 해야 하는 일` 을 변경하는 방법
 
 데스크톱 환경으로 진입하면 `/etc/xdg/autostart/hamonikr-user-env.desktop` 파일이 실행되고, 
 실제 수정은 `/usr/local/bin/set-user-env` 파일이 사용자 환경 설정을 적용합니다.
@@ -98,4 +103,20 @@ Skipped:
 
 ```
 set-user-env restore
+```
+
+#### 개별 사용자 변경사항 디버깅
+실행 기록은 $HOME/.hamonikr/log/ 경로에 실행파일명.log 파일로 기록되며 아래와 같은 내용이 남습니다.
+```
+2022-10-11_12:47_16 set-user-env : Started...
+2022-10-11_12:47_16 set-user-env : Succeed backup from previous settings.
+2022-10-11_12:47_16 set-user-env : Update hamonikr default logo setting
+2022-10-11_12:47_16 set-user-env : Deleted cache
+2022-10-11_12:47_16 set-user-env : Copy applets
+2022-10-11_12:47_16 set-user-env : Update default terminal settings
+2022-10-11_12:47_16 set-user-env : Update default nimf settings
+2022-10-11_12:47_16 set-user-env : update search provider settings
+2022-10-11_12:47_16 set-user-env : Update hamonikr community link icon
+2022-10-11_12:47_16 set-user-env : Created set-user-env.done file
+2022-10-11_13:23_02 set-user-env : Started...
 ```

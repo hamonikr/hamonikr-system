@@ -2,13 +2,15 @@
 #
 # Setting default user desktop enviroment for HamoniKR OS
 # 
-# 이 프로그램은 하모니카OS 사용자의 기본 환경을 설정하는 프로그램 이기 때문에, root 권한이 아니라 사용자 권한으로 실행되어야 합니다.
-# Since this program is a program that sets the basic environment of HamoniKR OS users, it should be executed as user rights, not root privileges. 
+# 이 프로그램은 하모니카OS 사용자의 기본 환경을 설정하는 프로그램 이기 때문에,
+# root 권한이 아니라 사용자 권한으로 실행되어야 합니다. Since this program is a
+# program that sets the basic environment of HamoniKR OS users, it should be
+# executed as user rights, not root privileges. 
 #
 # Usage : set-user-env apply | restore
 # 
-# Copyright 2022 HamoniKR Team. All rights reserved.
-# See LICENSE.md in the project root for license information.
+# Copyright 2022 HamoniKR Team. All rights reserved. See LICENSE.md in the
+# project root for license information.
 
 [ "$EUID" = 0 ] && echo "Run with user authority. (EUID : $EUID)" && exit
 
@@ -115,7 +117,7 @@ case "$1" in
 
             # fix asbru-cm font
             if [ -f "$HOME/.config/asbru/asbru.yml" ] ; then
-                sed -i 's/Monospace/Droid Sans Mono/g' $HOME/.config/asbru/asbru.yml
+                sed -i 's/Monospace/Hack Nerd Font Regular/g' $HOME/.config/asbru/asbru.yml
                 log "Update asbru font seting"
             fi
 
@@ -127,16 +129,14 @@ case "$1" in
                 fi
             fi
 
-            # Desktop Community Icon
-            if [ -f "/usr/share/applications/hamonikrorg.desktop" ]; then
-                if [ -d "$HOME/Desktop" ]; then
-                    cp /usr/share/applications/hamonikrorg.desktop $HOME/Desktop/hamonikrorg.desktop
-                    chmod +x $HOME/Desktop/hamonikrorg.desktop
-                else
-                    cp /usr/share/applications/hamonikrorg.desktop "$HOME/바탕화면/hamonikrorg.desktop"
-                    chmod +x "$HOME/바탕화면/hamonikrorg.desktop"
-                fi
-                log "Update hamonikr community link icon"
+            # Community link
+            [ -f ~/.config/user-dirs.dirs ] && source ~/.config/user-dirs.dirs
+            [ -z $XDG_DESKTOP_DIR ] && XDG_DESKTOP_DIR="$HOME/Desktop"
+            
+            if [ -f "/usr/share/applications/hamonikr-community.desktop" ] && \
+                [ ! -f "$XDG_DESKTOP_DIR/hamonikr-community.desktop" ]; then
+                cp /usr/share/applications/hamonikr-community.desktop $XDG_DESKTOP_DIR/hamonikr-community.desktop
+                log "Update hamonikr community link"
             fi
             
             touch /home/$USER/.hamonikr/set-user-env.done
