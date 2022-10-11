@@ -149,11 +149,11 @@ case "$1" in
                 log "Update hamonikr community link"
             fi
             
-            touch $HOME/.hamonikr/set-user-env.done
-            log "Created set-user-env.done file"
-
             # Fix nemo bug : https://github.com/hamonikr/hamonikr-system/issues/4
             sudo usermod -aG sambashare $USER
+
+            touch $HOME/.hamonikr/set-user-env.done
+            log "Created set-user-env.done file"
 
         fi
     ;;
