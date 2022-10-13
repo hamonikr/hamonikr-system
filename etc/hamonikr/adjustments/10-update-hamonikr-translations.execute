@@ -20,6 +20,11 @@ if [ -f "/etc/hamonikr/info" ] ; then
 
     for src in $(ls $HAMONIKR_DIR/*.mo); do
         cp $src $TARGET_DIR
+        if [ $? -eq 0 ] ; then
+            log "Succeed copy $src to $TARGET_DIR"
+        else
+            log "Failed : copy translation file $src to $TARGET_DIR"
+        fi
     done
     # log "Update translation"
     echo "Update translation"
