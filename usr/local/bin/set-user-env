@@ -148,6 +148,18 @@ case "$1" in
                 install -m 755 /usr/share/applications/hamonikr-community.desktop $XDG_DESKTOP_DIR/hamonikr-community.desktop
                 log "Update hamonikr community link"
             fi
+
+            # Hamonikr-drive link
+            if [ -f "/usr/share/applications/hamonikr-drive.desktop" ] &&  \
+                [ ! -f "$XDG_DESKTOP_DIR/hamonikr-drive.desktop" ]; then
+                install -m 755 /usr/share/applications/hamonikr-drive.desktop $XDG_DESKTOP_DIR/hamonikr-drive.desktop
+                log "Update hamonikr-drive link"
+            fi
+
+            # default hamonikr-theme-setting
+            if [ -f "/usr/local/bin/hamonikr-theme-setting" ]; then
+                hamonikr-theme-setting restore && hamonikr-theme-setting macstyle
+            fi
             
             # Fix nemo bug : https://github.com/hamonikr/hamonikr-system/issues/4
             sudo usermod -aG sambashare $USER

@@ -1,3 +1,11 @@
+hamonikr-system (6.2.5) taebaek; urgency=medium
+
+  * Update set-user-env
+   - Add hamonikr-drive link
+   - Add default hamonikr-theme-setting macstyle
+   
+ -- HamoniKR <pkg@hamonikr.org>  Fri, 14 Oct 2022 18:02:20 +0900
+
 hamonikr-system (6.2.4) taebaek; urgency=medium
 
   * Update hamonikr-system.menu
