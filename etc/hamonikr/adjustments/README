@@ -33,3 +33,6 @@ exec /usr/shar/fglrx/amdccclesu.desktop gksu /usr/bin/amdcccle;
 hide /usr/shar/applications/xfce-file-manager.desktop;
 categories /usr/shar/applications/libreoffice-draw.desktop Office;
 ```
+category : https://specifications.freedesktop.org/menu-spec/latest/apa.html
+AudioVideo / Audio / Video / Development / Education / Game / Graphics / Network
+/ Office / Science / Settings / System / Utility

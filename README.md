@@ -71,6 +71,10 @@ etc/hamonikr/adjustments 안에 수정을 원하는 파일을 작성하면 시�
     categories /usr/shar/applications/libreoffice-draw.desktop Office;
     ```
 
+[Category](https://specifications.freedesktop.org/menu-spec/latest/apa.html) :
+AudioVideo / Audio / Video / Development / Education / Game / Graphics / Network
+/ Office / Science / Settings / System / Utility
+
 #### 시스템 전역 변경사항 디버깅
 실행 기록은 /var/log/hamonikr-system.log 파일에 기록되며 아래와 같은 내용이 남습니다.
 ```

@@ -1,3 +1,15 @@
+hamonikr-system (6.2.6) taebaek; urgency=medium
+
+  [Kevin]
+  * Add linuxmint mirror info
+   - Add mirror.hamonikr.org
+  * Update menu control
+   - hamonikrwelcome, hamonikr-help moved to System category
+  * Adjust APT pinning for mintUpdate.py
+   - Required 700 priority at mintUpdate.py
+
+ -- HamoniKR <pkg@hamonikr.org>  Sat, 15 Oct 2022 20:16:51 +0900
+
 hamonikr-system (6.2.5) taebaek; urgency=medium
 
   * Update set-user-env
