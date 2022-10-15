@@ -131,14 +131,6 @@ case "$1" in
                 log "Update asbru font seting"
             fi
 
-            # figlet LOGO
-            if [ -f "$HOME/.bashrc" ]; then
-                if [ -z "`cat $HOME/.bashrc | grep figlet`" ]; then
-                    echo 'figlet "$HOSTNAME"' >> $HOME/.bashrc
-                    log "Update figlet setting"
-                fi
-            fi
-
             # Community link
             [ -f ~/.config/user-dirs.dirs ] && source ~/.config/user-dirs.dirs
             [ -z $XDG_DESKTOP_DIR ] && XDG_DESKTOP_DIR="$HOME/Desktop"

@@ -1,3 +1,13 @@
+hamonikr-system (6.2.7) taebaek; urgency=medium
+
+  [Kevin]
+  * Adjust live user session shell to zsh
+  * Removed hexchat
+  * Removed nm-connection-editor desktop file
+  * Removed figlet in bashrc
+
+ -- HamoniKR <pkg@hamonikr.org>  Sun, 16 Oct 2022 02:27:42 +0900
+
 hamonikr-system (6.2.6) taebaek; urgency=medium
 
   [Kevin]
