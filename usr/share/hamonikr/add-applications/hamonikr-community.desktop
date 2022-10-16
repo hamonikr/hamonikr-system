@@ -9,3 +9,4 @@ Comment[ko]=하모니카 커뮤니티 바로가기
 Icon=hamonikr-community
 Exec=sh -c 'xdg-open https://hamonikr.org/'
 Terminal=false
+Categories=Network;WebBrowser;
