@@ -1,0 +1,19 @@
+[Desktop Entry]
+Name=Disk Usage Analyzer
+Name[ko]=디스크 사용량 분석
+Comment=Check folder sizes and available disk space
+Comment[ko]=폴더 크기 확인 및 남은 디스크 공간 보기
+# Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+Keywords=storage;space;cleanup;
+TryExec=baobab
+Exec=baobab
+# Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+Icon=org.gnome.baobab
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=GTK;GNOME;System;Filesystem;X-GNOME-Utilities;
+NotShowIn=KDE;
+DBusActivatable=true
+X-GNOME-UsesNotifications=true
+X-Ubuntu-Gettext-Domain=baobab

@@ -22,12 +22,3 @@ categories /usr/share/applications/xreader.desktop Office;
 categories /usr/share/applications/stacer.desktop System;
 categories /usr/share/applications/org.gnome.DiskUtility.desktop System;
 categories /usr/share/applications/org.gnome.Terminal.desktop Utility;
-rename /usr/share/applications/xpad.desktop Sticky Notes
-renameko /usr/share/applications/xpad.desktop 스티커 메모
-rename /usr/share/applications/xreader.desktop PDF Viewer
-renameko /usr/share/applications/xreader.desktop PDF 뷰어
-renameko /usr/share/applications/hypnotix.desktop IPTV 보기
-rename /usr/share/applications/org.x.Warpinator.desktop File Send and Receive
-renameko /usr/share/applications/org.x.Warpinator.desktop 기기간 파일전송
-rename /usr/share/applications/transmission-gtk.desktop Torrent Client
-renameko /usr/share/applications/transmission-gtk.desktop 토렌트 클라이언트

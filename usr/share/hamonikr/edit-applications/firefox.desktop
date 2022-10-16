@@ -201,7 +201,7 @@ Exec=firefox -new-window
 
 [Desktop Action new-private-window]
 Name=Open a New Private Window
-Name[ko]=새 사생활 보호창
+Name[ko]=새 시크릿 창
 Name[ar]=افتح نافذة جديدة للتصفح الخاص
 Name[ca]=Obre una finestra nova en mode d'incògnit
 Name[cs]=Otevřít nové anonymní okno

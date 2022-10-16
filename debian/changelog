@@ -1,3 +1,11 @@
+hamonikr-system (6.3.0) taebaek; urgency=medium
+
+  [Kevin]
+  * Add desktop files for Korean
+   - Causes not working rename and renameko in hamonikr-system.menu 
+
+ -- HamoniKR <pkg@hamonikr.org>  Sun, 16 Oct 2022 15:01:43 +0900
+
 hamonikr-system (6.2.9) taebaek; urgency=medium
 
   [Kevin]
