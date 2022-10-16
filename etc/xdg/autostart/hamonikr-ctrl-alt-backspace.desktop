@@ -1,8 +1,10 @@
 [Desktop Entry]
 Encoding=UTF-8
 Version=1.0
-Name=Ctrl Alt Backspace
+Name=Desktop Restart Shortcut (Ctrl+Alt+Backspace)
+Name[ko]=세션 재시작 단축키 (Ctrl+Alt+Backspace)
 Comment=Allows Ctrl+Alt+Backspace to restart Xorg
+Comment=Ctrl+Alt+Backspace 키로 세션을 재시작하도록 설정합니다.
 Exec=setxkbmap -option terminate:ctrl_alt_bksp
 Terminal=false
 Type=Application

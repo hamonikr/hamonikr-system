@@ -1,6 +1,8 @@
 [Desktop Entry]
-Name=Change to RTC
-Comment=Change to RTC
+Name=Display time as RTC
+Name[ko]=시간 표시 조정(RTC)
+Comment=Change Display time as RTC
+Comment[ko]=시간 표시 방식을 RTC 로 적용합니다.
 Type=Application
 Exec=timedatectl set-local-rtc 1 --adjust-system-clock
 Terminal=false
