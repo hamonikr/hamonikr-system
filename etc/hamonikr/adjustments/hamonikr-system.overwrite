@@ -1,7 +1,7 @@
 /etc/hamonikr/templates/default-testpage.pdf /usr/share/cups/data/default-testpage.pdf
 /usr/share/hamonikr/edit-applications/firefox.desktop /usr/share/applications/firefox.desktop
 /usr/share/hamonikr/edit-applications/xed.desktop /usr/share/applications/xed.desktop
-/usr/share/hamonikr/edit-applications/hypnotix.desktop /usr/share/hamonikr/edit-applications/hypnotix.desktop
+/usr/share/hamonikr/edit-applications/hypnotix.desktop /usr/share/applications/hypnotix.desktop
 /usr/share/hamonikr/edit-applications/org.x.Warpinator.desktop /usr/share/applications/org.x.Warpinator.desktop
 /usr/share/hamonikr/edit-applications/transmission-gtk.desktop /usr/share/applications/transmission-gtk.desktop
 /usr/share/hamonikr/edit-applications/xpad.desktop /usr/share/applications/xpad.desktop
