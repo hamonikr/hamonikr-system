@@ -1,0 +1,21 @@
+[Desktop Entry]
+Name=Power Statistics
+Name[ko]=전원관리 통계
+Comment=Observe power management
+Comment[ko]=전원 관리 기록을 보여줍니다.
+# Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+Keywords=battery;consumption;charge;
+# Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+Icon=org.gnome.PowerStats
+Exec=gnome-power-statistics
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;System;Monitor;
+OnlyShowIn=GNOME;Unity;
+StartupNotify=true
+X-GNOME-Bugzilla-Bugzilla=GNOME
+X-GNOME-Bugzilla-Product=gnome-power-manager
+X-GNOME-Bugzilla-Component=gnome-power-statistics
+X-GNOME-Bugzilla-Version=3.32.0
+X-Desktop-File-Install-Version=0.10
+X-Ubuntu-Gettext-Domain=gnome-power-manager
