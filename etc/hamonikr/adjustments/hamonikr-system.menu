@@ -1,17 +1,20 @@
-exec /usr/share/applications/naver-whale.desktop /usr/bin/naver-whale-stable %U --password-store=basic;
-exec /usr/share/applications/com.github.maoschanz.drawing.desktop drawing --new-tab;
-hide /usr/share/applications/mintwelcome.desktop;
-hide /usr/share/applications/hamonikr-community.desktop;
-hide /usr/share/applications/debian-uxterm.desktop;
-hide /usr/share/applications/debian-xterm.desktop;
-hide /usr/share/applications/io.github.Hexchat.desktop;
-hide /usr/share/applications/mcedit.desktop;
-hide /usr/share/applications/org.freedesktop.IBus.Setup.desktop;
-hide /usr/share/applications/spacefm-find.desktop;
-hide /usr/share/applications/thingy.desktop;
-hide /usr/share/applications/wheelspeed.desktop;
-hide /usr/share/applications/mediainfo-gui.desktop;
-hide /usr/share/applications/nm-connection-editor.desktop;
+exec /usr/share/applications/naver-whale.desktop /usr/bin/naver-whale-stable %U --password-store=basic
+exec /usr/share/applications/com.github.maoschanz.drawing.desktop drawing --new-tab
+hide /usr/share/applications/mintwelcome.desktop
+hide /usr/share/applications/hamonikr-community.desktop
+hide /usr/share/applications/debian-uxterm.desktop
+hide /usr/share/applications/debian-xterm.desktop
+hide /usr/share/applications/io.github.Hexchat.desktop
+hide /usr/share/applications/mcedit.desktop
+hide /usr/share/applications/org.freedesktop.IBus.Setup.desktop
+hide /usr/share/applications/spacefm-find.desktop
+hide /usr/share/applications/thingy.desktop
+hide /usr/share/applications/wheelspeed.desktop
+hide /usr/share/applications/mediainfo-gui.desktop
+hide /usr/share/applications/nm-connection-editor.desktop
+hide /usr/share/applications/plank.desktop
 categories /usr/share/applications/mediainfo-gui.desktop AudioVideo;
 categories /usr/share/applications/hamonikrwelcome.desktop System;
 categories /usr/share/applications/hamonikr-help.desktop System;
+categories /usr/share/applications/plank-setting.desktop System;
+renameko /usr/share/applications/hypnotix.desktop IPTV 보기

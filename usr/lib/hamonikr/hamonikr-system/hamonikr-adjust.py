@@ -225,6 +225,17 @@ class HamoniKRSystem():
                                         os.system("cat \"%s\" >> \"%s\"" % (names_file, desktop_file))
                                         self.update_timestamp(desktop_file)
                                         self.update_timestamp(names_file)
+                            elif line_items[0] == "renameko":
+                                if len(line_items) == 3:
+                                    action, desktop_file, names_file = line.split()
+                                    names_file = names_file.strip()
+                                    if os.path.exists(names_file) and os.path.exists(desktop_file) and (self.has_changed(desktop_file, self.edited, "name") or self.has_changed(names_file, self.edited, "name")):
+                                        # remove all existing names, generic names, comments
+                                        os.system("sed -i -e '/^Name[ko]/d' -e '/^GenericName[ko]/d' -e '/^Comment[ko]/d' \"%s\"" % desktop_file)
+                                        # add provided ones
+                                        os.system("cat \"%s\" >> \"%s\"" % (names_file, desktop_file))
+                                        self.update_timestamp(desktop_file)
+                                        self.update_timestamp(names_file)                                        
                     filehandle.close()
 
             self.log("Executed:")
