@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=Passwords and Keys
+Name[ko]=암호 및 키 관리
+Comment=Manage your passwords and encryption keys
+Comment[ko]=암호나 GPG 키를 관리합니다.
+# Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+Keywords=keyring;encryption;security;sign;ssh;
+Exec=seahorse
+Terminal=false
+Type=Application
+# Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+Icon=org.gnome.seahorse.Application
+Categories=GNOME;GTK;Security;Utility;DesktopSettings;X-XFCE-SettingsDialog;
+StartupNotify=true
+DBusActivatable=true
+X-Ubuntu-Gettext-Domain=seahorse

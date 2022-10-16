@@ -1,3 +1,11 @@
+hamonikr-system (6.3.2) taebaek; urgency=medium
+
+  [Kevin]
+  * Add desktop files overwrite
+   - For Korean enviroment
+
+ -- HamoniKR <pkg@hamonikr.org>  Sun, 16 Oct 2022 17:29:40 +0900
+
 hamonikr-system (6.3.1) taebaek; urgency=medium
 
   [Kevin]
