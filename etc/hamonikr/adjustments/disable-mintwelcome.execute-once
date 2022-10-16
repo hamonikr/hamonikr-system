@@ -1,0 +1,32 @@
+#!/bin/bash
+
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+    if [ -f /etc/xdg/autostart/mintwelcome.desktop ] ; then
+      rm -f /etc/xdg/autostart/mintwelcome.desktop
+      echo "Removed /etc/xdg/autostart/mintwelcome.desktop"
+    fi
+
+    if [ -f /usr/share/applications/mintwelcome.desktop ] ; then
+      rm -f /usr/share/applications/mintwelcome.desktop
+      echo "Removed /usr/share/applications/mintwelcome.desktop"
+    fi
+
+    if [ -f /usr/share/applications/kde4/mintwelcome.desktop ] ; then
+      rm -f /usr/share/applications/kde4/mintwelcome.desktop
+      echo "Removed /usr/share/applications/kde4/mintwelcome.desktop"
+    fi
+
+fi
