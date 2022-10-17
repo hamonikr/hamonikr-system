@@ -153,6 +153,13 @@ case "$1" in
                 hamonikr-theme-setting restore && hamonikr-theme-setting macstyle
             fi
             
+            # naver whale default browser
+            if [ "$(dpkg-query -W --showformat='${db:Status-Status}' naver-whale-stable 2>&1)" = "installed" ] ; then
+                # bug fix : [ defulat applications > web > firefox ] !need USER
+                xdg-settings set default-web-browser naver-whale.desktop
+            fi
+
+
             # Fix nemo bug : https://github.com/hamonikr/hamonikr-system/issues/4
             sudo usermod -aG sambashare $USER
 

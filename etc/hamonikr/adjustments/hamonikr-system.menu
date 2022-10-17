@@ -23,5 +23,5 @@ categories /usr/share/applications/hamonikr-community.desktop Network;WebBrowser
 categories /usr/share/applications/xreader.desktop Office;
 categories /usr/share/applications/stacer.desktop System;
 categories /usr/share/applications/org.gnome.DiskUtility.desktop System;
-categories /usr/share/applications/org.gnome.Terminal.desktop Utility;
+categories /usr/share/applications/org.gnome.Terminal.desktop Utility;TerminalEmulator;
 categories /usr/share/applications/mintupdate.desktop System;
