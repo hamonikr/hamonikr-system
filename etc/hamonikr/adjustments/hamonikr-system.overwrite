@@ -21,3 +21,4 @@
 /usr/share/hamonikr/edit-applications/timeshift-gtk.desktop /usr/share/applications/timeshift-gtk.desktop
 /usr/share/hamonikr/edit-applications/mintupdate.desktop /usr/share/applications/mintupdate.desktop
 /usr/share/hamonikr/edit-applications/mintupdate.desktop /etc/xdg/autostart/mintupdate.desktop
+/usr/share/hamonikr/user-setup/user-setup-apply /usr/lib/user-setup/user-setup-apply
