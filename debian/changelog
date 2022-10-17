@@ -1,3 +1,11 @@
+hamonikr-system (6.3.7) taebaek; urgency=medium
+
+  [Kevin]
+  * Changed default audio player
+   - default audio player as lollypop
+
+ -- HamoniKR <pkg@hamonikr.org>  Mon, 17 Oct 2022 18:16:30 +0900
+
 hamonikr-system (6.3.6) taebaek; urgency=medium
 
   [Kevin]
