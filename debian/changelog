@@ -1,10 +1,17 @@
+hamonikr-system (6.3.5) taebaek; urgency=medium
+
+  [JamesBae]
+  * Fix update-default-browser.execute-once
+    - Not change default browser in default applications setting
+
+ -- HamoniKR <pkg@hamonikr.org>  Mon, 17 Oct 2022 14:42:27 +0900
+
 hamonikr-system (6.3.4) taebaek; urgency=medium
 
   [JamesBae]
   * Fix grub logo icon change
 
  -- HamoniKR <pkg@hamonikr.org>  Mon, 17 Oct 2022 13:06:56 +0900
-
 
 hamonikr-system (6.3.3) taebaek; urgency=medium
 
