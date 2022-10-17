@@ -1,3 +1,11 @@
+hamonikr-system (6.3.3) taebaek; urgency=medium
+
+  [Kevin]
+  * Disable mintreport with HamoniKR
+   - Add adjustments/disable-mintreport.execute-once
+
+ -- HamoniKR <pkg@hamonikr.org>  Mon, 17 Oct 2022 09:01:13 +0900
+
 hamonikr-system (6.3.2) taebaek; urgency=medium
 
   [Kevin]

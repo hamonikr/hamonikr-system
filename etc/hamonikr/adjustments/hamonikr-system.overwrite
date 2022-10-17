@@ -19,8 +19,5 @@
 /usr/share/hamonikr/edit-applications/plank-setting.desktop /usr/share/applications/plank-setting.desktop
 /usr/share/hamonikr/edit-applications/system-config-printer.desktop /usr/share/applications/system-config-printer.desktop
 /usr/share/hamonikr/edit-applications/timeshift-gtk.desktop /usr/share/applications/timeshift-gtk.desktop
-/usr/share/hamonikr/edit-applications/mintreport-tray.desktop /usr/share/applications/mintreport-tray.desktop
-/usr/share/hamonikr/edit-applications/mintreport-tray.desktop /etc/xdg/autostart/mintreport-tray.desktop
-/usr/share/hamonikr/edit-applications/mintreport.desktop /usr/share/applications/mintreport.desktop
 /usr/share/hamonikr/edit-applications/mintupdate.desktop /usr/share/applications/mintupdate.desktop
 /usr/share/hamonikr/edit-applications/mintupdate.desktop /etc/xdg/autostart/mintupdate.desktop
