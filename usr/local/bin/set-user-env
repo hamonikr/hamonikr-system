@@ -24,24 +24,22 @@ log() {
     exec 1>&3 3>&-
 }
 
-log "Started..."
-
 case "$1" in
     apply)
         [ -f "$HOME/.hamonikr/set-user-env.done" ] && isrun="run" 
 
-        if [ x$isrun != "xrun" ]   then
+        if [ x$isrun != "xrun" ] ; then
 
             # backup previous env
             dconf dump / > $HOME/.hamonikr/backup_user_env.dconf
-            if [ $? -eq 0 ]   then
+            if [ $? -eq 0 ] ; then
                 log "Succeed backup from previous settings."
             else
                 log "Failed : Backup from previous settings."
             fi
             
             # change menu icon to hamonikr logo
-            if [ -f "$HOME/.cinnamon/configs/menu@cinnamon.org/0.json" ]   then
+            if [ -f "$HOME/.cinnamon/configs/menu@cinnamon.org/0.json" ] ; then 
                 sed -i 's/"value": "linuxmint-logo-ring-symbolic"/"value": "hamonikr"/g' $HOME/.cinnamon/configs/menu@cinnamon.org/0.json
                 log "Update hamonikr default logo setting"
             fi
@@ -50,7 +48,7 @@ case "$1" in
             [ -d "$HOME/.cache" ] && rm -rf $HOME/.cache/* && log "Deleted cache"
 
             # copy applet to user home
-            if [ -d "/home/$USER/.cinnamon/configs" ]   then
+            if [ -d "/home/$USER/.cinnamon/configs" ] ; then
                 cp -af /usr/share/cinnamon/applets/expo@cinnamon.org /home/$USER/.cinnamon/configs/
                 cp -af /usr/share/cinnamon/applets/scale@cinnamon.org /home/$USER/.cinnamon/configs/        
                 cp -af /usr/share/cinnamon/applets/user@cinnamon.org /home/$USER/.cinnamon/configs/                
@@ -59,36 +57,47 @@ case "$1" in
             fi
 
             # Albert Launcher Settings
-            if [ -d "/etc/skel/.config/albert" ]   then
+            if [ -d "/etc/skel/.config/albert" ] ; then
                 cp -af /etc/skel/.config/albert $HOME/.config/
-                log "Copy albert launcher setting"
+                if [ $? -eq 0 ] ; then
+                    log "Copy albert launcher settings" 
+                fi                  
             fi
 
-            # plank Settings When installed hamonikr-theme
-            if [ -d "/etc/skel/.config/plank" ]   then
+            # plank Settings When installed hamonikr-themes
+            if [ "$(dpkg-query -W --showformat='${db:Status-Status}' hamonikr-themes 2>&1)" = "installed" ] && \
+                [ -d "/etc/skel/.config/plank" ] ; then
+
                 [ ! -z $(pidof plank | grep '[0-9]') ] && killall plank &>/dev/null
                 rm -rf $HOME/.config/plank
                 cp -af /etc/skel/.config/plank $HOME/.config/
+                [ -f /etc/skel/.config/autostart/plank.desktop ] && \
+                cp -af /etc/skel/.config/autostart/plank.desktop $HOME/.config/autostart/plank.desktop
                 dconf load /net/launchpad/plank/docks/ < /etc/skel/.config/plank/dock1/launchers/plank-dconf
                 [ -z $(pidof plank | grep '[0-9]') ] && plank & &>/dev/null
-                log "Copy plank dock setting"
+                if [ $? -eq 0 ] ; then
+                    log "Update HamoniKR OS plank Dock Settings." 
+                fi
+                              
             fi            
    
             # gnome-terminal 설정
-            if [ -f /etc/hamonikr/templates/hamonikr-terminal.dconf ]   then
-                log "Update default terminal settings"
+            if [ -f /etc/hamonikr/templates/hamonikr-terminal.dconf ] ; then
                 dconf load /org/gnome/terminal/legacy/profiles:/:`gsettings list-recursively org.gnome.Terminal.ProfilesList | grep default | cut -d' ' -f3 | tr -d "'"`/ < /etc/hamonikr/templates/hamonikr-terminal.dconf
+                if [ $? -eq 0 ] ; then
+                    log "Update default terminal settings" 
+                fi                                                
             fi
 
             # nimf 입력기 설정
-            if command -v nimf &> /dev/null   then
+            if command -v nimf &> /dev/null ; then
                 im-config -n nimf
                 log "Update default nimf settings"   
             fi
             
             # 단축키
-            if command -v shutter &> /dev/null   then
-                if ! command -v fsearch &> /dev/null   then
+            if command -v shutter &> /dev/null ; then
+                if ! command -v fsearch &> /dev/null ; then
                     log "update default keyboard shortcut settings for shutter"       
                     gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ binding "['<Primary><Shift>p']"
                     gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ command 'shutter -s'
@@ -111,7 +120,7 @@ case "$1" in
                     gsettings set org.cinnamon.desktop.keybindings custom-list "['custom0','custom1','custom2']"
                 fi
             else
-                if command -v fsearch &> /dev/null   then    
+                if command -v fsearch &> /dev/null ; then    
                     log "update default keyboard shortcut settings for fsearch"               
                     gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ binding "['<Primary><Shift>f']"
                     gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ command 'fsearch'
@@ -126,9 +135,11 @@ case "$1" in
             log "update search provider settings"
 
             # fix asbru-cm font
-            if [ -f "$HOME/.config/asbru/asbru.yml" ]   then
+            if [ -f "$HOME/.config/asbru/asbru.yml" ] ; then
                 sed -i 's/Monospace/Hack Nerd Font Regular/g' $HOME/.config/asbru/asbru.yml
-                log "Update asbru font seting"
+                if [ $? -eq 0 ] ; then
+                    log "Update asbru font seting" 
+                fi                                
             fi
 
             # Community link
@@ -136,25 +147,32 @@ case "$1" in
             [ -z $XDG_DESKTOP_DIR ] && XDG_DESKTOP_DIR="$HOME/Desktop"
             
             if [ -f "/usr/share/applications/hamonikr-community.desktop" ] && \
-                [ ! -f "$XDG_DESKTOP_DIR/hamonikr-community.desktop" ]  then
+                [ ! -f "$XDG_DESKTOP_DIR/hamonikr-community.desktop" ] ; then
                 install -m 755 /usr/share/applications/hamonikr-community.desktop $XDG_DESKTOP_DIR/hamonikr-community.desktop
-                log "Update hamonikr community link"
+                if [ $? -eq 0 ] ; then
+                    log "Update hamonikr community link" 
+                fi                
             fi
 
             # Hamonikr-drive link
             if [ -f "/usr/share/applications/hamonikr-drive.desktop" ] &&  \
-                [ ! -f "$XDG_DESKTOP_DIR/hamonikr-drive.desktop" ]  then
+                [ ! -f "$XDG_DESKTOP_DIR/hamonikr-drive.desktop" ] ; then
                 install -m 755 /usr/share/applications/hamonikr-drive.desktop $XDG_DESKTOP_DIR/hamonikr-drive.desktop
-                log "Update hamonikr-drive link"
+                if [ $? -eq 0 ] ; then
+                    log "Update hamonikr-drive link" 
+                fi                
             fi
 
             # default hamonikr-theme-setting
-            if [ -f "/usr/local/bin/hamonikr-theme-setting" ]  then
+            if [ -x "/usr/local/bin/hamonikr-theme-setting" ] ; then
                 hamonikr-theme-setting restore && hamonikr-theme-setting macstyle
+                if [ $? -eq 0 ] ; then
+                    log "Updated hamonikr-theme-setting restore and macstyle" 
+                fi
             fi
             
             # naver whale default browser
-            if [ "$(dpkg-query -W --showformat='${db:Status-Status}' naver-whale-stable 2>&1)" = "installed" ]   then
+            if [ "$(dpkg-query -W --showformat='${db:Status-Status}' naver-whale-stable 2>&1)" = "installed" ] ; then
                 # bug fix : [ defulat applications > web > firefox ] !need USER
                 xdg-settings set default-web-browser naver-whale.desktop
 
@@ -163,7 +181,7 @@ case "$1" in
             fi
 
             # default Audio player
-            if [ "$(dpkg-query -W --showformat='${db:Status-Status}' lollypop 2>&1)" = "installed" ]   then
+            if [ "$(dpkg-query -W --showformat='${db:Status-Status}' lollypop 2>&1)" = "installed" ] ; then
                 xdg-mime default org.gnome.Lollypop.desktop application/ogg application/x-ogg application/x-ogm-audio audio/aac audio/mp4 audio/mpeg audio/mpegurl audio/ogg audio/vnd.rn-realaudio audio/vorbis audio/x-flac audio/x-mp3 audio/x-mpeg audio/x-mpegurl audio/x-ms-wma audio/x-musepack audio/x-oggflac audio/x-pn-realaudio audio/x-scpls audio/x-speex audio/x-vorbis audio/x-vorbis+ogg audio/x-wav x-content/audio-player audio/x-aac audio/m4a audio/x-m4a audio/mp3 audio/ac3 audio/flac application/xspf+xml audio/x-opus+ogg application/vnd.apple.mpegurl
             fi
 
@@ -174,19 +192,20 @@ case "$1" in
             log "Created set-user-env.done file"
 
         fi
-      
+      ;;
     restore)
-        if [ -f "$HOME/.hamonikr/backup_user_env.dconf" ]   then            
+
+        if [ -f "$HOME/.hamonikr/backup_user_env.dconf" ] ; then            
             dconf load / < $HOME/.hamonikr/backup_user_env.dconf
-            if [ $? -eq 0 ]   then
+            if [ $? -eq 0 ] ; then
                 log "Successful restored previous settings." 
             else
                 log "Failed : Restore previous settings."
             fi
         fi         
-      
+      ;;
     *)
         echo "This program required patameter."
         echo "Usage : set-user-env apply | restore"
-      
+      ;;
 esac
