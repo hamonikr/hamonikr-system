@@ -1,10 +1,19 @@
+hamonikr-system (6.3.5) taebaek; urgency=medium
+
+  [Kevin]
+  * Add user-setup-apply
+   - Change default shell as zsh when installed hamonikr-zsh
+  * Update ubuntu mirror server info
+   - Add ftp.kaist.ac.kr
+
+ -- HamoniKR <pkg@hamonikr.org>  Mon, 17 Oct 2022 15:54:50 +0900
+
 hamonikr-system (6.3.4) taebaek; urgency=medium
 
   [JamesBae]
   * Fix grub logo icon change
 
  -- HamoniKR <pkg@hamonikr.org>  Mon, 17 Oct 2022 13:06:56 +0900
-
 
 hamonikr-system (6.3.3) taebaek; urgency=medium
 
