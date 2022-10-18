@@ -29,8 +29,8 @@ if [ -f "/etc/hamonikr/info" ] ; then
             RELEASE = "Unknown"
         fi    
 
-        if ping -q -c 1 -W 1 pms.invesume.com >/dev/null; then
-            curl -XPOST "http://pms.invesume.com:8086/write?db=hamonikr" --data-binary "machineid,codename=$CODENAME,version=$RELEASE value=\"$RD\""
+        if ping -q -c 1 -W 1 u.hamonikr.org >/dev/null; then
+            curl -XPOST "http://u.hamonikr.org:8086/write?db=hamonikr" --data-binary "machineid,codename=$CODENAME,version=$RELEASE value=\"$RD\""
             # log "Update hamonikr user status"
             echo "Update hamonikr user status"
         fi   
