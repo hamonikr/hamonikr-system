@@ -16,7 +16,7 @@ if [ -f "/etc/hamonikr/info" ] ; then
 
     GRP_CHECK=$(grep "vboxsf" /etc/group)
     if [ x${GRP_CHECK} = "x" ] ; then
-      addgroup vboxsf
+      addgroup --gid 5000 vboxsf
       echo "Updated vboxsf group for virtualbox share folder"
     fi
 
