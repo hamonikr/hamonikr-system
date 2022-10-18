@@ -15,11 +15,11 @@ case "$1" in
         fi
 
         # Apply HamoniKR OS infomation in system
-        cp -f /etc/hamonikr/.bak/issue.bak /etc/issue
-        cp -f /etc/hamonikr/.bak/issue.net.bak /etc/issue.net
-        cp -f /etc/hamonikr/.bak/lsb-release.bak /etc/lsb-release
-        cp -f /etc/hamonikr/.bak/os-release.bak /etc/os-release
-        cp -f /etc/hamonikr/.bak/os-release.bak /usr/lib/os-release
+        [ -f /etc/hamonikr/.bak/issue.bak ] && cp -f /etc/hamonikr/.bak/issue.bak /etc/issue
+        [ -f /etc/hamonikr/.bak/issue.net.bak ] && cp -f /etc/hamonikr/.bak/issue.net.bak /etc/issue.net
+        [ -f /etc/hamonikr/.bak/lsb-release.bak ] && cp -f /etc/hamonikr/.bak/lsb-release.bak /etc/lsb-release
+        [ -f /etc/hamonikr/.bak/os-release.bak ] && cp -f /etc/hamonikr/.bak/os-release.bak /etc/os-release
+        [ -f /etc/hamonikr/.bak/os-release.bak ] && cp -f /etc/hamonikr/.bak/os-release.bak /usr/lib/os-release
 
         [ -d "/etc/hamonikr/.bak" ] && rm -rf "/etc/hamonikr/.bak"
         [ -d "/etc/hamonikr/adjustments" ] && rm -rf "/etc/hamonikr/adjustments"
