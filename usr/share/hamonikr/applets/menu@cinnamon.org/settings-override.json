@@ -1,0 +1,27 @@
+{
+    "menu-custom" : {
+        "default" : true,
+        "override-props" : true
+    },
+    "menu-label" : {
+        "default" : "",
+        "override-props" : true
+    },
+    "menu-icon" : {
+        "icon_categories" : [{
+            "name" : "HamoniKR",
+            "icons" : [
+                    "hamonikr-logo",
+                    "hamonikr-logo2",
+                    "cinnamon-symbolic",
+                    "emblem-favorite-symbolic",
+                    "user-bookmarks-symbolic",
+                    "start-here-symbolic"
+            ]
+        }],
+        "default_category" : "HamoniKR",
+        "default" : "hamonikr",
+        "default_icon" : "hamonikr",
+        "override-props" : true
+    }
+}

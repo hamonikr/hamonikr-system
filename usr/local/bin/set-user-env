@@ -163,14 +163,6 @@ case "$1" in
                 fi                
             fi
 
-            # default hamonikr-theme-setting
-            if [ -x "/usr/local/bin/hamonikr-theme-setting" ] ; then
-                hamonikr-theme-setting restore && hamonikr-theme-setting macstyle
-                if [ $? -eq 0 ] ; then
-                    log "Updated hamonikr-theme-setting restore and macstyle" 
-                fi
-            fi
-            
             # naver whale default browser
             if [ "$(dpkg-query -W --showformat='${db:Status-Status}' naver-whale-stable 2>&1)" = "installed" ] ; then
                 # bug fix : [ defulat applications > web > firefox ] !need USER

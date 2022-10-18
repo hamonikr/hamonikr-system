@@ -1,0 +1,290 @@
+[x.dm.slick-greeter]
+theme-name='HamoniKR'
+icon-theme-name='HamoniKR'
+font-name='Noto Sans CJK KR 9'
+background='/usr/share/backgrounds/hamonikr/default_background.jpg'
+draw-user-backgrounds=true
+
+[org.onboard]
+theme='/usr/share/onboard/themes/Droid.theme'
+layout='/usr/share/onboard/layouts/Compact-ko.onboard'
+key-label-overrides=['RWIN:Super:', 'LWIN:Super:']
+status-icon-provider='AppIndicator'
+key-label-font='Noto Sans CJK KR 10'
+
+[org.onboard.theme-settings]
+key-label-overrides=['RWIN:Super:', 'LWIN:Super:']
+key-label-font='Noto Sans CJK KR 10'
+
+[org.gnome.desktop.interface]
+cursor-theme='HamoniKR'
+document-font-name="Noto Sans CJK KR 10"
+font-name="Noto Sans CJK KR 10"
+gtk-key-theme='Default'
+gtk-theme='HamoniKR'
+icon-theme='HamoniKR'
+monospace-font-name="Hack Nerd Font 10"
+toolkit-accessibility=false
+
+[org.gnome.desktop.background]
+color-shading-type="solid"
+picture-options="zoom"
+picture-uri='file:///usr/share/backgrounds/hamonikr/default_background.jpg'
+primary-color="#000000"
+secondary-color="#000000"
+show-desktop-icons=false
+
+[org.gnome.desktop.wm.preferences]
+button-layout=':minimize,maximize,close'
+num-workspaces=4
+theme='HamoniKR'
+titlebar-font="Noto Sans CJK KR 11"
+titlebar-uses-system-font=false
+
+[org.gnome.desktop.sound]
+event-sounds=false
+input-feedback-sounds=false
+theme-name="LinuxMint"
+
+[org.gnome.Terminal.Legacy.Profile]
+background-color='rgb(0,0,0)'
+background-transparency-percent=20
+bold-color-same-as-fg=true
+cursor-colors-set=false
+default-size-columns=95
+font='Hack Nerd Font 10'
+foreground-color='rgb(211,215,207)'
+highlight-colors-set=false
+palette=['rgb(46,52,54)', 'rgb(204,0,0)', 'rgb(78,154,6)', 'rgb(196,160,0)', 'rgb(52,101,164)', 'rgb(117,80,123)', 'rgb(6,152,154)', 'rgb(211,215,207)', 'rgb(85,87,83)', 'rgb(239,41,41)', 'rgb(138,226,52)', 'rgb(252,233,79)', 'rgb(114,159,207)', 'rgb(173,127,168)', 'rgb(52,226,226)', 'rgb(238,238,236)']
+use-system-font=false
+use-theme-colors=false
+use-theme-transparency=false
+use-transparent-background=true
+visible-name='hamonikr'
+
+[org.gnome.meld]
+custom-font='Hack Nerd Font ,10'
+
+[org.gnome.settings-daemon.plugins.xsettings]
+hinting="slight"
+
+[org.gnome.gnote]
+use-client-side-decorations='gnome,ubuntu,pop,cinnamon,cinnamon2d,mate,xfce'
+enable-custom-font=true
+custom-font-face='Noto Sans CJK KR 10'
+
+[org.gnome.libgnomekbd.keyboard]
+options=['grp\tgrp:win_space_toggle', 'terminate\tterminate:ctrl_alt_bksp']
+
+[org.cinnamon]
+favorite-apps=['naver-whale.desktop', 'mintinstall.desktop', 'cinnamon-settings.desktop', 'org.gnome.Terminal.desktop', 'nemo.desktop']
+panels-enabled=['1:0:top'] 
+panels-height=['1:38']
+enabled-applets=['panel1:left:0:menu@cinnamon.org:0', 'panel1:left:1:grouped-window-list@cinnamon.org:1', 'panel1:right:0:systray@cinnamon.org:2', 'panel1:right:1:expo@cinnamon.org:3', 'panel1:right:2:xapp-status@cinnamon.org:4', 'panel1:right:3:notifications@cinnamon.org:5', 'panel1:right:4:printers@cinnamon.org:6', 'panel1:right:5:removable-drives@cinnamon.org:7', 'panel1:right:6:bluetooth@cinnamon.org:8', 'panel1:right:7:network@cinnamon.org:9', 'panel1:right:8:sound@cinnamon.org:10', 'panel1:right:9:power@cinnamon.org:11', 'panel1:right:10:calendar@cinnamon.org:12', 'panel1:right:11:show-desktop@cinnamon.org:13', 'panel1:right:12:user@cinnamon.org:14']
+
+[org.cinnamon.desktop.keybindings.media-keys]
+www=['<Super>w']
+terminal=['<Primary><Alt>t']
+
+[org.cinnamon.desktop.interface]
+cursor-theme='HamoniKR'
+gtk-key-theme='Default'
+gtk-theme='HamoniKR-light'
+icon-theme='HamoniKR'
+menus-have-icons=true
+toolkit-accessibility=false
+font-name="Noto Sans CJK KR 10"
+scaling-factor=uint32 0
+
+[org.cinnamon.desktop.screensaver]
+font-date="Ubuntu 24"
+font-message="Ubuntu 14"
+font-time="Ubuntu 64"
+
+[org.cinnamon.desktop.background]
+primary-color="#000000"
+secondary-color="#000000"
+color-shading-type="solid"
+picture-uri='file:///usr/share/backgrounds/hamonikr/default_background.jpg'
+picture-options="zoom"
+
+[org.cinnamon.desktop.wm.preferences]
+button-layout=':minimize,maximize,close'
+num-workspaces=4
+theme='HamoniKR'
+titlebar-font="Noto Sans CJK KR 10"
+titlebar-uses-system-font=false
+
+[org.cinnamon.settings-daemon.plugins.xsettings]
+hinting="slight"
+menus-have-icons=true
+
+[org.cinnamon.settings-daemon.plugins.power]
+button-power="interactive"
+lock-on-suspend=true
+
+[org.cinnamon.theme]
+name='HamoniKR-dark'
+
+[org.cinnamon]
+panel-scale-text-icons=true
+workspace-expo-view-as-grid=true
+app-menu-icon-name="hamonikr-menu"
+
+[org.cinnamon.sounds]
+close-file="/usr/share/mint-artwork/sounds/close.oga"
+login-file="/usr/share/mint-artwork/sounds/login.oga"
+logout-file="/usr/share/mint-artwork/sounds/logout.ogg"
+map-file="/usr/share/mint-artwork/sounds/map.oga"
+maximize-file="/usr/share/mint-artwork/sounds/maximize.oga"
+minimize-file="/usr/share/mint-artwork/sounds/minimize.oga"
+notification-file="/usr/share/mint-artwork/sounds/notification.oga"
+plug-file="/usr/share/mint-artwork/sounds/plug.oga"
+switch-file="/usr/share/mint-artwork/sounds/switch.oga"
+tile-file="/usr/share/mint-artwork/sounds/tile.oga"
+unmaximize-file="/usr/share/mint-artwork/sounds/unmaximize.oga"
+unplug-file="/usr/share/mint-artwork/sounds/unplug.oga"
+close-enabled=false
+login-enabled=true
+logout-enabled=true
+map-enabled=false
+maximize-enabled=false
+minimize-enabled=false
+notification-enabled=false
+plug-enabled=true
+switch-enabled=true
+tile-enabled=true
+unmaximize-enabled=false
+unplug-enabled=true
+
+[org.cinnamon.desktop.sound]
+event-sounds=false
+input-feedback-sounds=false
+theme-name="LinuxMint"
+volume-sound-enabled=true
+volume-sound-file="/usr/share/mint-artwork/sounds/volume.oga"
+
+[org.cinnamon.desktop.session]
+session-manager-uses-logind=true
+settings-daemon-uses-logind=true
+
+[org.nemo.desktop]
+computer-icon-visible=true
+font="Noto Sans CJK KR 10"
+home-icon-visible=true
+volumes-visible=true
+
+[org.nemo.window-state]
+start-with-status-bar=true
+
+[org.nemo.preferences]
+thumbnail-limit=4294967295
+bulk-rename-tool=b'bulky'
+
+[org.mate.interface]
+buttons-have-icons=false
+document-font-name="Noto Sans CJK KR 10"
+enable-animations=false
+font-name="Noto Sans CJK KR 10"
+gtk-theme="HamoniKR"
+icon-theme="HamoniKR"
+menus-have-icons=true
+monospace-font-name="Hack Nerd Font 10"
+
+[org.mate.background]
+color-shading-type="solid"
+picture-filename="/usr/share/backgrounds/hamonikr/default_background.jpg"
+picture-options="zoom"
+primary-color="#000000000000"
+secondary-color="#000000000000"
+show-desktop-icons=true
+
+[org.mate.font-rendering]
+antialiasing="rgba"
+dpi=96.0
+hinting="slight"
+rgba-order="rgb"
+
+[org.mate.sound]
+theme-name="LinuxMint"
+
+[org.mate.caja.desktop]
+computer-icon-visible=true
+font="Ubuntu 10"
+home-icon-visible=true
+trash-icon-visible=false
+volumes-visible=true
+
+[org.mate.caja.preferences]
+background-color="#ffffff"
+background-set=false
+enable-delete=true
+preview-sound="never"
+show-icon-text="never"
+show-image-thumbnails="always"
+thumbnail-limit=4294967295
+
+[org.mate.Marco.general]
+button-layout=":minimize,maximize,close"
+center-new-windows=true
+compositing-manager=true
+num-workspaces=4
+theme="Mint-Y"
+
+[org.mate.NotificationDaemon]
+popup-location="top_right"
+theme="coco"
+
+[org.mate.peripherals-touchpad]
+natural-scroll=true
+tap-to-click=true
+two-finger-click=3
+three-finger-click=2
+
+[org.mate.peripherals-keyboard-xkb.kbd]
+options=['grp\tgrp:win_space_toggle', 'terminate\tterminate:ctrl_alt_bksp']
+
+[org.mate.peripherals-mouse]
+cursor-theme="default"
+
+[org.mate.Marco.general]
+titlebar-font="Noto Sans CJK KR 11"
+
+[org.mate.Marco.global-keybindings]
+run-command-terminal="<Primary><Alt>t"
+
+[org.mate.power-manager]
+notify-low-capacity=false
+
+[org.mate.panel]
+default-layout='mint'
+enable-sni-support=false
+
+[org.mate.applications-calculator]
+exec='gnome-calculator'
+
+[org.mate.applications-at-mobility]
+exec='onboard'
+
+[org.mate.applications-messenger]
+exec='hexchat'
+
+[org.mate.SettingsDaemon.plugins.media-keys]
+magnifier='<Alt><Mod4>m'
+screenreader='<Alt><Mod4>s'
+on-screen-keyboard='<Alt><Mod4>k'
+
+[org.gtk.Settings.FileChooser]
+sort-directories-first=true
+startup-mode='cwd'
+
+[io.github.celluloid-player.Celluloid]
+mpv-options='hwdec=yes'
+
+[org.x.viewer.plugins.pythonconsole]
+use-system-font=false
+font='Hack Nerd Font 9'
+
+[net.launchpad.plank.dock.settings]
+zoom-enabled=true
+zoom-percent=150
