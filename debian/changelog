@@ -1,3 +1,11 @@
+hamonikr-system (6.4.1) taebaek; urgency=medium
+
+  [Kevin]
+  * Add exception handling in set-user-env
+   - bug fix - set-user-env  34: bakcup_user_env.dconf not found
+
+ -- HamoniKR <pkg@hamonikr.org>  Wed, 19 Oct 2022 12:17:16 +0900
+
 hamonikr-system (6.4.0) taebaek; urgency=medium
 
   [JamesBae]

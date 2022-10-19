@@ -31,11 +31,13 @@ case "$1" in
         if [ x$isrun != "xrun" ] ; then
 
             # backup previous env
-            dconf dump / > $HOME/.hamonikr/backup_user_env.dconf
-            if [ $? -eq 0 ] ; then
-                log "Succeed backup from previous settings."
-            else
-                log "Failed : Backup from previous settings."
+            if [ ! -f $HOME/.hamonikr/backup_user_env.dconf ] ; then
+                dconf dump / > $HOME/.hamonikr/backup_user_env.dconf
+                if [ $? -eq 0 ] ; then
+                    log "Succeed backup from previous settings."
+                else
+                    log "Failed : Backup from previous settings."
+                fi
             fi
             
             # change menu icon to hamonikr logo
@@ -130,9 +132,11 @@ case "$1" in
             fi
 
             # search provider   
-            cp -a /usr/share/cinnamon/search_providers/google@hamonikr.org $HOME/.local/share/cinnamon/search_providers/google@hamonikr.org
-            gsettings set org.cinnamon enabled-search-providers [\"google@hamonikr.org\"]
-            log "update search provider settings"
+            if [ ! -d $HOME/.local/share/cinnamon/search_providers/google@hamonikr.org ] ; then
+                cp -a /usr/share/cinnamon/search_providers/google@hamonikr.org $HOME/.local/share/cinnamon/search_providers/google@hamonikr.org
+                gsettings set org.cinnamon enabled-search-providers [\"google@hamonikr.org\"]
+                log "update search provider settings"
+            fi
 
             # fix asbru-cm font
             if [ -f "$HOME/.config/asbru/asbru.yml" ] ; then
