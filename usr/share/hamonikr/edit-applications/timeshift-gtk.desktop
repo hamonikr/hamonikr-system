@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Timeshift Backup
-Name[ko]=백업 및 복구
+Name[ko]=시스템 스냅샷 Timeshift
 MimeType=
 Exec=timeshift-launcher
 Type=Application
