@@ -88,8 +88,9 @@ terminal=['<Primary><Alt>t']
 
 [org.cinnamon.desktop.interface]
 cursor-theme='HamoniKR'
+clock-show-date=true
 gtk-key-theme='Default'
-gtk-theme='HamoniKR-light'
+gtk-theme='HamoniKR'
 icon-theme='HamoniKR'
 menus-have-icons=true
 toolkit-accessibility=false
@@ -124,7 +125,7 @@ button-power="interactive"
 lock-on-suspend=true
 
 [org.cinnamon.theme]
-name='HamoniKR-dark'
+name='HamoniKR'
 
 [org.cinnamon]
 panel-scale-text-icons=true
