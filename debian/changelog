@@ -1,3 +1,12 @@
+hamonikr-system (6.4.8) taebaek; urgency=medium
+
+  [Kevin]
+  * Update default image viewer as pix
+   - remove xviewer and set default as pix
+  * Hide default on screen keyboard, because of onboard
+
+ -- HamoniKR <pkg@hamonikr.org>  Thu, 20 Oct 2022 20:53:50 +0900
+
 hamonikr-system (6.4.7) taebaek; urgency=medium
 
   [Kevin]
