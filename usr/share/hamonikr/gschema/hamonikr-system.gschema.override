@@ -109,6 +109,9 @@ color-shading-type="solid"
 picture-uri='file:///usr/share/backgrounds/hamonikr/default_background.jpg'
 picture-options="zoom"
 
+[org.cinnamon.desktop.background.slideshow]
+image-source='xml:///usr/share/cinnamon-background-properties/hamonikr.xml'
+
 [org.cinnamon.desktop.wm.preferences]
 button-layout=':minimize,maximize,close'
 num-workspaces=4
