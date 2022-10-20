@@ -1,10 +1,18 @@
+hamonikr-system (6.4.6) taebaek; urgency=medium
+
+  [Kevin]
+  * Overwrite grub title change script
+   - Update 10-hamonikr-system.overwrite
+
+ -- HamoniKR <pkg@hamonikr.org>  Thu, 20 Oct 2022 14:45:13 +0900
+
 hamonikr-system (6.4.5) taebaek; urgency=medium
 
   [Kevin]
-  * Overwrite grub title instead of linuxmint script
-   - Changed 10-hamonikr-system.overwrite
+  * disable mintsystem when use hamonikr-system
+   - update postinst and prerm
 
- -- HamoniKR <pkg@hamonikr.org>  Thu, 20 Oct 2022 14:43:02 +0900
+ -- HamoniKR <pkg@hamonikr.org>  Thu, 20 Oct 2022 14:13:15 +0900
 
 hamonikr-system (6.4.3) taebaek; urgency=medium
 

@@ -26,6 +26,9 @@ case "$1" in
         fi
 
         if which systemctl >/dev/null 2>&1 ; then
+            if [ $(systemctl is-enabled mintsystem) = "enabled" ] ; then
+                systemctl disable mintsystem
+            fi        
             if [ $(systemctl is-enabled ubuntu-system-adjustments) = "enabled" ] ; then
                 systemctl disable ubuntu-system-adjustments
             fi
