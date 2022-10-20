@@ -1,6 +1,3 @@
-/etc/hamonikr/templates/default-testpage.pdf                                        /usr/share/cups/data/default-testpage.pdf
-/usr/share/hamonikr/edit-applications/albert.desktop                                /usr/share/applications/albert.desktop
-/usr/share/hamonikr/edit-applications/boot-select.desktop 	                        /usr/share/applications/boot-select.desktop
 /usr/share/hamonikr/edit-applications/cinnamon-color-panel.desktop                  /usr/share/applications/cinnamon-color-panel.desktop
 /usr/share/hamonikr/edit-applications/cinnamon-display-panel.desktop                /usr/share/applications/cinnamon-display-panel.desktop
 /usr/share/hamonikr/edit-applications/cinnamon-network-panel.desktop 	            /usr/share/applications/cinnamon-network-panel.desktop
@@ -55,4 +52,3 @@
 /usr/share/hamonikr/edit-applications/xed.desktop                                   /usr/share/applications/xed.desktop
 /usr/share/hamonikr/edit-applications/xpad.desktop                                  /usr/share/applications/xpad.desktop
 /usr/share/hamonikr/edit-applications/xreader.desktop                               /usr/share/applications/xreader.desktop
-/usr/share/hamonikr/user-setup/user-setup-apply                                     /usr/lib/user-setup/user-setup-apply
