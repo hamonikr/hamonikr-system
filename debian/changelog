@@ -1,6 +1,14 @@
 hamonikr-system (6.4.6) taebaek; urgency=medium
 
   [Kevin]
+  * Changed date format in calendar@cinnamon.org
+   - Update 10-adjust-applet-gschema.execute-once
+
+ -- HamoniKR <pkg@hamonikr.org>  Thu, 20 Oct 2022 17:38:48 +0900
+
+hamonikr-system (6.4.6) taebaek; urgency=medium
+
+  [Kevin]
   * Overwrite grub title change script
    - Update 10-hamonikr-system.overwrite
 

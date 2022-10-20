@@ -30,6 +30,11 @@ if [ -f "/etc/hamonikr/info" ] ; then
     /usr/share/cinnamon/applets/menu@cinnamon.org/settings-override.json
   fi
 
+  if [ -f /usr/share/hamonikr/applets/calendar@cinnamon.org/settings-override.json ] ; then
+    cp -f /usr/share/hamonikr/applets/calendar@cinnamon.org/settings-override.json \
+    /usr/share/cinnamon/applets/calendar@cinnamon.org/settings-override.json
+  fi
+
   if [ -f /usr/share/hamonikr/gschema/hamonikr-system.gschema.override ] ; then
     
     cp -f /usr/share/hamonikr/gschema/hamonikr-system.gschema.override \
