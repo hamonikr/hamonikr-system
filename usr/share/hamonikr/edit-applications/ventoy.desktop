@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Ventoy
+Name[ko]=Ventoy 부팅 USB 제작
+Icon=ventoy
+Exec=ventoy
+Terminal=false
+Categories=Utility;
+Keywords=ventoy;usb;iso;
+Keywords[ko]=ventoy;usb;iso;부팅;
+

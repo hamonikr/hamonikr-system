@@ -1,0 +1,16 @@
+[Desktop Entry]
+Version=1.0
+Name=Firewall Configuration
+Name[ko]=방화벽 설정
+Comment=An easy way to configure your firewall
+Comment[ko]=방화벽 설정을 도와줍니다
+Keywords=gufw;security;firewall;network;
+Keywords[ko]=gufw;security;firewall;network;방화벽;네트워크;파이어월;
+Categories=GNOME;GTK;Settings;Security;X-GNOME-Settings-Panel;X-GNOME-SystemSettings;X-Unity-Settings-Panel;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
+Exec=gufw
+Icon=gufw
+Terminal=false
+Type=Application
+X-GNOME-Settings-Panel=gufw
+X-Unity-Settings-Panel=gufw
+X-Ubuntu-Gettext-Domain=gufw

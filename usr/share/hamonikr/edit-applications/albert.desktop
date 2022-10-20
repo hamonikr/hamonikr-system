@@ -1,0 +1,14 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Categories=Utility;
+Comment=A desktop agnostic launcher
+Comment[ko]=빠른 프로그램 검색도구 (alt + space)
+Exec=albert
+GenericName=Launcher
+Icon=albert
+Name=Albert
+Name[ko]=Albert 런처
+StartupNotify=false
+Type=Application
+Version=1.0
+Keywords[ko]=launcher;terminal;command;알버트;런처;스팟라이트;spotlight;

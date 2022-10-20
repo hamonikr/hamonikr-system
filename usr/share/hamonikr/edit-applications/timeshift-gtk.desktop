@@ -1,11 +1,11 @@
 [Desktop Entry]
 Name=Timeshift Backup
-Name[ko]=시스템 스냅샷 Timeshift
+Name[ko]=시스템 스냅샷 관리
 MimeType=
 Exec=timeshift-launcher
 Type=Application
 GenericName=Backup and Restore Utility
-GenericName[ko]=시스템 백업 및 복구 프로그램
+GenericName[ko]=시스템 스냅샷 관리
 GenericName[ca]=Utilitat de restauració del sistema
 GenericName[cs]=Nástroj pro obnovení systému
 GenericName[da]=Værktøj til systemgendannelse
@@ -17,7 +17,7 @@ GenericName[ru]=Программа для восстановления сист�
 Terminal=false
 Icon=timeshift
 Comment=System Backup and Restore Utility
-Comment[ko]=시스템을 백업 또는 복구합니다
+Comment[ko]=시스템 스냅샷을 생성하거나 복원합니다
 Comment[ca]=Utilitat de restauració del sistema
 Comment[cs]=Nástroj pro obnovení systému
 Comment[da]=Værktøj til systemgendannelse

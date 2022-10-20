@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Application
+Version=1.3
+Name=Boot-Select
+Name[ko]=부팅 메뉴 선택기
+GenericName=boot-select
+GenericName[ko]=시스템 부팅 메뉴 설정 프로그램
+Comment=Choose Default Boot Menu
+Comment[ko]=시스템 부팅시 사용할 기본값을 설정합니다
+Icon=boot-select.png
+Exec=boot-select
+Terminal=false
+Categories=Utility;
+Keywords[ko]=boot;부팅;grub;menu;부트로더;부팅메뉴;메뉴;그럽;grub;
+X-Ubuntu-Gettext-Domain=boot-select
