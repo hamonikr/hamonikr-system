@@ -1,4 +1,10 @@
 {
+    "use-custom-format" : {
+        "type" : "switch",
+        "default" : true,
+        "description": "Use a custom date format",
+        "tooltip": "Check this to define a custom format for the date in the calendar applet."
+    },
     "custom-format" : {
         "type" : "entry",
         "default" : "%Y-%m-%e(%a), %p%l:%M",
