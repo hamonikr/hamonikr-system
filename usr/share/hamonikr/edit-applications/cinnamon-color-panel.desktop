@@ -7,7 +7,6 @@ StartupNotify=true
 Categories=GTK;Settings;X-Cinnamon-Settings-Panel;HardwareSettings
 OnlyShowIn=X-Cinnamon;
 X-Cinnamon-Settings-Panel=color
-Keywords[ko]=launcher;terminal;command;알버트;런처;스팟라이트;spotlight;
 # Translators: those are keywords for the color control-center panel
 Name=Color
 Name[am]=ቀለም
@@ -45,7 +44,7 @@ Name[ja]=色
 Name[kab]=Ini
 Name[kk]=Түс
 Name[km]=ពណ៌
-Name[ko]=색상
+Name[ko]=색상 관리
 Name[ku]=Reng
 Name[lt]=Spalva
 Name[lv]=Krāsa
