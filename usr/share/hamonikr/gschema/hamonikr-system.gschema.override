@@ -81,6 +81,10 @@ favorite-apps=['naver-whale.desktop', 'mintinstall.desktop', 'cinnamon-settings.
 panels-enabled=['1:0:top'] 
 panels-height=['1:38']
 enabled-applets=['panel1:left:0:menu@cinnamon.org:0', 'panel1:left:1:grouped-window-list@cinnamon.org:1', 'panel1:right:0:systray@cinnamon.org:2', 'panel1:right:1:expo@cinnamon.org:3', 'panel1:right:2:xapp-status@cinnamon.org:4', 'panel1:right:3:notifications@cinnamon.org:5', 'panel1:right:4:printers@cinnamon.org:6', 'panel1:right:5:removable-drives@cinnamon.org:7', 'panel1:right:6:bluetooth@cinnamon.org:8', 'panel1:right:7:network@cinnamon.org:9', 'panel1:right:8:sound@cinnamon.org:10', 'panel1:right:9:power@cinnamon.org:11', 'panel1:right:10:calendar@cinnamon.org:12', 'panel1:right:11:show-desktop@cinnamon.org:13', 'panel1:right:12:user@cinnamon.org:14']
+panel-scale-text-icons=true
+workspace-expo-view-as-grid=true
+app-menu-icon-name="hamonikr-menu"
+enabled-extensions=['smart-panel@mohammad-sn']
 
 [org.cinnamon.desktop.keybindings.media-keys]
 www=['<Super>w']
@@ -129,11 +133,6 @@ lock-on-suspend=true
 
 [org.cinnamon.theme]
 name='HamoniKR'
-
-[org.cinnamon]
-panel-scale-text-icons=true
-workspace-expo-view-as-grid=true
-app-menu-icon-name="hamonikr-menu"
 
 [org.cinnamon.sounds]
 close-file="/usr/share/mint-artwork/sounds/close.oga"
