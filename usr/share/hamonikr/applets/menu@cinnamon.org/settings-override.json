@@ -23,5 +23,15 @@
         "default" : "hamonikr",
         "default_icon" : "hamonikr",
         "override-props" : true
-    }
+    },
+    "menu-icon-size" : {
+        "type": "spinbutton",
+        "default" : 24,
+        "min" : 16,
+        "max" : 96,
+        "step" : 1,
+        "units" : "px",
+        "description" : "Icon size",
+        "dependency" : "menu-custom"
+     }
 }

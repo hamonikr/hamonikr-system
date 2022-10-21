@@ -7,7 +7,7 @@
     },
     "custom-format" : {
         "type" : "entry",
-        "default" : "%Y-%m-%e(%a), %p%l:%M",
+        "default" : "%m-%e(%a), %p%l:%M",
         "description" : "Date format",
         "dependency" : "use-custom-format",
         "tooltip" : "Set your custom format here."

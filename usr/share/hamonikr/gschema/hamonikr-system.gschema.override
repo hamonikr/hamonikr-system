@@ -23,7 +23,7 @@ font-name="Noto Sans CJK KR 10"
 gtk-key-theme='Default'
 gtk-theme='HamoniKR'
 icon-theme='HamoniKR'
-monospace-font-name="Hack Nerd Font 10"
+monospace-font-name="Hack Nerd Font 9"
 toolkit-accessibility=false
 
 [org.gnome.desktop.background]
@@ -38,7 +38,7 @@ show-desktop-icons=false
 button-layout=':minimize,maximize,close'
 num-workspaces=4
 theme='HamoniKR'
-titlebar-font="Noto Sans CJK KR 11"
+titlebar-font="Noto Sans CJK KR 10"
 titlebar-uses-system-font=false
 
 [org.gnome.desktop.sound]
@@ -52,7 +52,7 @@ background-transparency-percent=20
 bold-color-same-as-fg=true
 cursor-colors-set=false
 default-size-columns=95
-font='Hack Nerd Font 10'
+font='Hack Nerd Font 9'
 foreground-color='rgb(211,215,207)'
 highlight-colors-set=false
 palette=['rgb(46,52,54)', 'rgb(204,0,0)', 'rgb(78,154,6)', 'rgb(196,160,0)', 'rgb(52,101,164)', 'rgb(117,80,123)', 'rgb(6,152,154)', 'rgb(211,215,207)', 'rgb(85,87,83)', 'rgb(239,41,41)', 'rgb(138,226,52)', 'rgb(252,233,79)', 'rgb(114,159,207)', 'rgb(173,127,168)', 'rgb(52,226,226)', 'rgb(238,238,236)']
@@ -63,7 +63,7 @@ use-transparent-background=true
 visible-name='hamonikr'
 
 [org.gnome.meld]
-custom-font='Hack Nerd Font ,10'
+custom-font='Hack Nerd Font ,9'
 
 [org.gnome.settings-daemon.plugins.xsettings]
 hinting="slight"
@@ -80,7 +80,7 @@ options=['grp\tgrp:win_space_toggle', 'terminate\tterminate:ctrl_alt_bksp']
 favorite-apps=['naver-whale.desktop', 'mintinstall.desktop', 'cinnamon-settings.desktop', 'org.gnome.Terminal.desktop', 'nemo.desktop']
 panels-enabled=['1:0:top'] 
 panels-height=['1:38']
-enabled-applets=['panel1:left:0:menu@cinnamon.org:0', 'panel1:left:1:grouped-window-list@cinnamon.org:1', 'panel1:right:0:systray@cinnamon.org:2', 'panel1:right:1:expo@cinnamon.org:3', 'panel1:right:2:xapp-status@cinnamon.org:4', 'panel1:right:3:notifications@cinnamon.org:5', 'panel1:right:4:printers@cinnamon.org:6', 'panel1:right:5:removable-drives@cinnamon.org:7', 'panel1:right:6:bluetooth@cinnamon.org:8', 'panel1:right:7:network@cinnamon.org:9', 'panel1:right:8:sound@cinnamon.org:10', 'panel1:right:9:power@cinnamon.org:11', 'panel1:right:10:calendar@cinnamon.org:12', 'panel1:right:11:show-desktop@cinnamon.org:13', 'panel1:right:12:user@cinnamon.org:14']
+enabled-applets=['panel1:left:0:menu@cinnamon.org:0', 'panel1:left:1:grouped-window-list@cinnamon.org:1', 'panel1:right:0:systray@cinnamon.org:2', 'panel1:right:1:printers@cinnamon.org:3', 'panel1:right:2:removable-drives@cinnamon.org:4', 'panel1:right:3:bluetooth@cinnamon.org:5', 'panel1:right:4:sound@cinnamon.org:6', 'panel1:right:5:calendar@cinnamon.org:7', 'panel1:right:6:notifications@cinnamon.org:8', 'panel1:right:7:network@cinnamon.org:9', 'panel1:right:8:power@cinnamon.org:10', 'panel1:right:9:user@cinnamon.org:11']
 panel-scale-text-icons=true
 workspace-expo-view-as-grid=true
 app-menu-icon-name="hamonikr-menu"
@@ -192,7 +192,7 @@ font-name="Noto Sans CJK KR 10"
 gtk-theme="HamoniKR"
 icon-theme="HamoniKR"
 menus-have-icons=true
-monospace-font-name="Hack Nerd Font 10"
+monospace-font-name="Hack Nerd Font 9"
 
 [org.mate.background]
 color-shading-type="solid"
@@ -251,7 +251,7 @@ options=['grp\tgrp:win_space_toggle', 'terminate\tterminate:ctrl_alt_bksp']
 cursor-theme="default"
 
 [org.mate.Marco.general]
-titlebar-font="Noto Sans CJK KR 11"
+titlebar-font="Noto Sans CJK KR 10"
 
 [org.mate.Marco.global-keybindings]
 run-command-terminal="<Primary><Alt>t"

@@ -1,3 +1,14 @@
+hamonikr-system (6.5.1) taebaek; urgency=medium
+
+  [Kevin]
+  * Update smart-panel@mohammad-sn extension settings
+  * Update calendar applet settings
+  * Changed applet display
+  * Reduce menu icon size as 24
+  * Changed terminal default font size as 9
+
+ -- HamoniKR <pkg@hamonikr.org>  Fri, 21 Oct 2022 22:31:49 +0900
+
 hamonikr-system (6.5.0) taebaek; urgency=medium
 
   [Kevin]

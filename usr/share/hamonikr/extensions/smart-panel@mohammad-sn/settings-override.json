@@ -1,0 +1,62 @@
+{
+    "scroll-action" : {
+        "type": "combobox",
+        "default" : "switch_workspace",
+        "description" : "Action on scrolling: ",
+        "options" : {
+            "Switch between workspaces" : "switch_workspace",
+            "Adjust opacity of windows" : "adjust_opacity",
+            "Toggle show desktop"       : "desktop",
+            "Switch between windows"    : "switch-windows",
+            "None"                      : "none"
+        },
+        "tooltip" : ""
+    },
+    "mdlclck-action" : {
+        "type": "combobox",
+        "default" : "appswitcher",
+        "description" : "Action on panel middle click: ",
+        "options" : {
+            "Expo"                  : "expo",
+            "Overview"              : "overview",
+            "Launch App Switcher"   : "appswitcher",
+            "Show Desktop"          : "desktop",
+            "Run 1st Custom Command": "cc1",
+            "Run 2nd Custom Command": "cc2",
+            "Run 3rd Custom Command": "cc3",
+            "None"                  : "none"
+        },
+        "tooltip" : ""
+    },
+    "cc1-action": {
+        "type": "entry", 
+        "description": "1st Custom Command:", 
+        "default": "gnome-terminal"
+    },
+    "cc2-action": {
+        "type": "entry", 
+        "description": "2nd Custom Command:", 
+        "default": "lollypop"
+    },
+    "cc3-action": {
+        "type": "entry", 
+        "description": "3rd Custom Command:", 
+        "default": "xed"
+    },
+    "appswitcher-style" : {
+        "type": "combobox",
+        "default" : "coverflow",
+        "description" : "App switcher style: ",
+        "options" : {
+            "Icons only"                    : "icons",
+            "Thumbnails only"               : "thumbnails",
+            "Icons and thumbnails"          : "icons+thumbnails",
+            "Icons and window preview"      : "icons+preview",
+            "Window preview (no icons)"     : "preview",
+            "Coverflow (3D)"                : "coverflow",
+            "Timeline (3D)"                 : "timeline",
+            "System default"                : "default"
+        },
+        "tooltip" : ""
+    }
+}
