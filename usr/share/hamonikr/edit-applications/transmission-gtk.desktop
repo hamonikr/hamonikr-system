@@ -79,6 +79,8 @@ Categories=Network;FileTransfer;P2P;GTK;
 X-Ubuntu-Gettext-Domain=transmission
 X-AppInstall-Keywords=torrent
 Actions=Pause;Minimize;
+Keywords=torrent;seed;download;utorrent;bittorrent;
+Keywords=torrent;seed;download;utorrent;bittorrent;토렌트;다운로드;
 
 [Desktop Action Pause]
 Name=Start Transmission with All Torrents Paused

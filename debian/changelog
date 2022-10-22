@@ -1,3 +1,12 @@
+hamonikr-system (6.5.2) taebaek; urgency=medium
+
+  [Kevin]
+  * Removed drive and community desktop icon
+  * Update hamonikr-system.menu
+  * Update few desktop name
+
+ -- HamoniKR <pkg@hamonikr.org>  Sat, 22 Oct 2022 23:13:14 +0900
+
 hamonikr-system (6.5.1) taebaek; urgency=medium
 
   [Kevin]

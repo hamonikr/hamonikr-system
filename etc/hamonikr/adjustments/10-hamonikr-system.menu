@@ -16,6 +16,8 @@ hide /usr/share/applications/nm-connection-editor.desktop
 hide /usr/share/applications/plank.desktop
 hide /usr/share/applications/mintwelcome.desktop
 hide /usr/share/applications/cinnamon-onscreen-keyboard.desktop
+hide /usr/share/applications/albert.desktop
+hide /usr/share/applications/org.gnome.PowerStats.desktop
 categories /usr/share/applications/mediainfo-gui.desktop AudioVideo;
 categories /usr/share/applications/hamonikrwelcome.desktop System;
 categories /usr/share/applications/hamonikr-help.desktop System;

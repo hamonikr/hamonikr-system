@@ -146,26 +146,27 @@ case "$1" in
                 fi                                
             fi
 
-            # Community link
+            # Desktop name
             [ -f ~/.config/user-dirs.dirs ] && source ~/.config/user-dirs.dirs
             [ -z $XDG_DESKTOP_DIR ] && XDG_DESKTOP_DIR="$HOME/Desktop"
             
-            if [ -f "/usr/share/applications/hamonikr-community.desktop" ] && \
-                [ ! -f "$XDG_DESKTOP_DIR/hamonikr-community.desktop" ] ; then
-                install -m 755 /usr/share/applications/hamonikr-community.desktop $XDG_DESKTOP_DIR/hamonikr-community.desktop
-                if [ $? -eq 0 ] ; then
-                    log "Update hamonikr community link" 
-                fi                
-            fi
+            # Community link
+            # if [ -f "/usr/share/applications/hamonikr-community.desktop" ] && \
+            #     [ ! -f "$XDG_DESKTOP_DIR/hamonikr-community.desktop" ] ; then
+            #     install -m 755 /usr/share/applications/hamonikr-community.desktop $XDG_DESKTOP_DIR/hamonikr-community.desktop
+            #     if [ $? -eq 0 ] ; then
+            #         log "Update hamonikr community link" 
+            #     fi                
+            # fi
 
             # Hamonikr-drive link
-            if [ -f "/usr/share/applications/hamonikr-drive.desktop" ] &&  \
-                [ ! -f "$XDG_DESKTOP_DIR/hamonikr-drive.desktop" ] ; then
-                install -m 755 /usr/share/applications/hamonikr-drive.desktop $XDG_DESKTOP_DIR/hamonikr-drive.desktop
-                if [ $? -eq 0 ] ; then
-                    log "Update hamonikr-drive link" 
-                fi                
-            fi
+            # if [ -f "/usr/share/applications/hamonikr-drive.desktop" ] &&  \
+            #     [ ! -f "$XDG_DESKTOP_DIR/hamonikr-drive.desktop" ] ; then
+            #     install -m 755 /usr/share/applications/hamonikr-drive.desktop $XDG_DESKTOP_DIR/hamonikr-drive.desktop
+            #     if [ $? -eq 0 ] ; then
+            #         log "Update hamonikr-drive link" 
+            #     fi                
+            # fi
 
             # naver whale default browser
             if [ "$(dpkg-query -W --showformat='${db:Status-Status}' naver-whale-stable 2>&1)" = "installed" ] ; then

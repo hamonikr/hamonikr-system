@@ -157,3 +157,5 @@ Type=Application
 Categories=System;
 X-GNOME-Autostart-Delay=20
 X-MATE-Autostart-Delay=20
+Keywords=software;update;
+Keywords[ko]=software;update;업데이트;매니저;패치;

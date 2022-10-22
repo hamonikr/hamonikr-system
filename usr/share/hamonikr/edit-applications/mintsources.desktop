@@ -153,3 +153,5 @@ Type=Application
 Categories=GNOME;GTK;System;Settings;X-GNOME-SystemSettings;X-GNOME-Settings-Panel;XFCE;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
 X-GNOME-Settings-Panel=software-properties
 MimeType=text/x-apt-sources-list;
+Keywords=software;source;apt;repo;
+Keywords[ko]=software;source;apt;repo;저장소;소스;미러;gpg;키;

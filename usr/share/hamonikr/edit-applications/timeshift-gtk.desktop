@@ -1,11 +1,11 @@
 [Desktop Entry]
 Name=Timeshift Backup
-Name[ko]=시스템 스냅샷 관리
+Name[ko]=시스템 스냅샷 Timeshift
 MimeType=
 Exec=timeshift-launcher
 Type=Application
 GenericName=Backup and Restore Utility
-GenericName[ko]=시스템 스냅샷 관리
+GenericName[ko]=시스템 스냅샷 Timeshift
 GenericName[ca]=Utilitat de restauració del sistema
 GenericName[cs]=Nástroj pro obnovení systému
 GenericName[da]=Værktøj til systemgendannelse
@@ -29,3 +29,5 @@ Comment[ru]=Программа для восстановления систем�
 X-KDE-StartupNotify=false
 Categories=System;
 X-GNOME-UsesNotifications=true
+Keywords=backup;snapshot;restore;
+Keywords[ko]=backup;snapshot;restore;백업;스냅샷;복구;복원;초기화;
