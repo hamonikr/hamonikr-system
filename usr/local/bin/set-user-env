@@ -25,7 +25,7 @@ log() {
 }
 
 case "$1" in
-    apply)
+    apply|default)
         [ -f "$HOME/.hamonikr/set-user-env.done" ] && isrun="run" 
 
         if [ x$isrun != "xrun" ] ; then
@@ -196,7 +196,7 @@ case "$1" in
 
         fi
       ;;
-    restore)
+    restore|reset)
 
         if [ -f "$HOME/.hamonikr/backup_user_env.dconf" ] ; then            
             dconf load / < $HOME/.hamonikr/backup_user_env.dconf
