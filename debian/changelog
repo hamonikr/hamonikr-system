@@ -1,3 +1,10 @@
+hamonikr-system (6.5.3) taebaek; urgency=medium
+
+  [Kevin]
+  * Update few desktop name for menu display
+
+ -- HamoniKR <pkg@hamonikr.org>  Sun, 23 Oct 2022 01:00:41 +0900
+
 hamonikr-system (6.5.2) taebaek; urgency=medium
 
   [Kevin]
