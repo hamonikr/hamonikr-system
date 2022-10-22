@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Version=1.0
+Name=MS Office 365
+Name[ko]=MS 오피스
+Comment=Visit to MS Office 365
+Comment[ko]=MS Office 365
+Icon=msoffice-365
+Exec=sh -c 'xdg-open https://www.office.com/'
+Terminal=false
+Categories=Office;

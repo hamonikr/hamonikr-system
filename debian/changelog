@@ -1,3 +1,10 @@
+hamonikr-system (6.5.5) taebaek; urgency=medium
+
+  [Kevin]
+  * Add msoffice 365 shortcut desktop file
+
+ -- HamoniKR <pkg@hamonikr.org>  Sun, 23 Oct 2022 02:59:58 +0900
+
 hamonikr-system (6.5.4) taebaek; urgency=medium
 
   [Kevin]
