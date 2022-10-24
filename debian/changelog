@@ -1,3 +1,11 @@
+hamonikr-system (6.5.6) taebaek; urgency=medium
+
+  [Kevin]
+  * Add grub Korean translation
+   - usr/share/hamonikr/locale/ko/LC_MESSAGES/grub.mo
+
+ -- HamoniKR <pkg@hamonikr.org>  Mon, 24 Oct 2022 11:01:01 +0900
+
 hamonikr-system (6.5.5) taebaek; urgency=medium
 
   [Kevin]
