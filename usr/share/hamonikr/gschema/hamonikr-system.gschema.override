@@ -89,6 +89,7 @@ enabled-extensions=['smart-panel@mohammad-sn']
 [org.cinnamon.desktop.keybindings.media-keys]
 www=['<Super>w']
 terminal=['<Primary><Alt>t']
+help=['F1']
 
 [org.cinnamon.desktop.interface]
 cursor-theme='HamoniKR'
