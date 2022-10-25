@@ -22,6 +22,7 @@
 /usr/share/hamonikr/edit-applications/hypnotix.desktop                              /usr/share/applications/hypnotix.desktop
 /usr/share/hamonikr/edit-applications/io.github.celluloid_player.Celluloid.desktop  /usr/share/applications/io.github.celluloid_player.Celluloid.desktop
 /usr/share/hamonikr/edit-applications/lightdm-settings.desktop                      /usr/share/applications/lightdm-settings.desktop
+/usr/share/hamonikr/edit-applications/mintlocale-im.desktop                         /usr/share/applications/mintlocale-im.desktop
 /usr/share/hamonikr/edit-applications/mintsources.desktop                           /usr/share/applications/mintsources.desktop
 /usr/share/hamonikr/edit-applications/mintstick-format.desktop                      /usr/share/applications/mintstick-format.desktop
 /usr/share/hamonikr/edit-applications/mintstick.desktop                             /usr/share/applications/mintstick.desktop

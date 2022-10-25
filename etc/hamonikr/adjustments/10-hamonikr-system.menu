@@ -18,6 +18,7 @@ hide /usr/share/applications/mintwelcome.desktop
 hide /usr/share/applications/cinnamon-onscreen-keyboard.desktop
 hide /usr/share/applications/albert.desktop
 hide /usr/share/applications/org.gnome.PowerStats.desktop
+hide /usr/share/applications/winetricks.desktop
 categories /usr/share/applications/mediainfo-gui.desktop AudioVideo;
 categories /usr/share/applications/hamonikrwelcome.desktop System;
 categories /usr/share/applications/hamonikr-help.desktop System;
