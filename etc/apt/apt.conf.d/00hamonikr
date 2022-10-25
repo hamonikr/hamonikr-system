@@ -10,6 +10,7 @@ APT
         "^nimf*";
         "^libnimf*";
         "^albert*";
+        "^plank*";        
         "^boot-select*";        
         "^cinnamon*";        
         "^stacer*";        
@@ -19,8 +20,13 @@ APT
         "^fonts-inconsolata*";        
         "^fonts-noto-cjk-extra*";                
         "^spacefm*";        
-        "^xdotool*";                        
+        "^xdotool*";                    
         "main";
+        "hamonikr-zsh";
+        "lollypop";
+        "celluloid";
+        "samba";
+        "nemo-filename-repairer";
   };
 
 };

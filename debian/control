@@ -14,10 +14,9 @@ Vcs-Browser: https://github.com/hamonikr/hamonikr-system
 Package: hamonikr-system
 Architecture: all
 Depends: ${misc:Depends},
-         imagemagick-6-common,
-         python-is-python3,
-         spacefm,
-         unalz
+         imagemagick-6-common
+Recommends: spacefm,
+            python-is-python3                     
 Description: HamoniKR OS Base Package
  Used by the desktop and other tools to gather
  information and process common system tasks.
