@@ -1,3 +1,11 @@
+hamonikr-system (6.6.3) taebaek; urgency=medium
+
+  [Kevin Kim]
+  * Add xdotool for nemo_action
+   - Causes next,previous workspaces action require.
+  
+ -- HamoniKR <pkg@hamonikr.org>  Thu, 27 Oct 2022 00:34:14 +0900
+
 hamonikr-system (6.6.2) taebaek; urgency=medium
 
   [Kevin Kim]
