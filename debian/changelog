@@ -1,3 +1,12 @@
+hamonikr-system (6.6.2) taebaek; urgency=medium
+
+  [Kevin Kim]
+  * Fix smart-panel bug
+   - Cinnamon debugger - missing property error
+   - Add url property in metadata.json
+  
+ -- HamoniKR <pkg@hamonikr.org>  Wed, 26 Oct 2022 16:33:34 +0900
+
 hamonikr-system (6.6.1) taebaek; urgency=medium
 
   [Kevin Kim]
