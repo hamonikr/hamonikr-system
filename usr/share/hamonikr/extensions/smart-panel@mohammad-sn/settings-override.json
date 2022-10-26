@@ -36,12 +36,12 @@
     "cc2-action": {
         "type": "entry", 
         "description": "2nd Custom Command:", 
-        "default": "lollypop"
+        "default": ""
     },
     "cc3-action": {
         "type": "entry", 
         "description": "3rd Custom Command:", 
-        "default": "xed"
+        "default": ""
     },
     "appswitcher-style" : {
         "type": "combobox",

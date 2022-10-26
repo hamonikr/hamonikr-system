@@ -1,3 +1,10 @@
+hamonikr-system (6.6.0) taebaek; urgency=medium
+
+  [Kevin Kim]
+  * Adjust smart panel settings
+  
+ -- HamoniKR <pkg@hamonikr.org>  Wed, 26 Oct 2022 12:41:29 +0900
+
 hamonikr-system (6.5.9) taebaek; urgency=medium
 
   [Kevin Kim]
