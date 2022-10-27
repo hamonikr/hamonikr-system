@@ -1,3 +1,11 @@
+hamonikr-system (6.6.4) taebaek; urgency=medium
+
+  [Kevin Kim]
+  * Update love user log
+   - influxdb schema ad taebaek-live
+  
+ -- HamoniKR <pkg@hamonikr.org>  Thu, 27 Oct 2022 09:43:40 +0900
+
 hamonikr-system (6.6.3) taebaek; urgency=medium
 
   [Kevin Kim]
