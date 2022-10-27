@@ -22,9 +22,9 @@ if [ -f "/etc/hamonikr/info" ] ; then
         source /etc/hamonikr/info
 
         if [ -z $CODENAME ] ; then
-            CODENAME = "Unknown"
+            CODENAME="Unknown"
         else
-            CODENAME = "$CODENAME-live"
+            CODENAME="$CODENAME-live"
         fi
 
         if [ -z $RELEASE ] ; then
