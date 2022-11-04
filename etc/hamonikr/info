@@ -1,10 +1,10 @@
 RELEASE=6.0
 CODENAME=taebaek
 EDITION="Cinnamon"
-DESCRIPTION="HamoniKR 6.0 LTS (taebaek)"
+DESCRIPTION="HamoniKR 6.0 (taebaek)"
 DESKTOP=Gnome
 TOOLKIT=GTK
 NEW_FEATURES_URL=https://hamonikr.org/menuDownload_TB
 RELEASE_NOTES_URL=https://hamonikr.org/menuDownload_TB
 USER_GUIDE_URL=https://docs.hamonikr.org/hamonikr-6.0
-GRUB_TITLE="HamoniKR 6.0 LTS"
+GRUB_TITLE="HamoniKR 6.0"

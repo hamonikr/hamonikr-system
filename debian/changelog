@@ -1,3 +1,11 @@
+hamonikr-system (6.6.7) taebaek; urgency=medium
+
+  [Kevin Kim]
+  * Changed distro name 
+   - Removed LTS in distro name
+  
+ -- HamoniKR <pkg@hamonikr.org>  Fri, 04 Nov 2022 22:49:20 +0900
+
 hamonikr-system (6.6.6) taebaek; urgency=medium
 
   [Kevin Kim]

@@ -1,8 +1,8 @@
 NAME="HamoniKR"
-VERSION="6.0 LTS"
+VERSION="6.0"
 ID=hamonikr
 ID_LIKE=ubuntu
-PRETTY_NAME="HamoniKR 6.0 LTS"
+PRETTY_NAME="HamoniKR 6.0"
 VERSION_ID="6.0"
 HOME_URL="https://hamonikr.org/"
 SUPPORT_URL="https://hamonikr.org/"
