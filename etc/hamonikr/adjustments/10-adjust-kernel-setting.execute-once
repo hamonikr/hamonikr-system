@@ -5,9 +5,10 @@ import syslog
 
 try:
     if os.path.exists("/etc/hamonikr/info"):
-        # Change to COMPRESS=gzip
-        if os.path.exists("/etc/initramfs-tools/initramfs.conf"):
-            os.system("sed -i 's/COMPRESS=lz4/COMPRESS=gzip/g' /etc/initramfs-tools/initramfs.conf")
+        # disable this feature for binwalk check
+        # # Change to COMPRESS=gzip
+        # if os.path.exists("/etc/initramfs-tools/initramfs.conf"):
+        #     os.system("sed -i 's/COMPRESS=lz4/COMPRESS=gzip/g' /etc/initramfs-tools/initramfs.conf")
 
         # Change kernel log level
         if os.path.exists("/etc/sysctl.conf"):

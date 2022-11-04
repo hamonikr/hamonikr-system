@@ -1,3 +1,11 @@
+hamonikr-system (6.6.5) taebaek; urgency=medium
+
+  [Kevin Kim]
+  * Restore kernel compression method as lz4
+   - Cause binwalk can't read main part
+  
+ -- HamoniKR <pkg@hamonikr.org>  Fri, 04 Nov 2022 13:07:46 +0900
+
 hamonikr-system (6.6.4) taebaek; urgency=medium
 
   [Kevin Kim]
