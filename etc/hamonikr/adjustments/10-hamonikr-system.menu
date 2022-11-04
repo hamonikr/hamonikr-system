@@ -19,6 +19,9 @@ hide /usr/share/applications/cinnamon-onscreen-keyboard.desktop
 hide /usr/share/applications/albert.desktop
 hide /usr/share/applications/org.gnome.PowerStats.desktop
 hide /usr/share/applications/winetricks.desktop
+hide /usr/share/applications/display-im6.q16.desktop
+hide /usr/share/applications/keepassx.desktop
+hide /usr/share/applications/org.keepassxc.KeePassXC.desktop
 categories /usr/share/applications/mediainfo-gui.desktop AudioVideo;
 categories /usr/share/applications/hamonikrwelcome.desktop System;
 categories /usr/share/applications/hamonikr-help.desktop System;
@@ -29,3 +32,5 @@ categories /usr/share/applications/stacer.desktop System;
 categories /usr/share/applications/org.gnome.DiskUtility.desktop System;
 categories /usr/share/applications/org.gnome.Terminal.desktop Utility;TerminalEmulator;
 categories /usr/share/applications/mintupdate.desktop System;
+categories /usr/share/applications/libreoffice-draw.desktop Office;
+categories /usr/share/applications/libreoffice-math.desktop Office;

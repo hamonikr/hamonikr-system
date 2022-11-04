@@ -1,3 +1,11 @@
+hamonikr-system (6.6.6) taebaek; urgency=medium
+
+  [Kevin Kim]
+  * Adjust menu
+   - Cause appear some applications after install hamonikr-desktop-full
+  
+ -- HamoniKR <pkg@hamonikr.org>  Fri, 04 Nov 2022 20:56:07 +0900
+
 hamonikr-system (6.6.5) taebaek; urgency=medium
 
   [Kevin Kim]
