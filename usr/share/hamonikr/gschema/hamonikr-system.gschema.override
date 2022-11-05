@@ -1,7 +1,7 @@
 [x.dm.slick-greeter]
-theme-name='HamoniKR'
+theme-name='HamoniKR-dark'
 icon-theme-name='HamoniKR'
-font-name='Noto Sans CJK KR 9'
+font-name='Pretendard 10'
 background='/usr/share/backgrounds/hamonikr/default_background.jpg'
 draw-user-backgrounds=true
 
@@ -10,16 +10,16 @@ theme='/usr/share/onboard/themes/Droid.theme'
 layout='/usr/share/onboard/layouts/Compact-ko.onboard'
 key-label-overrides=['RWIN:Super:', 'LWIN:Super:']
 status-icon-provider='AppIndicator'
-key-label-font='Noto Sans CJK KR 10'
+key-label-font='Pretendard 10'
 
 [org.onboard.theme-settings]
 key-label-overrides=['RWIN:Super:', 'LWIN:Super:']
-key-label-font='Noto Sans CJK KR 10'
+key-label-font='Pretendard 10'
 
 [org.gnome.desktop.interface]
 cursor-theme='HamoniKR'
-document-font-name="Noto Sans CJK KR 10"
-font-name="Noto Sans CJK KR 10"
+document-font-name="Pretendard 10"
+font-name="Pretendard 10"
 gtk-key-theme='Default'
 gtk-theme='HamoniKR'
 icon-theme='HamoniKR'
@@ -38,7 +38,7 @@ show-desktop-icons=false
 button-layout=':minimize,maximize,close'
 num-workspaces=4
 theme='HamoniKR'
-titlebar-font="Noto Sans CJK KR 10"
+titlebar-font="Pretendard 10"
 titlebar-uses-system-font=false
 
 [org.gnome.desktop.sound]
@@ -71,7 +71,7 @@ hinting="slight"
 [org.gnome.gnote]
 use-client-side-decorations='gnome,ubuntu,pop,cinnamon,cinnamon2d,mate,xfce'
 enable-custom-font=true
-custom-font-face='Noto Sans CJK KR 10'
+custom-font-face='Pretendard 10'
 
 [org.gnome.libgnomekbd.keyboard]
 options=['grp\tgrp:win_space_toggle', 'terminate\tterminate:ctrl_alt_bksp']
@@ -99,7 +99,7 @@ gtk-theme='HamoniKR'
 icon-theme='HamoniKR'
 menus-have-icons=true
 toolkit-accessibility=false
-font-name="Noto Sans CJK KR 10"
+font-name="Pretendard 10"
 scaling-factor=uint32 0
 
 [org.cinnamon.desktop.screensaver]
@@ -121,7 +121,7 @@ image-source='xml:///usr/share/cinnamon-background-properties/hamonikr.xml'
 button-layout=':minimize,maximize,close'
 num-workspaces=4
 theme='HamoniKR'
-titlebar-font="Noto Sans CJK KR 10"
+titlebar-font="Pretendard 10"
 titlebar-uses-system-font=false
 
 [org.cinnamon.settings-daemon.plugins.xsettings]
@@ -174,7 +174,7 @@ settings-daemon-uses-logind=true
 
 [org.nemo.desktop]
 computer-icon-visible=true
-font="Noto Sans CJK KR 10"
+font="Pretendard 10"
 home-icon-visible=true
 volumes-visible=true
 
@@ -187,9 +187,9 @@ bulk-rename-tool=b'bulky'
 
 [org.mate.interface]
 buttons-have-icons=false
-document-font-name="Noto Sans CJK KR 10"
+document-font-name="Pretendard 10"
 enable-animations=false
-font-name="Noto Sans CJK KR 10"
+font-name="Pretendard 10"
 gtk-theme="HamoniKR"
 icon-theme="HamoniKR"
 menus-have-icons=true
@@ -252,7 +252,7 @@ options=['grp\tgrp:win_space_toggle', 'terminate\tterminate:ctrl_alt_bksp']
 cursor-theme="default"
 
 [org.mate.Marco.general]
-titlebar-font="Noto Sans CJK KR 10"
+titlebar-font="Pretendard 10"
 
 [org.mate.Marco.global-keybindings]
 run-command-terminal="<Primary><Alt>t"
