@@ -1,3 +1,10 @@
+hamonikr-system (6.6.9) taebaek; urgency=medium
+
+  [Kevin Kim]
+  * Hide gdebi app
+  
+ -- HamoniKR <pkg@hamonikr.org>  Mon, 07 Nov 2022 02:33:55 +0900
+
 hamonikr-system (6.6.8) taebaek; urgency=medium
 
   [Kevin Kim]
