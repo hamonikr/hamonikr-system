@@ -23,6 +23,8 @@ hide /usr/share/applications/display-im6.q16.desktop
 hide /usr/share/applications/keepassx.desktop
 hide /usr/share/applications/org.keepassxc.KeePassXC.desktop
 hide /usr/share/applications/gdebi.desktop
+hide /usr/share/applications/fcitx.desktop
+hide /usr/share/applications/fcitx-configtool.desktop
 categories /usr/share/applications/mediainfo-gui.desktop AudioVideo;
 categories /usr/share/applications/hamonikrwelcome.desktop System;
 categories /usr/share/applications/hamonikr-help.desktop System;
