@@ -26,6 +26,68 @@ log() {
 
 case "$1" in
     apply|default)
+
+        # Upgrade from hanla to taebaek troubleshooting
+        if [ ! -f "$HOME/.hamonikr/taebaekupdate.done" ]; then
+            if [ -f /var/log/taebaekupdate.dummy ]; then
+                log "Upgrade from hanla to taebaek troubleshooting"
+                
+                # delete old files
+                rm -rf $HOME/.hamonikr/themes
+                rm $HOME/.hamonikr/backup_dconf
+                rm $HOME/.hamonikr/default_dconf
+                rm $HOME/.hamonikr/default_dconf.done
+                rm $HOME/.hamonikr/default_dconf.log
+                rm $HOME/.hamonikr/hamonikr-terminal.dconf
+                rm $HOME/.hamonikr/update-dconf-setting.log
+                
+                # delete old user plank files
+                # File in the /etc/skel/plank~ path are deleted from rel_upgrade_root.py in hamonikr-update package.
+                rm $HOME/.config/plank/dock1/launchers/desktop.dockitem
+                rm $HOME/.config/plank/dock1/launchers/io.github.celluloid_player.Celluloid.dockitem
+                rm $HOME/.config/plank/dock1/launchers/mintinstall.dockitem
+                rm $HOME/.config/plank/dock1/launchers/naver-whale.dockitem
+                rm $HOME/.config/plank/dock1/launchers/nemo.dockitem
+                rm $HOME/.config/plank/dock1/launchers/org.gnome.Termianl.dockitem
+                rm $HOME/.config/plank/dock1/launchers/plank-dconf
+                rm $HOME/.config/plank/dock1/launchers/stacer.dockitem
+                rm $HOME/.config/plank/dock1/launchers/system-shutdown.dockitem
+                rm $HOME/.config/plank/dock1/launchers/trash.dockitem
+                rm $HOME/.config/plank/dock1/launchers/xed.dockitem
+
+                # delete old cinnamon setting & cache
+                rm -rf $HOME/.cinnamon/configs/*
+                rm $HOME/.cinnamon/spices.cache
+
+                # cp hamonikt-theme.desktop
+                cp -af /etc/skel/.config/autostart/hamonikr-theme.desktop $HOME/.config/autostart/hamonikr-theme.desktop
+                cp -af /etc/skel/.config/autostart/plank.desktop $HOME/.config/autostart/plank.desktop
+
+                # delete old community desktop & copy new community desktop
+                [ -f ~/.config/user-dirs.dirs ] && source ~/.config/user-dirs.dirs
+                [ -z $XDG_DESKTOP_DIR ] && XDG_DESKTOP_DIR="$HOME/Desktop"
+                if [ -f $XDG_DESKTOP_DIR/hamonikrorg.desktop ]; then
+                    rm $XDG_DESKTOP_DIR/hamonikrorg.desktop
+                    cp -af /usr/share/applications/hamonikr-community.desktop $XDG_DESKTOP_DIR/hamonikr-community.desktop
+                    chmod 755 $XDG_DESKTOP_DIR/hamonikr-community.desktop
+                fi
+                
+                # theme settings
+                if [ -f $HOME/.hamonikr/theme/hamonikr-theme-setting.done ]; then
+                    rm $HOME/.hamonikr/theme/hamonikr-theme-setting.done
+                fi
+                
+                hamonikr-theme-setting macstyle
+
+                # kill plank (Duplicate operation below), It often doesn't turn on.
+                [ ! -z $(pidof plank | grep '[0-9]') ] && killall plank &>/dev/null
+               
+                sleep 1
+            fi
+
+            touch $HOME/.hamonikr/taebaekupdate.done
+        fi
+
         [ -f "$HOME/.hamonikr/set-user-env.done" ] && isrun="run" 
 
         if [ x$isrun != "xrun" ] ; then

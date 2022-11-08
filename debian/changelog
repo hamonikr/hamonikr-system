@@ -1,3 +1,12 @@
+hamonikr-system (6.7.2) taebaek; urgency=medium
+
+  [James Bae]
+  * ADD upgrade from hanla to taebaek troubleshooting
+   - set-user-env
+   - 10-adjust-applet-gschema.execute-once
+  
+ -- HamoniKR <pkg@hamonikr.org>  Tue, 08 Nov 2022 15:42:37 +0900
+
 hamonikr-system (6.7.1) taebaek; urgency=medium
 
   [Kevin Kim]

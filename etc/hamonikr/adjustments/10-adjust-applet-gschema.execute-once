@@ -17,10 +17,10 @@ if [ -f "/etc/hamonikr/info" ] ; then
   if [ -f /usr/share/cinnamon/applets/grouped-window-list@cinnamon.org/settings-override.json ] ; then
     cp -f /usr/share/cinnamon/applets/grouped-window-list@cinnamon.org/settings-override.json \
     /usr/share/cinnamon/applets/grouped-window-list@cinnamon.org/settings-override.json.bak
+  fi
 
     cp -f /usr/share/hamonikr/applets/grouped-window-list@cinnamon.org/settings-override.json \
     /usr/share/cinnamon/applets/grouped-window-list@cinnamon.org/settings-override.json
-  fi
 
   if [ -f /usr/share/cinnamon/applets/menu@cinnamon.org/settings-override.json ] ; then
     cp -f /usr/share/cinnamon/applets/menu@cinnamon.org/settings-override.json \
