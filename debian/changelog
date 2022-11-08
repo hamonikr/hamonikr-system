@@ -1,3 +1,10 @@
+hamonikr-system (6.7.1) taebaek; urgency=medium
+
+  [Kevin Kim]
+  * Hide qt5ct, org.gnome.Calendar
+  
+ -- HamoniKR <pkg@hamonikr.org>  Tue, 08 Nov 2022 14:29:58 +0900
+
 hamonikr-system (6.7.0) taebaek; urgency=medium
 
   [Kevin Kim]
