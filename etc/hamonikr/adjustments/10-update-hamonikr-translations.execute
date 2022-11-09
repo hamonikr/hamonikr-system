@@ -35,4 +35,12 @@ if [ -f "/etc/hamonikr/info" ] ; then
         /boot/grub/locale/ko.mo
     fi
 
+    # Synchronize names from the startmenu and control panel
+    if [ -f "$HAMONIKR_DIR/cinnamon.mo" ] && [ -f "$HAMONIKR_DIR/cinnamon-control-center.mo" ]; then
+        cp $HAMONIKR_DIR/cinnamon.mo \
+        $TARGET_DIR/cinnamon.mo
+        cp $HAMONIKR_DIR/cinnamon-control-center.mo \
+        $TARGET_DIR/cinnamon-control-center.mo
+    fi
+
 fi
