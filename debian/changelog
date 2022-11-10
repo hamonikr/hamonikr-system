@@ -1,3 +1,11 @@
+hamonikr-system (6.7.5) taebaek; urgency=medium
+
+  [James Bae]
+  * Fix mintsources.desktop Icon image name
+
+ -- HamoniKR <pkg@hamonikr.org>  Thu, 10 Nov 2022 14:03:23 +0900
+
+
 hamonikr-system (6.7.4) taebaek; urgency=medium
 
   [James Bae]
