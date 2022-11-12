@@ -1,0 +1,8 @@
+우분투에서 하모니카 환경을 사용하고 싶은 사용자를 위한 조장
+- 우분투 배포판의 정보는 그대로 사용할수 있도록 해야 함
+- 하모니카 환경에 맞는 수정은 반영되어야 함
+
+따라서 hamonikr-system 패키지를 다음과 같이 새로 구성애햐 함
+
+hamonikr-adjestment : 하모니카 환경을 구성하는 패키지
+hamonikr-distro-info : 배포판의 이름을 hamonikr version 으로 변경하는 패키지를
