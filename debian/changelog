@@ -1,10 +1,18 @@
+hamonikr-system (6.7.6) taebaek; urgency=medium
+
+  [James Bae]
+  * Change shutter capture command
+   - <Primary><Shift>p to <Shift><Primary><Alt>p
+   - Key conflict with command palette in vcode
+
+ -- HamoniKR <pkg@hamonikr.org>  Mon, 14 Nov 2022 16:25:23 +0900
+
 hamonikr-system (6.7.5) taebaek; urgency=medium
 
   [James Bae]
   * Fix mintsources.desktop Icon image name
 
  -- HamoniKR <pkg@hamonikr.org>  Thu, 10 Nov 2022 14:03:23 +0900
-
 
 hamonikr-system (6.7.4) taebaek; urgency=medium
 
