@@ -1,3 +1,11 @@
+hamonikr-system (6.7.7) taebaek; urgency=medium
+
+  [James Bae]
+  * Update /etc/hamonikr/info
+   - update new_feature, release_note link
+
+ -- HamoniKR <pkg@hamonikr.org>  Wed, 16 Nov 2022 18:23:23 +0900
+
 hamonikr-system (6.7.6) taebaek; urgency=medium
 
   [James Bae]
