@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# /etc/hamonikr/adjustments/10-count-user.execute의 내용 이동
+# 서비스가 너무 빨리 실행되서 ping 주소를 찾지 못함
+
+# sleep 60초
+sleep 60
+
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+    # add running user count
+    if [ -f "/usr/bin/curl" ] ; then
+
+        RD=`head -c 16 /dev/urandom | md5sum | head -c 32`
+        
+        source /etc/hamonikr/info
+
+        if [ -z $CODENAME ] ; then
+            CODENAME="Unknown"
+        else
+            CODENAME="$CODENAME-live"
+        fi
+
+        if [ -z $RELEASE ] ; then
+            RELEASE = "Unknown"
+        fi    
+
+        if ping -q -c 1 -W 1 u.hamonikr.org >/dev/null; then
+            curl -XPOST "http://u.hamonikr.org:8086/write?db=hamonikr" --data-binary "machineid,codename=$CODENAME,version=$RELEASE value=\"$RD\""
+            # log "Update hamonikr user status"
+            echo "Update hamonikr user status"
+        fi   
+
+    fi    
+
+fi

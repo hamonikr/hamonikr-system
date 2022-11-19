@@ -1,4 +1,4 @@
-hamonikr-system (6.7.6) taebaek; urgency=medium
+hamonikr-system (6.7.9) taebaek; urgency=medium
 
   [Kevin]
   * Apply scale value setting for QT applications
@@ -7,6 +7,33 @@ hamonikr-system (6.7.6) taebaek; urgency=medium
    - Tested on Ubuntu 20.04
 
  -- HamoniKR <pkg@hamonikr.org>  Sat, 19 Nov 2022 18:57:39 +0900
+
+hamonikr-system (6.7.8) taebaek; urgency=medium
+
+  [James Bae]
+  * Fix 10-count-user.execute
+   - Ping command not executed due to slow network startup
+   - Failed to use sleep due to sequential execution of hamonikr-adjust.py
+   - Create a script and proceed to the background run
+
+ -- HamoniKR <pkg@hamonikr.org>  Wed, 17 Nov 2022 20:01:23 +0900
+
+hamonikr-system (6.7.7) taebaek; urgency=medium
+
+  [James Bae]
+  * Update /etc/hamonikr/info
+   - update new_feature, release_note link
+
+ -- HamoniKR <pkg@hamonikr.org>  Wed, 16 Nov 2022 18:23:23 +0900
+
+hamonikr-system (6.7.6) taebaek; urgency=medium
+
+  [James Bae]
+  * Change shutter capture command
+   - <Primary><Shift>p to <Shift><Primary><Alt>p
+   - Key conflict with command palette in vcode
+
+ -- HamoniKR <pkg@hamonikr.org>  Mon, 14 Nov 2022 16:25:23 +0900
 
 hamonikr-system (6.7.5) taebaek; urgency=medium
 
