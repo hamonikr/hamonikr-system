@@ -24,6 +24,49 @@ log() {
     exec 1>&3 3>&-
 }
 
+setup_qt_scale() {
+    # Ajdust scaling setting for albert, stacer
+    # gnome : scaling-factor
+    # cinnamon : active-display-scale
+    # 
+    # ref : https://github.com/albertlauncher/albert/issues/573
+    # ref : https://unix.stackexchange.com/questions/596887/how-to-scale-the-resolution-display-of-the-desktop-and-or-applications
+    
+    if [ "$XDG_CURRENT_DESKTOP" = "" ]
+    then
+    desktop=$(echo "$XDG_DATA_DIRS" | sed 's/.*\(xfce\|kde\|gnome\).*/\1/')
+    else
+    desktop=$XDG_CURRENT_DESKTOP
+    fi
+    desktop=${desktop,,}  # convert to lower case
+
+    if [[ $desktop == *"cinnamon"* ]]; then
+        echo "Cinnamon : $desktop"
+        SCALE=$(gsettings list-recursively | grep active-display-scale | cut -d" " -f3) 
+        if [ ! -z "$SCALE" ]; then
+            echo "export QT_AUTO_SCREEN_SET_FACTOR=0" >> ~/.xprofile
+            echo "export QT_AUTO_SCREEN_SCALE_FACTORS=$SCALE" >> ~/.xprofile
+            echo "export QT_SCALE_FACTOR=$SCALE" >> ~/.xprofile
+            echo "export QT_FONT_DPI=96" >> ~/.xprofile
+            
+            log "Update Cinnamon QT scale variable in ~/.xprofile" 
+        fi    
+    elif [[ $desktop == *"gnome"* ]]; then
+        echo "GNOME : $desktop"
+        SCALE=$(gsettings list-recursively | grep "org.gnome.desktop.interface text-scaling-factor" | cut -d" " -f3) 
+        if [ ! -z "$SCALE" ]; then
+            echo "export QT_AUTO_SCREEN_SET_FACTOR=0" >> ~/.xprofile
+            echo "export QT_AUTO_SCREEN_SCALE_FACTORS=$SCALE" >> ~/.xprofile
+            echo "export QT_SCALE_FACTOR=$SCALE" >> ~/.xprofile
+            echo "export QT_FONT_DPI=96" >> ~/.xprofile
+
+            log "Update GNOME QT scale variable in ~/.xprofile"
+        fi    
+    else
+        continue
+    fi    
+}
+
 case "$1" in
     apply|default)
 
@@ -234,6 +277,9 @@ case "$1" in
 
             # Fix nemo bug : https://github.com/hamonikr/hamonikr-system/issues/4
             sudo usermod -aG sambashare $USER
+
+            # QT scale setting
+            setup_qt_scale
 
             touch $HOME/.hamonikr/set-user-env.done
             log "Created set-user-env.done file"

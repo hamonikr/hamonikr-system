@@ -15,9 +15,12 @@ err() {
 # lightdm login theme
 if [ -f "/usr/share/hamonikr/etc/lightdm/slick-greeter.conf" ] ; then
 
-    cp -f /usr/share/hamonikr/etc/lightdm/slick-greeter.conf /etc/lightdm/slick-greeter.conf
+    if [ -d "/etc/lightdm/" ]; then
+      cp -f /usr/share/hamonikr/etc/lightdm/slick-greeter.conf /etc/lightdm/slick-greeter.conf
 
-    echo "Update /etc/lightdm/slick-greeter.conf"
+      echo "Update /etc/lightdm/slick-greeter.conf"
+    fi
+    
 fi
 
 # lightdm login mouse cursor

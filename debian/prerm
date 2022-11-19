@@ -8,12 +8,19 @@ case "$1" in
 
         if which systemctl >/dev/null 2>&1
         then
-            if [ $(systemctl is-enabled mintsystem) = "disabled" ] ; then
-                systemctl enable mintsystem
-            fi           
-            if [ $(systemctl is-enabled ubuntu-system-adjustments) = "disabled" ] ; then
-                systemctl enable ubuntu-system-adjustments
-            fi        
+            # if exist service
+            if systemctl --all --type service | grep -q "mintsystem";then
+                if [ $(systemctl is-enabled mintsystem) = "disabled" ] ; then
+                    systemctl enable mintsystem
+                fi
+            fi
+                       
+            if systemctl --all --type service | grep -q "ubuntu-system-adjustments";then
+                if [ $(systemctl is-enabled ubuntu-system-adjustments) = "disabled" ] ; then
+                    systemctl enable ubuntu-system-adjustments
+                fi
+            fi                       
+                    
             systemctl daemon-reload
         fi
 

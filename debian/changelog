@@ -1,10 +1,19 @@
+hamonikr-system (6.7.6) taebaek; urgency=medium
+
+  [Kevin]
+  * Apply scale value setting for QT applications
+   - Support HiDPI env for stacer, albert
+  * Update exception handling
+   - Tested on Ubuntu 20.04
+
+ -- HamoniKR <pkg@hamonikr.org>  Sat, 19 Nov 2022 18:57:39 +0900
+
 hamonikr-system (6.7.5) taebaek; urgency=medium
 
   [James Bae]
   * Fix mintsources.desktop Icon image name
 
  -- HamoniKR <pkg@hamonikr.org>  Thu, 10 Nov 2022 14:03:23 +0900
-
 
 hamonikr-system (6.7.4) taebaek; urgency=medium
 
