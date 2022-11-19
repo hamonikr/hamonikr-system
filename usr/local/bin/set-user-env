@@ -275,9 +275,6 @@ case "$1" in
 
             fi
 
-            # Fix nemo bug : https://github.com/hamonikr/hamonikr-system/issues/4
-            sudo usermod -aG sambashare $USER
-
             # QT scale setting
             setup_qt_scale
 
