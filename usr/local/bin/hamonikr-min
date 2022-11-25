@@ -1,0 +1,47 @@
+#!/bin/bash
+#
+# Service Adjustment for HamoniKR OS Minimal Mode
+# 
+# Copyright 2022 HamoniKR Team. All rights reserved. 
+# See LICENSE.md in the project root for license information.
+
+[ "$EUID" = 0 ] && echo "Run with user authority. (EUID : $EUID)" && exit
+
+log() {
+    # stdout
+    echo "$@"
+    # write to logfile
+    mkdir -p $HOME/.hamonikr/log
+    exec 3>&1 1>>$HOME/.hamonikr/log/${0##*/}.log 2>&1 && echo "$(date +%Y-%m-%d_%H:%M_%S) ${0##*/} : $@"
+    # stdout reset
+    exec 1>&3 3>&-
+}
+
+case "$1" in
+    start)
+        if [ -x /usr/local/bin/hamonikr-theme-setting ]; then
+            rm -f $HOME/.hamonikr/theme/hamonikr-theme-setting.done
+            /usr/local/bin/hamonikr-theme-setting winstyle
+        fi
+        
+        killtarget="/usr/share/hamonikr/hamonikr-min/killtarget"
+        if [ -f ${killtarget} ]; then
+            IFS=$'\n' read -d '' -r -a lines < ${killtarget}
+            ## get item count using ${lines[@]} ##
+            for process in "${lines[@]}"
+            do
+                if [[ ! ${process} =~ "#" ]]; then
+                    killall ${process}
+                    [ $? -eq 0 ] && log "killed ${process}" 
+                fi
+            done
+            log "Successful adjust process for minimal mode" 
+        else
+            log "[ERROR] Could not fount ${killtarget} file"
+        fi
+      ;;
+    stop)
+      ;;
+    *)
+      ;;
+esac

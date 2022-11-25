@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=HamoniKR OS Minimal Mode
+Name[ko]=하모니카 경량화 서비스
+Comment=Adjust HamoniKR OS Minimal Mode
+Comment[ko]=OS 사용자 환경을 조정합니다.
+Exec=hamonikr-min start
+Terminal=false
+Type=Application
+StartupNotify=false
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=3

@@ -1,3 +1,12 @@
+hamonikr-system (6.8.2) taebaek; urgency=medium
+
+  [Kevin]
+  * Add minimal mode setting
+   - Added HamoniKR minimal mode variable 
+   - in /etc/hamonikr/hamonikrSystem.conf
+
+ -- HamoniKR <pkg@hamonikr.org>  Sat, 26 Nov 2022 01:07:54 +0900
+
 hamonikr-system (6.8.1) taebaek; urgency=medium
 
   [Kevin]

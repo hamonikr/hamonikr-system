@@ -95,19 +95,30 @@ class HamoniKRSystem():
                 config = configparser.RawConfigParser()
                 config.read('/etc/hamonikr/hamonikrSystem.conf')
                 self.enabled = (config.get('global', 'enabled') == "True")
+                self.minimal = (config.get('global', 'minimal') == "True")
             except:
                 config = configparser.RawConfigParser()
                 config.add_section('global')
                 config.set('global', 'enabled', 'True')
+                config.set('global', 'minimal', 'False')
                 config.add_section('restore')
                 with open('/etc/hamonikr/hamonikrSystem.conf', 'w') as configfile:
                     config.write(configfile)
                 self.enabled = True
+                self.minimal = False
 
             # Exit if disabled
             if not self.enabled:
                 self.log("Disabled - Exited")
                 self.quit()
+
+            # Run if minimal mode True
+            if self.minimal:
+                self.log("Adjust Minimal Mode - ACTIVE")
+                os.system("mv /etc/xdg/autostart/hamonikr-minimal.desktop.norun /etc/xdg/autostart/hamonikr-minimal.desktop")
+            else:
+                self.log("Restore Minimal Mode - INACTIVE")
+                os.system("mv /etc/xdg/autostart/hamonikr-minimal.desktop /etc/xdg/autostart/hamonikr-minimal.desktop.norun")
 
             adjustment_directory = "/etc/hamonikr/adjustments/"
 
