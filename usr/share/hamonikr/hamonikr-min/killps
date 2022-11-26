@@ -1,27 +1,41 @@
 # THIS PROCESS WILL BE KILL
-conky
+
+# virtual box
 #VBoxClient
-avahi-daemon
-#gvfs-afc-volume-monitor
-#pulsaudio
-cupsd
-# wpa_supplicant
-cups-browsed
-nmbd
 #VBoxService
-smbd
+
+# sound
+#pulsaudio
+#csd-sound
+
+# wifi
+# wpa_supplicant
+
+# printer
+cupsd
+cups-browsed
 csd-print-notifications
+csd-printer
+
+# bluetooth
+blueberry-obex-agent
+obexd
+
+# apps
+plank
+albert
+conky
+
+# etc..
+avahi-daemon
+gvfs-afc-volume-monitor
+nmbd
+smbd
 csd-wacom
 csd-screensaver-proxy
-csd-sound
 csd-power
-csd-printer
 gvfs-gphoto2-volume-monitor
 evolution-alarm-notify
 evolution-source-registry
 evolution-calendar-factory
 evolution-addressbook-factory
-blueberry-obex-agent
-obexd
-plank
-albert
