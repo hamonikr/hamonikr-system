@@ -125,6 +125,13 @@ class HamoniKRSystem():
                             os.system("mv /etc/xdg/autostart/%s /etc/xdg/autostart/%s" % (line, line + ".norun"))
                             self.minimized.append(line)
                 filehandle.close()
+                filehandle = open("/usr/share/hamonikr/hamonikr-min/killps")
+                for line in filehandle:
+                    line = line.strip()
+                    if not line.find("#") != -1:
+                        os.system("killall %s" % (line))
+                        self.minimized.append("Killed : " + line)
+                filehandle.close()                
             else:
                 self.log("Restore Minimal Mode - INACTIVE")
                 os.system("mv /etc/xdg/autostart/hamonikr-minimal.desktop /etc/xdg/autostart/hamonikr-minimal.desktop.disable")

@@ -1,32 +1,25 @@
 # THIS PROCESS WILL BE KILL
-
-# virtual box
+# - virtual box
 #VBoxClient
 #VBoxService
-
-# sound
+# - sound
 #pulsaudio
 #csd-sound
-
-# wifi
+# - wifi
 # wpa_supplicant
-
-# printer
+# -printer
 cupsd
 cups-browsed
 csd-print-notifications
 csd-printer
-
-# bluetooth
+# - bluetooth
 blueberry-obex-agent
 obexd
-
-# apps
+# - apps
 plank
 albert
 conky
-
-# etc..
+# - etc..
 avahi-daemon
 gvfs-afc-volume-monitor
 nmbd
@@ -39,3 +32,4 @@ evolution-alarm-notify
 evolution-source-registry
 evolution-calendar-factory
 evolution-addressbook-factory
+xrdp
