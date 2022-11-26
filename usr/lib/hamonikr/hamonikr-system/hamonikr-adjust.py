@@ -23,6 +23,7 @@ class HamoniKRSystem():
         self.overwritten = []
         self.skipped = []
         self.edited = []
+        self.minimized = []
         self.original_timestamps = {}
         self.timestamps = {}
         self.timestamps_changed = False
@@ -116,9 +117,24 @@ class HamoniKRSystem():
             if self.minimal:
                 self.log("Adjust Minimal Mode - ACTIVE")
                 os.system("mv /etc/xdg/autostart/hamonikr-minimal.desktop.norun /etc/xdg/autostart/hamonikr-minimal.desktop")
+                filehandle = open("/usr/share/hamonikr/hamonikr-min/killapps")
+                for line in filehandle:
+                    line = line.strip()
+                    if not line.find("#") != -1:
+                        if os.path.exists("/etc/xdg/autostart/%s" % (line)):
+                            os.system("mv /etc/xdg/autostart/%s /etc/xdg/autostart/%s" % (line, line + ".norun"))
+                            self.minimized.append(line)
+                filehandle.close()
             else:
                 self.log("Restore Minimal Mode - INACTIVE")
                 os.system("mv /etc/xdg/autostart/hamonikr-minimal.desktop /etc/xdg/autostart/hamonikr-minimal.desktop.norun")
+                filehandle = open("/usr/share/hamonikr/hamonikr-min/killapps")
+                for line in filehandle:
+                    line = line.strip()
+                    if not line.find("#") != -1:
+                        if os.path.exists("/etc/xdg/autostart/%s" % (line + ".norun")):
+                            os.system("mv /etc/xdg/autostart/%s /etc/xdg/autostart/%s" % (line + ".norun", line))
+                filehandle.close()
 
             adjustment_directory = "/etc/hamonikr/adjustments/"
 
@@ -268,6 +284,10 @@ class HamoniKRSystem():
             self.log("Skipped:")
             for filename in sorted(self.skipped):
                 self.log("  %s" % filename)
+            
+            self.log("Minimized:")
+            for filename in sorted(self.minimized):
+                self.log("  %s" % filename)    
             
             self.log("--------------------")
 

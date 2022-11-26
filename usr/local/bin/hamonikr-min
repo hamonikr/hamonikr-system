@@ -24,9 +24,9 @@ case "$1" in
             /usr/local/bin/hamonikr-theme-setting winstyle
         fi
         
-        killtarget="/usr/share/hamonikr/hamonikr-min/killtarget"
-        if [ -f ${killtarget} ]; then
-            IFS=$'\n' read -d '' -r -a lines < ${killtarget}
+        killps="/usr/share/hamonikr/hamonikr-min/killps"
+        if [ -f ${killps} ]; then
+            IFS=$'\n' read -d '' -r -a lines < ${killps}
             ## get item count using ${lines[@]} ##
             for process in "${lines[@]}"
             do
@@ -37,7 +37,26 @@ case "$1" in
             done
             log "Successful adjust process for minimal mode" 
         else
-            log "[ERROR] Could not fount ${killtarget} file"
+            log "[ERROR] Could not fount ${killps} file"
+        fi
+
+        killapps="/usr/share/hamonikr/hamonikr-min/killapps"
+        if [ -f ${killapps} ]; then
+            IFS=$'\n' read -d '' -r -a lines < ${killapps}
+
+            for apps in "${lines[@]}"
+            do
+                if [[ ! ${apps} =~ "#" ]]; then
+                    if [ -f $HOME/.config/autostart/${apps} ]; then
+                        mv $HOME/.config/autostart/${apps} $HOME/.config/autostart/${apps}.norun
+                        [ $? -eq 0 ] && log "Disabled ${apps}"
+                    fi
+                     
+                fi
+            done
+            log "Disabled application for minimal mode" 
+        else
+            log "[ERROR] Could not fount ${killapps} file"
         fi
       ;;
     stop)

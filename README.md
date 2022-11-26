@@ -1,15 +1,39 @@
 ## hamonikr-system
 이 패키지는 하모니카OS의 기본 환경을 구성하는 필수 패키지입니다.
 
-패키지를 설치했지만, 하모니카 환경을 사용하고 싶지 않은 경우, 
+하모니카 환경을 사용하고 싶지 않은 경우, 
+
+`/etc/hamonikr/hamonikrSystem.conf` 파일에서 
 
 다음과 같이 설정하여 시스템 전역에서 하모니카 시스템 서비스를 구동하지 않을 수 있습니다.
 
 ```
-# etc/hamonikr/hamonikrSystem.conf
 [global]
 enable = False
 ```
+
+### 하모니카 OS 경령화
+
+보다 적은 리소스를 사용하는 환경이 필요하다면 
+
+`/etc/hamonikr/hamonikrSystem.conf` 파일에서 
+
+다음과 같은 옵션을 사용할 수 있습니다.
+
+다음과 같이 `minimal = True` 로 설정하면 원하지 않는 서비스를 구동하지 않을 수 있습니다.
+
+```
+[global]
+minimal = True
+```
+
+ * 구동에서 제외할 프로그램 목록 : `/usr/share/hamonikr/hamonikr-min/killapps`
+
+ * 구동에서 제외할 프로세스 목록 : `/usr/share/hamonikr/hamonikr-min/killps`
+
+
+원래 하모니카 OS의 상태로 시스템을 변경하려면 `minimal = False` 로 변경하신 후 시스템을 재시작 하세요.
+
 
 ## 주요 구성 요소
 
