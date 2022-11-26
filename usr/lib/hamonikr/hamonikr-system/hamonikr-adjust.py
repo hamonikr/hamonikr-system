@@ -116,7 +116,7 @@ class HamoniKRSystem():
             # Run if minimal mode True
             if self.minimal:
                 self.log("Adjust Minimal Mode - ACTIVE")
-                os.system("mv /etc/xdg/autostart/hamonikr-minimal.desktop.norun /etc/xdg/autostart/hamonikr-minimal.desktop")
+                os.system("mv /etc/xdg/autostart/hamonikr-minimal.desktop.disable /etc/xdg/autostart/hamonikr-minimal.desktop")
                 filehandle = open("/usr/share/hamonikr/hamonikr-min/killapps")
                 for line in filehandle:
                     line = line.strip()
@@ -127,13 +127,12 @@ class HamoniKRSystem():
                 filehandle.close()
             else:
                 self.log("Restore Minimal Mode - INACTIVE")
-                os.system("mv /etc/xdg/autostart/hamonikr-minimal.desktop /etc/xdg/autostart/hamonikr-minimal.desktop.norun")
+                os.system("mv /etc/xdg/autostart/hamonikr-minimal.desktop /etc/xdg/autostart/hamonikr-minimal.desktop.disable")
                 filehandle = open("/usr/share/hamonikr/hamonikr-min/killapps")
-                for line in filehandle:
-                    line = line.strip()
-                    if not line.find("#") != -1:
-                        if os.path.exists("/etc/xdg/autostart/%s" % (line + ".norun")):
-                            os.system("mv /etc/xdg/autostart/%s /etc/xdg/autostart/%s" % (line + ".norun", line))
+                for filename in os.listdir("/etc/xdg/autostart"):
+                    basename, extension = os.path.splitext(filename)
+                    if extension == ".norun":
+                        os.system("mv /etc/xdg/autostart/%s /etc/xdg/autostart/%s" % (filename, basename))
                 filehandle.close()
 
             adjustment_directory = "/etc/hamonikr/adjustments/"

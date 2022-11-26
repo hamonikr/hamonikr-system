@@ -2,8 +2,8 @@
 conky
 #VBoxClient
 avahi-daemon
-gvfs-afc-volume-monitor
-pulsaudio
+#gvfs-afc-volume-monitor
+#pulsaudio
 cupsd
 # wpa_supplicant
 cups-browsed

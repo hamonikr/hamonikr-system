@@ -19,10 +19,10 @@ log() {
 
 case "$1" in
     start)
-        if [ -x /usr/local/bin/hamonikr-theme-setting ]; then
-            rm -f $HOME/.hamonikr/theme/hamonikr-theme-setting.done
-            /usr/local/bin/hamonikr-theme-setting winstyle
-        fi
+        #if [ -x /usr/local/bin/hamonikr-theme-setting ]; then
+        #    rm -f $HOME/.hamonikr/theme/hamonikr-theme-setting.done
+        #    /usr/local/bin/hamonikr-theme-setting winstyle
+        #fi
         
         killps="/usr/share/hamonikr/hamonikr-min/killps"
         if [ -f ${killps} ]; then
@@ -35,7 +35,6 @@ case "$1" in
                     [ $? -eq 0 ] && log "killed ${process}" 
                 fi
             done
-            log "Successful adjust process for minimal mode" 
         else
             log "[ERROR] Could not fount ${killps} file"
         fi
@@ -54,12 +53,28 @@ case "$1" in
                      
                 fi
             done
-            log "Disabled application for minimal mode" 
         else
             log "[ERROR] Could not fount ${killapps} file"
         fi
       ;;
     stop)
+        killapps="/usr/share/hamonikr/hamonikr-min/killapps"
+        if [ -f ${killapps} ]; then
+            IFS=$'\n' read -d '' -r -a lines < ${killapps}
+
+            for apps in "${lines[@]}"
+            do
+                if [[ ! ${apps} =~ "#" ]]; then
+                    if [ -f $HOME/.config/autostart/${apps}.norun ]; then
+                        mv $HOME/.config/autostart/${apps}.norun $HOME/.config/autostart/${apps}
+                        [ $? -eq 0 ] && log "Enabled ${apps}"
+                    fi
+                     
+                fi
+            done
+        else
+            log "[ERROR] Could not fount ${killapps} file"
+        fi
       ;;
     *)
       ;;

@@ -1,7 +1,12 @@
 # THIS APPLICATION WILL BE DISABLE
 albert.desktop
 blueman.desktop
+blueberry-obex-agent.desktop
+blueberry-tray.desktop
+caribou-autostart.desktop
+conky-toggle.desktop
 change-timedatectl.desktop
+#cinnamon-settings-daemon-background.desktop
 cinnamon-settings-daemon-orientation.desktop
 cinnamon-settings-daemon-power.desktop
 cinnamon-settings-daemon-print-notifications.desktop
@@ -9,26 +14,38 @@ cinnamon-settings-daemon-screensaver-proxy.desktop
 cinnamon-settings-daemon-smartcard.desktop
 # cinnamon-settings-daemon-sound.desktop
 cinnamon-settings-daemon-wacom.desktop
-# cinnamon-settings-daemon-xrandr.desktop
-cinnamon-settings-daemon-xsettings.desktop
+#cinnamon-settings-daemon-xrandr.desktop
+#cinnamon-settings-daemon-xsettings.desktop
+geoclue-demo-agent.desktop
+hamonikrreport.desktop
+hamonikrwelcome.desktop
 hamonikr-ctrl-alt-backspace.desktop
-nimf-settings-autostart.desktop
+#nimf-settings-autostart.desktop
+mintupdate.desktop
+nvidia-prime.desktop
 onboard-autostart.desktop
 orca-autostart.desktop
-org.gnome.Evolution-alarm-notify.desktop
+#org.gnome.SettingsDaemon.A11ySettings.desktop
+#org.gnome.SettingsDaemon.Color.desktop
+#org.gnome.SettingsDaemon.Datetime.desktop
+#org.gnome.SettingsDaemon.DiskUtilityNotify.desktop
+#org.gnome.SettingsDaemon.Housekeeping.desktop
+#org.gnome.SettingsDaemon.Keyboard.desktop
+#org.gnome.SettingsDaemon.MediaKeys.desktoporg.gnome.Evolution-alarm-notify.desktop
 org.gnome.SettingsDaemon.Power.desktop
 org.gnome.SettingsDaemon.PrintNotifications.desktop
 org.gnome.SettingsDaemon.Rfkill.desktop
 org.gnome.SettingsDaemon.ScreensaverProxy.desktop
 org.gnome.SettingsDaemon.Sharing.desktop
 org.gnome.SettingsDaemon.Smartcard.desktop
-org.gnome.SettingsDaemon.Sound.desktop
+#org.gnome.SettingsDaemon.Sound.desktop
 org.gnome.SettingsDaemon.UsbProtection.desktop
 org.gnome.SettingsDaemon.Wacom.desktop
-org.gnome.SettingsDaemon.Wwan.desktop
+#org.gnome.SettingsDaemon.Wwan.desktop
+#org.gnome.SettingsDaemon.XSettings.desktop
 plank.desktop
 print-applet.desktop
-pulseaudio.desktop
+#pulseaudio.desktop
 sbschedule-kde.desktop
 sbschedule.desktop
 spice-vdagent.desktop
@@ -36,3 +53,6 @@ ubiquity-mint.desktop
 ubuntu-report-on-upgrade.desktop
 update-notifier.desktop
 xpad.desktop
+vboxclient.desktop
+warpinator-autostart.desktop
+xapp-sn-watcher.desktop
