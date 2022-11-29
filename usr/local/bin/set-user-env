@@ -276,7 +276,7 @@ case "$1" in
             fi
 
             # QT scale setting
-            setup_qt_scale
+            # setup_qt_scale
 
             touch $HOME/.hamonikr/set-user-env.done
             log "Created set-user-env.done file"
