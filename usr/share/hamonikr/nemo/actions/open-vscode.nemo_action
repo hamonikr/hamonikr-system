@@ -1,0 +1,14 @@
+[Nemo Action]
+# Requires spacefm to be installed (apt install spacefm).
+# Spacefm allows for search by file contents ;-)
+Name=Open VS_Code Here
+Name[ko]=현재 폴더 VSCODE 열기(_C)
+Comment=Open %F with VSCODE
+Comment=선택한 폴더 %F 를 VSCODE 로 엽니다.
+Exec=code %F
+Icon-Name=search-symbolic
+Selection=any
+Extensions=dir;
+EscapeSpaces=true
+Dependencies=code;
+
