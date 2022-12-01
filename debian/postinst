@@ -47,16 +47,16 @@ case "$1" in
 
         # Apply HamoniKR OS infomation in system
         [ ! -d "/etc/hamonikr/.bak" ] && mkdir -p "/etc/hamonikr/.bak"
-        cp /etc/issue /etc/hamonikr/.bak/issue.bak
-        cp /etc/issue.net /etc/hamonikr/.bak/issue.net.bak
-        cp /etc/lsb-release /etc/hamonikr/.bak/lsb-release.bak
-        cp /etc/os-release /etc/hamonikr/.bak/os-release.bak
+        [ -f /etc/issue ] && cp /etc/issue /etc/hamonikr/.bak/issue.bak
+        [ -f /etc/issue.net ] && cp /etc/issue.net /etc/hamonikr/.bak/issue.net.bak
+        [ -f /etc/lsb-release ] && cp /etc/lsb-release /etc/hamonikr/.bak/lsb-release.bak
+        [ -f /etc/os-release ] && cp /etc/os-release /etc/hamonikr/.bak/os-release.bak
 
-        cp -f /etc/hamonikr/issue /etc/issue
-        cp -f /etc/hamonikr/issue.net /etc/issue.net
-        cp -f /etc/hamonikr/lsb-release /etc/lsb-release
-        cp -f /etc/hamonikr/os-release /etc/os-release
-        cp -f /etc/hamonikr/os-release /usr/lib/os-release
+        [ -f /etc/hamonikr/issue ] && cp -f /etc/hamonikr/issue /etc/issue
+        [ -f /etc/hamonikr/issue.net ] &&  cp -f /etc/hamonikr/issue.net /etc/issue.net
+        [ -f /etc/hamonikr/lsb-release ] &&  cp -f /etc/hamonikr/lsb-release /etc/lsb-release
+        [ -f /etc/hamonikr/os-release ] &&  cp -f /etc/hamonikr/os-release /etc/os-release
+        [ -f /etc/hamonikr/os-release ] &&  cp -f /etc/hamonikr/os-release /usr/lib/os-release
 
     ;;
 
