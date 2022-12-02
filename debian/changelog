@@ -1,3 +1,11 @@
+hamonikr-system (6.8.9) taebaek; urgency=medium
+
+  [Kevin]
+  * Support debian 11 i386
+   - Build on LDME 5 32bit
+
+ -- HamoniKR <pkg@hamonikr.org>  Fri, 02 Dec 2022 13:01:57 +0900
+
 hamonikr-system (6.8.2) taebaek; urgency=medium
 
   [Kevin]
