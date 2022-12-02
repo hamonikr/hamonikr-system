@@ -20,7 +20,13 @@ case "$1" in
                     systemctl enable ubuntu-system-adjustments
                 fi
             fi                       
-                    
+
+            if systemctl --all --type service | grep -q "debian-system-adjustments";then
+                if [ $(systemctl is-enabled debian-system-adjustments) = "disabled" ] ; then
+                    systemctl enable debian-system-adjustments
+                fi
+            fi      
+
             systemctl daemon-reload
         fi
 

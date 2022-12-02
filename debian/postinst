@@ -39,6 +39,12 @@ case "$1" in
                 fi
             fi
   
+            if systemctl --all --type service | grep -q "debian-system-adjustments";then
+                if [ $(systemctl is-enabled debian-system-adjustments) = "enabled" ] ; then
+                systemctl disable debian-system-adjustments
+                fi
+            fi
+            
             systemctl enable hamonikr-system.service
             systemctl daemon-reload
         fi

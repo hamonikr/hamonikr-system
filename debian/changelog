@@ -1,3 +1,12 @@
+hamonikr-system (6.9.1) unstable; urgency=medium
+
+  [Kevin Kim]
+  * Support debian 11 amd64, i386
+   - Build on LDME5 32bit
+   - Add debian-adjustments-service control
+
+ -- HamoniKR <pkg@hamonikr.org>  Fri, 02 Dec 2022 14:47:48 +0900
+
 hamonikr-system (6.9.0) taebaek; urgency=medium
 
   [JamesBae]
