@@ -1,9 +1,0 @@
-[Nemo Action]
-Name=Create _Shortcut
-Name[ko]=바로가기 만들기(_S)
-Comment=Create a shortcut to %f
-Comment[ko]=%f 의 바로가기 만들기
-Exec=ln -s %F %F@shortcut
-Selection=s
-Extensions=any;
-EscapeSpaces=true

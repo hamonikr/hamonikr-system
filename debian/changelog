@@ -1,3 +1,11 @@
+hamonikr-system (6.9.2) unstable; urgency=medium
+
+  [Kevin Kim]
+  * Removed create link in context menu
+  * Fixed bug linuxmint.list in previous version
+
+ -- HamoniKR <pkg@hamonikr.org>  Fri, 02 Dec 2022 21:27:29 +0900
+
 hamonikr-system (6.9.1) unstable; urgency=medium
 
   [Kevin Kim]
