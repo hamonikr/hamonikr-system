@@ -19,17 +19,23 @@ obexd
 plank
 albert
 conky
+# - network
+nm-applet
 # - etc..
 avahi-daemon
-gvfs-afc-volume-monitor
 nmbd
 smbd
-csd-wacom
 csd-screensaver-proxy
-csd-power
-gvfs-gphoto2-volume-monitor
+xrdp
+# 전원관리 (활성화시 노트북의 전원관리 사용못함)
+# csd-power
+# 태블릿 (활성화시 와콤 태블릿의 설정이 적용되지 않음)
+# csd-wacom
+# 그놈 공식 개인 정보 관리자 evolution (제거되도 해당 프로그램 실행시 다시 생김)
 evolution-alarm-notify
 evolution-source-registry
 evolution-calendar-factory
 evolution-addressbook-factory
-xrdp
+# gvfs 관련
+gvfs-gphoto2-volume-monitor
+gvfs-afc-volume-monitor

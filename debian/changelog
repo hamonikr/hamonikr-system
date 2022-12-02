@@ -1,3 +1,12 @@
+hamonikr-system (6.9.0) taebaek; urgency=medium
+
+  [JamesBae]
+  * Update & Change minimal mode setting
+   - Add kill nm-applet process in killps
+   - Change to Disabled csd-power csd-wacom and desktop file
+
+ -- HamoniKR <pkg@hamonikr.org>  Fri, 02 Dec 2022 13:28:18 +0900
+
 hamonikr-system (6.8.9) taebaek; urgency=medium
 
   [Kevin]
