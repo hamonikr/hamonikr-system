@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# 서비스가 너무 빨리 실행되서 ping 주소를 찾지 못함
-# 순차적으로 읽는 hamonikr-adjust.py는 sleep을 걸면 행이 걸림
-# 기존에 있던 내용은 /usr/shre/hamonikr/count-user/count-user.sh 이동
-
-/usr/share/hamonikr/count-user/10-count-user.execute &

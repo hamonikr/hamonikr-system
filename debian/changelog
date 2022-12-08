@@ -1,3 +1,11 @@
+hamonikr-system (6.9.3) unstable; urgency=medium
+
+  [JamesBae]
+  * Add Branch LMDE5 32bit
+   - Remove All adjustments file
+
+ -- HamoniKR <pkg@hamonikr.org>  Thu, 08 Dec 2022 12:42:19 +09000
+
 hamonikr-system (6.9.2) unstable; urgency=medium
 
   [Kevin Kim]
