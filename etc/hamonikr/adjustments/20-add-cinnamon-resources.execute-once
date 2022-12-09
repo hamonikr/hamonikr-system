@@ -1,0 +1,22 @@
+#!/bin/bash
+
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+    if [ -d /usr/share/cinnamon ] ; then
+        cp -ar /usr/share/hamonikr/cinnamon/* /usr/share/cinnamon
+    fi
+    # log "Update cinnamon resources in /usr/share/cinnamon"
+    echo "Update cinnamon resources in /usr/share/cinnamon"
+fi

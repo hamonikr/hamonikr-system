@@ -1,0 +1,32 @@
+#!/bin/bash
+
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+# lightdm login theme
+if [ -f "/usr/share/hamonikr/etc/lightdm/slick-greeter.conf" ] ; then
+
+    if [ -d "/etc/lightdm/" ]; then
+      cp -f /usr/share/hamonikr/etc/lightdm/slick-greeter.conf /etc/lightdm/slick-greeter.conf
+
+      echo "Update /etc/lightdm/slick-greeter.conf"
+    fi
+    
+fi
+
+# lightdm login mouse cursor
+if [ -f "/usr/share/hamonikr/etc/lightdm/index.theme" ] ; then
+
+    cp -f /usr/share/hamonikr/etc/lightdm/index.theme /usr/share/icons/default/index.theme
+
+    echo "Update /usr/share/icons/default/index.theme"
+fi

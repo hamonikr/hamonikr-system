@@ -1,0 +1,26 @@
+#!/bin/bash
+
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+    TARGET_DIR=/usr/share/applications
+
+    for src in $(ls /usr/share/hamonikr/add-applications/*.desktop); do
+        cp $src $TARGET_DIR
+    done
+
+    # log "Installed new app in /usr/share/applications"
+    echo "Installed new app in /usr/share/applications"
+
+fi

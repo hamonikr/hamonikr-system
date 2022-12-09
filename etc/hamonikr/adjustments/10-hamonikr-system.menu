@@ -1,0 +1,41 @@
+exec /usr/share/applications/naver-whale.desktop /usr/bin/naver-whale-stable %U --password-store=basic
+exec /usr/share/applications/com.github.maoschanz.drawing.desktop drawing --new-tab
+hide /usr/share/applications/mintwelcome.desktop
+hide /usr/share/applications/hamonikr-community.desktop
+hide /usr/share/applications/debian-uxterm.desktop
+hide /usr/share/applications/debian-xterm.desktop
+hide /usr/share/applications/io.github.Hexchat.desktop
+hide /usr/share/applications/mcedit.desktop
+hide /usr/share/applications/org.freedesktop.IBus.Setup.desktop
+hide /usr/share/applications/spacefm-find.desktop
+hide /usr/share/applications/spacefm.desktop
+hide /usr/share/applications/thingy.desktop
+show /usr/share/applications/wheelspeed.desktop
+hide /usr/share/applications/mediainfo-gui.desktop
+hide /usr/share/applications/nm-connection-editor.desktop
+hide /usr/share/applications/plank.desktop
+hide /usr/share/applications/mintwelcome.desktop
+hide /usr/share/applications/cinnamon-onscreen-keyboard.desktop
+hide /usr/share/applications/albert.desktop
+hide /usr/share/applications/org.gnome.PowerStats.desktop
+hide /usr/share/applications/winetricks.desktop
+hide /usr/share/applications/display-im6.q16.desktop
+hide /usr/share/applications/keepassx.desktop
+hide /usr/share/applications/org.keepassxc.KeePassXC.desktop
+hide /usr/share/applications/gdebi.desktop
+hide /usr/share/applications/fcitx.desktop
+hide /usr/share/applications/fcitx-configtool.desktop
+hide /usr/share/applications/org.gnome.Calendar.desktop
+hide /usr/share/applications/qt5ct.desktop
+categories /usr/share/applications/mediainfo-gui.desktop AudioVideo;
+categories /usr/share/applications/hamonikrwelcome.desktop System;
+categories /usr/share/applications/hamonikr-help.desktop System;
+categories /usr/share/applications/plank-setting.desktop Settings;
+categories /usr/share/applications/hamonikr-community.desktop Network;WebBrowser;
+categories /usr/share/applications/xreader.desktop Office;
+categories /usr/share/applications/stacer.desktop System;
+categories /usr/share/applications/org.gnome.DiskUtility.desktop System;
+categories /usr/share/applications/org.gnome.Terminal.desktop Utility;TerminalEmulator;
+categories /usr/share/applications/mintupdate.desktop System;
+categories /usr/share/applications/libreoffice-draw.desktop Office;
+categories /usr/share/applications/libreoffice-math.desktop Office;

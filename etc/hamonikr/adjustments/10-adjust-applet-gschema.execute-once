@@ -1,0 +1,61 @@
+#!/bin/bash
+
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+  if [ -f /usr/share/cinnamon/applets/grouped-window-list@cinnamon.org/settings-override.json ] ; then
+    cp -f /usr/share/cinnamon/applets/grouped-window-list@cinnamon.org/settings-override.json \
+    /usr/share/cinnamon/applets/grouped-window-list@cinnamon.org/settings-override.json.bak
+  fi
+
+    cp -f /usr/share/hamonikr/applets/grouped-window-list@cinnamon.org/settings-override.json \
+    /usr/share/cinnamon/applets/grouped-window-list@cinnamon.org/settings-override.json
+
+  if [ -f /usr/share/cinnamon/applets/menu@cinnamon.org/settings-override.json ] ; then
+    cp -f /usr/share/cinnamon/applets/menu@cinnamon.org/settings-override.json \
+    /usr/share/cinnamon/applets/menu@cinnamon.org/settings-override.json.bak
+
+    cp -f /usr/share/hamonikr/applets/menu@cinnamon.org/settings-override.json \
+    /usr/share/cinnamon/applets/menu@cinnamon.org/settings-override.json
+  fi
+
+  if [ -f /usr/share/hamonikr/applets/calendar@cinnamon.org/settings-override.json ] ; then
+    cp -f /usr/share/hamonikr/applets/calendar@cinnamon.org/settings-override.json \
+    /usr/share/cinnamon/applets/calendar@cinnamon.org/settings-override.json
+  fi
+
+  # Install smart-panel@mohammad-sn extension
+  if [ -d /usr/share/hamonikr/extensions/smart-panel@mohammad-sn ] ; then
+    [ ! -d /usr/share/cinnamon/extensions ] && mkdir -p /usr/share/cinnamon/extensions
+    cp -a /usr/share/hamonikr/extensions/smart-panel@mohammad-sn /usr/share/cinnamon/extensions
+    [ $? -eq 0 ] && log "Installed smart-panel@mohammad-sn extension" 
+  fi
+
+  # if [ -f /usr/share/hamonikr/gschema/hamonikr-system.gschema.override ] ; then
+    
+  #   cp -f /usr/share/hamonikr/gschema/hamonikr-system.gschema.override \
+  #   /usr/share/glib-2.0/schemas/hamonikr-system.gschema.override
+    
+  #   if [ -f /usr/share/hamonikr/gschema/mint-artwork.gschema.override ] ; then
+  #     rm /usr/share/hamonikr/gschema/mint-artwork.gschema.override
+  #   fi
+
+  # fi
+  
+  if which glib-compile-schemas >/dev/null 2>&1 ; then
+      glib-compile-schemas /usr/share/glib-2.0/schemas
+  fi    
+  echo "Update hamonikr-system gschema"
+
+fi

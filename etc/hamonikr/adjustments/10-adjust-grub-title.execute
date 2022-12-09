@@ -1,0 +1,59 @@
+#!/usr/bin/python3
+import syslog
+
+# HamoniKR info file
+info_file = "/etc/hamonikr/info"
+
+try:
+    with open(info_file) as f:
+        for line in f:
+            if ("GRUB_TITLE" in line):
+                grub_title = line.strip().split("=")[1].replace('"', '')
+            else:
+                grub_title = "HamoniKR"
+except Exception as e:
+    # Best effort, default to generic title
+    syslog.syslog("Error when looking for info title: %s\n" % e)
+
+# Adjust the grub title
+try:
+    buffer = []
+    existing_title = None
+    needs_modification = False
+    with open("/boot/grub/grub.cfg") as grub_file:
+        in_10_linux_section = False
+        for line in grub_file:
+            if ("BEGIN /etc/grub.d/10_linux" in line):
+                in_10_linux_section = True
+            elif ("END /etc/grub.d/10_linux" in line):
+                in_10_linux_section = False
+            if (in_10_linux_section):
+                if ("menuentry" in line) or ("submenu" in line):
+                    # Get the existing title from the 1st menuentry in the 10_linux section
+                    if existing_title is None:
+                        if "'" in line:
+                            existing_title = line.split("'")[1]
+                        elif '"' in line:
+                            existing_title = line.split('"')[1]
+
+                        existing_title = existing_title.split(",")[0]
+                        syslog.syslog("Grub title found: %s\n" % existing_title)
+                    if (existing_title != grub_title):
+                        needs_modification = True
+                        line = line.replace(existing_title, grub_title)
+                    if ("--class ubuntu" in line) or ("--class linuxmint" in line) or ("--class debian" in line):
+                        needs_modification = True
+                        line = line.replace("class ubuntu", "class hamonikr")
+                        line = line.replace("class linuxmint", "class hamonikr")
+                        line = line.replace("class debian", "class hamonikr")        
+                if ("$vt_handoff" in line):
+                    needs_modification = True
+                    line = line.replace("$vt_handoff", "")
+            buffer.append(line)
+    if (needs_modification):
+        with open("/boot/grub/grub.cfg", "w") as grub_file:
+            grub_file.writelines(buffer)
+            syslog.syslog("Replaced title and/or vt_handoff in /boot/grub/grub.cfg\n")
+except Exception as e:
+    # Best effort, whatever happens, don't fail the boot sequence
+    syslog.syslog("Error when looking for grub title or replacing it: %s\n" % e)

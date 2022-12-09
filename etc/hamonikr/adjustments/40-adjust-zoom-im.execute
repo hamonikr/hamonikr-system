@@ -1,0 +1,29 @@
+#!/bin/bash
+
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+    if [ "$(dpkg-query -W --showformat='${db:Status-Status}' zoom 2>&1)" = "installed" ] ; then
+
+        if [ -d "/opt/zoom/platforminputcontexts" ] && \
+            [ -f "/usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libqt5im-nimf.so" ] && \
+            [ ! -f "/opt/zoom/platforminputcontexts/libqt5im-nimf.so" ] ; then
+            ln -s /usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libqt5im-nimf.so /opt/zoom/platforminputcontexts
+            # log "Updated im setting for zoom"
+            echo "Updated im setting for zoom"
+        fi
+
+    fi
+
+fi

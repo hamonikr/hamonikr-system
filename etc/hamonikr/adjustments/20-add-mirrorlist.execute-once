@@ -1,0 +1,22 @@
+#!/bin/bash
+
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+if [ -f "/etc/hamonikr/info" ] ; then
+  if [ ! -f "/usr/share/mint-mirrors/linuxmint.list" ] ; then
+    cp /usr/share/hamonikr/mint-mirrors/linuxmint.list /usr/share/mint-mirrors/linuxmint.list
+      if [ $? -eq 0 ]; then
+        echo "Add linuxmint.list in /usr/share/mint-mirrors"
+      fi
+  fi
+fi

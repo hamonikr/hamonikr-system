@@ -1,0 +1,26 @@
+#!/bin/bash
+
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+    #remove spacefm context menu when select folder
+    if [ -f "/usr/share/applications/spacefm.desktop" ] ; then
+        sed -i '/MimeType=/d' /usr/share/applications/spacefm-folder-handler.desktop 
+        sed -i '/MimeType=/d' /usr/share/applications/spacefm-find.desktop
+        sed -i '/MimeType=/d' /usr/share/applications/spacefm.desktop 
+        # log "Updated spacefm info"
+        echo "Updated spacefm info"
+    fi
+
+fi
