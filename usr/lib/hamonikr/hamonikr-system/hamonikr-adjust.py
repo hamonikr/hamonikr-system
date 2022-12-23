@@ -8,6 +8,7 @@ import fileinput
 import filecmp
 import configparser
 import glob
+import shlex
 
 TIMESTAMPS = "/var/log/hamonikr-system.timestamps"
 
@@ -174,31 +175,95 @@ class HamoniKRSystem():
                                 array_preserves.append(line)
                         filehandle.close()
 
-            overwrites = {}
-            if os.path.exists(adjustment_directory):
-                for filename in sorted(os.listdir(adjustment_directory)):
-                    basename, extension = os.path.splitext(filename)
-                    if extension == ".overwrite":
-                        filehandle = open(os.path.join(adjustment_directory, filename))
-                        for line in filehandle:
-                            line = line.strip()
-                            line_items = line.split()
-                            if len(line_items) == 2:
-                                source, destination = line.split()
-                                if destination not in array_preserves:
-                                    overwrites[destination] = source
-                        filehandle.close()
+            # overwrites
+                overwrites = {}
+                if os.path.exists(adjustment_directory):
+                    for filename in sorted(os.listdir(adjustment_directory)):
+                        basename, extension = os.path.splitext(filename)
+                        if extension == ".overwrite":
+                            filehandle = open(os.path.join(adjustment_directory, filename))
+                            for line in filehandle:
+                                line = line.strip()
+                                line_items = line.split()
+                                if len(line_items) == 2:
+                                    source, destination = line.split()
+                                    if destination not in array_preserves:
+                                        overwrites[destination] = source
+                            filehandle.close()
 
-            for key in overwrites.keys():
-                source = overwrites[key]
-                destination = key
-                if os.path.exists(source):
-                    if "*" not in destination:
-                        self.replace_file(source, destination)
-                    else:
-                        # Wildcard destination, find all possible matching destinations
-                        for matching_destination in glob.glob(destination):
-                            self.replace_file(source, matching_destination)
+                for key in overwrites.keys():
+                    source = overwrites[key]
+                    destination = key
+                    if os.path.exists(source):
+                        if "*" not in destination:
+                            self.replace_file(source, destination)
+                        else:
+                            # Wildcard destination, find all possible matching destinations
+                            for matching_destination in glob.glob(destination):
+                                self.replace_file(source, matching_destination)
+
+            # os-check (ubuntu, debian)
+            def parse_check_os(line):
+                return shlex.split(line, posix=True)[0].split('=', 1)
+
+            with open('/etc/os-release') as f:
+                checkos = dict(parse_check_os(line) for line in f if '=' in line)
+            
+            if (checkos['ID_LIKE'] == 'ubuntu'):
+                # overwrites-ubuntu
+                overwritesubuntu = {}
+                if os.path.exists(adjustment_directory):
+                    for filename in sorted(os.listdir(adjustment_directory)):
+                        basename, extension = os.path.splitext(filename)
+                        if extension == ".overwriteubuntu":
+                            filehandle = open(os.path.join(adjustment_directory, filename))
+                            for line in filehandle:
+                                line = line.strip()
+                                line_items = line.split()
+                                if len(line_items) == 2:
+                                    source, destination = line.split()
+                                    if destination not in array_preserves:
+                                        overwritesubuntu[destination] = source
+                            filehandle.close()
+
+                for key in overwritesubuntu.keys():
+                    source = overwritesubuntu[key]
+                    destination = key
+                    if os.path.exists(source):
+                        if "*" not in destination:
+                            self.replace_file(source, destination)
+                        else:
+                            # Wildcard destination, find all possible matching destinations
+                            for matching_destination in glob.glob(destination):
+                                self.replace_file(source, matching_destination)
+
+            elif (checkos['ID_LIKE'] == 'debian'):
+                # overwrites-debian
+                overwritesdebian = {}
+                if os.path.exists(adjustment_directory):
+                    for filename in sorted(os.listdir(adjustment_directory)):
+                        basename, extension = os.path.splitext(filename)
+                        if extension == ".overwritedebian":
+                            filehandle = open(os.path.join(adjustment_directory, filename))
+                            for line in filehandle:
+                                line = line.strip()
+                                line_items = line.split()
+                                if len(line_items) == 2:
+                                    source, destination = line.split()
+                                    if destination not in array_preserves:
+                                        overwritesdebian[destination] = source
+                            filehandle.close()
+
+                for key in overwritesdebian.keys():
+                    source = overwritesdebian[key]
+                    destination = key
+                    if os.path.exists(source):
+                        if "*" not in destination:
+                            self.replace_file(source, destination)
+                        else:
+                            # Wildcard destination, find all possible matching destinations
+                            for matching_destination in glob.glob(destination):
+                                self.replace_file(source, matching_destination)
 
             # Perform menu adjustments
             for filename in os.listdir(adjustment_directory):

@@ -1,0 +1,69 @@
+#!/bin/bash
+# default group setting, when create new user
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+source /etc/os-release
+
+if [ "X$ID_LIKE" = "Xubuntu" ]; then
+  
+  if [ -f "/etc/hamonikr/info" ] ; then
+  
+    if [ -f "/etc/adduser.conf" ] ; then
+
+      CHANGECHECK=$(cat /etc/adduser.conf | grep ^\EXTRA_GROUPS=)
+      if [ -z "$CHANGECHECK" ]; then
+        for g in {adm,lpadmin,audio,cdrom,video,sudo,vboxsf,vboxusers,wireshark,docker,xrdp,ssl-cert,sambashare}; do groupadd -f $g; done
+
+        grep "EXTRA_GROUPS=" /etc/adduser.conf 2>&1 >/dev/null && sed -i.bak '/EXTRA_GROUPS=/d' /etc/adduser.conf
+        echo "EXTRA_GROUPS=\"adm lpadmin audio cdrom video sudo vboxsf vboxusers wireshark docker xrdp ssl-cert sambashare\"" >> /etc/adduser.conf
+        
+        grep "ADD_EXTRA_GROUPS=" /etc/adduser.conf 2>&1 >/dev/null && sed -i.bak '/ADD_EXTRA_GROUPS=/d' /etc/adduser.conf
+        echo "ADD_EXTRA_GROUPS=1" >> /etc/adduser.conf
+        
+        echo "Updated default group settings"
+      else
+        echo "It's already been done"
+      fi
+    fi
+  fi
+
+elif [ "X$ID_LIKE" = "Xdebian" ]; then
+  # LMDE5에서 livecd의 adduser.conf 새로운 유저 생성 정책 변경시 로그인이 되지 않는 문제가 있음
+  # live-installer 패키지 설치 유무로 동작 체크
+  LIVECHECK=$(dpkg -l | grep live-installer)
+  # -z 문자열 길이가 0이면 참
+  if [ -z "$LIVECHECK" ]; then
+
+    if [ -f "/etc/hamonikr/info" ] ; then
+
+      if [ -f "/etc/adduser.conf" ] ; then
+
+        # EXTRA_GROUPS의 주석이 풀려 있는 경우 동작하지 않음
+        CHANGECHECK=$(cat /etc/adduser.conf | grep ^\EXTRA_GROUPS=)
+        if [ -z "$CHANGECHECK" ]; then
+          for g in {adm,lpadmin,audio,cdrom,video,sudo,vboxsf,vboxusers,wireshark,docker,xrdp,ssl-cert,sambashare}; do groupadd -f $g; done
+
+          grep "EXTRA_GROUPS=" /etc/adduser.conf 2>&1 >/dev/null && sed -i.bak '/EXTRA_GROUPS=/d' /etc/adduser.conf
+          echo "EXTRA_GROUPS=\"adm lpadmin audio cdrom video sudo vboxsf vboxusers wireshark docker xrdp ssl-cert sambashare\"" >> /etc/adduser.conf
+
+          grep "ADD_EXTRA_GROUPS=" /etc/adduser.conf 2>&1 >/dev/null && sed -i.bak '/ADD_EXTRA_GROUPS=/d' /etc/adduser.conf
+          echo "ADD_EXTRA_GROUPS=1" >> /etc/adduser.conf
+
+          echo "Updated default group settings"
+        else
+          echo "It's already been done"
+        fi
+      fi
+    fi
+  fi
+fi
