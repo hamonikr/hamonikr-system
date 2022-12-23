@@ -1,6 +1,5 @@
 /etc/hamonikr/templates/default-testpage.pdf /usr/share/cups/data/default-testpage.pdf
 /usr/share/hamonikr/user-setup/user-setup-apply /usr/lib/user-setup/user-setup-apply
-/etc/hamonikr/adjustments/10-adjust-grub-title.execute /usr/share/debian-system-adjustments/systemd/adjust-grub-title
 /usr/share/hamonikr/python-apt/templates/Ubuntu.mirrors /usr/share/python-apt/templates/Ubuntu.mirrors
 /usr/share/backgrounds/hamonikr/default_background.jpg /usr/share/backgrounds/linuxmint/default_background.jpg
 /usr/share/hamonikr/mint-mirrors/linuxmint.list /usr/share/mint-mirrors/linuxmint.list
