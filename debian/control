@@ -17,7 +17,7 @@ Depends: ${misc:Depends},
          imagemagick-6-common,
          xdotool
 Recommends: spacefm,
-            python-is-python3                     
+            python-is-python3
 Description: HamoniKR OS Base Package
  Used by the desktop and other tools to gather
  information and process common system tasks.

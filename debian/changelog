@@ -1,3 +1,10 @@
+hamonikr-system (6.9.7) unstable; urgency=medium
+
+  [JamesBae]
+  * Check plank used os environment in set-user-env
+
+ -- HamoniKR <pkg@hamonikr.org>  Fri, 23 Dec 2022 16:12:31 +0900
+
 hamonikr-system (6.9.6) unstable; urgency=medium
 
   [JamesBae]
