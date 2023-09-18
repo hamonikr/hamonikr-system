@@ -1,6 +1,8 @@
 [/]
+background-color='rgb(23,20,33)'
 background-transparency-percent=10
 font='Hack Nerd Font 9'
+foreground-color='rgb(208,207,204)'
 use-system-font=false
 use-theme-colors=false
 use-theme-transparency=false
