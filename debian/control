@@ -16,6 +16,7 @@ Architecture: all
 Depends: ${misc:Depends},
          imagemagick-6-common,
          xdotool
+Replaces: hamonikr-themes         
 Recommends: spacefm,
             python-is-python3
 Description: HamoniKR OS Base Package

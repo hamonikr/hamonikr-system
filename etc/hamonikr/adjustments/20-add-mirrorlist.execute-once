@@ -14,6 +14,7 @@ err() {
 
 if [ -f "/etc/hamonikr/info" ] ; then
   if [ ! -f "/usr/share/mint-mirrors/linuxmint.list" ] ; then
+    mkdir -p /usr/share/mint-mirrors
     cp /usr/share/hamonikr/mint-mirrors/linuxmint.list /usr/share/mint-mirrors/linuxmint.list
       if [ $? -eq 0 ]; then
         echo "Add linuxmint.list in /usr/share/mint-mirrors"

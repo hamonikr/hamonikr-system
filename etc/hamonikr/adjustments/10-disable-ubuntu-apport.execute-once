@@ -27,6 +27,11 @@ if [ -f "/etc/hamonikr/info" ] ; then
         systemctl daemon-reload
     fi    
 
+    # https://www.inforbiro.com/blog/how-to-disable-apport-error-reporting-in-ubuntu
+    if [ -f "/etc/default/apport" ] ; then
+        sed -i 's|enabled=1|enabled=0|g' /etc/default/apport
+    fi
+
 fi
 
 
