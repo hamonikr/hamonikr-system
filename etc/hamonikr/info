@@ -1,7 +1,7 @@
 RELEASE=7.0
 CODENAME=kumkang
 EDITION="Cinnamon"
-DESCRIPTION="HamoniKR 7.0 (taebaek)"
+DESCRIPTION="HamoniKR 7.0 (kumkang)"
 DESKTOP=Gnome
 TOOLKIT=GTK
 NEW_FEATURES_URL=https://docs.hamonikr.org/hamonikr-7.0/#new_feature

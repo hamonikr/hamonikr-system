@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Disable ubuntu apport service
+
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+    if which systemctl >/dev/null 2>&1 ; then
+        # if exist service
+        if systemctl --all --type service | grep -q "apport";then
+            if [ $(systemctl is-enabled apport) = "enabled" ] ; then
+                systemctl disable apport
+            fi
+        fi
+
+        systemctl daemon-reload
+    fi    
+
+fi
+
+

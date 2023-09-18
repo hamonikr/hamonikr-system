@@ -1,3 +1,12 @@
+hamonikr-system (7.1.1) stable; urgency=medium
+
+  [Kevin Kim]
+  * Release for Ubuntu 22.04
+   - disable apport service
+
+ -- HamoniKR <pkg@hamonikr.org>  Mon, 18 Sep 2023 12:45:46 +0900
+
+
 hamonikr-system (7.1.0) stable; urgency=medium
 
   [Kevin Kim]
