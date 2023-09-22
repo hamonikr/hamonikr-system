@@ -1,0 +1,25 @@
+#!/bin/bash
+
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+    if [ "$(dpkg-query -W --showformat='${db:Status-Status}' naver-whale-stable 2>&1)" = "installed" ] ; then
+
+      # https://forum.whale.naver.com/topic/46349/
+      apt-key export EF6C07F6 | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/whale-key.gpg
+      echo "Fixed Naver whale GPG KEY warning."
+
+    fi
+
+fi
