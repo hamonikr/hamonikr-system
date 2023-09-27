@@ -22,7 +22,7 @@ document-font-name="Pretendard 10"
 font-name="Pretendard 10"
 gtk-key-theme='Default'
 gtk-theme='HamoniKR'
-icon-theme='HamoniKR'
+icon-theme='Stylish'
 monospace-font-name="Hack Nerd Font 9"
 toolkit-accessibility=false
 
@@ -83,7 +83,7 @@ panels-height=['1:38']
 enabled-applets=['panel1:left:0:menu@cinnamon.org:0', 'panel1:left:1:grouped-window-list@cinnamon.org:1', 'panel1:right:0:systray@cinnamon.org:2', 'panel1:right:1:printers@cinnamon.org:3', 'panel1:right:2:removable-drives@cinnamon.org:4', 'panel1:right:3:bluetooth@cinnamon.org:5', 'panel1:right:4:sound@cinnamon.org:6', 'panel1:right:5:calendar@cinnamon.org:7', 'panel1:right:6:notifications@cinnamon.org:8', 'panel1:right:7:network@cinnamon.org:9', 'panel1:right:8:power@cinnamon.org:10', 'panel1:right:9:user@cinnamon.org:11', 'panel1:right:10:show-desktop@cinnamon.org:12']
 panel-scale-text-icons=true
 workspace-expo-view-as-grid=true
-app-menu-icon-name="hamonikr-menu"
+app-menu-icon-name="hamonikr-menu-icon"
 enabled-extensions=['smart-panel@mohammad-sn']
 
 [org.cinnamon.desktop.keybindings.media-keys]
