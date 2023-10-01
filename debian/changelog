@@ -1,3 +1,12 @@
+hamonikr-system (7.1.7) stable; urgency=medium
+
+  [Kevin Kim]
+  * Removed duplicated action
+   - hamonikr-themes package will be adjust applet, theme, icon settings
+  * Applied LinuxMint 21.2 mirror list
+
+ -- HamoniKR <pkg@hamonikr.org>  Sun, 01 Oct 2023 21:50:04 +0900
+
 hamonikr-system (7.1.6) stable; urgency=medium
 
   [Kevin Kim]
