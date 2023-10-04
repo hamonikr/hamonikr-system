@@ -8,6 +8,6 @@ HOME_URL="https://hamonikr.org/"
 SUPPORT_URL="https://hamonikr.org/"
 BUG_REPORT_URL="https://hamonikr.org/hamoni_board"
 PRIVACY_POLICY_URL="https://hamonikr.org/page_YaNU21/"
-VERSION_CODENAME=vera
+VERSION_CODENAME=victoria
 DEBIAN_CODENAME=bookworm
 HAMONIKR_CODENAME=kumkang

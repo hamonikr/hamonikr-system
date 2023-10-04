@@ -150,18 +150,34 @@ case "$1" in
                 sed -i 's/"value": "linuxmint-logo-ring-symbolic"/"value": "hamonikr"/g' $HOME/.cinnamon/configs/menu@cinnamon.org/0.json
                 log "Update hamonikr default logo setting"
             fi
+            if [ -f "$HOME/.config/cinnamon/spices/menu@cinnamon.org/0.json" ] ; then 
+                # changed path in linuxmint 21.2
+                sed -i.bak 's/"value": "hamonikr-menu"/"value": "hamonikr"/g' $HOME/.config/cinnamon/spices/menu@cinnamon.org/0.json
+                sed -i.bak 's/"value": "linuxmint-logo-ring-symbolic"/"value": "hamonikr"/g' $HOME/.config/cinnamon/spices/menu@cinnamon.org/0.json
+                log "Update hamonikr default logo setting"            
+            fi            
+
 
             # delete cache
             [ -d "$HOME/.cache" ] && rm -rf $HOME/.cache/* && log "Deleted cache"
 
-            # copy applet to user home
-            if [ -d "/home/$USER/.cinnamon/configs" ] ; then
-                cp -af /usr/share/cinnamon/applets/expo@cinnamon.org /home/$USER/.cinnamon/configs/
-                cp -af /usr/share/cinnamon/applets/scale@cinnamon.org /home/$USER/.cinnamon/configs/        
-                cp -af /usr/share/cinnamon/applets/user@cinnamon.org /home/$USER/.cinnamon/configs/                
-                cp -af /usr/share/cinnamon/applets/xrandr@cinnamon.org /home/$USER/.cinnamon/configs/
-                log "Copy applets"
-            fi
+            # hamonikr-theme working part
+            # # copy applet to user home
+            # if [ -d "/home/$USER/.cinnamon/configs" ] ; then
+            #     cp -af /usr/share/cinnamon/applets/expo@cinnamon.org /home/$USER/.cinnamon/configs/
+            #     cp -af /usr/share/cinnamon/applets/scale@cinnamon.org /home/$USER/.cinnamon/configs/        
+            #     cp -af /usr/share/cinnamon/applets/user@cinnamon.org /home/$USER/.cinnamon/configs/                
+            #     cp -af /usr/share/cinnamon/applets/xrandr@cinnamon.org /home/$USER/.cinnamon/configs/
+            #     log "Copy applets"
+            # fi
+            # # changed path in linuxmint 21.2            
+            # if [ -d "/home/$USER/.config/cinnamon/spices" ] ; then
+            #     cp -af /usr/share/cinnamon/applets/expo@cinnamon.org /home/$USER/.config/cinnamon/spices/
+            #     cp -af /usr/share/cinnamon/applets/scale@cinnamon.org /home/$USER/.config/cinnamon/spices/        
+            #     cp -af /usr/share/cinnamon/applets/user@cinnamon.org /home/$USER/.config/cinnamon/spices/                
+            #     cp -af /usr/share/cinnamon/applets/xrandr@cinnamon.org /home/$USER/.config/cinnamon/spices/
+            #     log "Copy applets"
+            # fi            
 
             # Albert Launcher Settings
             if [ -d "/etc/skel/.config/albert" ] ; then
