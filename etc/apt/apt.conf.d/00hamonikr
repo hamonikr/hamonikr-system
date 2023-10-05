@@ -7,7 +7,11 @@ APT
         "^hamonikr-desktop-base*";
         "^cinnamon-desktop-environment*";
         "^hamonikr-desktop-environment*";
-        "^libreoffice-hwp2odt";
+        "libreoffice-hwp2odt";
+        "language-pack-ko";
+        "language-pack-ko-base";
+        "language-pack-gnome-ko";
+        "language-pack-gnome-ko-base";
         "^nemo-compare*";
         "^nemo-image-converter*";
         "^numlockx*";
