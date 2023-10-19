@@ -25,28 +25,31 @@ case "$1" in
             update-icon-caches /usr/share/icons
         fi
 
-        if which systemctl >/dev/null 2>&1 ; then
-            # if exist service
-            if systemctl --all --type service | grep -q "mintsystem";then
-                if [ $(systemctl is-enabled mintsystem) = "enabled" ] ; then
-                    systemctl disable mintsystem
+        # systemd 명령어 실행 부분을 chroot 환경에서 동작하지 않도록 수정 (ISO 빌드시 오류)
+        if [ -z "$FAKEROOTKEY" ] && [ -d /run/systemd/system ]; then
+            if which systemctl >/dev/null 2>&1 ; then
+                # if exist service
+                if systemctl --all --type service | grep -q "mintsystem";then
+                    if [ $(systemctl is-enabled mintsystem) = "enabled" ] ; then
+                        systemctl disable mintsystem
+                    fi
                 fi
-            fi
-  
-            if systemctl --all --type service | grep -q "ubuntu-system-adjustments";then
-                if [ $(systemctl is-enabled ubuntu-system-adjustments) = "enabled" ] ; then
-                systemctl disable ubuntu-system-adjustments
+    
+                if systemctl --all --type service | grep -q "ubuntu-system-adjustments";then
+                    if [ $(systemctl is-enabled ubuntu-system-adjustments) = "enabled" ] ; then
+                    systemctl disable ubuntu-system-adjustments
+                    fi
                 fi
-            fi
-  
-            if systemctl --all --type service | grep -q "debian-system-adjustments";then
-                if [ $(systemctl is-enabled debian-system-adjustments) = "enabled" ] ; then
-                systemctl disable debian-system-adjustments
+    
+                if systemctl --all --type service | grep -q "debian-system-adjustments";then
+                    if [ $(systemctl is-enabled debian-system-adjustments) = "enabled" ] ; then
+                    systemctl disable debian-system-adjustments
+                    fi
                 fi
+                
+                systemctl enable hamonikr-system.service
+                systemctl daemon-reload
             fi
-            
-            systemctl enable hamonikr-system.service
-            systemctl daemon-reload
         fi
 
         /usr/lib/hamonikr/hamonikr-system/hamonikr-adjust.py

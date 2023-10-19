@@ -1,3 +1,13 @@
+hamonikr-system (7.3.0) stable; urgency=medium
+
+  [Kevin Kim]
+  * Add systemd preset config
+   - Disable systemd start when install chroot env
+   - Added usr/lib/systemd/system-preset/90-hamonikr.preset
+   - preset : It will start when system boot 
+
+ -- HamoniKR <pkg@hamonikr.org>  Thu, 19 Oct 2023 20:24:34 +0900
+
 hamonikr-system (7.2.2) stable; urgency=medium
 
   [Kevin Kim]
