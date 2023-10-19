@@ -1,2 +1,5 @@
 # hamonikr-system.preset
 enable hamonikr-system.service
+disable ubuntu-system-adjustments.service
+disable debian-system-adjustments.service
+disable mintsystem.service
