@@ -4,6 +4,7 @@ hide /usr/share/applications/mintwelcome.desktop
 hide /usr/share/applications/hamonikr-community.desktop
 hide /usr/share/applications/debian-uxterm.desktop
 hide /usr/share/applications/debian-xterm.desktop
+hide /usr/share/applications/conky.desktop
 hide /usr/share/applications/io.github.Hexchat.desktop
 hide /usr/share/applications/mcedit.desktop
 hide /usr/share/applications/org.freedesktop.IBus.Setup.desktop
