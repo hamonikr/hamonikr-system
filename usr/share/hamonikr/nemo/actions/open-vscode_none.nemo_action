@@ -1,11 +1,10 @@
 [Nemo Action]
 Name=Open VS_Code Here
 Name[ko]=현재 폴더 VSCODE 열기(_C)
-Comment=Open %F with VSCODE
-Comment=선택한 폴더 %F 를 VSCODE 로 엽니다.
+Comment=Open current folder with VSCODE
+Comment[ko]=현재 폴더를 VSCODE 로 엽니다.
 Exec=code %F
 Icon-Name=com.visualstudio.code
-Selection=s
-Extensions=dir;
+Selection=none
 EscapeSpaces=true
 Dependencies=code;

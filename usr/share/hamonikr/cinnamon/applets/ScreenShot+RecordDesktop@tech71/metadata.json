@@ -1,0 +1,8 @@
+{
+    "max-instances": -1,
+    "uuid": "ScreenShot+RecordDesktop@tech71",
+    "description": "Take A Snapshot Or Record Your Desktop (recording requires the packages ffmpeg, xdotool & x11-utils to be installed)",
+    "name": "ScreenShot+Record Desktop",
+    "author": "icarter09",
+    "last-edited": 1698475214
+}

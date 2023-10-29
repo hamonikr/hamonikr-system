@@ -6,5 +6,5 @@ Comment=Extract here with unalz
 Comment[ko]=현재 위치에 Alz 압축 파일 풀기
 Exec=gnome-terminal --working-directory=%P -e "/usr/bin/unalz %F"
 Icon-Name=gnome-mime-application-x-zip
-Selection=s
+Selection=notnone
 Extensions=alz;

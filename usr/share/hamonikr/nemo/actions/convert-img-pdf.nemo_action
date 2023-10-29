@@ -6,7 +6,7 @@ Comment=IMGs to PDF
 Comment[ko]=선택한 이미지 PDF 변환해서 현재 폴더에 저장
 Exec=gnome-terminal --working-directory=%P -- /bin/bash -c '/usr/bin/convert %F "%e.pdf"'
 Icon-Name=gnome-mime-image
-Selection=any
+Selection=notnone
 Extensions=jpg;png;gif;jpeg;
 Mimetypes=image/gif;image/jpeg;image/png;image/bmp;
 #EscapeSpaces=true

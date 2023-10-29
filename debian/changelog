@@ -1,3 +1,16 @@
+hamonikr-system (7.3.2) stable; urgency=medium
+
+  [Kevin Kim]
+  * Add new nemo action
+   - Convert video file to gif image
+   - Vscode open when none selection
+  * Fixed convert image to pdf
+   - Changed selection to notnone
+  * Add Screen Recoding applet
+  * Add Sync applet
+
+ -- HamoniKR <pkg@hamonikr.org>  Sun, 29 Oct 2023 14:52:42 +0900
+
 hamonikr-system (7.3.1) stable; urgency=medium
 
   [Kevin Kim]

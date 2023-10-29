@@ -19,6 +19,10 @@ if [ -f "/etc/hamonikr/info" ] ; then
     for src in $(ls /usr/share/hamonikr/nemo/actions/*.nemo_action); do
         cp $src $TARGET_DIR
     done
+    # action script (script must be *.sh extension)
+    for src in $(ls /usr/share/hamonikr/nemo/actions/*.sh); do
+        cp $src $TARGET_DIR
+    done    
     # log "Updated nemo actions in /usr/share/nemo/actions"
     echo "Updated nemo actions in /usr/share/nemo/actions"
 

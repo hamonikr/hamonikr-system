@@ -1,0 +1,36 @@
+[Nemo Action]
+
+#############################################
+#### DEBUGGING:
+####
+#### Run Nemo in debug mode using with
+###  NEMO_DEBUG set to include 'Actions'
+####
+#### i.e.    $ nemo --quit
+####         $ NEMO_DEBUG=Actions nemo --debug
+#############################################
+
+# Standard tokens that can be used in the Name, Comment (tooltip) and Exec fields:
+#
+# %U - insert URI list of selection
+# %F - insert path list of selection
+# %P - insert path of parent (current) directory
+# %f or %N (deprecated) - insert display name of first selected file
+# %p - insert display name of parent directory
+# %D - insert device path of file (i.e. /dev/sdb1)
+# %e - insert display name of first selected file with the extension stripped
+# %% - insert a literal percent sign, don't treat the next character as a token
+# %X - insert the XID for the NemoWindow this action is being activated in.
+Active=true
+
+Name=Convert Video to _Gif
+Name[ko]=선택한 파일을 GIF로 변환(_G)
+Comment=Convert %N to gif image
+Comment[ko]=선택한 파일 %N 을 움직이는 GIF 이미지로 변환 합니다
+Exec=<video2gif.sh "%F">
+Icon-Name=application-x-krita
+Selection=s
+Extensions=webm;mp4;mkv;flv;avi;mov;
+Dependencies=ffmpeg;
+#Conditions=desktop;
+
