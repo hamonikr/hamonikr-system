@@ -42,8 +42,12 @@ filename=$(basename -- "$1")
 extension="${filename##*.}"
 filename_noext="${filename%.*}"
 
+# Get the directory of the input file
+input_dir=$(dirname -- "$1")
+# Set the output file path to be in the same directory as the input file
+output_file="${input_dir}/${filename_noext}.gif"
+
 # Check if output file already exists
-output_file="${filename_noext}.gif"
 if [ -f "$output_file" ]; then
     if [ -n "$DISPLAY" ]; then
         if [[ $(locale | grep LANG) == *"ko_KR"* ]]; then
