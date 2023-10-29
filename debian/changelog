@@ -1,3 +1,10 @@
+hamonikr-system (7.3.3) stable; urgency=medium
+
+  [Kevin Kim]
+  * Moved applets, extension, search provider to hamonikr-theme
+
+ -- HamoniKR <pkg@hamonikr.org>  Sun, 29 Oct 2023 15:45:54 +0900
+
 hamonikr-system (7.3.2) stable; urgency=medium
 
   [Kevin Kim]
