@@ -1,0 +1,22 @@
+#!/usr/bin/python3
+
+import os
+import syslog
+
+# bug fix : /etc/grub.d/30_os-prober: 328: printf: %2$: invalid directive
+
+try:
+    if os.path.exists("/etc/hamonikr/info"):
+
+        # Change update-grub environment to LC_ALL=C
+        if os.path.exists("/usr/sbin/update-grub"):
+            # First, delete found line for prevent duplicate edit
+            os.system("sed -i.bak '/exec grub-mkconfig/d' /usr/sbin/update-grub")
+            os.system("echo 'LC_ALL=C exec grub-mkconfig -o /boot/grub/grub.cfg \"$@\"' >> /usr/sbin/update-grub")
+
+            syslog.syslog("Adjust update-grub : Fixed os-probe locale problem\n")
+        
+    else:
+        syslog.syslog("Coudln't find /etc/hamonikr/info file")
+except Exception as detail:
+    syslog.syslog("Coudln't adjust /usr/sbin/update-grub : %s" % detail)
