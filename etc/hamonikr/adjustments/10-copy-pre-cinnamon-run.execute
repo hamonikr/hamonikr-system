@@ -1,0 +1,30 @@
+#!/bin/bash
+# default group setting, when create new user
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+source /etc/os-release
+
+if [ "X$ID_LIKE" = "Xubuntu" ]; then
+  
+  if [ -f "/etc/hamonikr/info" ] ; then
+  
+    if [ -f "/usr/share/hamonikr/pre-cinnamon-run/cinnamon-session-cinnamon" ] ; then
+
+        cp /usr/share/hamonikr/pre-cinnamon-run/cinnamon-session-cinnamon /usr/bin/cinnamon-session-cinnamon
+        chmod +x /usr/bin/cinnamon-session-cinnamon
+        
+        echo "Updated pre cinnamon cmd"
+    fi
+  fi
+
+fi
