@@ -1,0 +1,4 @@
+#!/bin/sh
+. /usr/local/bin/pre-cinnamon-run.sh
+exec cinnamon-session --session cinnamon "$@"
+
