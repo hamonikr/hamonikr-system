@@ -15,6 +15,7 @@ Package: hamonikr-system
 Architecture: all
 Depends: ${misc:Depends},
          imagemagick-6-common,
+         ffmpeg,
          xdotool
 Replaces: hamonikr-themes         
 Recommends: spacefm,

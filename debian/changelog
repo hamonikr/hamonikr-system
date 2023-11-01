@@ -1,3 +1,21 @@
+hamonikr-system (7.3.9) stable; urgency=medium
+
+  [Kevin Kim]
+  * Update depend section
+   - Add ffmpeg for recording applet
+  * Update latest cinnamon translation
+   - recording applet
+
+ -- HamoniKR <pkg@hamonikr.org>  Wed, 01 Nov 2023 15:44:08 +0900
+
+hamonikr-system (7.3.8) stable; urgency=medium
+
+  [Kevin Kim]
+  * Update apt autoremove pkg list
+   - Change after upgrade test
+
+ -- HamoniKR <pkg@hamonikr.org>  Wed, 01 Nov 2023 13:54:40 +0900
+
 hamonikr-system (7.3.7) stable; urgency=medium
 
   [Kevin Kim]
