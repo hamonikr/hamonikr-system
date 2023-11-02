@@ -1,3 +1,10 @@
+hamonikr-system (7.4.1) stable; urgency=medium
+
+  [Kevin Kim]
+  * Fixed update manager can't run
+
+ -- HamoniKR <pkg@hamonikr.org>  Thu, 02 Nov 2023 14:44:27 +0900
+
 hamonikr-system (7.4.0) stable; urgency=medium
 
   [Kevin Kim]

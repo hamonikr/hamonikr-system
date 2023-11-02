@@ -1,5 +1,6 @@
 exec /usr/share/applications/naver-whale.desktop /usr/bin/naver-whale-stable %U --password-store=basic
 exec /usr/share/applications/com.github.maoschanz.drawing.desktop drawing --new-tab
+exec /usr/share/applications/mintupdate.desktop mintupdate
 hide /usr/share/applications/mintwelcome.desktop
 hide /usr/share/applications/hamonikr-community.desktop
 hide /usr/share/applications/debian-uxterm.desktop
