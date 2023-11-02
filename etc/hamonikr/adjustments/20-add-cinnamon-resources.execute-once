@@ -14,9 +14,9 @@ err() {
 
 if [ -f "/etc/hamonikr/info" ] ; then
 
-    if [ -d /usr/share/cinnamon ] ; then
-        # /usr/share/cinnamon/ 디렉토리 내 파일 개수 확인
-        file_count=$(find /usr/share/cinnamon -mindepth 1 -maxdepth 1 | wc -l)
+    if [ -d /usr/share/hamonikr/cinnamon ] ; then
+        # /usr/share/hamonikr/cinnamon/ 디렉토리 내 파일 개수 확인
+        file_count=$(find /usr/share/hamonikr/cinnamon -mindepth 1 -maxdepth 1 | wc -l)
         
         # 파일이 하나 이상 있을 때만 작업 수행
         if [ $file_count -gt 0 ]; then

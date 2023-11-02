@@ -1,3 +1,10 @@
+hamonikr-system (7.4.5) stable; urgency=medium
+
+  [Kevin Kim]
+  * Fixed wrong path when copy custom cinnamon resources
+
+ -- HamoniKR <pkg@hamonikr.org>  Thu, 02 Nov 2023 21:54:32 +0900
+
 hamonikr-system (7.4.4) stable; urgency=medium
 
   [Kevin Kim]
