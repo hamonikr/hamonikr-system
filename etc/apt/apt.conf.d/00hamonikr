@@ -1,37 +1,46 @@
 # Settings specific to HamoniKR
+# 기본 데스크톱 환경을 구성하는 패키지는 자동으로 제거되지 않도록 설정
 APT
 {
   NeverAutoRemove
   {
-        "^hamonikr*";
-        "^hamonikr-desktop-base*";
         "^cinnamon-desktop-environment*";
-        "^hamonikr-desktop-environment*";
-        "libreoffice-hwp2odt";
-        "^nemo-compare*";
-        "^nemo-image-converter*";
-        "^numlockx*";
-        "^shutter*";
-        "^xpad*";
-        "^asbru-cm*";
-        "^hardinfo*";
-        "^gprename*";
-        "^nimf*";
-        "^libnimf*";
-        "^albert*";
-        "^plank*";
-        "^boot-select*";
         "^cinnamon*";
-        "^stacer*";
-        "^unalz*";
-        "^neofetch*";
-        "^qt-fsarchiver*";
-        "^spacefm*";
-        "^xdotool*";
-        "main";
+        "^hamonikr-desktop-base*";
+        "^hamonikr-desktop-environment*";
+        "^hamonikr*";
+        "albert*";
+        "asbru-cm*";
+        "balena-etcher";
+        "boot-select*";
+        "gprename";
+        "grub2-theme-kumkang*"
         "hamonikr-zsh";
-        "samba";
+        "hardinfo*";
+        "language-pack-gnome-ko-base";
+        "language-pack-gnome-ko";
+        "language-pack-ko-base";
+        "language-pack-ko";
+        "libnimf*";
+        "libreoffice-hwp2odt";
+        "lollypop";
+        "main";
+        "nemo-compare*";
         "nemo-filename-repairer";
+        "nemo-image-converter*";
+        "neofetch*";
+        "nimf*";
+        "numlockx*";
+        "plank*";
+        "plymouth-theme-kumkang";
+        "qt-fsarchiver*";
+        "samba";
+        "shutter*";
+        "spacefm*";
+        "stacer*";
+        "unalz*";
+        "ventoy";
+        "xdotool*";
+        "xpad*";
   };
-
 };
