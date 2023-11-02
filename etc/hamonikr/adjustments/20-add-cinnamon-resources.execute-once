@@ -15,8 +15,18 @@ err() {
 if [ -f "/etc/hamonikr/info" ] ; then
 
     if [ -d /usr/share/cinnamon ] ; then
-        cp -ar /usr/share/hamonikr/cinnamon/* /usr/share/cinnamon
+        # /usr/share/cinnamon/ 디렉토리 내 파일 개수 확인
+        file_count=$(find /usr/share/cinnamon -mindepth 1 -maxdepth 1 | wc -l)
+        
+        # 파일이 하나 이상 있을 때만 작업 수행
+        if [ $file_count -gt 0 ]; then
+            cp -ar /usr/share/hamonikr/cinnamon/* /usr/share/cinnamon
+            # log "Update cinnamon resources in /usr/share/cinnamon"
+            echo "Update cinnamon resources in /usr/share/cinnamon"
+        else
+            # log "No files in /usr/share/cinnamon to update"
+            echo "No files in /usr/share/cinnamon to update"
+        fi
     fi
-    # log "Update cinnamon resources in /usr/share/cinnamon"
-    echo "Update cinnamon resources in /usr/share/cinnamon"
 fi
+  

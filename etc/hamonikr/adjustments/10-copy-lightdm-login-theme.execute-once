@@ -26,7 +26,8 @@ fi
 # lightdm login mouse cursor
 if [ -f "/usr/share/hamonikr/etc/lightdm/index.theme" ] ; then
 
-    cp -f /usr/share/hamonikr/etc/lightdm/index.theme /usr/share/icons/default/index.theme
+    # 심볼릭 링크를 따라가서 최종 대상에 파일 복사
+    cp -fL /usr/share/hamonikr/etc/lightdm/index.theme /usr/share/icons/default/index.theme
 
     echo "Update /usr/share/icons/default/index.theme"
 fi

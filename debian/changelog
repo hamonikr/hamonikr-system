@@ -1,3 +1,12 @@
+hamonikr-system (7.4.3) stable; urgency=medium
+
+  [Kevin Kim]
+  * Fixed adjustment scripts error message
+   - copy cinnamon resource
+   - copy lightdm login theme
+
+ -- HamoniKR <pkg@hamonikr.org>  Thu, 02 Nov 2023 21:17:24 +0900
+
 hamonikr-system (7.4.2) stable; urgency=medium
 
   [Kevin Kim]
