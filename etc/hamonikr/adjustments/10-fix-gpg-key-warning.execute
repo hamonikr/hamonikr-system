@@ -1,0 +1,31 @@
+#!/usr/bin/python3
+
+import os
+import syslog
+import subprocess
+
+# Fix gpg key warning when apt-get update cmd
+
+try:
+    if os.path.exists("/etc/hamonikr/info"):
+
+        # # apt-get update 명령 실행
+        # try:
+        #     update_output = subprocess.check_output(['sudo', 'apt-get', 'update', '-y'], stderr=subprocess.STDOUT, universal_newlines=True)
+        # except subprocess.CalledProcessError as e:
+        #     update_output = e.output
+
+        # # gpg 오류 메시지 검색
+        # error_message = "Key is stored in legacy trusted.gpg keyring" in update_output
+
+        # # gpg 오류 메시지 탐지 및 처리
+        # if error_message:
+        #     os.system("cp /etc/apt/trusted.gpg /etc/apt/trusted.gpg.d/")
+        #     syslog.syslog("Fixed gpg key warning\n")
+
+        # Too long time for apt-get update result, so just copy
+        os.system("cp /etc/apt/trusted.gpg /etc/apt/trusted.gpg.d/")
+        syslog.syslog("Fixed gpg key warning\n")
+
+except Exception as detail:
+    syslog.syslog("Coudln't fix gpg key warning : %s" % detail)
