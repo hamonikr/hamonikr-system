@@ -1,44 +1,64 @@
 ## hamonikr-system
+
 이 패키지는 하모니카OS의 기본 환경을 구성하는 필수 패키지입니다.
 
-하모니카 환경을 사용하고 싶지 않은 경우, 
+## 기능
 
-`/etc/hamonikr/hamonikrSystem.conf` 파일에서 
+### 하모니카 시스템 서비스 비활성화:
 
-다음과 같이 설정하여 시스템 전역에서 하모니카 시스템 서비스를 구동하지 않을 수 있습니다.
+* 위치: /etc/hamonikr/hamonikrSystem.conf
+* 설정: [global] 섹션에서 enable = False
 
+### 경량화 모드:
+
+* 설정: /etc/hamonikr/hamonikrSystem.conf에서 minimal = True
+* 제외 프로그램/프로세스 목록: /usr/share/hamonikr/hamonikr-min/killapps, /usr/share/hamonikr/hamonikr-min/killps
+* 복원: minimal = False로 설정 후 시스템 재시작
+
+## 주요 구성 요소
+
+### 디렉토리 및 파일:
+* /etc/hamonikr, /etc/hamonikr/apt, /etc/hamonikr/adjustments 등
+* /usr/lib/hamonikr/hamonikr-system, /usr/local/bin 등
+
+### 서비스: hamonikr-system.service
+* APT pinning: /etc/apt/apt.conf.d/00hamonikr, /etc/apt/preferences.d/hamonikr.pref
+
+### 배포본 정보 파일
+* /etc/hamonikr/info, /etc/hamonikr/lsb-release, /etc/hamonikr/os-release, /usr/lib/os-release
+
+### SSH 터미널 정보
+* /etc/hamonikr/issue, /etc/hamonikr/issue.net
+
+## 개발자를 위한 지침
+
+### 시스템 전역 변경
+* 방법: /etc/hamonikr/adjustments 내 파일 수정
+## hamonikr-system
+
+이 패키지는 하모니카OS의 기본 환경을 구성하는 필수 패키지입니다.
+
+## 기능
+
+### 하모니카 시스템 서비스 비활성화:
+
+* 위치: `/etc/hamonikr/hamonikrSystem.conf`
+* 설정: [global] 섹션에서 enable = False
+
+### 경량화 모드:
+
+* 설정: /etc/hamonikr/hamonikrSystem.conf에서 minimal = True
 ```
 [global]
 enable = False
 ```
 
-### 하모니카 OS 경령화
-
-보다 적은 리소스를 사용하는 환경이 필요하다면 
-
-`/etc/hamonikr/hamonikrSystem.conf` 파일에서 
-
-다음과 같은 옵션을 사용할 수 있습니다.
-
-다음과 같이 `minimal = True` 로 설정하면 원하지 않는 서비스를 구동하지 않을 수 있습니다.
-
-```
-[global]
-minimal = True
-```
-
- * 구동에서 제외할 프로그램 목록 : `/usr/share/hamonikr/hamonikr-min/killapps`
-
- * 구동에서 제외할 프로세스 목록 : `/usr/share/hamonikr/hamonikr-min/killps`
-
-
-원래 하모니카 OS의 상태로 시스템을 변경하려면 `minimal = False` 로 변경하신 후 시스템을 재시작 하세요.
-
+* 제외 프로그램/프로세스 목록: /usr/share/hamonikr/hamonikr-min/killapps, /usr/share/hamonikr/hamonikr-min/killps
+* 복원: minimal = False로 설정 후 시스템 재시작
 
 ## 주요 구성 요소
 
-### Structure
-
+### 디렉토리 및 파일:
 - debian : 패키지 빌드
 - etc/hamonikr : 하모니카OS 정보
 - etc/hamonikr/apt : apt pinning
@@ -51,33 +71,30 @@ minimal = True
 - usr/local/bin : 데스크톱 테마 적용 프로그램 (update-dconf-setting)
 - share : 하모니카OS 구동에 필요한 리소스
 
-### 하모니카 시스템 서비스
-
+### 시스템 서비스
 - hamonikr-system.service
 
 ### APT pinning
-
 - etc/apt/apt.conf.d/00hamonikr
 - etc/apt/preferences.d/hamonikr.pref
 
 ### 하모니카 배포본 정보
-
 - /etc/hamonikr/info
 - /etc/hamonikr/lsb-release
 - /etc/hamonikr/os-release
 - /usr/lib/os-release
 
 ### ssh 터미널 접속시 보여줄 정보
-
 - /etc/hamonikr/issue
 - /etc/hamonikr/issue.net
 
-## For Developer
+## 개발자를 위한 지침
 
-설정을 변경하는 것은 `시스템 전역적으로 root 권한으로 해야하는 일`과 `개별 사용자의 환경에서 해야 하는 일`이 구분되어야 합니다.
-반드시 아래의 방법을 준수하세요.
+### 시스템 전역 변경
+* 방법: /etc/hamonikr/adjustments 내 파일 수정
 
-### `시스템 전역적으로 root 권한으로 해야하는 일` 을 변경하는 방법
+### 파일 유형:
+.execute, .execute-once, .overwrite, .preserve, .menu
 
 etc/hamonikr/adjustments 안에 수정을 원하는 파일을 작성하면 시스템 시작시 적용됩니다.
 
@@ -95,12 +112,39 @@ etc/hamonikr/adjustments 안에 수정을 원하는 파일을 작성하면 시�
     categories /usr/shar/applications/libreoffice-draw.desktop Office;
     ```
 
+### 프로그램 메뉴 카테고리
 [Category](https://specifications.freedesktop.org/menu-spec/latest/apa.html) :
 AudioVideo / Audio / Video / Development / Education / Game / Graphics / Network
 / Office / Science / Settings / System / Utility
 
-#### 시스템 전역 변경사항 디버깅
-실행 기록은 /var/log/hamonikr-system.log 파일에 기록되며 아래와 같은 내용이 남습니다.
+
+### 개별 사용자 환경 변경
+* 실행: /etc/xdg/autostart/hamonikr-user-env.desktop → /usr/local/bin/set-user-env
+* 로그: $HOME/.hamonikr/log/set-user-env.log
+* 복원 명령: set-user-env restore
+
+### 디버깅
+
+#### 각 실행 파일 로그 : $HOME/.hamonikr/log/ 내 실행파일명.log
+
+각 실행 파일 로그는 $HOME/.hamonikr/log/ 경로에 실행파일명.log 파일로 기록되며 아래와 같은 내용이 남습니다.
+```
+2022-10-11_12:47_16 set-user-env : Started...
+2022-10-11_12:47_16 set-user-env : Succeed backup from previous settings.
+2022-10-11_12:47_16 set-user-env : Update hamonikr default logo setting
+2022-10-11_12:47_16 set-user-env : Deleted cache
+2022-10-11_12:47_16 set-user-env : Copy applets
+2022-10-11_12:47_16 set-user-env : Update default terminal settings
+2022-10-11_12:47_16 set-user-env : Update default nimf settings
+2022-10-11_12:47_16 set-user-env : update search provider settings
+2022-10-11_12:47_16 set-user-env : Update hamonikr community link icon
+2022-10-11_12:47_16 set-user-env : Created set-user-env.done file
+2022-10-11_13:23_02 set-user-env : Started...
+```
+
+#### 서비스 로그 파일 /var/log/hamonikr-system.log 또는 /var/log/syslog
+
+서비스 활동 로그는 /var/log/hamonikr-system.log 파일에 기록되며 아래와 같은 내용이 남습니다.
 ```
 --------------------
 Execution time: 0:00:00.657935
@@ -115,36 +159,4 @@ Skipped:
   /usr/share/applications/firefox.desktop
   /usr/share/applications/xed.desktop
   /usr/share/cups/data/default-testpage.pdf
-```
-
-또는
-
-/var/log/syslog 안에서 hamonikr-system 로그를 확인할 수도 있습니다.
-
-### `개별 사용자의 환경에서 해야 하는 일` 을 변경하는 방법
-
-데스크톱 환경으로 진입하면 `/etc/xdg/autostart/hamonikr-user-env.desktop` 파일이 실행되고, 
-실제 수정은 `/usr/local/bin/set-user-env` 파일이 사용자 환경 설정을 적용합니다.
-사용자 환경이 적용된 로그파일은 `HOME/.hamonikr/log/set-user-env.log` 파일을 확인하세요. 
-
-이전 환경으로 복원하시려면 아래와 같이 터미널에 입력하세요.
-
-```
-set-user-env restore
-```
-
-#### 개별 사용자 변경사항 디버깅
-실행 기록은 $HOME/.hamonikr/log/ 경로에 실행파일명.log 파일로 기록되며 아래와 같은 내용이 남습니다.
-```
-2022-10-11_12:47_16 set-user-env : Started...
-2022-10-11_12:47_16 set-user-env : Succeed backup from previous settings.
-2022-10-11_12:47_16 set-user-env : Update hamonikr default logo setting
-2022-10-11_12:47_16 set-user-env : Deleted cache
-2022-10-11_12:47_16 set-user-env : Copy applets
-2022-10-11_12:47_16 set-user-env : Update default terminal settings
-2022-10-11_12:47_16 set-user-env : Update default nimf settings
-2022-10-11_12:47_16 set-user-env : update search provider settings
-2022-10-11_12:47_16 set-user-env : Update hamonikr community link icon
-2022-10-11_12:47_16 set-user-env : Created set-user-env.done file
-2022-10-11_13:23_02 set-user-env : Started...
 ```
