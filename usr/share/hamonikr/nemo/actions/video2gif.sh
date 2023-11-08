@@ -25,15 +25,17 @@ display_error() {
     fi
 }
 
+
 # Check if ffmpeg is installed
 if ! command -v ffmpeg &> /dev/null; then
     display_error "ffmpeg is not installed. Please install it by running 'apt install ffmpeg'" "ffmpeg가 설치되지 않았습니다. 'apt install ffmpeg'를 실행하여 설치해 주세요."
     exit 1
 fi
 
+
 # Check if input file exists
-if [ ! -f "${1}" ]; then
-    display_error "Input video file does not exist." "입력 비디오 파일이 존재하지 않습니다."
+if [[ ! -f "$1" ]] ; then
+    display_error "File name contains space or characters that cannot be processed." "파일 이름에 처리할 수 없는 공백이나 특수문자가 있습니다."
     exit 1
 fi
 
@@ -93,4 +95,3 @@ fi
 if [ -f "$palette" ]; then
     rm "$palette"
 fi
-

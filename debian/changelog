@@ -1,3 +1,10 @@
+hamonikr-system (7.4.6) stable; urgency=medium
+
+  [Kevin Kim]
+  * Changed absolute path in video2gif.sh
+
+ -- HamoniKR <pkg@hamonikr.org>  Wed, 08 Nov 2023 20:29:01 +0900
+
 hamonikr-system (7.4.5) stable; urgency=medium
 
   [Kevin Kim]
