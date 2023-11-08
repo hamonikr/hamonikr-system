@@ -81,17 +81,96 @@ if [ -f "$output_file" ]; then
     fi
 fi
 
+# Function to calculate and display progress
+display_progress() {
+    local pid=$1
+    local duration=$2
+    local logfile=$3
+
+    echo "0" > "$logfile" # Initialize log file
+
+    # Convert duration to seconds if it is not already
+    local total_seconds=$(echo "$duration" | awk '{print int($1)}')
+
+    # Define messages based on locale
+    local title_en="Converting..."
+    local title_ko="변환 중..."
+    local text_en="Converting video to GIF..."
+    local text_ko="비디오 파일을 GIF로 변환 중..."
+
+    local title="$title_en"
+    local text="$text_en"
+
+    # Check for Korean locale and update messages
+    if [[ $(locale | grep LANG) == *"ko_KR"* ]]; then
+        title="$title_ko"
+        text="$text_ko"
+    fi
+
+    # While ffmpeg is running
+    while kill -0 "$pid" 2>/dev/null; do
+        sleep 1
+        # Get the current time from the log file
+        local current_time=$(grep 'time=' "$logfile" | tail -1 | sed -e 's/.*time=\([^ ]*\).*/\1/')
+        # Convert current_time to seconds
+        local current_seconds=$(echo "$current_time" | awk -F: '{ if (NF == 1) {print $1} else if (NF == 2) {print $1*60 + $2} else {print $1*3600 + $2*60 + $3} }')
+        # Calculate the percentage
+        local percentage=$(echo "scale=2; $current_seconds / $total_seconds * 100" | bc -l)
+
+        # Update the progress bar
+        echo "$percentage"
+    done | zenity --progress --title="$title" --text="$text" --percentage=0 --auto-close --width=400
+}
+
+
+# Function to convert HH:MM:SS.xxx to seconds
+convert_to_seconds() {
+    local total_seconds=0
+    local hours_minutes_seconds=($1)
+    local split=(${hours_minutes_seconds//:/ })
+    total_seconds=$(echo "${split[0]} * 3600 + ${split[1]} * 60 + ${split[2]}" | bc)
+    echo "$total_seconds"
+}
 
 # Convert video to gif based on extension
-if [[ "$extension" == "avi" || "$extension" == "mp4" ]]; then
-    ffmpeg -i "$input_file" "${output_file}"
+if [[ "$extension" == "avi" || "$extension" == "mp4" || "$extension" == "mkv" || "$extension" == "webm" ]]; then
+    # ffmpeg -i "$input_file" "${output_file}"
+
+    # Extract duration using ffprobe
+    duration=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$input_file")
+
+    # Ensure that duration is a number
+    if ! [[ "$duration" =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
+        display_error "Failed to retrieve the duration of the video." "비디오 파일의 길이를 확인할 수 없습니다."
+        exit 1
+    fi
+
+    # Start ffmpeg conversion process in the background and get its PID
+    # If wish original scale use -1
+    ffmpeg -i "$input_file" -vf "fps=10,scale=800:-1:flags=lanczos" -c:v gif -y "$output_file" -progress /tmp/ffmpeg-progress.log &
+    pid=$!
+
+    # Display progress bar
+    display_progress "$pid" "$duration" "/tmp/ffmpeg-progress.log"
+
+    # Check if ffmpeg finished successfully
+    if [ $? -ne 0 ]; then
+        display_error "The conversion has been interrupted." "변환 작업이 중단되었습니다."
+        exit 1
+    fi 
+    
 else
     palette="/tmp/${filename_noext}_palette.png"
-    ffmpeg -y -i "$input_file" -vf fps=${3:-10},scale=${2:-600}:-1:flags=lanczos,palettegen "$palette"
+    ffmpeg -y -i "$input_file" -vf fps=${3:-10},scale=${2:-800}:-1:flags=lanczos,palettegen "$palette"
     ffmpeg -i "$input_file" -i "$palette" -filter_complex "fps=${3:-10},scale=${2:-600}:-1:flags=lanczos[x];[x][1:v]paletteuse" "${output_file}"
 fi
 
 # Remove the palette if it was generated
 if [ -f "$palette" ]; then
     rm "$palette"
+fi
+
+# Remove the ffmpeg progress log file
+if [ -f "/tmp/ffmpeg-progress.log" ]; then
+    rm -f /tmp/ffmpeg-progress.log
 fi
