@@ -37,13 +37,16 @@ if [ ! -f "${1}" ]; then
     exit 1
 fi
 
+# Convert the input file to an absolute path
+input_file="$(realpath "$1")"
+
 # Extract the filename without extension and the extension
-filename=$(basename -- "$1")
+filename=$(basename -- "$input_file")
 extension="${filename##*.}"
 filename_noext="${filename%.*}"
 
 # Get the directory of the input file
-input_dir=$(dirname -- "$1")
+input_dir=$(dirname -- "$input_file")
 # Set the output file path to be in the same directory as the input file
 output_file="${input_dir}/${filename_noext}.gif"
 
@@ -76,17 +79,18 @@ if [ -f "$output_file" ]; then
     fi
 fi
 
+
 # Convert video to gif based on extension
-if [[ "$extension" == "avi" ]]; then
-    ffmpeg -i "$1" "${output_file}"
+if [[ "$extension" == "avi" || "$extension" == "mp4" ]]; then
+    ffmpeg -i "$input_file" "${output_file}"
 else
-    ffmpeg -y -i "$1" -vf fps=${3:-10},scale=${2:-600}:-1:flags=lanczos,palettegen "${filename_noext}.png"
-    ffmpeg -i "$1" -i "${filename_noext}.png" -filter_complex "fps=${3:-10},scale=${2:-600}:-1:flags=lanczos[x];[x][1:v]paletteuse" "${output_file}"
+    palette="/tmp/${filename_noext}_palette.png"
+    ffmpeg -y -i "$input_file" -vf fps=${3:-10},scale=${2:-600}:-1:flags=lanczos,palettegen "$palette"
+    ffmpeg -i "$input_file" -i "$palette" -filter_complex "fps=${3:-10},scale=${2:-600}:-1:flags=lanczos[x];[x][1:v]paletteuse" "${output_file}"
 fi
 
-
 # Remove the palette if it was generated
-if [ -f "${filename_noext}.png" ]; then
-    rm "${filename_noext}.png"
+if [ -f "$palette" ]; then
+    rm "$palette"
 fi
 
