@@ -7,6 +7,23 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib
 
+import gettext
+import locale
+
+# 현재 스크립트의 디렉토리를 기준으로 번역 파일들의 경로를 설정합니다.
+current_dir = os.path.dirname(os.path.abspath(__file__))
+locale_path = os.path.join(current_dir, 'locale')
+# 사용할 언어를 설정합니다. 'ko_KR'은 한국어를 의미합니다.
+language = 'ko_KR.UTF8'
+locale.setlocale(locale.LC_ALL, language)
+locale.bindtextdomain('video2gif', locale_path)
+gettext.textdomain('video2gif')
+
+# 번역 함수를 가져옵니다.
+_ = gettext.gettext
+
+# 예시 사용: UI 요소의 레이블 설정
+label_text = _("Video to GIF")
 class Video2GIFConverter:
     def __init__(self):
         self.builder = Gtk.Builder()

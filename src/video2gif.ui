@@ -184,7 +184,7 @@
                             <property name="has-entry">True</property>
                             <items>
                               <item id="&lt;ID 입력&gt;">480</item>
-                              <item translatable="yes">640</item>
+                              <item>640</item>
                               <item>800</item>
                               <item>1024</item>
                               <item>1280</item>

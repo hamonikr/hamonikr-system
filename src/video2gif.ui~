@@ -38,14 +38,13 @@
             </child>
             <child>
               <object class="GtkButton" id="ok_btn">
-                <property name="label">gtk-apply</property>
+                <property name="label" translatable="yes">Convert</property>
                 <property name="use-action-appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="can-default">True</property>
                 <property name="receives-default">False</property>
                 <property name="use-underline">True</property>
-                <property name="use-stock">True</property>
                 <signal name="clicked" handler="on_convert_button_clicked" swapped="no"/>
               </object>
               <packing>
@@ -185,12 +184,12 @@
                             <property name="has-entry">True</property>
                             <items>
                               <item id="&lt;ID 입력&gt;">480</item>
-                              <item translatable="yes">640</item>
+                              <item>640</item>
                               <item>800</item>
                               <item>1024</item>
                               <item>1280</item>
                               <item>1920</item>
-                              <item translatable="yes">Original</item>
+                              <item>Original</item>
                             </items>
                             <child internal-child="entry">
                               <object class="GtkEntry" id="app_entry">
