@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-09 16:10+0900\n"
+"POT-Creation-Date: 2023-11-09 22:17+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,38 +17,62 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: video2gif.ui:9
+#: video2gif.py:59
+msgid "Unsupported file extensions"
+msgstr ""
+
+#: video2gif.py:71
+msgid "No file selected. Please select a file."
+msgstr ""
+
+#: video2gif.py:118
+msgid "Conversion completed successfully."
+msgstr ""
+
+#: video2gif.py:134
+msgid "Error"
+msgstr ""
+
+#: video2gif.py:146
+msgid "Info"
+msgstr ""
+
+#: video2gif.ui.h:1
 msgid "Video to GIF"
 msgstr ""
 
-#: video2gif.ui:41
+#: video2gif.ui.h:2
 msgid "Convert"
 msgstr ""
 
-#: video2gif.ui:72
+#: video2gif.ui.h:3
 msgid "<b>Video to GIF</b>"
 msgstr ""
 
-#: video2gif.ui:99
+#: video2gif.ui.h:4
 msgid "<b>Select Video File</b>"
 msgstr ""
 
-#: video2gif.ui:126
+#: video2gif.ui.h:5
 msgid "<b>Image Size</b>"
 msgstr ""
 
-#: video2gif.ui:164
+#: video2gif.ui.h:6
 msgid "Select a size:"
 msgstr ""
 
-#: video2gif.ui:210
+#: video2gif.ui.h:7
+msgid "Original"
+msgstr ""
+
+#: video2gif.ui.h:8
 msgid "pixels"
 msgstr ""
 
-#: video2gif.ui:243
+#: video2gif.ui.h:9
 msgid "<b>Use palette</b>"
 msgstr ""
 
-#: video2gif.ui:281
+#: video2gif.ui.h:10
 msgid "It takes more time, but the resulting image quality is better."
 msgstr ""
