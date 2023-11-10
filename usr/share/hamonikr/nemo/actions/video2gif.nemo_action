@@ -27,12 +27,10 @@ Name=Convert Video to _Gif
 Name[ko]=선택한 파일을 GIF로 변환(_G)
 Comment=Convert %N to gif image
 Comment[ko]=선택한 파일 %N 을 움직이는 GIF 이미지로 변환 합니다
-Exec=<video2gif.sh "%F">
-# show convert process in terminal
-# Exec=gnome-terminal --working-directory=%P -- /bin/bash -c '/usr/share/nemo/actions/video2gif.sh "%F"'
+Exec=<video2gif "%F">
 Icon-Name=application-x-krita
 Selection=s
-Extensions=webm;mp4;mkv;flv;avi;mov;
-Dependencies=ffmpeg;
+Extensions=webm;mp4;mkv;flv;avi;
+Dependencies=ffmpeg;video2gif;
 #Conditions=desktop;
 
