@@ -1,3 +1,11 @@
+hamonikr-system (7.5.0) stable; urgency=medium
+
+  [Kevin Kim]
+  * Update video2gif nemo action
+   - Fixed wrong filename parameter in video2gif
+
+ -- HamoniKR <pkg@hamonikr.org>  Fri, 10 Nov 2023 20:49:25 +0900
+
 hamonikr-system (7.4.9) stable; urgency=medium
 
   [Kevin Kim]
