@@ -19,10 +19,17 @@ if [ -f "/etc/hamonikr/info" ] ; then
     for src in $(ls /usr/share/hamonikr/nemo/actions/*.nemo_action); do
         cp $src $TARGET_DIR
     done
+    
     # action script (script must be *.sh extension)
     for src in $(ls /usr/share/hamonikr/nemo/actions/*.sh); do
         cp $src $TARGET_DIR
-    done    
+    done
+
+    # Remove hamonikr 6.0 version file
+    if [ -f "/usr/share/nemo/actions/setting-display.nemo_action" ] ; then
+      rm -f /usr/share/nemo/actions/setting-display.nemo_action
+    fi
+    
     # log "Updated nemo actions in /usr/share/nemo/actions"
     echo "Updated nemo actions in /usr/share/nemo/actions"
 
