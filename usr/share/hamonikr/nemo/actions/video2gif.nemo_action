@@ -30,7 +30,7 @@ Comment[ko]=선택한 파일 %N 을 움직이는 GIF 이미지로 변환 합니�
 Exec=video2gif %F
 Icon-Name=application-x-krita
 Selection=s
-Extensions=webm;mp4;mkv;flv;avi;
+Extensions=webm;mp4;mkv;flv;avi;mov;
 Dependencies=ffmpeg;video2gif;
 #Conditions=desktop;
 
