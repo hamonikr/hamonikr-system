@@ -1,3 +1,10 @@
+hamonikr-system (7.5.2) stable; urgency=medium
+
+  [Kevin Kim]
+  * Fix smartpanel workspaces text unhide bug
+
+ -- HamoniKR <pkg@hamonikr.org>  Tue, 28 Nov 2023 10:36:03 +0900
+
 hamonikr-system (7.5.1) stable; urgency=medium
 
   [Kevin Kim]
