@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Fix smartpanel workspaces text unhide bug
+# 
+
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+    # https://github.com/linuxwacom/libwacom/issues/281
+    # https://www.youtube.com/watch?v=-TBT_l6qwj0
+    # https://bugzilla.redhat.com/show_bug.cgi?id=799667
+    # https://bugzilla.gnome.org/show_bug.cgi?id=672917
+    if [ -f "/usr/share/libwacom/intuos-s-p3-wl.tablet" ] ; then
+        sed -i.bak '/Styli=@intuospt3;$/s/Styli=@intuospt3;/Styli=@intuospt3;0xffffe;/g' /usr/share/libwacom/intuos-s-p3-wl.tablet
+    fi
+
+fi

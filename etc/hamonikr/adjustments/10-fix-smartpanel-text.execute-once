@@ -17,17 +17,6 @@ err() {
 
 if [ -f "/etc/hamonikr/info" ] ; then
 
-    if which systemctl >/dev/null 2>&1 ; then
-        # if exist service
-        if systemctl --all --type service | grep -q "apport";then
-            if [ $(systemctl is-enabled apport) = "enabled" ] ; then
-                systemctl disable apport
-            fi
-        fi
-
-        systemctl daemon-reload
-    fi    
-
     # https://github.com/linuxmint/cinnamon-spices-extensions/issues/461
     if [ -f "/usr/share/cinnamon/extensions/smart-panel@mohammad-sn/extension.js" ] ; then
         sed -i.bak '/showWorkspaceOSD : function() {/,/if (global.settings.get_boolean("workspace-osd-visible")) {/c\
