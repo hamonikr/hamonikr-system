@@ -1,0 +1,48 @@
+#!/bin/bash
+# TO-DO : 모든 lightdm-settings 의 설정값을 slick-greeter.conf 에서 파싱하여 ukui greeter에 적용해야 함
+# 현재 numlock 설정 상태만 읽어와서 처리
+
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+  if [ -f "/etc/lightdm/slick-greeter.conf" ] && [ -f "/etc/lightdm/ukui-greeter.conf" ]; then
+
+    # 파일에서 'activate-numlock=' 줄을 찾아서 값을 읽어옵니다.
+    numlock_value=$(grep 'activate-numlock=' /etc/lightdm/slick-greeter.conf | cut -d'=' -f2)
+
+    if [ "$numlock_value" == "true" ]; then
+        # 'true'일 때
+        if [ -f "/usr/bin/numlockx" ]; then
+          numlockx on
+        fi
+        # 'numlock=' 줄을 삭제 후 true 입력
+        sed -i '/numlock=/d' /etc/lightdm/slick-greeter.conf
+        echo "numlock=true" >> /etc/lightdm/slick-greeter.conf        
+        echo "Numlock is set to true."
+    else
+        # 'false'일 때
+        if [ -f "/usr/bin/numlockx" ]; then
+          numlockx off
+        fi        
+        # 'numlock=' 줄을 삭제 후 false 입력
+        sed -i '/numlock=/d' /etc/lightdm/slick-greeter.conf
+        echo "numlock=false" >> /etc/lightdm/slick-greeter.conf        
+        echo "Numlock is set to false."
+    fi
+
+    echo "Updated numlock setting"
+
+  fi
+
+fi

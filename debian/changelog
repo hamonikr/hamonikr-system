@@ -1,3 +1,11 @@
+hamonikr-system (7.5.4) stable; urgency=medium
+
+  [Kevin Kim]
+  * Fix numlockx bug
+   - https://hamonikr.org/hamoni_board/131009
+
+ -- HamoniKR <pkg@hamonikr.org>  Sat, 16 Dec 2023 00:15:56 +0900
+
 hamonikr-system (7.5.3) stable; urgency=medium
 
   [Kevin Kim]
