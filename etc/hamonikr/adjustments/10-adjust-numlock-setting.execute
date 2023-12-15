@@ -27,8 +27,8 @@ if [ -f "/etc/hamonikr/info" ] ; then
           numlockx on
         fi
         # 'numlock=' 줄을 삭제 후 true 입력
-        sed -i '/numlock=/d' /etc/lightdm/slick-greeter.conf
-        echo "numlock=true" >> /etc/lightdm/slick-greeter.conf        
+        sed -i '/numlock=/d' /etc/lightdm/ukui-greeter.conf
+        echo "numlock=true" >> /etc/lightdm/ukui-greeter.conf
         echo "Numlock is set to true."
     else
         # 'false'일 때
@@ -36,8 +36,8 @@ if [ -f "/etc/hamonikr/info" ] ; then
           numlockx off
         fi        
         # 'numlock=' 줄을 삭제 후 false 입력
-        sed -i '/numlock=/d' /etc/lightdm/slick-greeter.conf
-        echo "numlock=false" >> /etc/lightdm/slick-greeter.conf        
+        sed -i '/numlock=/d' /etc/lightdm/ukui-greeter.conf
+        echo "numlock=false" >> /etc/lightdm/ukui-greeter.conf
         echo "Numlock is set to false."
     fi
 

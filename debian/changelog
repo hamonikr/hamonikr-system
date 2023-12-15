@@ -1,10 +1,12 @@
 hamonikr-system (7.5.4) stable; urgency=medium
 
   [Kevin Kim]
-  * Fix numlockx bug
+  * Fixed numlock setting bug
    - https://hamonikr.org/hamoni_board/131009
+   - Add 10-adjust-numlock-setting.execute for lightdm
+   - Add hamonikr-numlock.desktop for user level
 
- -- HamoniKR <pkg@hamonikr.org>  Sat, 16 Dec 2023 00:15:56 +0900
+ -- HamoniKR <pkg@hamonikr.org>  Sat, 16 Dec 2023 01:03:49 +0900
 
 hamonikr-system (7.5.3) stable; urgency=medium
 

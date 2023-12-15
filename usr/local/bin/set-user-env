@@ -316,6 +316,26 @@ case "$1" in
             fi
         fi         
       ;;
+    updatenumlock)
+        if [ -f "/etc/lightdm/slick-greeter.conf" ] && [ -f "/etc/lightdm/ukui-greeter.conf" ]; then
+
+            # 파일에서 'activate-numlock=' 줄을 찾아서 값을 읽어옵니다.
+            numlock_value=$(grep 'activate-numlock=' /etc/lightdm/slick-greeter.conf | cut -d'=' -f2)
+
+            if [ "$numlock_value" == "true" ]; then
+                if [ -f "/usr/bin/numlockx" ]; then
+                    numlockx on
+                    log "numlockx on"
+                fi
+            else
+                if [ -f "/usr/bin/numlockx" ]; then
+                    numlockx off
+                    log "numlockx off"
+                fi
+            fi
+
+        fi
+      ;;      
     *)
         echo "This program required patameter."
         echo "Usage : set-user-env apply | restore"

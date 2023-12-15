@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=Numlock Settings
+Name[ko]=Numlock 모드 설정
+Comment=Apply user numlock settings
+Comment[ko]=사용자 Numlock 설정 적용
+Exec=set-user-env updatenumlock
+Terminal=false
+Type=Application
+StartupNotify=false
