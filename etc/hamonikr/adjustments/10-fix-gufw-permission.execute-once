@@ -22,7 +22,7 @@ if [ -f "/etc/hamonikr/info" ] ; then
 
   # /lib 경로의 권한이 755가 아닌 경우 변경
   if [ "$current_perms" != "755" ]; then
-      chmod 755 /lib
+      sudo chmod 755 /lib
       echo "Fixed permission on /lib"
   fi
 
