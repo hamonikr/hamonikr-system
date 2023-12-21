@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Fix gufw permission when start program
+# required chmod 755 /lib
+
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+  # /lib 경로의 현재 권한을 확인
+  current_perms=$(stat -c '%a' /lib)
+
+  # /lib 경로의 권한이 755가 아닌 경우 변경
+  if [ "$current_perms" != "755" ]; then
+      chmod 755 /lib
+      echo "Fixed permission on /lib"
+  fi
+
+fi
