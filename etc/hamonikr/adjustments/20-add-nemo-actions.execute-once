@@ -21,9 +21,11 @@ if [ -f "/etc/hamonikr/info" ] ; then
     done
     
     # action script (script must be *.sh extension)
-    for src in $(ls /usr/share/hamonikr/nemo/actions/*.sh); do
-        cp $src $TARGET_DIR
-    done
+    if [ -n "$(find /usr/share/hamonikr/nemo/actions/ -maxdepth 1 -name '*.sh' -print -quit)" ]; then
+        for src in /usr/share/hamonikr/nemo/actions/*.sh; do
+            cp $src $TARGET_DIR
+        done
+    fi
 
     # Remove hamonikr 6.0 version file
     if [ -f "/usr/share/nemo/actions/setting-display.nemo_action" ] ; then

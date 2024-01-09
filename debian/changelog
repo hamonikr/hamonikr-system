@@ -1,3 +1,12 @@
+hamonikr-system (7.5.6) stable; urgency=medium
+
+  [Kevin Kim]
+  * Fixed hoffice nimf library problem
+   - Added libqt5im-nimf.so
+   - Because of legacy method not working on hamonikr 7.0
+
+ -- HamoniKR <pkg@hamonikr.org>  Tue, 09 Jan 2024 13:26:44 +0900
+
 hamonikr-system (7.5.5) stable; urgency=medium
 
   [Kevin Kim]
