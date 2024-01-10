@@ -50,8 +50,9 @@ if [ -f "/etc/hamonikr/info" ] ; then
             # Bug : /opt/hnc/hoffice11/Bin/hword: error while loading shared libraries: libssl.so.1.1
             if [ ! -f "/usr/lib/x86_64-linux-gnu/libssl.so.1.1" ] ; then
                 # https://stackoverflow.com/questions/72133316/libssl-so-1-1-cannot-open-shared-object-file-no-such-file-or-directory
-                wget http://nz2.archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.20_amd64.deb -O /tmp/libssl1.1.deb
-                sudo dpkg -i /tmp/libssl1.1.deb
+                # wget http://nz2.archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.20_amd64.deb -O /tmp/libssl1.1.deb
+                # sudo dpkg -i /tmp/libssl1.1.deb
+                sudo apt-get install libssl1.1
 
                 echo "Fixed hword 2022 beta libssl problem"
             fi

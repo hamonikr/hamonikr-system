@@ -1,3 +1,11 @@
+hamonikr-system (7.5.8) stable; urgency=medium
+
+  [Kevin Kim]
+  * Fixed hword 2022 beta libssl problem
+   - install libssl1.1 from ubuntu 22.04 repo
+   
+ -- HamoniKR <pkg@hamonikr.org>  Wed, 10 Jan 2024 16:51:32 +0900
+
 hamonikr-system (7.5.7) stable; urgency=medium
 
   [Kevin Kim]
