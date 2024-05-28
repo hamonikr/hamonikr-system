@@ -1,11 +1,9 @@
 #!/bin/bash
 #
-# Setting default user desktop enviroment for HamoniKR OS
+# Setting default user desktop environment for HamoniKR OS
 # 
 # 이 프로그램은 하모니카OS 사용자의 기본 환경을 설정하는 프로그램 이기 때문에,
-# root 권한이 아니라 사용자 권한으로 실행되어야 합니다. Since this program is a
-# program that sets the basic environment of HamoniKR OS users, it should be
-# executed as user rights, not root privileges. 
+# root 권한이 아니라 사용자 권한으로 실행되어야 합니다.
 #
 # Usage : set-user-env apply | restore
 # 
@@ -15,329 +13,222 @@
 [ "$EUID" = 0 ] && echo "Run with user authority. (EUID : $EUID)" && exit
 
 log() {
-    # stdout
     echo "$@"
-    # write to logfile
     mkdir -p $HOME/.hamonikr/log
-    exec 3>&1 1>>$HOME/.hamonikr/log/${0##*/}.log 2>&1 && echo "$(date +%Y-%m-%d_%H:%M_%S) ${0##*/} : $@"
-    # stdout reset
+    exec 3>&1 1>>$HOME/.hamonikr/log/${0##*/}.log 2>&1
+    echo "$(date +%Y-%m-%d_%H:%M_%S) ${0##*/} : $@"
     exec 1>&3 3>&-
 }
 
 setup_qt_scale() {
-    # Ajdust scaling setting for albert, stacer
-    # gnome : scaling-factor
-    # cinnamon : active-display-scale
-    # 
-    # ref : https://github.com/albertlauncher/albert/issues/573
-    # ref : https://unix.stackexchange.com/questions/596887/how-to-scale-the-resolution-display-of-the-desktop-and-or-applications
-    
-    if [ "$XDG_CURRENT_DESKTOP" = "" ]
-    then
-    desktop=$(echo "$XDG_DATA_DIRS" | sed 's/.*\(xfce\|kde\|gnome\).*/\1/')
-    else
-    desktop=$XDG_CURRENT_DESKTOP
-    fi
+    local desktop
+    desktop=${XDG_CURRENT_DESKTOP,,}
+    [ -z "$desktop" ] && desktop=$(echo "$XDG_DATA_DIRS" | sed 's/.*\(xfce\|kde\|gnome\).*/\1/')
     desktop=${desktop,,}  # convert to lower case
 
+    local scale
     if [[ $desktop == *"cinnamon"* ]]; then
         echo "Cinnamon : $desktop"
-        SCALE=$(gsettings list-recursively | grep active-display-scale | cut -d" " -f3) 
-        if [ ! -z "$SCALE" ]; then
-            echo "export QT_AUTO_SCREEN_SET_FACTOR=0" >> ~/.xprofile
-            echo "export QT_AUTO_SCREEN_SCALE_FACTORS=$SCALE" >> ~/.xprofile
-            echo "export QT_SCALE_FACTOR=$SCALE" >> ~/.xprofile
-            echo "export QT_FONT_DPI=96" >> ~/.xprofile
-            
-            log "Update Cinnamon QT scale variable in ~/.xprofile" 
-        fi    
+        scale=$(gsettings list-recursively | grep active-display-scale | cut -d" " -f3) 
     elif [[ $desktop == *"gnome"* ]]; then
         echo "GNOME : $desktop"
-        SCALE=$(gsettings list-recursively | grep "org.gnome.desktop.interface text-scaling-factor" | cut -d" " -f3) 
-        if [ ! -z "$SCALE" ]; then
-            echo "export QT_AUTO_SCREEN_SET_FACTOR=0" >> ~/.xprofile
-            echo "export QT_AUTO_SCREEN_SCALE_FACTORS=$SCALE" >> ~/.xprofile
-            echo "export QT_SCALE_FACTOR=$SCALE" >> ~/.xprofile
-            echo "export QT_FONT_DPI=96" >> ~/.xprofile
+        scale=$(gsettings list-recursively | grep "org.gnome.desktop.interface text-scaling-factor" | cut -d" " -f3)
+    fi
 
-            log "Update GNOME QT scale variable in ~/.xprofile"
-        fi    
-    else
-        continue
-    fi    
+    if [ ! -z "$scale" ]; then
+        echo "export QT_AUTO_SCREEN_SET_FACTOR=0" >> ~/.xprofile
+        echo "export QT_AUTO_SCREEN_SCALE_FACTORS=$scale" >> ~/.xprofile
+        echo "export QT_SCALE_FACTOR=$scale" >> ~/.xprofile
+        echo "export QT_FONT_DPI=96" >> ~/.xprofile
+        log "Update $desktop QT scale variable in ~/.xprofile" 
+    fi
+}
+
+set_keyboard_shortcuts() {
+    local shortcuts=(
+        "shutter: ['<Shift><Primary><Alt>p']: 'shutter -s': '특정영역 화면캡처'"
+        "shutter: ['<Primary><Alt>p']: 'shutter -w': '선택한 윈도우 화면캡처'"
+        "fsearch: ['<Primary><Shift>f']: 'fsearch': '데스크탑 검색'"
+        "ask_openai: ['<Primary>q']: '/usr/local/bin/ask_openai': 'Ask OpenAI'"
+    )
+
+    local custom_list="['custom0'"
+    local count=0
+
+    for shortcut in "${shortcuts[@]}"; do
+        IFS=': ' read -r -a s <<< "$shortcut"
+        if command -v ${s[0]} &> /dev/null || [ -f ${s[2]} ]; then
+            gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop.keybindings/custom-keybindings/custom$count/ binding "${s[1]}"
+            gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop.keybindings.custom-keybindings/custom$count/ command "${s[2]}"
+            gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop.keybindings.custom-keybindings/custom$count/ name "${s[3]}"
+            custom_list="$custom_list,'custom$count'"
+            count=$((count + 1))
+        fi
+    done
+
+    custom_list="$custom_list]"
+    gsettings set org.cinnamon.desktop.keybindings custom-list "$custom_list"
+    log "Updated keyboard shortcut settings"
+}
+
+handle_upgrade_from_hanla_to_taebaek() {
+    if [ -f /var/log/taebaekupdate.dummy ]; then
+        log "Upgrade from hanla to taebaek troubleshooting"
+        
+        local files_to_delete=(
+            "$HOME/.hamonikr/themes"
+            "$HOME/.hamonikr/backup_dconf"
+            "$HOME/.hamonikr/default_dconf"
+            "$HOME/.hamonikr/default_dconf.done"
+            "$HOME/.hamonikr/default_dconf.log"
+            "$HOME/.hamonikr/hamonikr-terminal.dconf"
+            "$HOME/.hamonikr/update-dconf-setting.log"
+            "$HOME/.config/plank/dock1/launchers/desktop.dockitem"
+            "$HOME/.config/plank/dock1/launchers/io.github.celluloid_player.Celluloid.dockitem"
+            "$HOME/.config/plank/dock1/launchers/mintinstall.dockitem"
+            "$HOME/.config/plank/dock1/launchers/naver-whale.dockitem"
+            "$HOME/.config/plank/dock1/launchers/nemo.dockitem"
+            "$HOME/.config/plank/dock1/launchers/org.gnome.Termianl.dockitem"
+            "$HOME/.config/plank/dock1/launchers/plank-dconf"
+            "$HOME/.config/plank/dock1/launchers/stacer.dockitem"
+            "$HOME/.config/plank/dock1/launchers/system-shutdown.dockitem"
+            "$HOME/.config/plank/dock1/launchers/trash.dockitem"
+            "$HOME/.config/plank/dock1/launchers/xed.dockitem"
+            "$HOME/.cinnamon/configs/*"
+            "$HOME/.cinnamon/spices.cache"
+        )
+        
+        for file in "${files_to_delete[@]}"; do
+            rm -rf $file
+        done
+        
+        cp -af /etc/skel/.config/autostart/hamonikr-theme.desktop $HOME/.config/autostart/hamonikr-theme.desktop
+        cp -af /etc/skel/.config/autostart/plank.desktop $HOME/.config/autostart/plank.desktop
+        
+        [ -f ~/.config/user-dirs.dirs ] && source ~/.config/user-dirs.dirs
+        [ -z $XDG_DESKTOP_DIR ] && XDG_DESKTOP_DIR="$HOME/Desktop"
+        if [ -f $XDG_DESKTOP_DIR/hamonikrorg.desktop ]; then
+            rm $XDG_DESKTOP_DIR/hamonikrorg.desktop
+            cp -af /usr/share/applications/hamonikr-community.desktop $XDG_DESKTOP_DIR/hamonikr-community.desktop
+            chmod 755 $XDG_DESKTOP_DIR/hamonikr-community.desktop
+        fi
+        
+        [ -f $HOME/.hamonikr/theme/hamonikr-theme-setting.done ] && rm $HOME/.hamonikr/theme/hamonikr-theme-setting.done
+        hamonikr-theme-setting macstyle
+        
+        [ ! -z $(pidof plank | grep '[0-9]') ] && killall plank &>/dev/null
+        
+        sleep 1
+    fi
+    touch $HOME/.hamonikr/taebaekupdate.done
 }
 
 case "$1" in
     apply|default)
-
-        # Upgrade from hanla to taebaek troubleshooting
         if [ ! -f "$HOME/.hamonikr/taebaekupdate.done" ]; then
-            if [ -f /var/log/taebaekupdate.dummy ]; then
-                log "Upgrade from hanla to taebaek troubleshooting"
-                
-                # delete old files
-                rm -rf $HOME/.hamonikr/themes
-                rm $HOME/.hamonikr/backup_dconf
-                rm $HOME/.hamonikr/default_dconf
-                rm $HOME/.hamonikr/default_dconf.done
-                rm $HOME/.hamonikr/default_dconf.log
-                rm $HOME/.hamonikr/hamonikr-terminal.dconf
-                rm $HOME/.hamonikr/update-dconf-setting.log
-                
-                # delete old user plank files
-                # File in the /etc/skel/plank~ path are deleted from rel_upgrade_root.py in hamonikr-update package.
-                rm $HOME/.config/plank/dock1/launchers/desktop.dockitem
-                rm $HOME/.config/plank/dock1/launchers/io.github.celluloid_player.Celluloid.dockitem
-                rm $HOME/.config/plank/dock1/launchers/mintinstall.dockitem
-                rm $HOME/.config/plank/dock1/launchers/naver-whale.dockitem
-                rm $HOME/.config/plank/dock1/launchers/nemo.dockitem
-                rm $HOME/.config/plank/dock1/launchers/org.gnome.Termianl.dockitem
-                rm $HOME/.config/plank/dock1/launchers/plank-dconf
-                rm $HOME/.config/plank/dock1/launchers/stacer.dockitem
-                rm $HOME/.config/plank/dock1/launchers/system-shutdown.dockitem
-                rm $HOME/.config/plank/dock1/launchers/trash.dockitem
-                rm $HOME/.config/plank/dock1/launchers/xed.dockitem
-
-                # delete old cinnamon setting & cache
-                rm -rf $HOME/.cinnamon/configs/*
-                rm $HOME/.cinnamon/spices.cache
-
-                # cp hamonikt-theme.desktop
-                cp -af /etc/skel/.config/autostart/hamonikr-theme.desktop $HOME/.config/autostart/hamonikr-theme.desktop
-                cp -af /etc/skel/.config/autostart/plank.desktop $HOME/.config/autostart/plank.desktop
-
-                # delete old community desktop & copy new community desktop
-                [ -f ~/.config/user-dirs.dirs ] && source ~/.config/user-dirs.dirs
-                [ -z $XDG_DESKTOP_DIR ] && XDG_DESKTOP_DIR="$HOME/Desktop"
-                if [ -f $XDG_DESKTOP_DIR/hamonikrorg.desktop ]; then
-                    rm $XDG_DESKTOP_DIR/hamonikrorg.desktop
-                    cp -af /usr/share/applications/hamonikr-community.desktop $XDG_DESKTOP_DIR/hamonikr-community.desktop
-                    chmod 755 $XDG_DESKTOP_DIR/hamonikr-community.desktop
-                fi
-                
-                # theme settings
-                if [ -f $HOME/.hamonikr/theme/hamonikr-theme-setting.done ]; then
-                    rm $HOME/.hamonikr/theme/hamonikr-theme-setting.done
-                fi
-                
-                hamonikr-theme-setting macstyle
-
-                # kill plank (Duplicate operation below), It often doesn't turn on.
-                [ ! -z $(pidof plank | grep '[0-9]') ] && killall plank &>/dev/null
-               
-                sleep 1
-            fi
-
-            touch $HOME/.hamonikr/taebaekupdate.done
+            handle_upgrade_from_hanla_to_taebaek
         fi
 
-        [ -f "$HOME/.hamonikr/set-user-env.done" ] && isrun="run" 
+        [ -f "$HOME/.hamonikr/set-user-env.done" ] && isrun="run"
 
         if [ x$isrun != "xrun" ] ; then
-
-            # backup previous env
             if [ ! -f $HOME/.hamonikr/backup_user_env.dconf ] ; then
                 dconf dump / > $HOME/.hamonikr/backup_user_env.dconf
-                if [ $? -eq 0 ] ; then
-                    log "Succeed backup from previous settings."
-                else
-                    log "Failed : Backup from previous settings."
-                fi
+                [ $? -eq 0 ] && log "Succeed backup from previous settings." || log "Failed: Backup from previous settings."
             fi
-            
-            # change menu icon to hamonikr logo
-            if [ -f "$HOME/.cinnamon/configs/menu@cinnamon.org/0.json" ] ; then 
+
+            if [ -f "$HOME/.cinnamon/configs/menu@cinnamon.org/0.json" ]; then 
                 sed -i 's/"value": "linuxmint-logo-ring-symbolic"/"value": "hamonikr"/g' $HOME/.cinnamon/configs/menu@cinnamon.org/0.json
                 log "Update hamonikr default logo setting"
             fi
-            if [ -f "$HOME/.config/cinnamon/spices/menu@cinnamon.org/0.json" ] ; then 
-                # changed path in linuxmint 21.2
+            if [ -f "$HOME/.config/cinnamon/spices/menu@cinnamon.org/0.json" ]; then 
                 sed -i.bak 's/"value": "hamonikr-menu"/"value": "hamonikr"/g' $HOME/.config/cinnamon/spices/menu@cinnamon.org/0.json
                 sed -i.bak 's/"value": "linuxmint-logo-ring-symbolic"/"value": "hamonikr"/g' $HOME/.config/cinnamon/spices/menu@cinnamon.org/0.json
                 log "Update hamonikr default logo setting"            
             fi            
 
-
-            # delete cache
             [ -d "$HOME/.cache" ] && rm -rf $HOME/.cache/* && log "Deleted cache"
 
-            # hamonikr-theme working part
-            # # copy applet to user home
-            # if [ -d "/home/$USER/.cinnamon/configs" ] ; then
-            #     cp -af /usr/share/cinnamon/applets/expo@cinnamon.org /home/$USER/.cinnamon/configs/
-            #     cp -af /usr/share/cinnamon/applets/scale@cinnamon.org /home/$USER/.cinnamon/configs/        
-            #     cp -af /usr/share/cinnamon/applets/user@cinnamon.org /home/$USER/.cinnamon/configs/                
-            #     cp -af /usr/share/cinnamon/applets/xrandr@cinnamon.org /home/$USER/.cinnamon/configs/
-            #     log "Copy applets"
-            # fi
-            # # changed path in linuxmint 21.2            
-            # if [ -d "/home/$USER/.config/cinnamon/spices" ] ; then
-            #     cp -af /usr/share/cinnamon/applets/expo@cinnamon.org /home/$USER/.config/cinnamon/spices/
-            #     cp -af /usr/share/cinnamon/applets/scale@cinnamon.org /home/$USER/.config/cinnamon/spices/        
-            #     cp -af /usr/share/cinnamon/applets/user@cinnamon.org /home/$USER/.config/cinnamon/spices/                
-            #     cp -af /usr/share/cinnamon/applets/xrandr@cinnamon.org /home/$USER/.config/cinnamon/spices/
-            #     log "Copy applets"
-            # fi            
-
-            # Albert Launcher Settings
-            if [ -d "/etc/skel/.config/albert" ] ; then
+            if [ -d "/etc/skel/.config/albert" ]; then
                 cp -af /etc/skel/.config/albert $HOME/.config/
-                if [ $? -eq 0 ] ; then
-                    log "Copy albert launcher settings" 
-                fi                  
+                [ $? -eq 0 ] && log "Copy albert launcher settings"
             fi
             
             source /etc/os-release
 
             if [ "X$ID_LIKE" = "Xubuntu" ]; then
-
-                # plank Settings When installed hamonikr-themes
-                if [ "$(dpkg-query -W --showformat='${db:Status-Status}' hamonikr-themes 2>&1)" = "installed" ] && \
-                    [ -d "/etc/skel/.config/plank" ] ; then
-
+                if [ "$(dpkg-query -W --showformat='${db:Status-Status}' hamonikr-themes 2>&1)" = "installed" ] && [ -d "/etc/skel/.config/plank" ]; then
                     [ ! -z $(pidof plank | grep '[0-9]') ] && killall plank &>/dev/null
                     rm -rf $HOME/.config/plank
                     cp -af /etc/skel/.config/plank $HOME/.config/
-                    [ -f /etc/skel/.config/autostart/plank.desktop ] && \
                     cp -af /usr/share/hamonikr-themes/etc/skel/.config/autostart/plank.desktop $HOME/.config/autostart/plank.desktop
                     dconf load /net/launchpad/plank/docks/ < /etc/skel/.config/plank/dock1/launchers/plank-dconf
                     [ -z $(pidof plank | grep '[0-9]') ] && plank & &>/dev/null
-                    if [ $? -eq 0 ] ; then
-                        log "Update HamoniKR OS plank Dock Settings." 
-                    fi
-                                
+                    [ $? -eq 0 ] && log "Update HamoniKR OS plank Dock Settings."
                 fi
-                
             fi
    
-            # gnome-terminal 설정
-            if [ -f /etc/hamonikr/templates/hamonikr-terminal.dconf ] ; then
+            if [ -f /etc/hamonikr/templates/hamonikr-terminal.dconf ]; then
                 dconf load /org/gnome/terminal/legacy/profiles:/:`gsettings list-recursively org.gnome.Terminal.ProfilesList | grep default | cut -d' ' -f3 | tr -d "'"`/ < /etc/hamonikr/templates/hamonikr-terminal.dconf
-                if [ $? -eq 0 ] ; then
-                    log "Update default terminal settings" 
-                fi                                                
+                [ $? -eq 0 ] && log "Update default terminal settings"
             fi
 
-            # nimf 입력기 설정
             if command -v nimf &> /dev/null ; then
                 im-config -n nimf
-                log "Update default nimf settings"   
-            fi
-            
-            # 단축키
-            if command -v shutter &> /dev/null ; then
-                if ! command -v fsearch &> /dev/null ; then
-                    log "update default keyboard shortcut settings for shutter"       
-                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ binding "['<Shift><Primary><Alt>p']"
-                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ command 'shutter -s'
-                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ name '특정영역 화면캡처'
-                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ binding "['<Primary><Alt>p']"
-                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ command 'shutter -w'
-                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ name '선택한 윈도우 화면캡처'
-                    gsettings set org.cinnamon.desktop.keybindings custom-list "['custom0','custom1']"
-                else
-                    log "update default keyboard shortcut settings for shutter and fsearch"              
-                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ binding "['<Shift><Primary><Alt>p']"
-                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ command 'shutter -s'
-                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ name '특정영역 화면캡처'
-                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ binding "['<Primary><Alt>p']"
-                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ command 'shutter -w'
-                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ name '선택한 윈도우 화면캡처'
-                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom2/ binding "['<Primary><Shift>f']"
-                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom2/ command 'fsearch'
-                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom2/ name '데스크탑 검색'
-                    gsettings set org.cinnamon.desktop.keybindings custom-list "['custom0','custom1','custom2']"
-                fi
-            else
-                if command -v fsearch &> /dev/null ; then    
-                    log "update default keyboard shortcut settings for fsearch"               
-                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ binding "['<Primary><Shift>f']"
-                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ command 'fsearch'
-                    gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ name '데스크탑 검색'
-                    gsettings set org.cinnamon.desktop.keybindings custom-list "['custom0']"
-                fi
+                log "Update default nimf settings"
             fi
 
-            # search provider   
-            if [ ! -d $HOME/.local/share/cinnamon/search_providers/google@hamonikr.org ] ; then
+            set_keyboard_shortcuts
+
+            if [ ! -d $HOME/.local/share/cinnamon/search_providers/google@hamonikr.org ]; then
                 cp -a /usr/share/cinnamon/search_providers/google@hamonikr.org $HOME/.local/share/cinnamon/search_providers/google@hamonikr.org
-                gsettings set org.cinnamon enabled-search-providers [\"google@hamonikr.org\"]
+                gsettings set org.cinnamon enabled-search-providers "[\"google@hamonikr.org\"]"
                 log "update search provider settings"
             fi
 
-            # fix asbru-cm font
-            if [ -f "$HOME/.config/asbru/asbru.yml" ] ; then
+            if [ -f "$HOME/.config/asbru/asbru.yml" ]; then
                 sed -i 's/Monospace/Hack Nerd Font Regular/g' $HOME/.config/asbru/asbru.yml
-                if [ $? -eq 0 ] ; then
-                    log "Update asbru font seting" 
-                fi                                
+                [ $? -eq 0 ] && log "Update asbru font setting"
             fi
 
-            # Desktop name
             [ -f ~/.config/user-dirs.dirs ] && source ~/.config/user-dirs.dirs
             [ -z $XDG_DESKTOP_DIR ] && XDG_DESKTOP_DIR="$HOME/Desktop"
             
-            # naver whale default browser
-            if [ "$(dpkg-query -W --showformat='${db:Status-Status}' naver-whale-stable 2>&1)" = "installed" ] ; then
-                # bug fix : [ defulat applications > web > firefox ] !need USER
+            if [ "$(dpkg-query -W --showformat='${db:Status-Status}' naver-whale-stable 2>&1)" = "installed" ]; then
                 xdg-settings set default-web-browser naver-whale.desktop
-
-                # https://wiki.archlinux.org/title/Xdg-utils
                 xdg-mime default naver-whale.desktop x-scheme-handler/https x-scheme-handler/http
             fi
 
-            # default Audio player
-            if [ "$(dpkg-query -W --showformat='${db:Status-Status}' lollypop 2>&1)" = "installed" ] ; then
+            if [ "$(dpkg-query -W --showformat='${db:Status-Status}' lollypop 2>&1)" = "installed" ]; then
                 xdg-mime default org.gnome.Lollypop.desktop application/ogg application/x-ogg application/x-ogm-audio audio/aac audio/mp4 audio/mpeg audio/mpegurl audio/ogg audio/vnd.rn-realaudio audio/vorbis audio/x-flac audio/x-mp3 audio/x-mpeg audio/x-mpegurl audio/x-ms-wma audio/x-musepack audio/x-oggflac audio/x-pn-realaudio audio/x-scpls audio/x-speex audio/x-vorbis audio/x-vorbis+ogg audio/x-wav x-content/audio-player audio/x-aac audio/m4a audio/x-m4a audio/mp3 audio/ac3 audio/flac application/xspf+xml audio/x-opus+ogg application/vnd.apple.mpegurl
             fi
 
-            # default Image viewer as pix
-            if [ "$(dpkg-query -W --showformat='${db:Status-Status}' pix 2>&1)" = "installed" ] ; then
+            if [ "$(dpkg-query -W --showformat='${db:Status-Status}' pix 2>&1)" = "installed" ]; then
                 xdg-mime default pix.desktop image/bmp image/jpeg image/gif image/png image/tiff image/x-bmp image/x-ico image/x-png image/x-pcx image/x-tga image/xpm image/svg+xml
-
             fi
-
-            # QT scale setting
-            # setup_qt_scale
 
             touch $HOME/.hamonikr/set-user-env.done
             log "Created set-user-env.done file"
-
         fi
       ;;
     restore|reset)
-
-        if [ -f "$HOME/.hamonikr/backup_user_env.dconf" ] ; then            
+        if [ -f "$HOME/.hamonikr/backup_user_env.dconf" ]; then
             dconf load / < $HOME/.hamonikr/backup_user_env.dconf
-            if [ $? -eq 0 ] ; then
-                log "Successful restored previous settings." 
-            else
-                log "Failed : Restore previous settings."
-            fi
-        fi         
+            [ $? -eq 0 ] && log "Successful restored previous settings." || log "Failed: Restore previous settings."
+        fi
       ;;
     updatenumlock)
         if [ -f "/etc/lightdm/slick-greeter.conf" ] && [ -f "/etc/lightdm/ukui-greeter.conf" ]; then
-
-            # 파일에서 'activate-numlock=' 줄을 찾아서 값을 읽어옵니다.
             numlock_value=$(grep 'activate-numlock=' /etc/lightdm/slick-greeter.conf | cut -d'=' -f2)
-
             if [ "$numlock_value" == "true" ]; then
-                if [ -f "/usr/bin/numlockx" ]; then
-                    numlockx on
-                    log "numlockx on"
-                fi
+                [ -f "/usr/bin/numlockx" ] && numlockx on && log "numlockx on"
             else
-                if [ -f "/usr/bin/numlockx" ]; then
-                    numlockx off
-                    log "numlockx off"
-                fi
+                [ -f "/usr/bin/numlockx" ] && numlockx off && log "numlockx off"
             fi
-
         fi
-      ;;      
+      ;;
     *)
-        echo "This program required patameter."
+        echo "This program required parameter."
         echo "Usage : set-user-env apply | restore"
       ;;
 esac

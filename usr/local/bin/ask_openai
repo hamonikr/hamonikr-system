@@ -1,0 +1,125 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
+import os
+import subprocess
+import sys
+import logging
+import configparser
+from pathlib import Path
+import json
+
+# Function to install a package if it's not already installed
+def install_package(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+# Ensure the required packages are installed
+try:
+    import requests
+except ImportError:
+    install_package('requests')
+    import requests
+
+try:
+    import pyperclip
+except ImportError:
+    install_package('pyperclip')
+    import pyperclip
+
+# Configure logging to log to the user's home directory
+log_file = os.path.join(os.path.expanduser("~"), 'ask_openai.log')
+logging.basicConfig(filename=log_file, level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# Function to show message using Zenity
+def show_message(title, text):
+    subprocess.run(['zenity', '--info', '--title', title, '--text', text])
+
+# Read API key from configuration file
+def read_api_key():
+    config_path = Path.home() / '.ask_openai.conf'
+    if not config_path.exists():
+        message = "Configuration file not found in the home directory."
+        logging.error(message)
+        show_message("Error", message)
+        raise FileNotFoundError(message)
+    
+    config = configparser.ConfigParser()
+    config.read(config_path)
+    return config.get('openai', 'api_key', fallback=None)
+
+api_key = read_api_key()
+
+# Function to get the content from the clipboard
+def get_clipboard_content():
+    try:
+        return pyperclip.paste()
+    except Exception as e:
+        logging.error(f"Error getting clipboard content: {e}")
+        return None
+
+# Function to query OpenAI API
+def query_openai(model, prompt, api_key):
+    try:
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {api_key}"
+        }
+        data = {
+            "model": model,
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": 4096
+        }
+        response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, data=json.dumps(data))
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Error querying OpenAI API: {e}")
+        return None
+
+# Check if the API key is set
+if not api_key:
+    message = "OpenAI API key is not set. Please set the API key in the configuration file."
+    if os.getenv("LANG", "en")[:2] == "ko":
+        message = "OpenAI API 키가 설정되지 않았습니다. API 키를 환경 변수로 설정해 주세요."
+    logging.error(message)
+    show_message("Error", message)
+    raise EnvironmentError(message)
+
+# Get the content from the clipboard
+clipboard_content = get_clipboard_content()
+if clipboard_content is None or clipboard_content.strip() == "":
+    message = "Clipboard is empty!"
+    if os.getenv("LANG", "en")[:2] == "ko":
+        message = "클립보드가 비어 있습니다!"
+    logging.error(message)
+    show_message("Error", message)
+    raise ValueError(message)
+
+# Define the pre-defined prompt
+if os.getenv("LANG", "en")[:2] == "ko":
+    predefined_prompt = "다음 문장이 프로그램 소스코드인 경우 코드에 대한 설명을 해주고, 오류 메세지인 경우 오류 해결방법을 알려주세요. 모든 응답은 한국어로 해주세요.\n"
+else:
+    predefined_prompt = "If the following text is a program source code, please explain the code, and if it is an error message, please provide a solution. Please respond in English.\n"
+
+# Combine the predefined prompt with the clipboard content
+full_prompt = f"{predefined_prompt}{clipboard_content}"
+logging.debug(f"Full prompt: {full_prompt}")
+
+# Model to use
+# model = "gpt-3.5-turbo"
+model = "gpt-4o"
+
+# Query OpenAI API
+response = query_openai(model, full_prompt, api_key)
+if response is None:
+    logging.error("No response from OpenAI API.")
+    show_message("Error", "No response from OpenAI API.")
+    raise RuntimeError("No response from OpenAI API.")
+
+# Extract and log the response text
+response_text = response.get('choices', [{}])[0].get('message', {}).get('content', 'No response text available.')
+logging.debug(f"OpenAI Response: {response_text}")
+
+# Show the response text in a Zenity dialog
+show_message("OpenAI Response", response_text)
+
