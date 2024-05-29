@@ -8,6 +8,7 @@ import logging
 import configparser
 from pathlib import Path
 import json
+import re
 
 # Function to install a package if it's not already installed
 def install_package(package):
@@ -32,8 +33,10 @@ logging.basicConfig(filename=log_file, level=logging.DEBUG, format='%(asctime)s 
 
 # Function to show message using Zenity
 def show_message(title, text):
-    subprocess.run(['zenity', '--info', '--title', title, '--text', text])
-
+    # subprocess.run(['zenity', '--info', '--title', title, '--text', text, '--width=600', '--height=400'])
+    proc = subprocess.Popen(['zenity', '--text-info', '--title', title, '--width=600', '--height=400'], stdin=subprocess.PIPE, text=True)
+    proc.communicate(input=text)
+    
 # Read API key from configuration file
 def read_api_key():
     config_path = Path.home() / '.ask_openai.conf'
@@ -107,10 +110,11 @@ logging.debug(f"Full prompt: {full_prompt}")
 
 # Model to use
 # model = "gpt-3.5-turbo"
-model = "gpt-4o"
+model = "gpt-4"
 
 # Query OpenAI API
 response = query_openai(model, full_prompt, api_key)
+
 if response is None:
     logging.error("No response from OpenAI API.")
     show_message("Error", "No response from OpenAI API.")
@@ -118,8 +122,16 @@ if response is None:
 
 # Extract and log the response text
 response_text = response.get('choices', [{}])[0].get('message', {}).get('content', 'No response text available.')
+
+# Remove formatting characters like ** and ``` and other language codes
+response_text = re.sub(r'\*\*', '', response_text)
+response_text = re.sub(r'```[a-z]*', '', response_text)
+response_text = response_text.replace('```', '').replace('`', '')
+
 logging.debug(f"OpenAI Response: {response_text}")
 
-# Show the response text in a Zenity dialog
-show_message("OpenAI Response", response_text)
-
+# Show the response text in a Zenity dialog with scrolling
+if os.getenv("LANG", "en")[:2] == "ko":
+    show_message("AI 응답", response_text)
+else:
+    show_message("OpenAI Response", response_text)
