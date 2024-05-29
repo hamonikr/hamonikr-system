@@ -83,7 +83,7 @@ def query_openai(model, prompt, api_key):
 if not api_key:
     message = "OpenAI API key is not set. Please set the API key in the configuration file."
     if os.getenv("LANG", "en")[:2] == "ko":
-        message = "OpenAI API 키가 설정되지 않았습니다. API 키를 환경 변수로 설정해 주세요."
+        message = "API 키가 설정되지 않았습니다. ~/.ask_openai.conf 파일에 API 키를 설정해 주세요."
     logging.error(message)
     show_message("Error", message)
     raise EnvironmentError(message)
@@ -117,7 +117,11 @@ response = query_openai(model, full_prompt, api_key)
 
 if response is None:
     logging.error("No response from OpenAI API.")
-    show_message("Error", "No response from OpenAI API.")
+    if os.getenv("LANG", "en")[:2] == "ko":
+        show_message("Error", "OpenAI 응답이 없습니다. API키가 사용가능한지 확인해주세요.")
+    else:
+        show_message("Error", "No response from OpenAI API. Check your API key.")
+    
     raise RuntimeError("No response from OpenAI API.")
 
 # Extract and log the response text
