@@ -49,7 +49,7 @@ set_keyboard_shortcuts() {
         "shutter: ['<Shift><Primary><Alt>p']: 'shutter -s': '특정영역 화면캡처'"
         "shutter: ['<Primary><Alt>p']: 'shutter -w': '선택한 윈도우 화면캡처'"
         "fsearch: ['<Primary><Shift>f']: 'fsearch': '데스크탑 검색'"
-        "ask_openai: ['<Primary>q']: '/usr/local/bin/ask_openai': 'Ask OpenAI'"
+        "ask_openai: ['<Primary><Alt>a']: '/usr/local/bin/ask_openai': 'Ask OpenAI'"
     )
 
     local custom_list="['custom0'"
