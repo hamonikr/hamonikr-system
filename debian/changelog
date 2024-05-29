@@ -3,7 +3,7 @@ hamonikr-system (7.5.9) stable; urgency=medium
   [Kevin Kim]
   * Add ask_openai command
    - using gpt4o engine
-   - Ctrl+q shortcut
+   - Ctrl+Alt+a shortcut
   * Refactoring set-user-env cmd
    
  -- HamoniKR <pkg@hamonikr.org>  Wed, 29 May 2024 01:07:29 +0900
