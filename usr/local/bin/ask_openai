@@ -95,7 +95,7 @@ if clipboard_content is None or clipboard_content.strip() == "":
     if os.getenv("LANG", "en")[:2] == "ko":
         message = "클립보드가 비어 있습니다!"
     logging.error(message)
-    # show_message("Error", message)
+    show_message("Error", message)
     raise ValueError(message)
 
 # Define the pre-defined prompt
