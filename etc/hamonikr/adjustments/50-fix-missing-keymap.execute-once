@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# https://www.claudiokuenzler.com/blog/1257/how-to-fix-missing-keymaps-debian-ubuntu-localectl-failed-read-list
+
+log() {
+  echo "$@"
+  logger -p user.notice -t "$(basename $0)" "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t "$(basename $0)" [ERROR] "$@"
+}
+
+if [ -f "/etc/hamonikr/info" ]; then
+  # install keymaps from kbd upstream project
+  wget -q https://mirrors.edge.kernel.org/pub/linux/utils/kbd/kbd-2.5.1.tar.gz -O /tmp/kbd-2.5.1.tar.gz && \
+  tar -xzf /tmp/kbd-2.5.1.tar.gz -C /tmp/ && \
+  cp -Rp /tmp/kbd-2.5.1/data/keymaps/* /usr/share/keymaps/
+
+  rm -rf /tmp/kbd-2.5.1*
+
+  if [ $? -eq 0 ]; then
+    log "Installed keymap from kbd upstream"
+  else
+    err "Failed to install keymap from kbd upstream"
+  fi
+fi

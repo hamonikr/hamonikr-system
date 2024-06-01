@@ -1,3 +1,10 @@
+hamonikr-system (7.6.0) stable; urgency=medium
+
+  [Kevin Kim]
+  * Install keymaps from kbd upstream project
+   
+ -- HamoniKR <pkg@hamonikr.org>  Sun, 02 Jun 2024 01:25:59 +0900
+
 hamonikr-system (7.5.9) stable; urgency=medium
 
   [Kevin Kim]
