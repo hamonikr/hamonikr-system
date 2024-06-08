@@ -1,0 +1,30 @@
+name: Create Release on Tag
+
+on:
+  push:
+    branches: [ "master" ]
+    tags:
+      - 'v*'  # 태그 이름이 'v'로 시작하는 경우
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          path: hamonikr-system
+
+      - name: Create archives
+        run: |
+          tar --exclude=".*" -czvf ${{ github.ref_name }}.tar.gz hamonikr-system
+          zip -r ${{ github.ref_name }}.zip hamonikr-system -x "*/.*"
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          generate_release_notes: true
+          files: |
+            ${{ github.ref_name }}.tar.gz
+            ${{ github.ref_name }}.zip
