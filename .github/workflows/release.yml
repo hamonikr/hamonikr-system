@@ -3,8 +3,7 @@ name: Create Release on Tag
 on:
   push:
     branches: [ "master" ]
-    tags:
-      - 'v*'  # 태그 이름이 'v'로 시작하는 경우
+    tags: '*'
 
 jobs:
   release:
