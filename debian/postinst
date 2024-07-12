@@ -55,8 +55,8 @@ case "$1" in
         /usr/lib/hamonikr/hamonikr-system/hamonikr-adjust.py
 
         # Source is not available in the sh shell
-        . /etc/lsb-release || true
-        . /etc/os-release || true
+        [ -f /etc/lsb-release ] && . /etc/lsb-release 
+        [ -f /etc/os-release ] && . /etc/os-release 
 
         # Apply HamoniKR OS infomation in system
         [ ! -d "/etc/hamonikr/.bak" ] && mkdir -p "/etc/hamonikr/.bak"
@@ -66,20 +66,22 @@ case "$1" in
         [ -f /etc/os-release ] && cp /etc/os-release /etc/hamonikr/.bak/os-release.bak
 
         # OS check
-        if [ "X$ID_LIKE" = "Xubuntu" ] || [ "X$ID_LIKE"="Xubuntu debian" ] ; then
+        if [ "X$ID_LIKE" = "Xubuntu" ] || [ "X$ID_LIKE" = "Xubuntu debian" ]; then
             echo "postinst... ubuntu"
             [ -f /etc/hamonikr/issue ] && cp -f /etc/hamonikr/issue /etc/issue
             [ -f /etc/hamonikr/issue.net ] &&  cp -f /etc/hamonikr/issue.net /etc/issue.net
             [ -f /etc/hamonikr/lsb-release ] &&  cp -f /etc/hamonikr/lsb-release /etc/lsb-release
             [ -f /etc/hamonikr/os-release ] &&  cp -f /etc/hamonikr/os-release /etc/os-release
             [ -f /etc/hamonikr/os-release ] &&  cp -f /etc/hamonikr/os-release /usr/lib/os-release
-        elif [ "X$ID_LIKE" = "Xdebian" ]; then
+        elif [ "X$ID_LIKE" = "Xdebian" ] || [ "X$ID" = "Xdebian" ]; then
             echo "postinst... debian"
             [ -f /etc/hamonikr/issue ] && cp -f /etc/hamonikr/issue /etc/issue
             [ -f /etc/hamonikr/issue.net ] &&  cp -f /etc/hamonikr/issue.net /etc/issue.net
             [ -f /etc/hamonikr/lsb-release-debian ] &&  cp -f /etc/hamonikr/lsb-release-debian /etc/lsb-release
             [ -f /etc/hamonikr/os-release-debian ] &&  cp -f /etc/hamonikr/os-release-debian /etc/os-release
             [ -f /etc/hamonikr/os-release-debian ] &&  cp -f /etc/hamonikr/os-release-debian /usr/lib/os-release
+        else
+            echo "Can not detect OS code. It seems other OS."
         fi
 
     ;;
