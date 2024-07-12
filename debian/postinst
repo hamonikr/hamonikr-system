@@ -55,8 +55,8 @@ case "$1" in
         /usr/lib/hamonikr/hamonikr-system/hamonikr-adjust.py
 
         # Source is not available in the sh shell
-        . /etc/lsb-release
-        . /etc/os-release
+        . /etc/lsb-release || true
+        . /etc/os-release || true
 
         # Apply HamoniKR OS infomation in system
         [ ! -d "/etc/hamonikr/.bak" ] && mkdir -p "/etc/hamonikr/.bak"
