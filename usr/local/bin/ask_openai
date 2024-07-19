@@ -10,22 +10,25 @@ from pathlib import Path
 import json
 import re
 
-# Function to install a package if it's not already installed
-def install_package(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+# Function to install a package in a virtual environment
+def install_package_in_venv(package, venv_dir):
+    subprocess.check_call([os.path.join(venv_dir, 'bin', 'python'), "-m", "pip", "install", package])
 
-# Ensure the required packages are installed
-try:
-    import requests
-except ImportError:
-    install_package('requests')
-    import requests
+# Ensure the required packages are installed in a virtual environment
+def ensure_package_installed(package, venv_dir):
+    try:
+        subprocess.check_call([os.path.join(venv_dir, 'bin', 'python'), "-c", f"import {package}"])
+    except subprocess.CalledProcessError:
+        install_package_in_venv(package, venv_dir)
 
-try:
-    import pyperclip
-except ImportError:
-    install_package('pyperclip')
-    import pyperclip
+# Create a virtual environment if it does not exist
+venv_dir = Path.home() / '.ask_openai_venv'
+if not venv_dir.exists():
+    subprocess.check_call([sys.executable, "-m", "venv", str(venv_dir)])
+
+# Ensure the required packages are installed in the virtual environment
+ensure_package_installed('requests', venv_dir)
+ensure_package_installed('pyperclip', venv_dir)
 
 # Configure logging to log to the user's home directory
 log_file = os.path.join(os.path.expanduser("~"), 'ask_openai.log')
@@ -33,10 +36,9 @@ logging.basicConfig(filename=log_file, level=logging.DEBUG, format='%(asctime)s 
 
 # Function to show message using Zenity
 def show_message(title, text):
-    # subprocess.run(['zenity', '--info', '--title', title, '--text', text, '--width=600', '--height=400'])
     proc = subprocess.Popen(['zenity', '--text-info', '--title', title, '--width=600', '--height=400'], stdin=subprocess.PIPE, text=True)
     proc.communicate(input=text)
-    
+
 # Read API key from configuration file
 def read_api_key():
     config_path = Path.home() / '.ask_openai.conf'
@@ -55,6 +57,7 @@ api_key = read_api_key()
 # Function to get the content from the clipboard
 def get_clipboard_content():
     try:
+        import pyperclip
         return pyperclip.paste()
     except Exception as e:
         logging.error(f"Error getting clipboard content: {e}")
@@ -63,6 +66,7 @@ def get_clipboard_content():
 # Function to query OpenAI API
 def query_openai(model, prompt, api_key):
     try:
+        import requests
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Bearer {api_key}"
@@ -109,9 +113,7 @@ full_prompt = f"{predefined_prompt}{clipboard_content}"
 logging.debug(f"Full prompt: {full_prompt}")
 
 # Model to use
-# model = "gpt-3.5-turbo"
-# model = "gpt-4"
-model = "gpt-4o"
+model = "gpt-4"
 
 # Query OpenAI API
 response = query_openai(model, full_prompt, api_key)
