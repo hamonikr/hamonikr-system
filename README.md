@@ -4,6 +4,17 @@
 
 ## 기능
 
+### GPT 플러그인 기능 활성화
+
+클립보드의 내용을 기반으로 ChatGPT 응답을 하는 기능을 사용하기 위해서는
+
+아래의 형식으로 구성 파일(`~/.ask_openai.conf`)을 작성하는 것이 필요:
+
+```
+[openai]
+api_key = YOUR_OPEN_AI_API_KEY
+```
+
 ### 하모니카 시스템 서비스 비활성화:
 
 * 위치: /etc/hamonikr/hamonikrSystem.conf

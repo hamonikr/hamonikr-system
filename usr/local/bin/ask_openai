@@ -9,6 +9,7 @@ import configparser
 from pathlib import Path
 import json
 import re
+import time
 
 # Function to install a package in a virtual environment
 def install_package_in_venv(package, venv_dir):
@@ -28,7 +29,6 @@ if not venv_dir.exists():
 
 # Ensure the required packages are installed in the virtual environment
 ensure_package_installed('requests', venv_dir)
-ensure_package_installed('pyperclip', venv_dir)
 
 # Configure logging to log to the user's home directory
 log_file = os.path.join(os.path.expanduser("~"), 'ask_openai.log')
@@ -54,17 +54,45 @@ def read_api_key():
 
 api_key = read_api_key()
 
-# Function to get the content from the clipboard
+# Function to get the content from the clipboard using xclip or xsel
 def get_clipboard_content():
+    for attempt in range(3):
+        try:
+            content = subprocess.check_output(['xclip', '-selection', 'clipboard', '-o'], text=True)
+            logging.debug(f"Clipboard content retrieved using xclip on attempt {attempt + 1}: {content}")
+            if content.strip() != "":
+                return content
+        except subprocess.CalledProcessError as e:
+            logging.error(f"Error getting clipboard content using xclip on attempt {attempt + 1}: {e}")
+            time.sleep(1)
+        
+        try:
+            content = subprocess.check_output(['xsel', '--clipboard', '--output'], text=True)
+            logging.debug(f"Clipboard content retrieved using xsel on attempt {attempt + 1}: {content}")
+            if content.strip() != "":
+                return content
+        except subprocess.CalledProcessError as e:
+            logging.error(f"Error getting clipboard content using xsel on attempt {attempt + 1}: {e}")
+            time.sleep(1)
+    
+    return None
+
+# Function to check internet connectivity
+def check_internet_connection():
     try:
-        import pyperclip
-        return pyperclip.paste()
-    except Exception as e:
-        logging.error(f"Error getting clipboard content: {e}")
-        return None
+        subprocess.check_call(['ping', '-c', '1', '8.8.8.8'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        logging.debug("Internet connection is available.")
+        return True
+    except subprocess.CalledProcessError:
+        logging.error("No internet connection.")
+        return False
 
 # Function to query OpenAI API
 def query_openai(model, prompt, api_key):
+    if not check_internet_connection():
+        show_message("Error", "No internet connection. Please check your network settings.")
+        raise RuntimeError("No internet connection.")
+    
     try:
         import requests
         headers = {
@@ -77,6 +105,9 @@ def query_openai(model, prompt, api_key):
             "max_tokens": 4096
         }
         response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, data=json.dumps(data))
+        logging.debug(f"OpenAI API response status code: {response.status_code}")
+        logging.debug(f"OpenAI API response headers: {response.headers}")
+        logging.debug(f"OpenAI API response content: {response.content}")
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
@@ -94,7 +125,15 @@ if not api_key:
 
 # Get the content from the clipboard
 clipboard_content = get_clipboard_content()
-if clipboard_content is None or clipboard_content.strip() == "":
+if clipboard_content is None:
+    message = "Failed to retrieve clipboard content."
+    if os.getenv("LANG", "en")[:2] == "ko":
+        message = "클립보드 내용을 가져오는 데 실패했습니다."
+    logging.error(message)
+    show_message("Error", message)
+    raise ValueError(message)
+
+if clipboard_content.strip() == "":
     message = "Clipboard is empty!"
     if os.getenv("LANG", "en")[:2] == "ko":
         message = "클립보드가 비어 있습니다!"
@@ -113,7 +152,7 @@ full_prompt = f"{predefined_prompt}{clipboard_content}"
 logging.debug(f"Full prompt: {full_prompt}")
 
 # Model to use
-model = "gpt-4"
+model = "gpt-4o-mini"
 
 # Query OpenAI API
 response = query_openai(model, full_prompt, api_key)
