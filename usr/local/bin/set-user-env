@@ -81,6 +81,15 @@ set_keyboard_shortcuts() {
     log "Updated keyboard shortcut settings"
 }
 
+# Ensure ask_openai shortcut
+existing_command=$(gsettings get org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom2/ command 2>/dev/null)
+if [ "$existing_command" == "'ask_openai'" ]; then
+    log "ask_openai shortcut already set. No changes made."
+else
+    log "Setting keyboard shortcut for ask_openai"
+    set_keyboard_shortcuts
+fi
+
 handle_upgrade_from_hanla_to_taebaek() {
     if [ -f /var/log/taebaekupdate.dummy ]; then
         log "Upgrade from hanla to taebaek troubleshooting"
