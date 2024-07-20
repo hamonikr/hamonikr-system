@@ -53,4 +53,22 @@ if [ "x$isrun" != "xrun" ]; then
         echo "$?" > $HOME/.hamonikr/theme/${0##*/}.done
         log "Updated nimf as default"
     fi
+
+    # Set conky autostart
+    if [ -f "/etc/hamonikr/info" ]; then
+        source "/etc/hamonikr/info"
+    else
+        log "Info file not found."
+    fi
+
+    # Execute command based on CONKY value
+    if [ "$CONKY" == "TRUE" ]; then
+        log "Conky autostart is enabled. Set autostart..."
+        sed -i -r s/Hidden=.*/Hidden=false/ "$HOME"/.config/autostart/conky.desktop
+    else
+        log "Conky autostart is disabled. Disable autostart..."
+        sed -i -r s/Hidden=.*/Hidden=true/ "$HOME"/.config/autostart/conky.desktop    
+    fi
+    
 fi
+
