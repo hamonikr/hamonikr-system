@@ -1,3 +1,11 @@
+hamonikr-system (7.7.0+h1) stable; urgency=medium
+
+  [Kevin Kim]
+  * Release for bookworm arm64
+   - Fix document url for arm version
+   
+ -- HamoniKR <pkg@hamonikr.org>  Sat, 20 Jul 2024 14:45:10 +0900
+
 hamonikr-system (7.7.0) stable; urgency=medium
 
   [Kevin Kim]
