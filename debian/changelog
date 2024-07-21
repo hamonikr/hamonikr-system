@@ -1,3 +1,11 @@
+hamonikr-system (7.7.2+h1) stable; urgency=medium
+
+  [Kevin Kim]
+  * Release for bookworm arm64
+   - Change shell to bash
+   
+ -- HamoniKR <pkg@hamonikr.org>  Sun, 21 Jul 2024 11:08:54 +0900
+
 hamonikr-system (7.7.2) stable; urgency=medium
 
   [Kevin Kim]
