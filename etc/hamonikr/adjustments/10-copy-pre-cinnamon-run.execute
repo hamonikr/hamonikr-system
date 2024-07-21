@@ -14,17 +14,17 @@ err() {
 
 source /etc/os-release
 
-if [ "X$ID_LIKE" = "Xubuntu" ]; then
-  
-  if [ -f "/etc/hamonikr/info" ] ; then
-  
-    if [ -f "/usr/share/hamonikr/pre-cinnamon-run/cinnamon-session-cinnamon" ] ; then
-
-        cp /usr/share/hamonikr/pre-cinnamon-run/cinnamon-session-cinnamon /usr/bin/cinnamon-session-cinnamon
-        chmod +x /usr/bin/cinnamon-session-cinnamon
-        
-        echo "Updated pre cinnamon cmd"
+if [ -f "/etc/hamonikr/info" ]; then
+  if [ -f "/usr/share/hamonikr/pre-cinnamon-run/cinnamon-session-cinnamon" ]; then
+    if cp /usr/share/hamonikr/pre-cinnamon-run/cinnamon-session-cinnamon /usr/bin/cinnamon-session-cinnamon; then
+      chmod +x /usr/bin/cinnamon-session-cinnamon
+      log "Updated pre cinnamon cmd"
+    else
+      log "Failed to copy cinnamon-session-cinnamon"
     fi
+  else
+    log "/usr/share/hamonikr/pre-cinnamon-run/cinnamon-session-cinnamon does not exist"
   fi
-
+else
+  log "/etc/hamonikr/info does not exist"
 fi
