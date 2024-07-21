@@ -29,6 +29,7 @@ hide /usr/share/applications/fcitx.desktop
 hide /usr/share/applications/fcitx-configtool.desktop
 hide /usr/share/applications/org.gnome.Calendar.desktop
 hide /usr/share/applications/qt5ct.desktop
+hide /usr/share/applications/software-properties-gtk.desktop
 categories /usr/share/applications/mediainfo-gui.desktop AudioVideo;
 categories /usr/share/applications/hamonikrwelcome.desktop System;
 categories /usr/share/applications/hamonikr-help.desktop System;
