@@ -21,28 +21,25 @@
 
 if [ "$EUID" = 0 ]; then
     echo "Run with user authority. (EUID : $EUID)"
-    exit
+    exit 1
 fi
 
-if [ ! -d "/home/${USER}/.hamonikr/" ]; then
-    mkdir -p /home/${USER}/.hamonikr/
-fi
-
-if [ ! -d "/home/${USER}/.config/autostart/" ]; then
-    mkdir -p /home/${USER}/.config/autostart/
-fi
+# Create necessary directories if they do not exist
+mkdir -p "/home/${USER}/.hamonikr/"
+mkdir -p "/home/${USER}/.config/autostart/"
 
 log() {
     # stdout
     echo "$1"
     # write to logfile
-    mkdir -p $HOME/.hamonikr/log
-    echo "$(date +%Y-%m-%d_%H:%M_%S) ${0##*/} : $1" >> $HOME/.hamonikr/log/${0##*/}.log
+    log_dir="$HOME/.hamonikr/log"
+    mkdir -p "$log_dir"
+    echo "$(date +%Y-%m-%d_%H:%M:%S) ${0##*/} : $1" >> "$log_dir/${0##*/}.log"
 }
 
-mkdir -p $HOME/.hamonikr/theme
+mkdir -p "$HOME/.hamonikr/theme"
 
-if [ -f $HOME/.hamonikr/theme/${0##*/}.done ]; then
+if [ -f "$HOME/.hamonikr/theme/${0##*/}.done" ]; then
     isrun="run"
 fi
 
@@ -50,7 +47,7 @@ if [ "x$isrun" != "xrun" ]; then
     # nimf 입력기 기본으로 설정
     if command -v nimf > /dev/null; then
         im-config -n nimf
-        echo "$?" > $HOME/.hamonikr/theme/${0##*/}.done
+        echo "$?" > "$HOME/.hamonikr/theme/${0##*/}.done"
         log "Updated nimf as default"
     fi
 
@@ -64,11 +61,19 @@ if [ "x$isrun" != "xrun" ]; then
     # Execute command based on CONKY value
     if [ "$CONKY" == "TRUE" ]; then
         log "Conky autostart is enabled. Set autostart..."
-        sed -i -r s/Hidden=.*/Hidden=false/ "$HOME"/.config/autostart/conky.desktop
-    else
-        log "Conky autostart is disabled. Disable autostart..."
-        sed -i -r s/Hidden=.*/Hidden=true/ "$HOME"/.config/autostart/conky.desktop    
-    fi
-    
-fi
+        mkdir -p "$HOME/.conky"
+        cat <<'EOF' > "$HOME/.conky/conky-startup.sh"
+#!/bin/sh
 
+if [ "$DESKTOP_SESSION" = "cinnamon" ]; then 
+   sleep 20s
+   killall conky
+   cd "$HOME/.conky/hamonikr"
+   conky -c "$HOME/.conky/hamonikr/hamonikr-info" &
+   exit 0
+fi
+EOF
+        chmod +x "$HOME/.conky/conky-startup.sh"
+        bash /usr/bin/conkytoggle.sh
+    fi
+fi
