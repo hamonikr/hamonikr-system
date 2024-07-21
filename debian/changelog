@@ -1,3 +1,12 @@
+hamonikr-system (7.7.1) stable; urgency=medium
+
+  [Kevin Kim]
+  * Release for bookworm arm64
+   - Add conky autostart feature
+   - Ensure shortcut part
+   
+ -- HamoniKR <pkg@hamonikr.org>  Sun, 21 Jul 2024 09:12:03 +0900
+
 hamonikr-system (7.7.0+h1) stable; urgency=medium
 
   [Kevin Kim]
