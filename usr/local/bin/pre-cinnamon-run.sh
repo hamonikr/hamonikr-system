@@ -77,8 +77,8 @@ if [ ! -f "$HOME/.hamonikr/theme/conky.done" ]; then
 if [ "$DESKTOP_SESSION" = "cinnamon" ]; then 
    sleep 20s
    killall conky
-   cd "$HOME/.conky/hamonikr"
-   conky -c "$HOME/.conky/hamonikr/hamonikr-info" &
+   cd "$HOME/.conky/hamonikr/Dark_widget"
+   conky -c "$HOME/.conky/hamonikr/Dark_widget/widget_pi5" &
    exit 0
 fi
 EOF
