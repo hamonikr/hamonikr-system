@@ -77,12 +77,13 @@ if [ ! -f "$HOME/.hamonikr/theme/conky.done" ]; then
 if [ "$DESKTOP_SESSION" = "cinnamon" ]; then 
    sleep 20s
    killall conky
-   cd "$HOME/.conky/hamonikr/Dark_widget"
-   conky -c "$HOME/.conky/hamonikr/Dark_widget/widget_pi5" &
+   cd "$HOME/.conky/raspberry"
+   conky -c "$HOME/.conky/raspberry/simple.conf" &
    exit 0
 fi
 EOF
             chmod +x "$HOME/.conky/conky-startup.sh"
+            conky -c "$HOME/.conky/raspberry/simple.conf" &
 
             log "Create conky autostart desktop file..."
             mkdir -p $HOME/.config/autostart
@@ -96,7 +97,7 @@ X-GNOME-Autostart-enabled=true
 Name=Conky
 Comment=
 EOF
-            bash /usr/bin/conkytoggle.sh
+            # bash /usr/bin/conkytoggle.sh
             touch "$HOME/.hamonikr/theme/conky.done"
         else
             log "Can not found conky theme pack..."
