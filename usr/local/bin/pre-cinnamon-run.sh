@@ -83,7 +83,19 @@ if [ "$DESKTOP_SESSION" = "cinnamon" ]; then
 fi
 EOF
             chmod +x "$HOME/.conky/conky-startup.sh"
-            
+
+            log "Create conky autostart desktop file..."
+            mkdir -p $HOME/.config/autostart
+            cat <<'EOF' > "$HOME/.config/autostart/conky.desktop"
+[Desktop Entry]
+Type=Application
+Exec=sh "$HOME/.conky/conky-startup.sh"
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name=Conky
+Comment=
+EOF
             bash /usr/bin/conkytoggle.sh
             touch "$HOME/.hamonikr/theme/conky.done"
         else
