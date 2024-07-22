@@ -61,8 +61,10 @@ if [ "x$isrun" != "xrun" ]; then
     # Execute command based on CONKY value
     if [ "$CONKY" == "TRUE" ]; then
         log "Conky autostart is enabled. Set autostart..."
-        mkdir -p "$HOME/.conky"
-        cat <<'EOF' > "$HOME/.conky/conky-startup.sh"
+        
+        if [ -f "/usr/share/conky-manager2/themepacks/default-themes-2.1.cmtp.7z" ]; then
+            7z x /usr/share/conky-manager2/themepacks/default-themes-2.1.cmtp.7z -o$HOME
+            cat <<'EOF' > "$HOME/.conky/conky-startup.sh"
 #!/bin/sh
 
 if [ "$DESKTOP_SESSION" = "cinnamon" ]; then 
@@ -73,7 +75,14 @@ if [ "$DESKTOP_SESSION" = "cinnamon" ]; then
    exit 0
 fi
 EOF
-        chmod +x "$HOME/.conky/conky-startup.sh"
-        bash /usr/bin/conkytoggle.sh
+            chmod +x "$HOME/.conky/conky-startup.sh"
+            bash /usr/bin/conkytoggle.sh
+
+        else
+            log "Can not found conky theme pack..."
+        fi
+    else
+        log "Conky autostart is disabled. (CONKY = $CONKY)"
     fi
+
 fi
