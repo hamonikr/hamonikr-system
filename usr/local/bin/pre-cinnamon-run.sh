@@ -24,10 +24,6 @@ if [ "$EUID" = 0 ]; then
     exit 1
 fi
 
-# Create necessary directories if they do not exist
-mkdir -p "/home/${USER}/.hamonikr/"
-mkdir -p "/home/${USER}/.config/autostart/"
-
 log() {
     # stdout
     echo "$1"
@@ -37,20 +33,27 @@ log() {
     echo "$(date +%Y-%m-%d_%H:%M:%S) ${0##*/} : $1" >> "$log_dir/${0##*/}.log"
 }
 
+# Create necessary directories if they do not exist
+mkdir -p "/home/${USER}/.hamonikr/"
+mkdir -p "/home/${USER}/.config/autostart/"
 mkdir -p "$HOME/.hamonikr/theme"
 
-if [ -f "$HOME/.hamonikr/theme/${0##*/}.done" ]; then
-    isrun="run"
-fi
-
-if [ "x$isrun" != "xrun" ]; then
+# Check if nimf setting is done
+if [ ! -f "$HOME/.hamonikr/theme/nimf.done" ]; then
     # nimf 입력기 기본으로 설정
     if command -v nimf > /dev/null; then
         im-config -n nimf
-        echo "$?" > "$HOME/.hamonikr/theme/${0##*/}.done"
-        log "Updated nimf as default"
+        if [ $? -eq 0 ]; then
+            touch "$HOME/.hamonikr/theme/nimf.done"
+            log "Updated nimf as default"
+        fi
     fi
+else
+    log "Nimf is already set as default"
+fi
 
+# Check if conky autostart setting is done
+if [ ! -f "$HOME/.hamonikr/theme/conky.done" ]; then
     # Set conky autostart
     if [ -f "/etc/hamonikr/info" ]; then
         source "/etc/hamonikr/info"
@@ -63,7 +66,11 @@ if [ "x$isrun" != "xrun" ]; then
         log "Conky autostart is enabled. Set autostart..."
         
         if [ -f "/usr/share/conky-manager2/themepacks/default-themes-2.1.cmtp.7z" ]; then
-            7z x /usr/share/conky-manager2/themepacks/default-themes-2.1.cmtp.7z -o$HOME
+            log "Extract conky theme pack..."
+            # -aoa : Overwrite All files without prompt
+            7z x /usr/share/conky-manager2/themepacks/default-themes-2.1.cmtp.7z -o$HOME -aoa
+
+            log "Create conky startup script..."
             cat <<'EOF' > "$HOME/.conky/conky-startup.sh"
 #!/bin/sh
 
@@ -76,13 +83,15 @@ if [ "$DESKTOP_SESSION" = "cinnamon" ]; then
 fi
 EOF
             chmod +x "$HOME/.conky/conky-startup.sh"
+            
             bash /usr/bin/conkytoggle.sh
-
+            touch "$HOME/.hamonikr/theme/conky.done"
         else
             log "Can not found conky theme pack..."
         fi
     else
         log "Conky autostart is disabled. (CONKY = $CONKY)"
     fi
-
+else
+    log "Conky autostart is already set"
 fi
