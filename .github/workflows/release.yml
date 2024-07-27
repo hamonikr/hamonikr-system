@@ -67,6 +67,8 @@ jobs:
         uses: mikepenz/release-changelog-builder-action@v2
         with:
           configuration: .github/changelog-config.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   release:
     needs: [build-ubuntu-2404, build-ubuntu-2204, generate-changelog]
@@ -95,6 +97,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: ./*.deb
-          body_path: CHANGELOG.md
+          body: ${{ steps.changelog.outputs.changelog }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
