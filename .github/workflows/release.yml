@@ -89,14 +89,11 @@ jobs:
 
       - run: ls -R .
 
-      - name: Get release draft body
-        id: get_release_draft_body
-        run: echo "::set-output name=body::$(cat ${GITHUB_WORKSPACE}/release-drafter-release-draft.md)"
-
       - name: Create GitHub Release
+        id: create_release
         uses: softprops/action-gh-release@v1
         with:
           files: ./*.deb
-          body: ${{ steps.get_release_draft_body.outputs.body }}
+          body: ${{ steps.draft.outputs.changelog }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
