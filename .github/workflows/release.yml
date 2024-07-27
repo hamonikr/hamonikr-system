@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - "v*"
+      - 'v*'
 
 jobs:
   build-ubuntu-2404:
@@ -56,22 +56,26 @@ jobs:
           name: debian-package-ubuntu2204
           path: debian/artifacts-ubuntu2204/*.deb
 
-  release_draft:
+  generate-changelog:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Draft release
-        uses: release-drafter/release-drafter@v5
+      - name: Generate changelog
+        id: changelog
+        uses: ferrarimarco/[email protected]
         with:
-          config-name: release-drafter.yml
+          output: CHANGELOG.md
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        id: draft_release
+          CHANGELOG_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Save changelog
+        id: save_changelog
+        run: echo "::set-output name=changelog::$(cat CHANGELOG.md)"
 
   release:
-    needs: [build-ubuntu-2404, build-ubuntu-2204, release_draft]
+    needs: [build-ubuntu-2404, build-ubuntu-2204, generate-changelog]
     runs-on: ubuntu-latest
 
     steps:
@@ -90,10 +94,9 @@ jobs:
       - run: ls -R .
 
       - name: Create GitHub Release
-        id: create_release
         uses: softprops/action-gh-release@v1
         with:
           files: ./*.deb
-          body: ${{ steps.draft.outputs.changelog }}
+          body: ${{ steps.save_changelog.outputs.changelog }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
