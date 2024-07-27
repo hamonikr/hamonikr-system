@@ -64,7 +64,7 @@ jobs:
 
       - name: Generate changelog
         id: changelog
-        uses: mikepenz/release-changelog-builder-action@2
+        uses: mikepenz/release-changelog-builder-action@v2
         with:
           configuration: .github/changelog-config.json
         env:
