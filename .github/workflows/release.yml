@@ -4,8 +4,6 @@ on:
   push:
     tags:
       - "v*"
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
 
 jobs:
   build-ubuntu-2404:
@@ -66,8 +64,11 @@ jobs:
 
       - name: Draft release
         uses: release-drafter/release-drafter@v5
+        with:
+          config-name: release-drafter.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        id: draft_release
 
   release:
     needs: [build-ubuntu-2404, build-ubuntu-2204, release_draft]
@@ -88,10 +89,14 @@ jobs:
 
       - run: ls -R .
 
+      - name: Get release draft body
+        id: get_release_draft_body
+        run: echo "::set-output name=body::$(cat ${GITHUB_WORKSPACE}/release-drafter-release-draft.md)"
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           files: ./*.deb
-          body: ${{ steps.release_drafter.outputs.changelog }}
+          body: ${{ steps.get_release_draft_body.outputs.body }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
