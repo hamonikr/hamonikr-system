@@ -62,11 +62,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Generate changelog
-        id: changelog
-        uses: mikepenz/release-changelog-builder-action@v2
+      - name: Release Changelog Builder
+        id: changelog      
+        uses: mikepenz/release-changelog-builder-action@v5
         with:
-          configuration: .github/changelog-config.json
+          configurationJson: |
+            {
+              "template": "#{{CHANGELOG}}\n\n<details>\n<summary>Uncategorized</summary>\n\n#{{UNCATEGORIZED}}\n</details>",
+              "categories": [
+                {
+                    "title": "## 💬 Other",
+                    "labels": ["other"]
+                },
+                {
+                    "title": "## 📦 Dependencies",
+                    "labels": ["dependencies"]
+                }
+              ]
+            }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
