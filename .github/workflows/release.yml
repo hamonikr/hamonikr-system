@@ -66,6 +66,7 @@ jobs:
         id: changelog
         uses: requarks/changelog-action@v1
         with:
+          includeInvalidCommits: true
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
 
