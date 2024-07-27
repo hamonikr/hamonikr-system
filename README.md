@@ -1,5 +1,3 @@
-[![Build](https://github.com/hamonikr/hamonikr-system/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/hamonikr/hamonikr-system/actions/workflows/build.yml)
-
 ![x86_64](https://img.shields.io/badge/amd64-darkblue)
 ![ubuntu](https://img.shields.io/badge/ubuntu->=18.04-red)
 ![debian](https://img.shields.io/badge/debian->=10-brown)
