@@ -56,43 +56,26 @@ jobs:
           name: debian-package-ubuntu2204
           path: debian/artifacts-ubuntu2204/*.deb
 
-  release_draft:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@v3
-
-      - name: Draft release
-        uses: release-drafter/release-drafter@v5
-        with:
-          config-name: release-drafter.yml
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        id: draft_release
-
   generate-changelog:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Generate changelog
         id: changelog
-        uses: ferrarimarco/[email protected]
+        uses: mikepenz/[email protected]
         with:
-          output: CHANGELOG.md
-        env:
-          CHANGELOG_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Save changelog
-        id: save_changelog
-        run: echo "::set-output name=changelog::$(cat CHANGELOG.md)"
+          configuration: .github/changelog-config.json
 
   release:
     needs: [build-ubuntu-2404, build-ubuntu-2204, generate-changelog]
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
       - name: Download build artifacts for Ubuntu 24.04
         uses: actions/download-artifact@v2
         with:
@@ -108,9 +91,10 @@ jobs:
       - run: ls -R .
 
       - name: Create GitHub Release
+        id: create_release
         uses: softprops/action-gh-release@v1
         with:
           files: ./*.deb
-          body: ${{ steps.save_changelog.outputs.changelog }}
+          body_path: CHANGELOG.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

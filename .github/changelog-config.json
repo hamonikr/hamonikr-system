@@ -1,0 +1,18 @@
+{
+    "changelogFilename": "CHANGELOG.md",
+    "sections": [
+      {
+        "title": "🚀 Features",
+        "labels": ["feature"]
+      },
+      {
+        "title": "🐛 Bug Fixes",
+        "labels": ["bug"]
+      },
+      {
+        "title": "🧹 Chores",
+        "labels": ["chore"]
+      }
+    ]
+  }
+  
