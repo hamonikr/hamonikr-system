@@ -14,7 +14,7 @@ APT
         "balena-etcher";
         "boot-select*";
         "gprename";
-        "grub2-theme-kumkang*"
+        "grub2-theme-dark*"
         "hamonikr-zsh";
         "hardinfo*";
         "language-pack-gnome-ko-base";
@@ -32,7 +32,7 @@ APT
         "nimf*";
         "numlockx*";
         "plank*";
-        "plymouth-theme-kumkang";
+        "plymouth-theme-hamonikr";
         "qt-fsarchiver*";
         "samba";
         "shutter*";
