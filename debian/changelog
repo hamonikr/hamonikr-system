@@ -1,3 +1,12 @@
+hamonikr-system (7.7.6) paektu; urgency=medium
+
+  [Kevin Kim]
+  * Release for HamoniKR paektu
+   - Applied new os info
+   - Hide fsck message while boot
+
+ -- HamoniKR <pkg@hamonikr.org>  Tue, 30 Jul 2024 17:35:18 +0900
+
 hamonikr-system (7.7.5+h3) paektu; urgency=medium
 
   [Kevin Kim]
