@@ -1,3 +1,11 @@
+hamonikr-system (7.7.7) unstable; urgency=medium
+
+  [Kevin Kim]
+  * Release for HamoniKR paektu
+   - Fixed dependency problem
+
+ -- HamoniKR <pkg@hamonikr.org>  Thu, 01 Aug 2024 18:22:49 +0900
+
 hamonikr-system (7.7.6) paektu; urgency=medium
 
   [Kevin Kim]

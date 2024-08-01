@@ -17,7 +17,9 @@ Depends: ${misc:Depends},
          imagemagick-6-common,
          ffmpeg,
          xdotool
-Replaces: hamonikr-themes         
+Replaces: hamonikr-themes,
+          hamonikr-welcome, 
+          hamonikr-icons
 Recommends: spacefm,
             python-is-python3,
             video2gif
