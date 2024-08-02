@@ -152,6 +152,7 @@ full_prompt = f"{predefined_prompt}{clipboard_content}"
 logging.debug(f"Full prompt: {full_prompt}")
 
 # Model to use
+# https://openai.com/api/pricing/
 model = "gpt-4o-mini"
 
 # Query OpenAI API
