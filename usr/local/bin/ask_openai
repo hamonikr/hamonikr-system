@@ -39,8 +39,13 @@ def show_message(title, text):
     proc = subprocess.Popen(['zenity', '--text-info', '--title', title, '--width=600', '--height=400'], stdin=subprocess.PIPE, text=True)
     proc.communicate(input=text)
 
-# Read API key from configuration file
+# Read API key from configuration file or environment variable
 def read_api_key():
+    api_key = os.getenv('OPENAI_API_KEY')
+    if api_key:
+        logging.debug("API key read from environment variable.")
+        return api_key
+    
     config_path = Path.home() / '.ask_openai.conf'
     if not config_path.exists():
         message = "Configuration file not found in the home directory."
@@ -50,7 +55,16 @@ def read_api_key():
     
     config = configparser.ConfigParser()
     config.read(config_path)
-    return config.get('openai', 'api_key', fallback=None)
+    api_key = config.get('openai', 'api_key', fallback=None)
+    
+    if api_key:
+        logging.debug("API key read from configuration file.")
+        return api_key
+    
+    message = "API key is not set. Please set the API key in the configuration file or as an environment variable."
+    logging.error(message)
+    show_message("Error", message)
+    raise EnvironmentError(message)
 
 api_key = read_api_key()
 
@@ -116,9 +130,9 @@ def query_openai(model, prompt, api_key):
 
 # Check if the API key is set
 if not api_key:
-    message = "OpenAI API key is not set. Please set the API key in the configuration file."
+    message = "OpenAI API key is not set. Please set the OPENAI_API_KEY key in configuration file or environment variable"
     if os.getenv("LANG", "en")[:2] == "ko":
-        message = "API 키가 설정되지 않았습니다. ~/.ask_openai.conf 파일에 API 키를 설정해 주세요."
+        message = "API 키가 설정되지 않았습니다. ~/.ask_openai.conf 파일 또는 환경변수 OPENAI_API_KEY 를 설정해 주세요."
     logging.error(message)
     show_message("Error", message)
     raise EnvironmentError(message)
@@ -143,9 +157,9 @@ if clipboard_content.strip() == "":
 
 # Define the pre-defined prompt
 if os.getenv("LANG", "en")[:2] == "ko":
-    predefined_prompt = "다음 문장이 프로그램 소스코드인 경우 코드에 대한 설명을 해주고, 오류 메세지인 경우 오류 해결방법을 알려주세요. 모든 응답은 한국어로 해주세요.\n"
+    predefined_prompt = "다음 문장이 프로그램 소스코드인 경우 코드에 대한 설명을 해주고, 오류 메세지인 경우 사용자가 우분투 24.04 기반의 Cinnamon 데스크톱 환경을 사용하는 하모니카OS를 사용한다고 가정하고, 이 오류의 설명과 해결방법을 알려주세요. 모든 응답은 한국어로 해주세요.\n"
 else:
-    predefined_prompt = "If the following text is a program source code, please explain the code, and if it is an error message, please provide a solution. Please respond in English.\n"
+    predefined_prompt = "If the following text is a program source code, please explain the code, and if it is an error message, assume that the user uses a HamoniKR OS that uses Ubuntu 24.04 based Cinnamon desktop environment, and tells us how to explain and solve this error.. Please respond in English.\n"
 
 # Combine the predefined prompt with the clipboard content
 full_prompt = f"{predefined_prompt}{clipboard_content}"

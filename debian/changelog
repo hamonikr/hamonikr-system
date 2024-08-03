@@ -1,3 +1,10 @@
+hamonikr-system (7.7.8) unstable; urgency=medium
+
+  [Kevin Kim]
+  * Change use environment variables in ask_openai command
+
+ -- HamoniKR <pkg@hamonikr.org>  Sun, 04 Aug 2024 00:12:42 +0900
+
 hamonikr-system (7.7.7+h1) unstable; urgency=medium
 
   [Kevin Kim]
