@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=balenaEtcher
+Name[ko]=OS 부팅디스크 만들기
+Exec=/opt/balenaEtcher/balena-etcher %U
+Terminal=false
+Type=Application
+Icon=balena-etcher
+StartupWMClass=balenaEtcher
+Comment=Flash OS images to SD cards and USB drives, safely and easily.
+Comment[ko]=OS 이미지를 SD 카드나 USB 드라이브에 안전하게 만듭니다.
+MimeType=x-scheme-handler/etcher;
+Categories=Utility;
