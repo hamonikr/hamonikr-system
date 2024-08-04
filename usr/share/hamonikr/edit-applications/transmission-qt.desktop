@@ -1,0 +1,22 @@
+[Desktop Entry]
+Name=Transmission (Qt)
+GenericName=BitTorrent Client
+Name[ko]=토렌트 클라이언트
+GenericName[ko]=토렌트 파일 다운로드 도구
+Comment=Download and share files over BitTorrent
+Comment[ko]=토렌트 파일을 다운로드 합니다
+# Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+Keywords=torrents;downloading;uploading;share;sharing;
+Exec=transmission-qt %U
+Icon=transmission
+Terminal=false
+Type=Application
+MimeType=application/x-bittorrent;x-scheme-handler/magnet;
+Categories=Network;FileTransfer;P2P;Qt;
+X-AppInstall-Keywords=torrent
+Actions=Minimize;
+
+[Desktop Action Minimize]
+Name=Start Transmission Minimized
+Exec=transmission-qt --minimized
+
