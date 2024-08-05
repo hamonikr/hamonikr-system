@@ -1,0 +1,43 @@
+#!/bin/bash
+
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+SOURCE_FILE="/usr/share/cinnamon/applets/xapp-status@cinnamon.org/applet.js"
+
+if [ ! -f "/usr/share/cinnamon/applets/xapp-status@cinnamon.org/applet.js.bak" ]; then
+
+# 함수 수정
+sed -i.bak '/shouldIgnoreStatusIcon(icon_proxy) {/,/return false;/c\
+	shouldIgnoreStatusIcon(icon_proxy) {\
+		let hiddenIcons = Main.systrayManager.getRoles();\
+\
+		let name = icon_proxy.name.toLowerCase();\
+\
+		// xpad 아이콘 숨기기\
+		if (name === "xpad") {\
+			return true;\
+		}\
+\
+		if (hiddenIcons.indexOf(name) != -1 ) {\
+			return true;\
+		}\
+\
+		return false;' $SOURCE_FILE
+
+  if [ $? -eq 0 ]; then
+    log "Modifications completed: $SOURCE_FILE"
+  else
+    err "Modification failure: $SOURCE_FILE"
+  fi
+
+fi
