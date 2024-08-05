@@ -115,7 +115,7 @@ jobs:
 
       - name: Create GitHub Release
         id: create_release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: ./*.deb
           body: ${{ steps.changelog.outputs.changelog }}
