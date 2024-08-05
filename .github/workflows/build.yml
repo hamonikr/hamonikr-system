@@ -26,7 +26,7 @@ jobs:
           artifacts-dir: debian/artifacts-ubuntu2404
 
       - name: Upload Debian Package
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: debian-package-ubuntu2404
           path: debian/artifacts-ubuntu2404/*.deb
@@ -51,7 +51,7 @@ jobs:
           artifacts-dir: debian/artifacts-ubuntu2204
 
       - name: Upload Debian Package
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: debian-package-ubuntu2204
           path: debian/artifacts-ubuntu2204/*.deb
