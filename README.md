@@ -3,6 +3,22 @@
 ![debian](https://img.shields.io/badge/debian->=10-brown)
 ![manjaro](https://img.shields.io/badge/linuxmint->20-darkgreen)
 
+![GitHubLicense](https://img.shields.io/github/license/hamonikr/hamonikr-system)
+![GitHub reposize](https://img.shields.io/github/repo-size/hamonikr/hamonikr-system)
+![GitHubDownload](https://img.shields.io/github/downloads/hamonikr/hamonikr-system/total)
+![GitHubRelease](https://img.shields.io/github/v/release/hamonikr/hamonikr-system)
+
+![GitHubpr](https://img.shields.io/github/issues-pr/hamonikr/hamonikr-system)
+![GitHubprclosed](https://img.shields.io/github/issues-pr-closed/hamonikr/hamonikr-system)
+![GitHubcommit](https://img.shields.io/github/commit-activity/m/hamonikr/hamonikr-system)
+![GitHubLastCommit](https://img.shields.io/github/last-commit/hamonikr/hamonikr-system)
+
+![GitHubcontributors](https://img.shields.io/github/contributors/hamonikr/hamonikr-system)
+![GitHubstars](https://img.shields.io/github/stars/hamonikr/hamonikr-system?style=social)
+![GitHubforks](https://img.shields.io/github/forks/hamonikr/hamonikr-system?style=social)
+![GitHubissues](https://img.shields.io/github/issues/hamonikr/hamonikr-system?style=social)
+![GitHubwatch](https://img.shields.io/github/watchers/hamonikr/hamonikr-system?style=social)
+
 ## hamonikr-system
 
 이 패키지는 하모니카OS의 기본 환경을 구성하는 필수 패키지입니다.
