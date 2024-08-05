@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build Debian Package
         uses: jtdor/build-deb-action@v1
@@ -36,7 +36,7 @@ jobs:
 
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build Debian Package
         uses: jtdor/build-deb-action@v1
@@ -60,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Update CHANGELOG
         id: changelog
@@ -97,7 +97,7 @@ jobs:
 
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Download build artifacts for Ubuntu 24.04
         uses: actions/download-artifact@v2
