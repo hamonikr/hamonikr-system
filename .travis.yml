@@ -1,0 +1,32 @@
+branches:
+    only:
+        - release
+dist: jammy
+sudo: required
+
+jobs:
+    include:
+        - language : python
+          before_script:
+            - sudo apt-get update -qq
+            - sudo apt-get install debhelper npm
+          script : 
+            - sudo dpkg-buildpackage -T clean
+            - sudo dpkg-buildpackage -b -us -uc -ui
+          script : 
+            - fakeroot make package
+            - mv *.deb ../../ && cd ..
+before_deploy:
+    - git config --local user.name "Hamonikr"
+    - git config --local user.email "hamonikr@gmail.com"
+    - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+    - git tag ${TRAVIS_TAG}
+deploy:
+    provider: releases
+    file_glob: true
+    file: ../*.deb
+    skip_cleanup: true
+    draft: true
+    on:
+        branch: release
+    token: $GITHUB_TOKEN

@@ -1,0 +1,87 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "yeji0407",
+      "name": "yeji0407",
+      "avatar_url": "https://avatars.githubusercontent.com/u/55476302?v=4",
+      "profile": "https://github.com/yeji0407",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "chaeya",
+      "name": "Kevin Kim",
+      "avatar_url": "https://avatars.githubusercontent.com/u/405502?v=4",
+      "profile": "https://hamonikr.org",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jullee96",
+      "name": "julie lee",
+      "avatar_url": "https://avatars.githubusercontent.com/u/66409676?v=4",
+      "profile": "https://github.com/jullee96",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "bdh1993",
+      "name": "JamesBae",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58254473?v=4",
+      "profile": "https://github.com/bdh1993",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "choonsik2",
+      "name": "choonsik",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62954933?v=4",
+      "profile": "https://github.com/choonsik2",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "gon1942",
+      "name": "ryan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/31919227?v=4",
+      "profile": "https://github.com/gon1942",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "bigeden",
+      "name": "Eden",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51899018?v=4",
+      "profile": "https://github.com/bigeden",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "yeji980407",
+      "name": "yeji980407",
+      "avatar_url": "https://avatars.githubusercontent.com/u/84702382?v=4",
+      "profile": "https://github.com/yeji980407",
+      "contributions": [
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "hamonikr-system",
+  "projectOwner": "hamonikr",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
