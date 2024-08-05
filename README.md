@@ -207,3 +207,29 @@ Skipped:
   /usr/share/cups/data/default-testpage.pdf
 ```
 ### Contributors
+
+<table>
+<tr>
+    <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
+        <a href=https://github.com/chaeya>
+            <img src=https://avatars.githubusercontent.com/u/405502?v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Kevin Kim/>
+            <br />
+            <sub style="font-size:100px"><b>Kevin Kim</b></sub>
+        </a>
+    </td>
+    <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
+        <a href=https://github.com/bdh1993>
+            <img src=https://avatars.githubusercontent.com/u/58254473?v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=JamesBae/>
+            <br />
+            <sub style="font-size:100px"><b>JamesBae</b></sub>
+        </a>
+    </td>
+    <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
+        <a href=https://github.com/igothere>
+            <img src=https://avatars.githubusercontent.com/u/51899018?v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Eden/>
+            <br />
+            <sub style="font-size:100px"><b>Eden</b></sub>
+        </a>
+    </td>
+</tr>
+</table>
