@@ -5,3 +5,27 @@ Pin-Priority: 700
 Package: *
 Pin: origin *.hamonikr.org
 Pin-Priority: 900
+
+Package: code
+Pin: origin "*.microsoft.com"
+Pin-Priority: 1001
+
+Package: google-chrome-stable
+Pin: origin "*.google.com"
+Pin-Priority: 1001
+
+Package: naver-whale-stable
+Pin: origin "*.naver.com"
+Pin-Priority: 1001
+
+Package: microsoft-edge-stable
+Pin: origin "*.microsoft.com"
+Pin-Priority: 1001
+
+Package: slack-desktop
+Pin: origin "packagecloud.io"
+Pin-Priority: 1001
+
+Package: megasync
+Pin: origin "mega.nz"
+Pin-Priority: 1001
