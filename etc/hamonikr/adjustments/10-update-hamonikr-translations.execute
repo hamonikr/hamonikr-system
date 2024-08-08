@@ -19,7 +19,12 @@ if [ -f "/etc/hamonikr/info" ] ; then
     HAMONIKR_DIR=/usr/share/hamonikr/locale/ko/LC_MESSAGES
 
     for src in $(ls $HAMONIKR_DIR/*.mo); do
-        cp $src $TARGET_DIR
+        # Grub Korean message
+        if [ -e $HAMONIKR_DIR/grub.mo ]; then
+            cp $HAMONIKR_DIR/grub.mo /boot/grub/locale/ko.mo 2>&1
+        else
+            cp $src $TARGET_DIR
+        fi    
         if [ $? -eq 0 ] ; then
             log "Succeed copy $src to $TARGET_DIR"
         else
@@ -28,12 +33,6 @@ if [ -f "/etc/hamonikr/info" ] ; then
     done
     # log "Update translation"
     echo "Update translation"
-
-    # Grub Korean message
-    if [ -e $HAMONIKR_DIR/grub.mo ]; then
-        cp $HAMONIKR_DIR/grub.mo \
-        /boot/grub/locale/ko.mo
-    fi
 
     # Synchronize names from the startmenu and control panel
     if [ -f "$HAMONIKR_DIR/cinnamon.mo" ] && [ -f "$HAMONIKR_DIR/cinnamon-control-center.mo" ]; then
