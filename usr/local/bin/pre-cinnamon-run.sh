@@ -52,59 +52,10 @@ else
     log "Nimf is already set as default"
 fi
 
-# Check if conky autostart setting is done
-if [ ! -f "$HOME/.hamonikr/theme/conky.done" ]; then
-    # Set conky autostart
-    if [ -f "/etc/hamonikr/info" ]; then
-        source "/etc/hamonikr/info"
-    else
-        log "Info file not found."
+# Run set-user-env
+if [ -f "$HOME/.hamonikr/set-user-env.done" ]; then
+    if command -v set-user-env > /dev/null; then
+        set-user-env apply
+        log "Execute set-user-env command..."        
     fi
-
-    # Execute command based on CONKY value
-    if [ "$CONKY" == "TRUE" ]; then
-        log "Conky autostart is enabled. Set autostart..."
-        
-        if [ -f "/usr/share/conky-manager2/themepacks/default-themes-2.1.cmtp.7z" ]; then
-            log "Extract conky theme pack..."
-            # -aoa : Overwrite All files without prompt
-            7z x /usr/share/conky-manager2/themepacks/default-themes-2.1.cmtp.7z -o$HOME -aoa
-
-            log "Create conky startup script..."
-            cat <<'EOF' > "$HOME/.conky/conky-startup.sh"
-#!/bin/sh
-
-if [ "$DESKTOP_SESSION" = "cinnamon" ]; then 
-   sleep 20s
-   killall conky
-   cd "$HOME/.conky/raspberry"
-   conky -c "$HOME/.conky/raspberry/simple.conf" &
-   exit 0
-fi
-EOF
-            chmod +x "$HOME/.conky/conky-startup.sh"
-            conky -c "$HOME/.conky/raspberry/simple.conf" &
-
-            log "Create conky autostart desktop file..."
-            mkdir -p $HOME/.config/autostart
-            cat <<'EOF' > "$HOME/.config/autostart/conky.desktop"
-[Desktop Entry]
-Type=Application
-Exec=sh "$HOME/.conky/conky-startup.sh"
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-Name=Conky
-Comment=
-EOF
-            # bash /usr/bin/conkytoggle.sh
-            touch "$HOME/.hamonikr/theme/conky.done"
-        else
-            log "Can not found conky theme pack..."
-        fi
-    else
-        log "Conky autostart is disabled. (CONKY = $CONKY)"
-    fi
-else
-    log "Conky autostart is already set"
 fi
