@@ -17,7 +17,7 @@ class HamoniKRSystem():
 
     def __init__(self):
         self.start_time = datetime.datetime.now()
-        self.logfile = open("/var/log/hamonikr-system.log", "a")
+        self.logfile = open("/var/log/hamonikr-system.log", "a", encoding='utf-8')
         self.time_log("hamonikr system started")
         self.executed = []
         self.executed_once = []
@@ -45,16 +45,17 @@ class HamoniKRSystem():
 
     def read_timestamps(self):
         if os.path.exists(TIMESTAMPS):
-            filehandle = open(TIMESTAMPS)
+            filehandle = open(TIMESTAMPS, encoding='utf-8')
             for line in filehandle:
                 line = line.strip()
                 line_items = line.split()
                 if len(line_items) == 2:
                     self.original_timestamps[line_items[0]] = line_items[1]
                     self.timestamps[line_items[0]] = line_items[1]
+            filehandle.close()
 
     def write_timestamps(self):
-        filehandle = open(TIMESTAMPS, "w")
+        filehandle = open(TIMESTAMPS, "w", encoding='utf-8')
         for filename in sorted(self.timestamps.keys()):
             line = "%s %s\n" % (filename, self.timestamps[filename])
             filehandle.write(line)
@@ -95,7 +96,7 @@ class HamoniKRSystem():
             # Read configuration
             try:
                 config = configparser.RawConfigParser()
-                config.read('/etc/hamonikr/hamonikrSystem.conf')
+                config.read('/etc/hamonikr/hamonikrSystem.conf', encoding='utf-8')
                 self.enabled = (config.get('global', 'enabled') == "True")
                 self.minimal = (config.get('global', 'minimal') == "True")
             except:
@@ -104,7 +105,7 @@ class HamoniKRSystem():
                 config.set('global', 'enabled', 'True')
                 config.set('global', 'minimal', 'False')
                 config.add_section('restore')
-                with open('/etc/hamonikr/hamonikrSystem.conf', 'w') as configfile:
+                with open('/etc/hamonikr/hamonikrSystem.conf', 'w', encoding='utf-8') as configfile:
                     config.write(configfile)
                 self.enabled = True
                 self.minimal = False
@@ -118,7 +119,7 @@ class HamoniKRSystem():
             if self.minimal:
                 self.log("Adjust Minimal Mode - ACTIVE")
                 os.system("mv /etc/xdg/autostart/hamonikr-minimal.desktop.disable /etc/xdg/autostart/hamonikr-minimal.desktop")
-                filehandle = open("/usr/share/hamonikr/hamonikr-min/killapps")
+                filehandle = open("/usr/share/hamonikr/hamonikr-min/killapps", encoding='utf-8')
                 for line in filehandle:
                     line = line.strip()
                     if not line.find("#") != -1:
@@ -126,7 +127,7 @@ class HamoniKRSystem():
                             os.system("mv /etc/xdg/autostart/%s /etc/xdg/autostart/%s" % (line, line + ".norun"))
                             self.minimized.append(line)
                 filehandle.close()
-                filehandle = open("/usr/share/hamonikr/hamonikr-min/killps")
+                filehandle = open("/usr/share/hamonikr/hamonikr-min/killps", encoding='utf-8')
                 for line in filehandle:
                     line = line.strip()
                     if not line.find("#") != -1:
@@ -136,7 +137,7 @@ class HamoniKRSystem():
             else:
                 self.log("Restore Minimal Mode - INACTIVE")
                 os.system("mv /etc/xdg/autostart/hamonikr-minimal.desktop /etc/xdg/autostart/hamonikr-minimal.desktop.disable")
-                filehandle = open("/usr/share/hamonikr/hamonikr-min/killapps")
+                filehandle = open("/usr/share/hamonikr/hamonikr-min/killapps", encoding='utf-8')
                 for filename in os.listdir("/etc/xdg/autostart"):
                     basename, extension = os.path.splitext(filename)
                     if extension == ".norun":
@@ -168,7 +169,7 @@ class HamoniKRSystem():
                 for filename in os.listdir(adjustment_directory):
                     basename, extension = os.path.splitext(filename)
                     if extension == ".preserve":
-                        filehandle = open(os.path.join(adjustment_directory, filename))
+                        filehandle = open(os.path.join(adjustment_directory, filename), encoding='utf-8')
                         for line in filehandle:
                             line = line.strip()
                             if (line):
@@ -181,7 +182,7 @@ class HamoniKRSystem():
                     for filename in sorted(os.listdir(adjustment_directory)):
                         basename, extension = os.path.splitext(filename)
                         if extension == ".overwrite":
-                            filehandle = open(os.path.join(adjustment_directory, filename))
+                            filehandle = open(os.path.join(adjustment_directory, filename), encoding='utf-8')
                             for line in filehandle:
                                 line = line.strip()
                                 line_items = line.split()
@@ -206,8 +207,9 @@ class HamoniKRSystem():
             def parse_check_os(line):
                 return shlex.split(line, posix=True)[0].split('=', 1)
 
-            with open('/etc/os-release') as f:
-                checkos = dict(parse_check_os(line) for line in f if '=' in line)
+            filehandle = open('/etc/os-release', encoding='utf-8')
+            checkos = dict(parse_check_os(line) for line in filehandle if '=' in line)
+            filehandle.close()
             
             if (checkos['ID_LIKE'] == 'ubuntu'):
                 # overwrites-ubuntu
@@ -216,7 +218,7 @@ class HamoniKRSystem():
                     for filename in sorted(os.listdir(adjustment_directory)):
                         basename, extension = os.path.splitext(filename)
                         if extension == ".overwriteubuntu":
-                            filehandle = open(os.path.join(adjustment_directory, filename))
+                            filehandle = open(os.path.join(adjustment_directory, filename), encoding='utf-8')
                             for line in filehandle:
                                 line = line.strip()
                                 line_items = line.split()
@@ -244,7 +246,7 @@ class HamoniKRSystem():
                     for filename in sorted(os.listdir(adjustment_directory)):
                         basename, extension = os.path.splitext(filename)
                         if extension == ".overwritedebian":
-                            filehandle = open(os.path.join(adjustment_directory, filename))
+                            filehandle = open(os.path.join(adjustment_directory, filename), encoding='utf-8')
                             for line in filehandle:
                                 line = line.strip()
                                 line_items = line.split()
@@ -269,7 +271,7 @@ class HamoniKRSystem():
             for filename in os.listdir(adjustment_directory):
                 basename, extension = os.path.splitext(filename)
                 if extension == ".menu":
-                    filehandle = open(os.path.join(adjustment_directory, filename))
+                    filehandle = open(os.path.join(adjustment_directory, filename), encoding='utf-8')
                     for line in filehandle:
                         line = line.strip()
                         line_items = line.split()
@@ -306,11 +308,11 @@ class HamoniKRSystem():
                                     if self.has_changed(desktop_file, self.edited, "exec"):
                                         executable = executable.strip()
                                         found_exec = False
-                                        for desktop_line in fileinput.input(desktop_file, inplace=True):
+                                        for desktop_line in fileinput.input(desktop_file, inplace=True, encoding='utf-8'):
                                             if desktop_line.startswith("Exec=") and not found_exec:
                                                 found_exec = True
                                                 desktop_line = "Exec=%s" % executable
-                                            print (desktop_line.strip())
+                                            print(desktop_line.strip())
                                         self.update_timestamp(desktop_file)
                             elif line_items[0] == "rename":
                                 if len(line_items) == 3:
@@ -366,7 +368,7 @@ class HamoniKRSystem():
                 self.write_timestamps()
 
         except Exception as detail:
-            print (detail)
+            print(detail)
             self.log(detail)
 
 hamonikrsystem = HamoniKRSystem()
