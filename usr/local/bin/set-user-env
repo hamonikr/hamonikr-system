@@ -180,7 +180,7 @@ case "$1" in
                     [ ! -z $(pidof plank | grep '[0-9]') ] && killall plank &>/dev/null
                     rm -rf $HOME/.config/plank
                     cp -af /etc/skel/.config/plank $HOME/.config/
-                    cp -af /usr/share/hamonikr-themes/etc/skel/.config/autostart/plank.desktop $HOME/.config/autostart/plank.desktop
+                    cp -af /etc/skel/.config/autostart/plank.desktop $HOME/.config/autostart/plank.desktop
                     dconf load /net/launchpad/plank/docks/ < /etc/skel/.config/plank/dock1/launchers/plank-dconf
                     [ -z $(pidof plank | grep '[0-9]') ] && plank & &>/dev/null
                     [ $? -eq 0 ] && log "Update HamoniKR OS plank Dock Settings."
