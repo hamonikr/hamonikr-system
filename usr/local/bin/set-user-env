@@ -138,8 +138,8 @@ handle_upgrade_from_hanla_to_taebaek() {
         [ ! -z $(pidof plank | grep '[0-9]') ] && killall plank &>/dev/null
         
         sleep 1
+        touch $HOME/.hamonikr/taebaekupdate.done
     fi
-    touch $HOME/.hamonikr/taebaekupdate.done
 }
 
 case "$1" in

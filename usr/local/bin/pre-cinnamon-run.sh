@@ -59,3 +59,10 @@ if [ -f "$HOME/.hamonikr/set-user-env.done" ]; then
         log "Execute set-user-env command..."        
     fi
 fi
+
+if [ ! -f $HOME/.hamonikr/theme/hamonikr-theme-setting.done ]; then
+    if command -v hamonikr-theme-setting > /dev/null; then
+        hamonikr-theme-setting macstyle
+        log "Execute hamonikr-theme-setting macstyle command..."        
+    fi
+fi

@@ -1,3 +1,12 @@
+hamonikr-system (7.8.3) unstable; urgency=medium
+
+  [Kevin Kim]
+  * Update pre cinnamon command
+  * Fix plank wrong path
+  * Set UTF-8 when you open the file explicitly
+
+ -- HamoniKR <pkg@hamonikr.org>  Thu, 08 Aug 2024 10:50:40 +0900
+
 hamonikr-system (7.8.2) unstable; urgency=medium
 
   [Kevin Kim]
