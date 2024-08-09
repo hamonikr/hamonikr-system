@@ -206,7 +206,7 @@ case "$1" in
             fi
 
             if [ -f "$HOME/.config/asbru/asbru.yml" ]; then
-                sed -i 's/Monospace/Hack Nerd Font Regular/g' $HOME/.config/asbru/asbru.yml
+                sed -i 's/Monospace/Monaco Nerd Font/g' $HOME/.config/asbru/asbru.yml
                 [ $? -eq 0 ] && log "Update asbru font setting"
             fi
 
