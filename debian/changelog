@@ -1,3 +1,10 @@
+hamonikr-system (7.8.5) unstable; urgency=medium
+
+  [Kevin Kim]
+  * Fix copy translation step
+
+ -- HamoniKR <pkg@hamonikr.org>  Fri, 09 Aug 2024 11:07:08 +0900
+
 hamonikr-system (7.8.4) unstable; urgency=medium
 
   [Kevin Kim]
