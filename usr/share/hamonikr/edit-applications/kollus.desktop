@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0.0.5
+Name=KollusAgent
+GenericName=KollusAgent Linux
+Comment=KollusAgent supports Kollus Vod service
+Exec=/usr/bin/kollus.sh %u
+Terminal=false
+Type=Application
+Icon=/usr/share/icons/kollus-icon.png
+StartupNotify=false
+Categories=Utility;Network
+MimeType=x-scheme-handler/kollus
+NoDisplay=true

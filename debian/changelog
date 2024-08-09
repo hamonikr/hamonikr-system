@@ -1,3 +1,9 @@
+hamonikr-system (7.8.6) unstable; urgency=medium
+
+  * Modified kollus.desktop
+
+ -- HamoniKR <pkg@hamonikr.org>  Fri, 09 Aug 2024 12:25:28 +0900
+
 hamonikr-system (7.8.5) unstable; urgency=medium
 
   [Kevin Kim]
