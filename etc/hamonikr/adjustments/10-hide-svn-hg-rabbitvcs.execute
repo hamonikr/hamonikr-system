@@ -1,0 +1,28 @@
+#!/bin/bash
+# default group setting, when create new user
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+# hide svn, hg in context menu
+if [ -f "/usr/share/rabbitvcs/configspec.ini" ] ; then
+    sed -i 's|svn = boolean(default=False)|svn = boolean(default=True)|g' /usr/share/rabbitvcs/configspec.ini
+    sed -i 's|hg = boolean(default=False)|hg = boolean(default=True)|g' /usr/share/rabbitvcs/configspec.ini
+    log "Updated /usr/share/rabbitvcs/configspec.ini"
+fi
+
+if [ -f "/opt/rabbitvcs-0.19/rabbitvcs/util/configspec/configspec.ini" ] ; then
+    sed -i 's|svn = boolean(default=False)|svn = boolean(default=True)|g' /opt/rabbitvcs-0.19/rabbitvcs/util/configspec/configspec.ini
+    sed -i 's|hg = boolean(default=False)|hg = boolean(default=True)|g' /opt/rabbitvcs-0.19/rabbitvcs/util/configspec/configspec.ini
+    log "Updated /opt/rabbitvcs-0.19/rabbitvcs/util/configspec/configspec.ini"
+fi        
+
+

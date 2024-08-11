@@ -1,3 +1,9 @@
+hamonikr-system (7.9.5) unstable; urgency=medium
+
+  * Hide hg and svn in rabbitvcs
+
+ -- HamoniKR <pkg@hamonikr.org>  Mon, 12 Aug 2024 01:09:15 +0900
+
 hamonikr-system (7.9.4) unstable; urgency=medium
 
   * Add Korean translation for gTile
