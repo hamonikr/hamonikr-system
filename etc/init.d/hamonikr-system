@@ -17,8 +17,10 @@ case $1 in
 			systemctl disable ubuntu-system-adjustments
 		fi	
 		/usr/lib/hamonikr/hamonikr-system/hamonikr-adjust.py
+		/etc/hamonikr/adjustments/10-adjust-grub-title.execute
 		;;
     stop)
+		/etc/hamonikr/adjustments/10-adjust-grub-title.execute
 		;;
     status)
 		exit 0

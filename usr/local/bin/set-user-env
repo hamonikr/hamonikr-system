@@ -200,13 +200,14 @@ case "$1" in
             set_keyboard_shortcuts
 
             if [ ! -d $HOME/.local/share/cinnamon/search_providers/google@hamonikr.org ]; then
+                mkdir -p $HOME/.local/share/cinnamon/search_providers/
                 cp -a /usr/share/cinnamon/search_providers/google@hamonikr.org $HOME/.local/share/cinnamon/search_providers/google@hamonikr.org
-                gsettings set org.cinnamon enabled-search-providers "[\"google@hamonikr.org\"]"
-                log "update search provider settings"
             fi
+            gsettings set org.cinnamon enabled-search-providers "[\"google@hamonikr.org\"]"
+            log "update search provider settings"
 
             if [ -f "$HOME/.config/asbru/asbru.yml" ]; then
-                sed -i 's/Monospace/Monaco Nerd Font/g' $HOME/.config/asbru/asbru.yml
+                sed -i 's/Monospace/MesloLGS NF/g' $HOME/.config/asbru/asbru.yml
                 [ $? -eq 0 ] && log "Update asbru font setting"
             fi
 

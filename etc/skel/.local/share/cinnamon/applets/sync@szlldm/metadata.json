@@ -1,0 +1,7 @@
+{
+    "description": "Monitor yet unwritten cached data. Click on the applet to sync (write out cached data). Useful when copying large files to slow removable medium(e.g. pendrive).",
+    "uuid": "sync@szlldm",
+    "name": "Sync",
+    "author": "szlldm",
+    "last-edited": 1720142418
+}
