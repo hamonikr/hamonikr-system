@@ -1,3 +1,11 @@
+hamonikr-system (7.9.4) unstable; urgency=medium
+
+  * Add Korean translation for gTile
+  * Fix file permission in /etc/skel/.local/share/cinnamon
+  * The translation of applet and extension must be installed inside home.
+
+ -- HamoniKR <pkg@hamonikr.org>  Mon, 12 Aug 2024 00:48:05 +0900
+
 hamonikr-system (7.9.3) unstable; urgency=medium
 
   * Add applet and extension into /etc/skel
