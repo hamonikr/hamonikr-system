@@ -138,9 +138,19 @@ if clipboard_content.strip() == "":
 
 # Define the pre-defined prompt
 if os.getenv("LANG", "en")[:2] == "ko":
-    predefined_prompt = "다음 문장이 프로그램 소스코드인 경우 코드에 대한 설명을 해주고, 오류 메세지인 경우 사용자가 우분투 24.04 기반의 Cinnamon 데스크톱 환경을 사용하는 하모니카OS를 사용한다고 가정하고, 이 오류의 설명과 해결방법을 알려주세요. 모든 응답은 한국어로 해주세요.\n"
+    predefined_prompt = """다음 문장이 프로그램 소스코드인 경우 코드에 대한 설명을 해주고, 
+    오류 메시지인 경우 사용자가 우분투 24.04 기반의 Cinnamon 데스크톱 환경을 사용하는 
+    HamoniKR OS를 사용한다고 가정하고, 먼저 https://hamonikr.org 또는 
+    https://docs.hamonikr.org/hamonikr-8.0 에서 관련 문서를 참고해 설명해 주세요. 
+    관련 정보를 찾을 수 없는 경우 https://askubuntu.com 에서 관련 내용을 찾아서 
+    참고할 수 있는 링크와 함께 설명해 주세요. 모든 응답은 한국어로 해주세요.\n"""
 else:
-    predefined_prompt = "If the following text is a program source code, please explain the code, and if it is an error message, assume that the user uses a HamoniKR OS that uses Ubuntu 24.04 based Cinnamon desktop environment, and tells us how to explain and solve this error.. Please respond in English.\n"
+    predefined_prompt = """If the following text is a program source code, please explain the 
+    code, and if it is an error message, assume that the user uses a HamoniKR OS that uses 
+    Ubuntu 24.04 based Cinnamon desktop environment. First, refer to relevant documents 
+    from https://hamonikr.org or https://docs.hamonikr.org/hamonikr-8.0. If no relevant 
+    information is found, provide explanations based on related content from 
+    https://askubuntu.com, including reference links. Please respond in English.\n"""
 
 # Combine the predefined prompt with the clipboard content
 full_prompt = f"{predefined_prompt}{clipboard_content}"
