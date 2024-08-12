@@ -2,9 +2,8 @@ Source: hamonikr-system
 Section: admin
 Priority: optional
 Maintainer: HamoniKR <root@hamonikr.org>
-XSBC-Original-Maintainer: Clement Lefebvre <clem@linuxmint.com>
+XSBC-Original-Maintainer: HamoniKR <root@hamonikr.org>
 Build-Depends: debhelper (>= 9),
-               fonts-naver-d2coding,
                grub-common
 Standards-Version: 3.9.5
 Homepage: https://www.hamonikr.org
@@ -16,7 +15,10 @@ Architecture: all
 Depends: ${misc:Depends},
          imagemagick-6-common,
          ffmpeg,
-         xdotool
+         xdotool,
+         python3-pip,
+         python3-requests,
+         xclip
 Replaces: hamonikr-themes,
           hamonikr-welcome, 
           hamonikr-icons

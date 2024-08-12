@@ -11,25 +11,6 @@ import json
 import re
 import time
 
-# Function to install a package in a virtual environment
-def install_package_in_venv(package, venv_dir):
-    subprocess.check_call([os.path.join(venv_dir, 'bin', 'python'), "-m", "pip", "install", package])
-
-# Ensure the required packages are installed in a virtual environment
-def ensure_package_installed(package, venv_dir):
-    try:
-        subprocess.check_call([os.path.join(venv_dir, 'bin', 'python'), "-c", f"import {package}"])
-    except subprocess.CalledProcessError:
-        install_package_in_venv(package, venv_dir)
-
-# Create a virtual environment if it does not exist
-venv_dir = Path.home() / '.ask_openai_venv'
-if not venv_dir.exists():
-    subprocess.check_call([sys.executable, "-m", "venv", str(venv_dir)])
-
-# Ensure the required packages are installed in the virtual environment
-ensure_package_installed('requests', venv_dir)
-
 # Configure logging to log to the user's home directory
 log_file = os.path.join(os.path.expanduser("~"), 'ask_openai.log')
 logging.basicConfig(filename=log_file, level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
