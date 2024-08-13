@@ -28,20 +28,15 @@ def read_api_key():
         return api_key
     
     config_path = Path.home() / '.ask_openai.conf'
-    if not config_path.exists():
-        message = "Configuration file not found in the home directory."
-        logging.error(message)
-        show_message("Error", message)
-        raise FileNotFoundError(message)
-    
-    config = configparser.ConfigParser()
-    config.read(config_path)
-    api_key = config.get('openai', 'api_key', fallback=None)
-    
-    if api_key:
-        logging.debug("API key read from configuration file.")
-        return api_key
-    
+    if config_path.exists():
+        config = configparser.ConfigParser()
+        config.read(config_path)
+        api_key = config.get('openai', 'api_key', fallback=None)
+        
+        if api_key:
+            logging.debug("API key read from configuration file.")
+            return api_key
+        
     message = "API key is not set. Please set the API key in the configuration file or as an environment variable."
     logging.error(message)
     show_message("Error", message)
