@@ -2,6 +2,7 @@ hamonikr-system (7.9.8) unstable; urgency=medium
 
   * Change to use environment variables and settings at the same time
    - ask_openai command
+  * Update latest gTile extension
 
  -- HamoniKR <pkg@hamonikr.org>  Tue, 13 Aug 2024 22:46:02 +0900
 
