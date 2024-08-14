@@ -206,10 +206,12 @@ case "$1" in
             gsettings set org.cinnamon enabled-search-providers "[\"google@hamonikr.org\"]"
             log "update search provider settings"
 
-            if [ -f "$HOME/.config/asbru/asbru.yml" ]; then
-                sed -i 's/Monospace/MesloLGS NF/g' $HOME/.config/asbru/asbru.yml
-                [ $? -eq 0 ] && log "Update asbru font setting"
-            fi
+            # if [ -f "$HOME/.config/asbru/asbru.yml" ]; then
+            #     sed -i 's/terminal font:.*/terminal font: MesloLGS NF 9/g' $HOME/.config/asbru/asbru.yml
+            #     sed -i 's/info font:.*/info font: MesloLGS NF 9/g' $HOME/.config/asbru/asbru.yml
+            #     # sed -i "s/unprotected color:.*/unprotected color: '#8f8ff0f0a4a4'/g" $HOME/.config/asbru/asbru.yml
+            #     [ $? -eq 0 ] && log "Update asbru font setting"
+            # fi
 
             [ -f ~/.config/user-dirs.dirs ] && source ~/.config/user-dirs.dirs
             [ -z $XDG_DESKTOP_DIR ] && XDG_DESKTOP_DIR="$HOME/Desktop"

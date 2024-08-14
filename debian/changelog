@@ -1,3 +1,10 @@
+hamonikr-system (7.9.9) unstable; urgency=medium
+
+  * Remove asbru.yml modification part in set-user-env
+   - Cause updated original package
+
+ -- HamoniKR <pkg@hamonikr.org>  Thu, 15 Aug 2024 00:47:35 +0900
+
 hamonikr-system (7.9.8) unstable; urgency=medium
 
   * Change to use environment variables and settings at the same time
