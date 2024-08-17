@@ -1,3 +1,9 @@
+hamonikr-system (8.0.0) unstable; urgency=medium
+
+  * Replace in code.desktop as code --no-sandbox
+
+ -- HamoniKR <pkg@hamonikr.org>  Sat, 17 Aug 2024 14:28:51 +0900
+
 hamonikr-system (7.9.9) unstable; urgency=medium
 
   * Remove asbru.yml modification part in set-user-env
