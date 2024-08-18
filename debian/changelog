@@ -1,3 +1,9 @@
+hamonikr-system (8.0.1) unstable; urgency=medium
+
+  * Add appimagelaunchersettings.desktop
+
+ -- HamoniKR <pkg@hamonikr.org>  Sun, 18 Aug 2024 21:02:36 +0900
+
 hamonikr-system (8.0.0) unstable; urgency=medium
 
   * Replace in code.desktop as code --no-sandbox

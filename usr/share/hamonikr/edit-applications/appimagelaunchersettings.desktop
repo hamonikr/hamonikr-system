@@ -1,0 +1,15 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Exec=AppImageLauncherSettings %f
+Name=AppImageLauncher Settings
+Name[ko]=앱이미지 런처 설정
+Name[de]=AppImageLauncher-Einstellungen
+Comment=Change settings for AppImageLauncher
+Comment[ko]=앱이미지 런처 설정을 변경합니다
+Comment[de]=Einstellungen für AppImageLauncher ändern
+Icon=AppImageLauncher
+Terminal=false
+Categories=Utility;Settings;DesktopSettings;LXQt;X-XFCE-SettingsDialog;X-XFCE-PersonalSettings;X-GNOME-PersonalSettings;
+X-AppImage-Integrate=false
+StartupWMClass=AppImageLauncher
