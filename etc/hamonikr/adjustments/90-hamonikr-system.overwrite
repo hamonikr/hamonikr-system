@@ -3,3 +3,5 @@
 /usr/share/hamonikr/python-apt/templates/Ubuntu.mirrors /usr/share/python-apt/templates/Ubuntu.mirrors
 /usr/share/backgrounds/hamonikr/default_background.jpg /usr/share/backgrounds/linuxmint/default_background.jpg
 /usr/share/hamonikr/mint-mirrors/linuxmint.list /usr/share/mint-mirrors/linuxmint.list
+/usr/local/sbin/yelp /usr/bin/yelp
+/usr/local/sbin/yelp /usr/local/bin/yelp
