@@ -11,9 +11,15 @@ import json
 import re
 import time
 
-# Configure logging to log to the user's home directory
+# Determine whether the program is running in debug mode
+DEBUG_MODE = os.getenv('DEBUG_MODE', 'false').lower() == 'true'
+
+# Configure logging based on DEBUG_MODE
 log_file = os.path.join(os.path.expanduser("~"), 'ask_openai.log')
-logging.basicConfig(filename=log_file, level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+if DEBUG_MODE:
+    logging.basicConfig(filename=log_file, level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+else:
+    logging.basicConfig(filename=log_file, level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Function to show message using Zenity
 def show_message(title, text):

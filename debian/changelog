@@ -1,3 +1,9 @@
+hamonikr-system (8.0.4) unstable; urgency=medium
+
+  * Add DEBUG_MODE in ask_openai log
+
+ -- HamoniKR <pkg@hamonikr.org>  Mon, 26 Aug 2024 11:06:43 +0900
+
 hamonikr-system (8.0.3) unstable; urgency=medium
 
   * Overwrite yelp to /usr/bin and /usr/local/bin
