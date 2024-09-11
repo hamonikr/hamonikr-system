@@ -14,8 +14,12 @@ import time
 # Determine whether the program is running in debug mode
 DEBUG_MODE = os.getenv('DEBUG_MODE', 'false').lower() == 'true'
 
-# Configure logging based on DEBUG_MODE
-log_file = os.path.join(os.path.expanduser("~"), 'ask_openai.log')
+# Ensure the directory for the log file exists
+log_dir = os.path.join(os.path.expanduser("~"), '.hamonikr/log')
+os.makedirs(log_dir, exist_ok=True)  # Create the directory if it does not exist
+
+log_file = os.path.join(log_dir, 'ask_openai.log')
+
 if DEBUG_MODE:
     logging.basicConfig(filename=log_file, level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 else:
@@ -30,7 +34,7 @@ def show_message(title, text):
 def read_api_key():
     api_key = os.getenv('OPENAI_API_KEY')
     if api_key:
-        logging.debug("API key read from environment variable.")
+        # logging.debug("API key read from environment variable.")
         return api_key
     
     config_path = Path.home() / '.ask_openai.conf'
@@ -40,7 +44,7 @@ def read_api_key():
         api_key = config.get('openai', 'api_key', fallback=None)
         
         if api_key:
-            logging.debug("API key read from configuration file.")
+            # logging.debug("API key read from configuration file.")
             return api_key
         
     message = "API key is not set. Please set the API key in the configuration file or as an environment variable."
@@ -55,20 +59,20 @@ def get_clipboard_content():
     for attempt in range(3):
         try:
             content = subprocess.check_output(['xclip', '-selection', 'clipboard', '-o'], text=True)
-            logging.debug(f"Clipboard content retrieved using xclip on attempt {attempt + 1}: {content}")
+            # logging.debug(f"Clipboard content retrieved using xclip on attempt {attempt + 1}: {content}")
             if content.strip() != "":
                 return content
         except subprocess.CalledProcessError as e:
-            logging.error(f"Error getting clipboard content using xclip on attempt {attempt + 1}: {e}")
+            # logging.error(f"Error getting clipboard content using xclip on attempt {attempt + 1}: {e}")
             time.sleep(1)
         
         try:
             content = subprocess.check_output(['xsel', '--clipboard', '--output'], text=True)
-            logging.debug(f"Clipboard content retrieved using xsel on attempt {attempt + 1}: {content}")
+            # logging.debug(f"Clipboard content retrieved using xsel on attempt {attempt + 1}: {content}")
             if content.strip() != "":
                 return content
         except subprocess.CalledProcessError as e:
-            logging.error(f"Error getting clipboard content using xsel on attempt {attempt + 1}: {e}")
+            # logging.error(f"Error getting clipboard content using xsel on attempt {attempt + 1}: {e}")
             time.sleep(1)
     
     return None
@@ -77,10 +81,10 @@ def get_clipboard_content():
 def check_internet_connection():
     try:
         subprocess.check_call(['ping', '-c', '1', '8.8.8.8'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        logging.debug("Internet connection is available.")
+        # logging.debug("Internet connection is available.")
         return True
     except subprocess.CalledProcessError:
-        logging.error("No internet connection.")
+        # logging.error("No internet connection.")
         return False
 
 # Function to query OpenAI API
@@ -101,9 +105,9 @@ def query_openai(model, prompt, api_key):
             "max_tokens": 4096
         }
         response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, data=json.dumps(data))
-        logging.debug(f"OpenAI API response status code: {response.status_code}")
-        logging.debug(f"OpenAI API response headers: {response.headers}")
-        logging.debug(f"OpenAI API response content: {response.content}")
+        # logging.debug(f"OpenAI API response status code: {response.status_code}")
+        # logging.debug(f"OpenAI API response headers: {response.headers}")
+        # logging.debug(f"OpenAI API response content: {response.content}")
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
@@ -112,9 +116,9 @@ def query_openai(model, prompt, api_key):
 
 # Check if the API key is set
 if not api_key:
-    message = "OpenAI API key is not set. Please set the OPENAI_API_KEY key in configuration file or environment variable"
+    message = "OpenAI API key is not set. Please set the OPENAI_API_KEY key in ~/.ask_openai.conf file."
     if os.getenv("LANG", "en")[:2] == "ko":
-        message = "API 키가 설정되지 않았습니다. ~/.ask_openai.conf 파일 또는 환경변수 OPENAI_API_KEY 를 설정해 주세요."
+        message = "API 키가 설정되지 않았습니다. ~/.ask_openai.conf 파일의 OPENAI_API_KEY 를 설정해 주세요."
     logging.error(message)
     show_message("Error", message)
     raise EnvironmentError(message)
@@ -155,7 +159,7 @@ else:
 
 # Combine the predefined prompt with the clipboard content
 full_prompt = f"{predefined_prompt}{clipboard_content}"
-logging.debug(f"Full prompt: {full_prompt}")
+# logging.debug(f"Full prompt: {full_prompt}")
 
 # Model to use
 # https://openai.com/api/pricing/
@@ -181,7 +185,7 @@ response_text = re.sub(r'\*\*', '', response_text)
 response_text = re.sub(r'```[a-z]*', '', response_text)
 response_text = response_text.replace('```', '').replace('`', '')
 
-logging.debug(f"OpenAI Response: {response_text}")
+# logging.debug(f"OpenAI Response: {response_text}")
 
 # Show the response text in a Zenity dialog with scrolling
 if os.getenv("LANG", "en")[:2] == "ko":

@@ -1,3 +1,10 @@
+hamonikr-system (8.0.5) unstable; urgency=medium
+
+  * Reduce ask_openai log
+  * Changed ask_openai log file location
+
+ -- HamoniKR <pkg@hamonikr.org>  Thu, 12 Sep 2024 01:09:15 +0900
+
 hamonikr-system (8.0.4) unstable; urgency=medium
 
   * Add DEBUG_MODE in ask_openai log
