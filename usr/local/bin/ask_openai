@@ -11,19 +11,13 @@ import json
 import re
 import time
 
-# Determine whether the program is running in debug mode
-DEBUG_MODE = os.getenv('DEBUG_MODE', 'false').lower() == 'true'
-
 # Ensure the directory for the log file exists
 log_dir = os.path.join(os.path.expanduser("~"), '.hamonikr/log')
 os.makedirs(log_dir, exist_ok=True)  # Create the directory if it does not exist
 
 log_file = os.path.join(log_dir, 'ask_openai.log')
 
-if DEBUG_MODE:
-    logging.basicConfig(filename=log_file, level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-else:
-    logging.basicConfig(filename=log_file, level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename=log_file, level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Function to show message using Zenity
 def show_message(title, text):
@@ -105,7 +99,7 @@ def query_openai(model, prompt, api_key):
             "max_tokens": 4096
         }
         response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, data=json.dumps(data))
-        # logging.debug(f"OpenAI API response status code: {response.status_code}")
+        logging.debug(f"OpenAI API response status code: {response.status_code}")
         # logging.debug(f"OpenAI API response headers: {response.headers}")
         # logging.debug(f"OpenAI API response content: {response.content}")
         response.raise_for_status()
