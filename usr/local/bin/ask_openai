@@ -1,5 +1,21 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
+# 
+# Copyright (C) 2023 HamoniKR Team
+# Author: Kevin Kim <chaeya@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
 import subprocess
@@ -10,85 +26,68 @@ from pathlib import Path
 import json
 import re
 import time
+import requests
 
-# Ensure the directory for the log file exists
-log_dir = os.path.join(os.path.expanduser("~"), '.hamonikr/log')
-os.makedirs(log_dir, exist_ok=True)  # Create the directory if it does not exist
+CONFIG_FILE = '.ask_openai.conf'
+LOG_DIR = os.path.join(os.path.expanduser("~"), '.hamonikr/log')
+LOG_FILE = os.path.join(LOG_DIR, 'ask_openai.log')
+API_URL = "https://api.openai.com/v1/chat/completions"
+MODEL = "gpt-4o-mini"
 
-log_file = os.path.join(log_dir, 'ask_openai.log')
+os.makedirs(LOG_DIR, exist_ok=True)
+logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
-logging.basicConfig(filename=log_file, level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-
-# Function to show message using Zenity
 def show_message(title, text):
     proc = subprocess.Popen(['zenity', '--text-info', '--title', title, '--width=600', '--height=400'], stdin=subprocess.PIPE, text=True)
     proc.communicate(input=text)
 
-# Read API key from configuration file or environment variable
 def read_api_key():
     api_key = os.getenv('OPENAI_API_KEY')
     if api_key:
-        # logging.debug("API key read from environment variable.")
         return api_key
     
-    config_path = Path.home() / '.ask_openai.conf'
+    config_path = Path.home() / CONFIG_FILE
     if config_path.exists():
         config = configparser.ConfigParser()
         config.read(config_path)
         api_key = config.get('openai', 'api_key', fallback=None)
         
         if api_key:
-            # logging.debug("API key read from configuration file.")
             return api_key
         
     message = "API key is not set. Please set the API key in the configuration file or as an environment variable."
-    logging.error(message)
-    show_message("Error", message)
-    raise EnvironmentError(message)
+    handle_error(message)
 
-api_key = read_api_key()
-
-# Function to get the content from the clipboard using xclip or xsel
 def get_clipboard_content():
     for attempt in range(3):
         try:
             content = subprocess.check_output(['xclip', '-selection', 'clipboard', '-o'], text=True)
-            # logging.debug(f"Clipboard content retrieved using xclip on attempt {attempt + 1}: {content}")
             if content.strip() != "":
                 return content
-        except subprocess.CalledProcessError as e:
-            # logging.error(f"Error getting clipboard content using xclip on attempt {attempt + 1}: {e}")
+        except subprocess.CalledProcessError:
             time.sleep(1)
         
         try:
             content = subprocess.check_output(['xsel', '--clipboard', '--output'], text=True)
-            # logging.debug(f"Clipboard content retrieved using xsel on attempt {attempt + 1}: {content}")
             if content.strip() != "":
                 return content
-        except subprocess.CalledProcessError as e:
-            # logging.error(f"Error getting clipboard content using xsel on attempt {attempt + 1}: {e}")
+        except subprocess.CalledProcessError:
             time.sleep(1)
     
     return None
 
-# Function to check internet connectivity
 def check_internet_connection():
     try:
         subprocess.check_call(['ping', '-c', '1', '8.8.8.8'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        # logging.debug("Internet connection is available.")
         return True
     except subprocess.CalledProcessError:
-        # logging.error("No internet connection.")
         return False
 
-# Function to query OpenAI API
 def query_openai(model, prompt, api_key):
     if not check_internet_connection():
-        show_message("Error", "No internet connection. Please check your network settings.")
-        raise RuntimeError("No internet connection.")
+        handle_error("No internet connection. Please check your network settings.")
     
     try:
-        import requests
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Bearer {api_key}"
@@ -98,91 +97,106 @@ def query_openai(model, prompt, api_key):
             "messages": [{"role": "user", "content": prompt}],
             "max_tokens": 4096
         }
-        response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, data=json.dumps(data))
+        response = requests.post(API_URL, headers=headers, data=json.dumps(data))
         logging.debug(f"OpenAI API response status code: {response.status_code}")
-        # logging.debug(f"OpenAI API response headers: {response.headers}")
-        # logging.debug(f"OpenAI API response content: {response.content}")
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
         logging.error(f"Error querying OpenAI API: {e}")
         return None
 
-# Check if the API key is set
-if not api_key:
-    message = "OpenAI API key is not set. Please set the OPENAI_API_KEY key in ~/.ask_openai.conf file."
-    if os.getenv("LANG", "en")[:2] == "ko":
-        message = "API 키가 설정되지 않았습니다. ~/.ask_openai.conf 파일의 OPENAI_API_KEY 를 설정해 주세요."
-    logging.error(message)
+def handle_error(message, log_level=logging.ERROR):
+    logging.log(log_level, message)
     show_message("Error", message)
-    raise EnvironmentError(message)
+    raise RuntimeError(message)
 
-# Get the content from the clipboard
-clipboard_content = get_clipboard_content()
-if clipboard_content is None:
-    message = "Failed to retrieve clipboard content."
-    if os.getenv("LANG", "en")[:2] == "ko":
-        message = "클립보드 내용을 가져오는 데 실패했습니다."
-    logging.error(message)
-    show_message("Error", message)
-    raise ValueError(message)
+def is_korean():
+    return os.getenv("LANG", "en")[:2] == "ko"
 
-if clipboard_content.strip() == "":
-    message = "Clipboard is empty!"
-    if os.getenv("LANG", "en")[:2] == "ko":
-        message = "클립보드가 비어 있습니다!"
-    logging.error(message)
-    show_message("Error", message)
-    raise ValueError(message)
-
-# Define the pre-defined prompt
-if os.getenv("LANG", "en")[:2] == "ko":
-    predefined_prompt = """다음 문장이 프로그램 소스코드인 경우 코드에 대한 설명을 해주고, 
-    오류 메시지인 경우 사용자가 우분투 24.04 기반의 Cinnamon 데스크톱 환경을 사용하는 
-    HamoniKR OS를 사용한다고 가정하고, 먼저 https://hamonikr.org 또는 
-    https://docs.hamonikr.org/hamonikr-8.0 에서 관련 문서를 참고해 설명해 주세요. 
-    관련 정보를 찾을 수 없는 경우 https://askubuntu.com 에서 관련 내용을 찾아서 
-    참고할 수 있는 링크와 함께 설명해 주세요. 모든 응답은 한국어로 해주세요.\n"""
-else:
-    predefined_prompt = """If the following text is a program source code, please explain the 
-    code, and if it is an error message, assume that the user uses a HamoniKR OS that uses 
-    Ubuntu 24.04 based Cinnamon desktop environment. First, refer to relevant documents 
-    from https://hamonikr.org or https://docs.hamonikr.org/hamonikr-8.0. If no relevant 
-    information is found, provide explanations based on related content from 
-    https://askubuntu.com, including reference links. Please respond in English.\n"""
-
-# Combine the predefined prompt with the clipboard content
-full_prompt = f"{predefined_prompt}{clipboard_content}"
-# logging.debug(f"Full prompt: {full_prompt}")
-
-# Model to use
-# https://openai.com/api/pricing/
-model = "gpt-4o-mini"
-
-# Query OpenAI API
-response = query_openai(model, full_prompt, api_key)
-
-if response is None:
-    logging.error("No response from OpenAI API.")
-    if os.getenv("LANG", "en")[:2] == "ko":
-        show_message("Error", "OpenAI 응답이 없습니다. API키가 사용가능한지 확인해주세요.")
-    else:
-        show_message("Error", "No response from OpenAI API. Check your API key.")
+def process_api_response(response):
+    if response is None:
+        message = "OpenAI 응답이 없습니다. API키가 사용가능한지 확인해주세요." if is_korean() else "No response from OpenAI API. Check your API key."
+        handle_error(message)
     
-    raise RuntimeError("No response from OpenAI API.")
+    response_text = response.get('choices', [{}])[0].get('message', {}).get('content', 'No response text available.')
+    response_text = re.sub(r'\*\*', '', response_text)
+    response_text = re.sub(r'```[a-z]*', '', response_text)
+    response_text = response_text.replace('```', '').replace('`', '')
+    
+    return response_text
 
-# Extract and log the response text
-response_text = response.get('choices', [{}])[0].get('message', {}).get('content', 'No response text available.')
+def main():
+    api_key = read_api_key()
+    if not api_key:
+        message = "API 키가 설정되지 않았습니다. ~/.ask_openai.conf 파일의 OPENAI_API_KEY 를 설정해 주세요." if is_korean() else "OpenAI API key is not set. Please set the OPENAI_API_KEY key in ~/.ask_openai.conf file."
+        handle_error(message)
 
-# Remove formatting characters like ** and ``` and other language codes
-response_text = re.sub(r'\*\*', '', response_text)
-response_text = re.sub(r'```[a-z]*', '', response_text)
-response_text = response_text.replace('```', '').replace('`', '')
+    clipboard_content = get_clipboard_content()
+    if clipboard_content is None or clipboard_content.strip() == "":
+        message = "클립보드가 비어 있습니다!" if is_korean() else "Clipboard is empty!"
+        handle_error(message)
 
-# logging.debug(f"OpenAI Response: {response_text}")
+    def get_predefined_prompt():
+        korean_prompt = """
+        다음 문장을 분석해주세요:
+        1. 프로그램 소스코드인 경우: 코드에 대한 설명을 제공해주세요.
+        2. 오류 메시지인 경우: 
+            하모니카OS(우분투 커널 기반, 리눅스 민트의 시나몬 데스크톱 환경 포함)를 사용하는 질문자가 특정 문제를 제기한 상황입니다.
+            
+            하모니카, 하모니카OS, HamoniKR, HamoniKR OS 등의 단어는 모두 하모니카OS를 의미합니다.
+            하모니카OS 는 linuxmint 를 기반으로, 한국 사용자들의 환경에 적합한 여러 프로그램을 추가하고 개작한 운영체제입니다.
+            하모니카 5.0은 linuxmint 20.1 Ulyssa 기반이며, Ubuntu 20.04 Focal 과 동일한 패키지입니다. 코드네임은 한라(Hanla) 입니다.
+            하모니카 6.0은 linuxmint 20.3 Una 기반이며, Ubuntu 20.4 Focal 과 동일한 패키지입니다. 코드네임은 금강(kumkang) 입니다.
+            하모니카 7.0은 linuxmint 21.2 Victoria 기반이며, Ubuntu 22.04 jammy 과 동일한 패키지입니다. 코드네임은 태백(taebaek) 입니다.
+            하모니카 8.0은 linuxmint 22 Wilma 기반이며, Ubuntu 24.04 Noble 과 동일한 패키지입니다. 코드네임은 백두(paektu) 입니다.
 
-# Show the response text in a Zenity dialog with scrolling
-if os.getenv("LANG", "en")[:2] == "ko":
-    show_message("AI 응답", response_text)
-else:
-    show_message("OpenAI Response", response_text)
+            정보를 제공할 때 다음의 우선순위로 웹사이트에서 정보를 검색하여 답변에 포함합니다:
+            - 하모니카 매뉴얼 사이트 (버전별):
+            - https://docs.hamonikr.org/hamonikr
+            - https://docs.hamonikr.org/hamonikr-5.0
+            - https://docs.hamonikr.org/hamonikr-6.0
+            - https://docs.hamonikr.org/hamonikr-7.0
+            - https://docs.hamonikr.org/hamonikr-8.0
+            - 하모니카 커뮤니티 질의응답 게시글:
+            - https://hamonikr.org/hamoni_board
+            - 우분투와 리눅스 민트의 질의응답 사이트:
+            - https://askubuntu.com/
+            - https://forums.linuxmint.com/
+
+            a. 질문자가 제공한 정보가 충분하다면, 해당 문제를 해결하기 위한 구체적인 방법을 한글로 자세히 설명합니다. 반드시 사용한 정보의 출처를 명확하게 제공하세요.
+            b. 질문이 하모니카OS, 리눅스, 또는 시나몬 데스크톱 환경과 관련이 없거나, 제공된 정보로 정확한 출처를 명확하게 제시할 수 없는 경우에는 일반적인 응답을 해주세요.
+            c. 이 답변이 ChatGPT 가 작성한 것을 알려주고, 인공지능 답변을 그대로 사용하는 위험에 대해서 알려주세요.
+
+            주의사항: 코드를 설명하는 부분은 bash, python 등의 문구를 붙이지 말고 평문으로 출력해주세요.
+            주의사항: 강조를 위해 ** 으로 표시하는 부분은 평문으로 출력해주세요.
+            주의사항: 항상 친절하고 이해하기 쉬운 언어를 사용하여 답변하며, 하모니카OS, 리눅스 민트, 시나몬 데스크톱 환경과 관련된 문제 해결에 중점을 둡니다.
+            주의사항: 답변을 하기 전 전체 답변 내용을 검토해서, 제대로 구성되지 않은 문장이나, 문맥상 이상한 부분을 자연스럽게 수정하는 과정을 수행 후, 리눅스 전문가가 말하듯이 해주세요.
+        """
+
+        english_prompt = """
+        Please analyze the following text:
+        1. If it's a program source code: Provide an explanation of the code.
+        2. If it's an error message:
+           - User environment: HamoniKR OS (Ubuntu 24.04 based, Cinnamon desktop)
+           - Finding a solution:
+             a) First, refer to relevant documents from:
+                - https://hamonikr.org
+                - https://docs.hamonikr.org/hamonikr-8.0
+             b) If no information is found above, find related content on https://askubuntu.com
+                and provide explanations with reference links.
+        Please respond in English.
+        """
+
+        return korean_prompt if is_korean() else english_prompt
+
+    predefined_prompt = get_predefined_prompt()
+
+    full_prompt = f"{predefined_prompt}{clipboard_content}"
+    response = query_openai(MODEL, full_prompt, api_key)
+    response_text = process_api_response(response)
+
+    title = "AI 응답" if is_korean() else "OpenAI Response"
+    show_message(title, response_text)
+
+if __name__ == "__main__":
+    main()
