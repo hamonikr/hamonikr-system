@@ -1,11 +1,11 @@
 RELEASE=8.0
 CODENAME=paektu
 EDITION="Cinnamon"
-DESCRIPTION="HamoniKR 8 Paektu"
+DESCRIPTION="HamoniKR 8.0 Paektu"
 DESKTOP=Gnome
 TOOLKIT=GTK
 CONKY=TRUE
 NEW_FEATURES_URL=https://docs.hamonikr.org/hamonikr-8.0/#new_feature
 RELEASE_NOTES_URL=https://docs.hamonikr.org/hamonikr-8.0/#release_note
 USER_GUIDE_URL=https://docs.hamonikr.org/hamonikr-8.0
-GRUB_TITLE="HamoniKR 8"
+GRUB_TITLE="HamoniKR 8.0"

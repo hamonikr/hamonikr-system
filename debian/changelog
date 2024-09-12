@@ -1,3 +1,9 @@
+hamonikr-system (8.0.6) unstable; urgency=medium
+
+  * Changed os version number 8 to 8.0
+
+ -- HamoniKR <pkg@hamonikr.org>  Thu, 12 Sep 2024 16:40:28 +0900
+
 hamonikr-system (8.0.5) unstable; urgency=medium
 
   * Reduce ask_openai log
