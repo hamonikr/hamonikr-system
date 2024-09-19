@@ -28,7 +28,7 @@ import re
 import time
 import requests
 
-CONFIG_FILE = '.ask_openai.conf'
+CONFIG_FILE = 'ask_openai.conf'
 LOG_DIR = os.path.join(os.path.expanduser("~"), '.hamonikr/log')
 LOG_FILE = os.path.join(LOG_DIR, 'ask_openai.log')
 API_URL = "https://api.openai.com/v1/chat/completions"
@@ -55,7 +55,7 @@ def read_api_key():
         if api_key:
             return api_key
         
-    message = "API key is not set. Please set the API key in the configuration file or as an environment variable."
+    message = "API 키가 설정되지 않았습니다. ~/ask_openai.conf 파일의 OPENAI_API_KEY 를 설정해 주세요." if is_korean() else "API key is not set. Please set the API key in the configuration file."
     handle_error(message)
 
 def get_clipboard_content():
