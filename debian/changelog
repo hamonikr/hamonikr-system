@@ -1,3 +1,9 @@
+hamonikr-system (8.0.8) unstable; urgency=medium
+
+  * Update www shortcut
+
+ -- HamoniKR <pkg@hamonikr.org>  Fri, 20 Sep 2024 08:09:47 +0900
+
 hamonikr-system (8.0.7) unstable; urgency=medium
 
   * Changed ask_openai.conf file name

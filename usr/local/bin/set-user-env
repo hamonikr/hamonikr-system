@@ -48,7 +48,8 @@ set_keyboard_shortcuts() {
     # 단축키
     if command -v shutter &> /dev/null ; then
         if ! command -v ask_openai &> /dev/null ; then
-            log "update default keyboard shortcut settings for shutter"       
+            log "update default keyboard shortcut settings for shutter"
+            gsettings set org.cinnamon.desktop.keybindings.media-keys www "['<Super>w']"
             gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ binding "['<Shift><Primary><Alt>p']"
             gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ command 'shutter -s'
             gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ name '특정영역 화면캡처'
@@ -57,7 +58,8 @@ set_keyboard_shortcuts() {
             gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom1/ name '선택한 윈도우 화면캡처'
             gsettings set org.cinnamon.desktop.keybindings custom-list "['custom0','custom1']"
         else
-            log "update default keyboard shortcut settings for shutter and ask_openai"              
+            log "update default keyboard shortcut settings for shutter and ask_openai"
+            gsettings set org.cinnamon.desktop.keybindings.media-keys www "['<Super>w']"                        
             gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ binding "['<Shift><Primary><Alt>p']"
             gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ command 'shutter -s'
             gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ name '특정영역 화면캡처'
@@ -71,7 +73,8 @@ set_keyboard_shortcuts() {
         fi
     else
         if command -v ask_openai &> /dev/null ; then    
-            log "update default keyboard shortcut settings for ask_openai"               
+            log "update default keyboard shortcut settings for ask_openai"
+            gsettings set org.cinnamon.desktop.keybindings.media-keys www "['<Super>w']" 
             gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ binding "['<Primary><Alt>a']"
             gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ command 'ask_openai'
             gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ name 'AI 질의'
