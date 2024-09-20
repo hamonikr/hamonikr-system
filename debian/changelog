@@ -1,4 +1,4 @@
-amonikr-system (8.1.0) unstable; urgency=medium
+hamonikr-system (8.1.0) unstable; urgency=medium
 
   * Add extra question feature in ask_openai command
 
