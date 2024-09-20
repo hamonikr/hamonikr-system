@@ -50,6 +50,7 @@ set_keyboard_shortcuts() {
         if ! command -v ask_openai &> /dev/null ; then
             log "update default keyboard shortcut settings for shutter"
             gsettings set org.cinnamon.desktop.keybindings.media-keys www "['<Super>w']"
+            gsettings set org.cinnamon.desktop.keybindings.media-keys help "['F1']"
             gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ binding "['<Shift><Primary><Alt>p']"
             gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ command 'shutter -s'
             gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ name '특정영역 화면캡처'
@@ -59,7 +60,8 @@ set_keyboard_shortcuts() {
             gsettings set org.cinnamon.desktop.keybindings custom-list "['custom0','custom1']"
         else
             log "update default keyboard shortcut settings for shutter and ask_openai"
-            gsettings set org.cinnamon.desktop.keybindings.media-keys www "['<Super>w']"                        
+            gsettings set org.cinnamon.desktop.keybindings.media-keys www "['<Super>w']"
+            gsettings set org.cinnamon.desktop.keybindings.media-keys help "['F1']"                      
             gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ binding "['<Shift><Primary><Alt>p']"
             gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ command 'shutter -s'
             gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ name '특정영역 화면캡처'
@@ -74,7 +76,8 @@ set_keyboard_shortcuts() {
     else
         if command -v ask_openai &> /dev/null ; then    
             log "update default keyboard shortcut settings for ask_openai"
-            gsettings set org.cinnamon.desktop.keybindings.media-keys www "['<Super>w']" 
+            gsettings set org.cinnamon.desktop.keybindings.media-keys www "['<Super>w']"
+            gsettings set org.cinnamon.desktop.keybindings.media-keys help "['F1']"
             gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ binding "['<Primary><Alt>a']"
             gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ command 'ask_openai'
             gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:/org/cinnamon/desktop/keybindings/custom-keybindings/custom0/ name 'AI 질의'

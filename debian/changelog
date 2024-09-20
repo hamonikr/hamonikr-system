@@ -1,3 +1,16 @@
+amonikr-system (8.1.0) unstable; urgency=medium
+
+  * Add extra question feature in ask_openai command
+
+ -- HamoniKR <pkg@hamonikr.org>  Fri, 20 Sep 2024 10:12:51 +0900
+
+hamonikr-system (8.0.9) unstable; urgency=medium
+
+  * Update ask_openai command
+  * Update help shortcut
+
+ -- HamoniKR <pkg@hamonikr.org>  Fri, 20 Sep 2024 08:27:58 +0900
+
 hamonikr-system (8.0.8) unstable; urgency=medium
 
   * Update www shortcut

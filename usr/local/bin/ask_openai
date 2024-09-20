@@ -34,6 +34,8 @@ LOG_FILE = os.path.join(LOG_DIR, 'ask_openai.log')
 API_URL = "https://api.openai.com/v1/chat/completions"
 MODEL = "gpt-4o-mini"
 
+conversation_history = []
+
 os.makedirs(LOG_DIR, exist_ok=True)
 logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -41,6 +43,19 @@ def show_message(title, text):
     proc = subprocess.Popen(['zenity', '--text-info', '--title', title, '--width=600', '--height=400'], stdin=subprocess.PIPE, text=True)
     proc.communicate(input=text)
 
+def show_message_with_input(title, text, follow_up_text):
+    if is_korean():
+        ok_label = "추가 질문"
+        cancel_label = "닫기"
+    else:
+        ok_label = "More Question"
+        cancel_label = "Close"
+
+    input_text = f"{text}\n\n{follow_up_text}"
+    input_proc = subprocess.Popen(['zenity', '--text-info', '--title', title, '--editable', '--width=600', '--height=400', '--ok-label', ok_label, '--cancel-label', cancel_label], stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
+    follow_up_question, _ = input_proc.communicate(input=input_text)
+    return follow_up_question.strip() if input_proc.returncode == 0 else None
+    
 def read_api_key():
     api_key = os.getenv('OPENAI_API_KEY')
     if api_key:
@@ -55,7 +70,10 @@ def read_api_key():
         if api_key:
             return api_key
         
-    message = "API 키가 설정되지 않았습니다. ~/ask_openai.conf 파일의 OPENAI_API_KEY 를 설정해 주세요." if is_korean() else "API key is not set. Please set the API key in the configuration file."
+    message = ("API 키가 설정되지 않았습니다. ~/ask_openai.conf 파일의 OPENAI_API_KEY 를 설정해 주세요. "
+               "자세한 내용은 https://docs.hamonikr.org/hamonikr-8.0/recommendation/askgpt 를 참조하세요.") if is_korean() else \
+              ("API key is not set. Please set the API key in the configuration file. "
+               "For more details, refer to https://docs.hamonikr.org/hamonikr-8.0/recommendation/askgpt .")
     handle_error(message)
 
 def get_clipboard_content():
@@ -122,6 +140,8 @@ def process_api_response(response):
     response_text = re.sub(r'\*\*', '', response_text)
     response_text = re.sub(r'```[a-z]*', '', response_text)
     response_text = response_text.replace('```', '').replace('`', '')
+
+    conversation_history.append({"role": "assistant", "content": response_text})
     
     return response_text
 
@@ -163,7 +183,7 @@ def main():
             - https://askubuntu.com/
             - https://forums.linuxmint.com/
 
-            a. 질문자가 제공한 정보가 충분하다면, 해당 문제를 해결하기 위한 구체적인 방법을 한글로 자세히 설명합니다. 반드시 사용한 정보의 출처를 명확하게 제공하세요.
+            a. 질문자가 제공한 정보가 충분하다면, 해당 문제를 해결하기 위한 구체적인 방법을 한글로 자세히 설명합니다. ���드시 사용한 정보의 출처를 명확하게 제공하세요.
             b. 질문이 하모니카OS, 리눅스, 또는 시나몬 데스크톱 환경과 관련이 없거나, 제공된 정보로 정확한 출처를 명확하게 제시할 수 없는 경우에는 일반적인 응답을 해주세요.
             c. 이 답변이 ChatGPT 가 작성한 것을 알려주고, 인공지능 답변을 그대로 사용하는 위험에 대해서 알려주세요.
 
@@ -192,11 +212,23 @@ def main():
     predefined_prompt = get_predefined_prompt()
 
     full_prompt = f"{predefined_prompt}{clipboard_content}"
+    conversation_history.append({"role": "user", "content": full_prompt})
     response = query_openai(MODEL, full_prompt, api_key)
     response_text = process_api_response(response)
 
     title = "AI 응답" if is_korean() else "OpenAI Response"
-    show_message(title, response_text)
+    follow_up_text = "더 물어보시려면 추가로 질문할 내용을 입력후 '추가 질문' 버튼을 클릭하세요:\n" if is_korean() else "If you want to ask more, enter your follow-up question and click 'More Question' button:\n"
+    
+    while True:
+        follow_up_question = show_message_with_input(title, response_text, follow_up_text)
+        if not follow_up_question:
+            break
+
+        follow_up_prompt = f"{predefined_prompt}{follow_up_question}"
+        conversation_history.append({"role": "user", "content": follow_up_prompt})
+        follow_up_response = query_openai(MODEL, follow_up_prompt, api_key)
+        response_text = process_api_response(follow_up_response)
+        show_message(title, response_text)
 
 if __name__ == "__main__":
     main()
