@@ -1,0 +1,13 @@
+[Nemo Action]
+Active=true
+Name=Merge PDFs
+Name[ko]=선택한 PDF 합치기
+Comment=Merge selected PDF files into one
+Comment[ko]=선택한 PDF 파일들을 병합해서 현재 폴더에 저장
+Exec=<scripts/merge_pdf.sh %F>
+Icon-Name=gnome-mime-application-pdf
+Selection=notnone
+Mimetypes=application/pdf;
+Extensions=pdf;
+Quote=double
+Dependencies=pdfunite;

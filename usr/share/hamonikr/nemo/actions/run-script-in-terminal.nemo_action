@@ -1,0 +1,10 @@
+[Nemo Action]
+Active=true
+Name=Run Script with terminal
+Name[ko]=터미널에서 스크립트 실행
+Comment=Open a terminal window and run the currently selected script with terminal.
+Exec=gnome-terminal -v --window -- /bin/zsh -c "%F ; exec /bin/zsh" --working-directory=%P
+Icon-Name=terminal
+Selection=s
+Extensions=sh;
+Quote=double

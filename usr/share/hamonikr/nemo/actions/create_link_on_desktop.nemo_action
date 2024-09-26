@@ -1,0 +1,10 @@
+[Nemo Action]
+Name=Create Link on Desktop
+Name[ko]=바탕화면에 바로가기 생성
+Comment=Create a link to %F on the desktop
+Comment[ko]=바탕화면에 %F 바로가기 생성
+Exec=sh -c 'ln -s "%F" -t "$(xdg-user-dir DESKTOP)"'
+Icon-Name=insert-link-symbolic
+Selection=s
+Extensions=any;
+
