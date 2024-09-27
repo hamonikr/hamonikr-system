@@ -24,6 +24,15 @@ if [ -f "/etc/hamonikr/info" ] ; then
             echo "Updated im setting for zoom"
         fi
 
+        # latest version (>= 6.1.5.871) for HamoniKR 8.0
+        if [ -d "/opt/zoom/Qt/plugins/platforminputcontexts" ] && \
+            [ -f "/usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libqt5im-nimf.so" ] && \
+            [ ! -f "/opt/zoom/Qt/plugins/platforminputcontexts/libqt5im-nimf.so" ] ; then
+            ln -s /usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libqt5im-nimf.so /opt/zoom/Qt/plugins/platforminputcontexts
+            # log "Updated im setting for zoom"
+            echo "Updated im setting for zoom"
+        fi
+
     fi
 
 fi

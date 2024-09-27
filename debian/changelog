@@ -1,3 +1,9 @@
+hamonikr-system (8.1.4) unstable; urgency=medium
+
+  * Support latest zoom version (>= 6.1.5.871) for HamoniKR 8.0
+
+ -- HamoniKR <pkg@hamonikr.org>  Fri, 27 Sep 2024 15:10:14 +0900
+
 hamonikr-system (8.1.3) unstable; urgency=medium
 
   * disable hide bulky action
