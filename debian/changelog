@@ -1,3 +1,9 @@
+hamonikr-system (8.1.5) unstable; urgency=medium
+
+  * Changed default monospace font as MesloLGS NF
+
+ -- HamoniKR <pkg@hamonikr.org>  Fri, 27 Sep 2024 16:09:02 +0900
+
 hamonikr-system (8.1.4) unstable; urgency=medium
 
   * Support latest zoom version (>= 6.1.5.871) for HamoniKR 8.0
