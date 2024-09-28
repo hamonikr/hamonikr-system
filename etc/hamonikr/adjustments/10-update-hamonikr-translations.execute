@@ -20,23 +20,30 @@ if [ -f "/etc/hamonikr/info" ] ; then
 
     if [ ! -d "/boot/grub/locale" ]; then
         mkdir -p /boot/grub/locale
-    if [ $? -ne 0 ]; then
-        err "Failed to create directory /boot/grub/locale"
-        exit 1
-    fi
+        if [ $? -ne 0 ]; then
+            err "Failed to create directory /boot/grub/locale"
+            exit 1
+        fi
     fi
 
-    for src in $(ls $HAMONIKR_DIR/*.mo); do
-        # Grub Korean message
-        if [ -e $HAMONIKR_DIR/grub.mo ]; then
-            cp $HAMONIKR_DIR/grub.mo /boot/grub/locale/ko.mo 2>&1
-        else
-            cp $src $TARGET_DIR
-        fi    
+    # Grub Korean message
+    if [ -e $HAMONIKR_DIR/grub.mo ]; then
+        cp -v $HAMONIKR_DIR/grub.mo /boot/grub/locale/ko.mo 2>&1
         if [ $? -eq 0 ] ; then
-            log "Succeed copy $src to $TARGET_DIR"
+            log "Succeed copy $HAMONIKR_DIR/grub.mo to /boot/grub/locale/ko.mo"
         else
-            log "Failed : copy translation file $src to $TARGET_DIR"
+            log "Failed : copy translation file $HAMONIKR_DIR/grub.mo to /boot/grub/locale/ko.mo"
+        fi
+    fi
+
+    for src in $HAMONIKR_DIR/*.mo; do
+        if [ "$(basename $src)" != "grub.mo" ]; then
+            cp -v $src $TARGET_DIR
+            if [ $? -eq 0 ] ; then
+                log "Succeed copy $src to $TARGET_DIR/$(basename $src)"
+            else
+                log "Failed : copy translation file $src to $TARGET_DIR/$(basename $src)"
+            fi
         fi
     done
     log "Update translation"

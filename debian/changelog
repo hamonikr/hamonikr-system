@@ -1,3 +1,11 @@
+hamonikr-system (8.2.0) unstable; urgency=medium
+
+  * Removed modified cinnamon translation
+   - cinnamon-control-center.mo
+   - cinnamon.mo
+
+ -- HamoniKR <pkg@hamonikr.org>  Sat, 28 Sep 2024 22:22:21 +0900
+
 hamonikr-system (8.1.9) unstable; urgency=medium
 
   * Fixed wrong nemo-extensions.mo
