@@ -1,5 +1,6 @@
 [Nemo Action]
 # Requires gprename to be installed (apt install gprename).
+Active=false
 Name=Name batch change
 Name[ko]=이름 일괄 변경
 Comment=Rename %F with gprename
