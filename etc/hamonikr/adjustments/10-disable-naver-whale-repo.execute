@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Prevention of upgrade errors caused by naver-whale-stable
+# 아래 이슈가 해결되기 전 까지는 비활성화 해야 업그레이드 시 오류가 없기 때문에 네이버 웨일 저장소 비활성화
+# https://forum.whale.naver.com/topic/55770/?tab=comments#comment-134861
+
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+if [ -f "/etc/hamonikr/info" ] ; then
+
+    if [ -f /etc/apt/sources.list.d/naver-whale.list ] ; then
+      mv /etc/apt/sources.list.d/naver-whale.list /etc/apt/sources.list.d/naver-whale.list.bak
+      echo "Disabled /etc/apt/sources.list.d/naver-whale.list"
+    fi
+
+fi
