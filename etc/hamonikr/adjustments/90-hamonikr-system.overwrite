@@ -5,3 +5,5 @@
 /usr/share/hamonikr/mint-mirrors/linuxmint.list /usr/share/mint-mirrors/linuxmint.list
 /usr/local/sbin/yelp /usr/bin/yelp
 /usr/local/sbin/yelp /usr/local/bin/yelp
+/usr/share/hamonikr/cinnamon/applets/menu@cinnamon.org/applet.js /usr/share/cinnamon/applets/menu@cinnamon.org/applet.js
+/usr/share/hamonikr/locale/ko/LC_MESSAGES/cinnamon.mo /usr/share/locale/ko/LC_MESSAGES/cinnamon.mo
