@@ -1,0 +1,69 @@
+[Allow apt commands for desktop users]
+Identity=unix-group:admin;unix-group:sudo
+Action=org.debian.apt.update;org.debian.apt.upgrade;org.debian.apt.install
+ResultActive=yes
+
+[Allow gparted for desktop users]
+Identity=unix-group:admin;unix-group:sudo
+Action=org.gnome.gparted
+ResultActive=yes
+
+[Allow user and group management for desktop users]
+Identity=unix-group:admin;unix-group:sudo
+Action=org.freedesktop.accounts.user-administration;org.cinnamon.settings-users
+ResultActive=yes
+
+[Allow lightdm settings for desktop users]
+Identity=unix-group:admin;unix-group:sudo
+Action=org.x.lightdm-settings
+ResultActive=yes
+
+[Allow gufw for desktop users]
+Identity=unix-group:admin;unix-group:sudo
+Action=com.ubuntu.pkexec.gufw
+ResultActive=yes
+
+[Allow mintsources for desktop users]
+Identity=unix-group:admin;unix-group:sudo
+Action=com.linuxmint.mintsources
+ResultActive=yes
+
+[Allow boot-select for desktop users]
+Identity=unix-group:admin;unix-group:sudo
+Action=org.hamonikr.pkexec.boot-select
+ResultActive=yes
+
+[Allow timeshift for desktop users]
+Identity=unix-group:admin;unix-group:sudo
+Action=in.teejeetech.pkexec.timeshift-gtk
+ResultActive=yes
+
+[Allow apt install file for desktop users]
+Identity=unix-group:admin;unix-group:sudo
+Action=org.debian.apt.install-file
+ResultActive=yes
+
+[Allow apt install or remove packages for desktop users]
+Identity=unix-group:admin;unix-group:sudo
+Action=org.debian.apt.install-or-remove-packages
+ResultActive=yes
+
+[Allow apt install packages from new repo for desktop users]
+Identity=unix-group:admin;unix-group:sudo
+Action=org.debian.apt.install-packages-from-new-repo
+ResultActive=yes
+
+[Allow apt install packages from high trust repo for desktop users]
+Identity=unix-group:admin;unix-group:sudo
+Action=org.debian.apt.install-packages.high-trust-repo
+ResultActive=yes
+
+[Allow apt install purchased packages for desktop users]
+Identity=unix-group:admin;unix-group:sudo
+Action=org.debian.apt.install-purchased-packages
+ResultActive=yes
+
+[Allow synaptic for desktop users]
+Identity=unix-group:admin;unix-group:sudo
+Action=com.ubuntu.pkexec.synaptic
+ResultActive=yes

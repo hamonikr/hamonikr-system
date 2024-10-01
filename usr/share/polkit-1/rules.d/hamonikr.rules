@@ -1,0 +1,117 @@
+// Allow gparted for desktop users
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.gnome.gparted" &&
+        subject.active == true && subject.local == true &&
+        subject.isInGroup("sudo")) {
+            return polkit.Result.YES;
+    }
+});
+
+// Allow user and group management for desktop users
+polkit.addRule(function(action, subject) {
+    if ((action.id == "org.freedesktop.accounts.user-administration" ||
+         action.id == "org.cinnamon.settings-users") &&
+        subject.active == true && subject.local == true &&
+        subject.isInGroup("sudo")) {
+            return polkit.Result.YES;
+    }
+});
+
+// Allow lightdm settings for desktop users
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.x.lightdm-settings" &&
+        subject.active == true && subject.local == true &&
+        subject.isInGroup("sudo")) {
+            return polkit.Result.YES;
+    }
+});
+
+// Allow gufw for desktop users
+polkit.addRule(function(action, subject) {
+    if (action.id == "com.ubuntu.pkexec.gufw" &&
+        subject.active == true && subject.local == true &&
+        subject.isInGroup("sudo")) {
+            return polkit.Result.YES;
+    }
+});
+
+// Allow mintsources for desktop users
+polkit.addRule(function(action, subject) {
+    if (action.id == "com.linuxmint.mintsources" &&
+        subject.active == true && subject.local == true &&
+        subject.isInGroup("sudo")) {
+            return polkit.Result.YES;
+    }
+});
+
+// Allow boot-select for desktop users
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.hamonikr.pkexec.boot-select" &&
+        subject.active == true && subject.local == true &&
+        subject.isInGroup("sudo")) {
+            return polkit.Result.YES;
+    }
+});
+
+// Allow timeshift for desktop users
+polkit.addRule(function(action, subject) {
+    if (action.id == "in.teejeetech.pkexec.timeshift-gtk" &&
+        subject.active == true && subject.local == true &&
+        subject.isInGroup("sudo")) {
+            return polkit.Result.YES;
+    }
+});
+
+// Allow apt install file for desktop users
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.debian.apt.install-file" &&
+        subject.active == true && subject.local == true &&
+        subject.isInGroup("sudo")) {
+            return polkit.Result.YES;
+    }
+});
+
+// Allow apt install or remove packages for desktop users
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.debian.apt.install-or-remove-packages" &&
+        subject.active == true && subject.local == true &&
+        subject.isInGroup("sudo")) {
+            return polkit.Result.YES;
+    }
+});
+
+// Allow apt install packages from new repo for desktop users
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.debian.apt.install-packages-from-new-repo" &&
+        subject.active == true && subject.local == true &&
+        subject.isInGroup("sudo")) {
+            return polkit.Result.YES;
+    }
+});
+
+// Allow apt install packages from high trust repo for desktop users
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.debian.apt.install-packages.high-trust-repo" &&
+        subject.active == true && subject.local == true &&
+        subject.isInGroup("sudo")) {
+            return polkit.Result.YES;
+    }
+});
+
+// Allow apt install purchased packages for desktop users
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.debian.apt.install-purchased-packages" &&
+        subject.active == true && subject.local == true &&
+        subject.isInGroup("sudo")) {
+            return polkit.Result.YES;
+    }
+});
+
+// Allow synaptic for desktop users
+polkit.addRule(function(action, subject) {
+    if (action.id == "com.ubuntu.pkexec.synaptic" &&
+        subject.active == true && subject.local == true &&
+        subject.isInGroup("sudo")) {
+            return polkit.Result.YES;
+    }
+});

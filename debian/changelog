@@ -1,3 +1,9 @@
+hamonikr-system (8.2.3) unstable; urgency=medium
+
+  * Add policykit rule for Desktop environment
+
+ -- HamoniKR <pkg@hamonikr.org>  Tue, 01 Oct 2024 14:37:13 +0900
+
 hamonikr-system (8.2.2) unstable; urgency=medium
 
   * Add merge-pdfs nemo action
