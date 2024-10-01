@@ -1,10 +1,10 @@
-hamonikr-system (8.2.1) unstable; urgency=medium
+hamonikr-system (8.2.2) unstable; urgency=medium
 
   * Add merge-pdfs nemo action
 
  -- HamoniKR <pkg@hamonikr.org>  Mon, 02 Oct 2024 16:27:37 +0900
 
-hamonikr-system (8.2.0) unstable; urgency=medium
+hamonikr-system (8.2.1) unstable; urgency=medium
 
   * Add runasroot command in menu@cinnamon.org applet
    - Add /usr/local/bin/runasroot
