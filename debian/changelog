@@ -1,3 +1,10 @@
+hamonikr-system (8.2.4) unstable; urgency=medium
+
+  * Removed disable naver whale repo script
+   - Cause fixed from v3.28.266.14 over
+
+ -- HamoniKR <pkg@hamonikr.org>  Wed, 23 Oct 2024 16:26:18 +0900
+
 hamonikr-system (8.2.3) unstable; urgency=medium
 
   * Add policykit rule for Desktop environment
