@@ -212,21 +212,21 @@ Skipped:
 <tr>
     <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
         <a href=https://github.com/chaeya>
-            <img src=https://private-avatars.githubusercontent.com/u/405502?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MzQ2NjE3NDAsIm5iZiI6MTczNDY2MDU0MCwicGF0aCI6Ii91LzQwNTUwMiJ9.R7OhGXF2BEf7eIpF5Qf7nagYEG93rJL7GOg7sWu37Nw&v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Kevin Kim/>
+            <img src=https://avatars.githubusercontent.com/u/405502?v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Kevin Kim/>
             <br />
             <sub style="font-size:100px"><b>Kevin Kim</b></sub>
         </a>
     </td>
     <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
         <a href=https://github.com/bdh1993>
-            <img src=https://private-avatars.githubusercontent.com/u/58254473?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MzQ2NjIwNDAsIm5iZiI6MTczNDY2MDg0MCwicGF0aCI6Ii91LzU4MjU0NDczIn0.P7R9ebjblA2TXBgFq1-5brRiqzb39kVmJ7VKGakk7AQ&v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=JamesBae/>
+            <img src=https://avatars.githubusercontent.com/u/58254473?v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=JamesBae/>
             <br />
             <sub style="font-size:100px"><b>JamesBae</b></sub>
         </a>
     </td>
     <td align="center" style="word-wrap: break-word; width: 150.0; height: 150.0">
         <a href=https://github.com/igothere>
-            <img src=https://private-avatars.githubusercontent.com/u/51899018?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MzQ2NjIwNDAsIm5iZiI6MTczNDY2MDg0MCwicGF0aCI6Ii91LzUxODk5MDE4In0.gdeRwn9diXCERImwvJ9ma6az7hdBO3qaOGqljnlR-Lw&v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Eden/>
+            <img src=https://avatars.githubusercontent.com/u/51899018?v=4 width="100;"  style="border-radius:50%;align-items:center;justify-content:center;overflow:hidden;padding-top:10px" alt=Eden/>
             <br />
             <sub style="font-size:100px"><b>Eden</b></sub>
         </a>
