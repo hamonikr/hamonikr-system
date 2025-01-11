@@ -61,7 +61,24 @@ def read_api_key():
     if api_key:
         return api_key
     
+    # 먼저 ~/.ask_openai.conf 파일 확인
+    old_config_path = Path.home() / '.ask_openai.conf'
     config_path = Path.home() / CONFIG_FILE
+    
+    # 만약 ~/.ask_openai.conf 파일과 ~/ask_openai.conf 이 모두 있으면 새 파일 삭제 후 이동
+    if old_config_path.exists() and config_path.exists():
+        try:
+            config_path.unlink()  # 새 위치의 파일 삭제
+            old_config_path.rename(config_path)
+        except Exception as e:
+            logging.error(f"Failed to handle config files: {e}")
+    # 만약 ~/.ask_openai.conf 파일만 있으면 ~/ask_openai.conf로 이동
+    elif old_config_path.exists():
+        try:
+            old_config_path.rename(config_path)
+        except Exception as e:
+            logging.error(f"Failed to move config file: {e}")
+    
     if config_path.exists():
         config = configparser.ConfigParser()
         config.read(config_path)
