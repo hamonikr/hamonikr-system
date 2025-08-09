@@ -162,9 +162,6 @@ msgstr "음성 인식 엔진"
 msgid "API Configuration"
 msgstr "API 설정"
 
-msgid "Keyboard Shortcut"
-msgstr "키보드 단축키"
-
 msgid "Recognition Engine"
 msgstr "인식 엔진"
 
