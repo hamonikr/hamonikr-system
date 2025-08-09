@@ -1,3 +1,12 @@
+amonikr-system (8.2.8) unstable; urgency=medium
+
+  * Cinnamon IME Support Patch
+   - https://github.com/linuxmint/cinnamon/issues/11115  
+   - GTK IMMulticontext 구현으로 nimf, fcitx, ibus 등 모든 입력기 한글입력 지원
+  * xpad(메모장 앱)의 트레이 아이콘이 표시되지 않도록 수정하는 기능 제거
+
+ -- HamoniKR <pkg@hamonikr.org>  Sat, 09 Aug 2025 16:43:47 +0900
+
 hamonikr-system (8.2.7) unstable; urgency=medium
 
   * Changed ask_openai.conf file name
