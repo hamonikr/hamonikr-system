@@ -1,0 +1,140 @@
+# VOICE RECOGNITION APPLET - English Translation
+# Copyright (C) 2024 HamoniKR
+# This file is distributed under the same license as the voice-recognition@hamonikr package.
+# HamoniKR Team, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: voice-recognition@hamonikr\n"
+"Report-Msgid-Bugs-To: https://github.com/hamonikr/airun/issues\n"
+"POT-Creation-Date: 2024-07-20 17:15+0900\n"
+"PO-Revision-Date: 2024-07-20 17:20+0900\n"
+"Last-Translator: HamoniKR Team <root@hamonikr.org>\n"
+"Language-Team: English <en@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Start Voice Recognition"
+msgstr "Start Voice Recognition"
+
+msgid "Stop Voice Recognition"
+msgstr "Stop Voice Recognition"
+
+msgid "Waiting"
+msgstr "Waiting"
+
+msgid "Recording..."
+msgstr "Recording..."
+
+msgid "Converting..."
+msgstr "Converting..."
+
+msgid "Complete: "
+msgstr "Complete: "
+
+msgid "Recognition Failed"
+msgstr "Recognition Failed"
+
+msgid "Copy Last Text Again"
+msgstr "Copy Last Text Again"
+
+msgid "Check Clipboard"
+msgstr "Check Clipboard"
+
+msgid "Re-detect Microphone Device"
+msgstr "Re-detect Microphone Device"
+
+msgid "Shortcut: Ctrl+Alt+V"
+msgstr "Shortcut: Ctrl+Alt+V"
+
+msgid "Voice Recognition"
+msgstr "Voice Recognition"
+
+msgid "Recording started. (Max "
+msgstr "Recording started. (Max "
+
+msgid " seconds)"
+msgstr " seconds)"
+
+msgid "Recording stopped. Converting to text..."
+msgstr "Recording stopped. Converting to text..."
+
+msgid "Recording completed. Converting to text..."
+msgstr "Recording completed. Converting to text..."
+
+msgid "Voice Recognition Complete"
+msgstr "Voice Recognition Complete"
+
+msgid "Text copied to clipboard:\\n"
+msgstr "Text copied to clipboard:\\n"
+
+msgid "Copy Complete"
+msgstr "Copy Complete"
+
+msgid "Last text copied again:\\n"
+msgstr "Last text copied again:\\n"
+
+msgid "Notification"
+msgstr "Notification"
+
+msgid "No text to copy."
+msgstr "No text to copy."
+
+msgid "Clipboard"
+msgstr "Clipboard"
+
+msgid "Clipboard is empty."
+msgstr "Clipboard is empty."
+
+msgid "Clipboard Content"
+msgstr "Clipboard Content"
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Failed to start recording: "
+msgstr "Failed to start recording: "
+
+msgid "Failed to stop recording: "
+msgstr "Failed to stop recording: "
+
+msgid "Recording Error"
+msgstr "Recording Error"
+
+msgid "Microphone access failed: "
+msgstr "Microphone access failed: "
+
+msgid "Audio processing failed: "
+msgstr "Audio processing failed: "
+
+msgid "API call failed: "
+msgstr "API call failed: "
+
+msgid "API response timeout"
+msgstr "API response timeout"
+
+msgid "No API response received."
+msgstr "No API response received."
+
+msgid "API response processing failed: "
+msgstr "API response processing failed: "
+
+msgid "API response reading failed: "
+msgstr "API response reading failed: "
+
+msgid "Voice recognition failed: "
+msgstr "Voice recognition failed: "
+
+msgid "Clipboard reading failed"
+msgstr "Clipboard reading failed"
+
+msgid "Clipboard check failed: "
+msgstr "Clipboard check failed: "
+
+msgid "Missing Dependencies"
+msgstr "Missing Dependencies"
+
+msgid "The following packages are required:\\n"
+msgstr "The following packages are required:\\n" 

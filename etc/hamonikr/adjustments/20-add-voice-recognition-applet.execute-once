@@ -1,0 +1,48 @@
+#!/bin/bash
+
+readonly SCRIPT_NAME=$(basename $0)
+
+log() {
+  echo "$@"
+  logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+  echo "$@" >&2
+  logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+if [ -f "/etc/hamonikr/info" ] ; then
+    # 음성인식 애플릿 설치
+    if [ -d /usr/share/hamonikr/cinnamon/applets/voice-recognition@hamonikr ] ; then
+        # 시스템 전역 애플릿 디렉토리에 복사
+        cp -ar /usr/share/hamonikr/cinnamon/applets/voice-recognition@hamonikr /usr/share/cinnamon/applets/
+        log "Voice recognition applet installed to /usr/share/cinnamon/applets/"
+        
+        # 권한 설정
+        chmod +x /usr/share/cinnamon/applets/voice-recognition@hamonikr/applet.js 2>/dev/null || true
+        
+        # 번역 파일 설치
+        if [ -d /usr/share/hamonikr/cinnamon/applets/voice-recognition@hamonikr/po ]; then
+            for po_file in /usr/share/hamonikr/cinnamon/applets/voice-recognition@hamonikr/po/*.po; do
+                if [ -f "$po_file" ]; then
+                    # 언어 코드 추출 (예: ko.po -> ko)
+                    lang=$(basename "$po_file" .po)
+                    
+                    # 로케일 디렉토리 생성
+                    mkdir -p "/usr/share/locale/$lang/LC_MESSAGES"
+                    
+                    # .po 파일을 .mo 파일로 컴파일
+                    if command -v msgfmt >/dev/null 2>&1; then
+                        msgfmt "$po_file" -o "/usr/share/locale/$lang/LC_MESSAGES/voice-recognition@hamonikr.mo"
+                        log "Voice recognition applet translation for $lang installed"
+                    fi
+                fi
+            done
+        fi
+        
+        log "Voice recognition applet setup completed"
+    else
+        log "Voice recognition applet source not found in /usr/share/hamonikr/cinnamon/applets/"
+    fi
+fi

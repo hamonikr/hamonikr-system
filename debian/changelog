@@ -1,4 +1,14 @@
-amonikr-system (8.2.8) unstable; urgency=medium
+hamonikr-system (8.2.9) unstable; urgency=medium
+
+  * Added Voice Recognition Cinnamon Applet
+   - Integrated voice-recognition@hamonikr applet for system-wide installation
+   - Added dependencies: alsa-utils, libnotify-bin, curl for voice recognition functionality
+   - Added voice-recognition-toggle.sh script to /usr/local/bin
+   - Added automatic applet installation via adjustment script
+
+ -- HamoniKR <pkg@hamonikr.org>  Sat, 10 Aug 2025 01:55:00 +0900
+
+hamonikr-system (8.2.8) unstable; urgency=medium
 
   * Cinnamon IME Support Patch
    - https://github.com/linuxmint/cinnamon/issues/11115  

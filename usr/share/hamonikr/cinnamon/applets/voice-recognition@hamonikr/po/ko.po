@@ -1,0 +1,208 @@
+# VOICE RECOGNITION APPLET - Korean Translation
+# Copyright (C) 2024 HamoniKR
+# This file is distributed under the same license as the voice-recognition@hamonikr package.
+# HamoniKR Team, 2024
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: voice-recognition@hamonikr\n"
+"Report-Msgid-Bugs-To: https://github.com/hamonikr/airun/issues\n"
+"POT-Creation-Date: 2024-07-20 17:15+0900\n"
+"PO-Revision-Date: 2024-07-20 17:20+0900\n"
+"Last-Translator: HamoniKR Team <root@hamonikr.org>\n"
+"Language-Team: Korean <ko@li.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Start Voice Recognition"
+msgstr "음성 인식 시작"
+
+msgid "Stop Voice Recognition"
+msgstr "음성 인식 중지"
+
+msgid "Waiting"
+msgstr "대기 중"
+
+msgid "Recording..."
+msgstr "녹음 중..."
+
+msgid "Converting..."
+msgstr "변환 중..."
+
+msgid "Complete: "
+msgstr "완료: "
+
+msgid "Recognition Failed"
+msgstr "인식 실패"
+
+msgid "Copy Last Text Again"
+msgstr "마지막 텍스트 다시 복사"
+
+msgid "Check Clipboard"
+msgstr "클립보드 확인"
+
+msgid "Re-detect Microphone Device"
+msgstr "마이크 장치 다시 감지"
+
+msgid "Shortcut: Ctrl+Alt+V"
+msgstr "단축키: Ctrl+Alt+V"
+
+msgid "Voice Recognition"
+msgstr "음성 인식"
+
+msgid "Recording started. (Max "
+msgstr "녹음을 시작했습니다. (최대 "
+
+msgid " seconds)"
+msgstr "초)"
+
+msgid "Recording stopped. Converting to text..."
+msgstr "녹음을 중지했습니다. 텍스트로 변환 중..."
+
+msgid "Recording completed. Converting to text..."
+msgstr "녹음이 완료되었습니다. 텍스트로 변환 중..."
+
+msgid "Voice Recognition Complete"
+msgstr "음성 인식 완료"
+
+msgid "Text copied to clipboard:\\n"
+msgstr "텍스트가 클립보드에 복사되었습니다:\\n"
+
+msgid "Copy Complete"
+msgstr "복사 완료"
+
+msgid "Last text copied again:\\n"
+msgstr "마지막 텍스트를 다시 복사했습니다:\\n"
+
+msgid "Notification"
+msgstr "알림"
+
+msgid "No text to copy."
+msgstr "복사할 텍스트가 없습니다."
+
+msgid "Clipboard"
+msgstr "클립보드"
+
+msgid "Clipboard is empty."
+msgstr "클립보드가 비어있습니다."
+
+msgid "Clipboard Content"
+msgstr "클립보드 내용"
+
+msgid "Error"
+msgstr "오류"
+
+msgid "Failed to start recording: "
+msgstr "녹음 시작 실패: "
+
+msgid "Failed to stop recording: "
+msgstr "녹음 중지 실패: "
+
+msgid "Recording Error"
+msgstr "녹음 오류"
+
+msgid "Microphone access failed: "
+msgstr "마이크 접근 실패: "
+
+msgid "Audio processing failed: "
+msgstr "오디오 처리 실패: "
+
+msgid "API call failed: "
+msgstr "API 호출 실패: "
+
+msgid "API response timeout"
+msgstr "API 응답 시간 초과"
+
+msgid "No API response received."
+msgstr "API 응답을 받지 못했습니다."
+
+msgid "API response processing failed: "
+msgstr "API 응답 처리 실패: "
+
+msgid "API response reading failed: "
+msgstr "API 응답 읽기 실패: "
+
+msgid "Voice recognition failed: "
+msgstr "음성 인식 실패: "
+
+msgid "Clipboard reading failed"
+msgstr "클립보드 읽기 실패"
+
+msgid "Clipboard check failed: "
+msgstr "클립보드 확인 실패: "
+
+msgid "Missing Dependencies"
+msgstr "의존성 누락"
+
+msgid "The following packages are required:\\n"
+msgstr "다음 패키지가 필요합니다:\\n"
+
+# Settings translations
+msgid "Voice Recognition Settings"
+msgstr "음성 인식 설정"
+
+msgid "Whisper Server URL"
+msgstr "Whisper 서버 URL"
+
+msgid "Enter the URL of your Whisper server for voice recognition"
+msgstr "음성 인식을 위한 Whisper 서버 URL을 입력하세요"
+
+msgid "Keyboard Shortcut"
+msgstr "키보드 단축키"
+
+msgid "Enter keyboard shortcut as text (e.g., Ctrl+Alt+V)"
+msgstr "키보드 단축키를 텍스트로 입력하세요 (예: Ctrl+Alt+V)"
+
+# New engine selection settings
+msgid "Speech Recognition Engine"
+msgstr "음성 인식 엔진"
+
+msgid "API Configuration"
+msgstr "API 설정"
+
+msgid "Keyboard Shortcut"
+msgstr "키보드 단축키"
+
+msgid "Recognition Engine"
+msgstr "인식 엔진"
+
+msgid "Select the speech recognition engine to use"
+msgstr "사용할 음성 인식 엔진을 선택하세요"
+
+msgid "Whisper Server"
+msgstr "Whisper 서버"
+
+msgid "OpenAI Whisper API"
+msgstr "OpenAI Whisper API"
+
+msgid "Google Cloud Speech"
+msgstr "Google Cloud Speech"
+
+msgid "Vosk (Offline)"
+msgstr "Vosk (오프라인)"
+
+msgid "Local Whisper"
+msgstr "로컬 Whisper"
+
+msgid "OpenAI API Key"
+msgstr "OpenAI API 키"
+
+msgid "Enter your OpenAI API key for Whisper API access"
+msgstr "Whisper API 접근을 위한 OpenAI API 키를 입력하세요"
+
+msgid "Google Cloud API Key"
+msgstr "Google Cloud API 키"
+
+msgid "Enter your Google Cloud Speech-to-Text API key"
+msgstr "Google Cloud Speech-to-Text API 키를 입력하세요"
+
+msgid "Vosk Model Path"
+msgstr "Vosk 모델 경로"
+
+msgid "Select the path to Vosk model directory"
+msgstr "Vosk 모델 디렉토리 경로를 선택하세요"
+
+msgid "Keyboard shortcut to start/stop voice recognition"
+msgstr "음성 인식 시작/중지 키보드 단축키"

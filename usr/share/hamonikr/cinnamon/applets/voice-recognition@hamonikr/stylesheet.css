@@ -1,0 +1,38 @@
+/* Voice Recognition Applet Stylesheet */
+
+/* Settings dialog entry fields - more specific selectors */
+.cinnamon-settings-entry {
+    min-width: 400px !important;
+    width: 400px !important;
+}
+
+/* All entry widgets in settings */
+entry {
+    min-width: 400px !important;
+    width: 400px !important;
+}
+
+/* GtkEntry widgets */
+GtkEntry {
+    min-width: 400px !important;
+    width: 400px !important;
+}
+
+/* Alternative selectors */
+.entry {
+    min-width: 400px !important;
+}
+
+/* Settings window entry fields */
+.settings-window entry,
+.settings-dialog entry,
+.applet-settings entry {
+    min-width: 400px !important;
+    width: 400px !important;
+}
+
+/* Specific to text input fields */
+input[type="text"] {
+    min-width: 400px !important;
+    width: 400px !important;
+}

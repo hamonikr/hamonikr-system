@@ -18,13 +18,21 @@ Depends: ${misc:Depends},
          xdotool,
          python3-pip,
          python3-requests,
-         xclip
+         xclip,
+         alsa-utils,
+         libnotify-bin,
+         curl
 Replaces: hamonikr-themes,
           hamonikr-welcome, 
           hamonikr-icons
 Recommends: spacefm,
             python-is-python3,
             video2gif
+Suggests: python3-vosk,
+          python3-openai,
+          python3-google-cloud-speech,
+          whisper,
+          vosk-model-small-ko
 Description: HamoniKR OS Base Package
  Used by the desktop and other tools to gather
  information and process common system tasks.

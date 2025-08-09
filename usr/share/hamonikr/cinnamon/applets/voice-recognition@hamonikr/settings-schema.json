@@ -1,0 +1,77 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["page1"],
+        "page1": {
+            "type": "page",
+            "title": "Settings",
+            "sections": ["engine-section", "api-section", "shortcut-section"]
+        },
+        "engine-section": {
+            "type": "section",
+            "title": "Speech Recognition Engine",
+            "keys": ["recognition-engine"]
+        },
+        "api-section": {
+            "type": "section",
+            "title": "API Configuration",
+            "keys": ["whisper-server-url", "openai-api-key", "google-api-key", "vosk-model-path"]
+        },
+        "shortcut-section": {
+            "type": "section",
+            "title": "Keyboard Shortcut",
+            "keys": ["toggle-shortcut"]
+        }
+    },
+    "recognition-engine": {
+        "type": "combobox",
+        "default": "whisper-server",
+        "description": "Recognition Engine",
+        "tooltip": "Select the speech recognition engine to use",
+        "options": {
+            "Whisper Server": "whisper-server",
+            "OpenAI Whisper API": "openai-whisper",
+            "Google Cloud Speech": "google-speech",
+            "Vosk (Offline)": "vosk-offline",
+            "Local Whisper": "local-whisper"
+        }
+    },
+    "whisper-server-url": {
+        "type": "entry",
+        "default": "https://api.hamonize.com/whisper/inference",
+        "description": "Whisper Server URL",
+        "tooltip": "Enter the URL of your Whisper server for voice recognition",
+        "expand-width": true,
+        "dependency": "recognition-engine=whisper-server"
+    },
+    "openai-api-key": {
+        "type": "entry",
+        "default": "",
+        "description": "OpenAI API Key",
+        "tooltip": "Enter your OpenAI API key for Whisper API access",
+        "expand-width": true,
+        "dependency": "recognition-engine=openai-whisper"
+    },
+    "google-api-key": {
+        "type": "entry",
+        "default": "",
+        "description": "Google Cloud API Key",
+        "tooltip": "Enter your Google Cloud Speech-to-Text API key",
+        "expand-width": true,
+        "dependency": "recognition-engine=google-speech"
+    },
+    "vosk-model-path": {
+        "type": "filechooser",
+        "default": "/usr/share/vosk-models",
+        "description": "Vosk Model Path",
+        "tooltip": "Select the path to Vosk model directory",
+        "select-dir": true,
+        "dependency": "recognition-engine=vosk-offline"
+    },
+    "toggle-shortcut": {
+        "type": "keybinding",
+        "default": "<Control><Alt>v",
+        "description": "Keyboard Shortcut",
+        "tooltip": "Keyboard shortcut to start/stop voice recognition"
+    }
+} 

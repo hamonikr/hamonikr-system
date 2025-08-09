@@ -1,0 +1,141 @@
+# VOICE RECOGNITION APPLET
+# Copyright (C) 2024 HamoniKR
+# This file is distributed under the same license as the voice-recognition@hamonikr package.
+# HamoniKR Team, 2024
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: voice-recognition@hamonikr\n"
+"Report-Msgid-Bugs-To: https://github.com/hamonikr/airun/issues\n"
+"POT-Creation-Date: 2024-07-20 17:15+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Start Voice Recognition"
+msgstr ""
+
+msgid "Stop Voice Recognition"
+msgstr ""
+
+msgid "Waiting"
+msgstr ""
+
+msgid "Recording..."
+msgstr ""
+
+msgid "Converting..."
+msgstr ""
+
+msgid "Complete: "
+msgstr ""
+
+msgid "Recognition Failed"
+msgstr ""
+
+msgid "Copy Last Text Again"
+msgstr ""
+
+msgid "Check Clipboard"
+msgstr ""
+
+msgid "Re-detect Microphone Device"
+msgstr ""
+
+msgid "Shortcut: Ctrl+Alt+V"
+msgstr ""
+
+msgid "Voice Recognition"
+msgstr ""
+
+msgid "Recording started. (Max "
+msgstr ""
+
+msgid " seconds)"
+msgstr ""
+
+msgid "Recording stopped. Converting to text..."
+msgstr ""
+
+msgid "Recording completed. Converting to text..."
+msgstr ""
+
+msgid "Voice Recognition Complete"
+msgstr ""
+
+msgid "Text copied to clipboard:\\n"
+msgstr ""
+
+msgid "Copy Complete"
+msgstr ""
+
+msgid "Last text copied again:\\n"
+msgstr ""
+
+msgid "Notification"
+msgstr ""
+
+msgid "No text to copy."
+msgstr ""
+
+msgid "Clipboard"
+msgstr ""
+
+msgid "Clipboard is empty."
+msgstr ""
+
+msgid "Clipboard Content"
+msgstr ""
+
+msgid "Error"
+msgstr ""
+
+msgid "Failed to start recording: "
+msgstr ""
+
+msgid "Failed to stop recording: "
+msgstr ""
+
+msgid "Recording Error"
+msgstr ""
+
+msgid "Microphone access failed: "
+msgstr ""
+
+msgid "Audio processing failed: "
+msgstr ""
+
+msgid "API call failed: "
+msgstr ""
+
+msgid "API response timeout"
+msgstr ""
+
+msgid "No API response received."
+msgstr ""
+
+msgid "API response processing failed: "
+msgstr ""
+
+msgid "API response reading failed: "
+msgstr ""
+
+msgid "Voice recognition failed: "
+msgstr ""
+
+msgid "Clipboard reading failed"
+msgstr ""
+
+msgid "Clipboard check failed: "
+msgstr ""
+
+msgid "Missing Dependencies"
+msgstr ""
+
+msgid "The following packages are required:\\n"
+msgstr "" 
