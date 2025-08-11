@@ -1270,7 +1270,7 @@ except Exception as e:
             // 개별 키바인딩 설정 (gsettings 명령어 방식)
             let commands = [
                 "gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:" + customKeyPath + " binding \"['" + shortcut + "']\"",
-                "gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:" + customKeyPath + " command '" + GLib.get_home_dir() + "/.local/bin/voice-recognition-toggle.sh'",
+                "gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:" + customKeyPath + " command '/usr/local/bin/voice-recognition-toggle.sh'",
                 "gsettings set org.cinnamon.desktop.keybindings.custom-keybinding:" + customKeyPath + " name 'Voice Recognition Toggle'"
             ];
             
