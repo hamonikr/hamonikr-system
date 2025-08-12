@@ -1,3 +1,9 @@
+hamonikr-system (8.3.1) unstable; urgency=medium
+
+  * Release v8.3.1
+
+ -- HamoniKR <pkg@hamonikr.org>  Tue, 12 Aug 2025 10:48:24 +0900
+
 hamonikr-system (8.3.0) unstable; urgency=medium
 
   * Fix wrong path voice-recognition-toggle.sh script
