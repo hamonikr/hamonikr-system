@@ -145,28 +145,32 @@ if [ -f "debian/changelog" ]; then
         fi
     done < <(git --no-pager log --oneline origin/master..origin/dev --pretty=format:"%h %s")
     
-    # dch 명령어가 있는지 확인
+    # dch 명령어가 있는지 확인하고, 실패 시 수동 업데이트로 폴백
+    DO_MANUAL_UPDATE=false
     if command -v dch &> /dev/null; then
-        # dch를 사용하여 새 엔트리 추가
+        # dch를 사용하여 새 엔트리 추가 시도
         DEBEMAIL="${DEBEMAIL:-pkg@hamonikr.org}" \
         DEBFULLNAME="${DEBFULLNAME:-HamoniKR}" \
-        dch --no-editor --newversion "${NEW_VERSION}" --distribution "$DISTRIBUTION" "Release ${NEW_TAG}"
-        
-        # 변경사항 추가
-        if [ -n "$CHANGELOG_ENTRIES" ]; then
-            echo -e "$CHANGELOG_ENTRIES" | while IFS= read -r entry; do
+        dch --newversion "${NEW_VERSION}" --distribution "$DISTRIBUTION" "Release ${NEW_TAG}" || DO_MANUAL_UPDATE=true
+
+        # 변경사항 추가 (dch가 성공했을 때만 시도)
+        if [ "$DO_MANUAL_UPDATE" = false ] && [ -n "$CHANGELOG_ENTRIES" ]; then
+            while IFS= read -r entry; do
                 if [ -n "$entry" ]; then
-                    dch --no-editor --append "$entry"
+                    dch --append "$entry" || DO_MANUAL_UPDATE=true
                 fi
-            done
+            done < <(echo -e "$CHANGELOG_ENTRIES")
         fi
     else
-        # dch가 없으면 수동으로 업데이트
-        echo -e "${YELLOW}dch 명령어가 없습니다. 수동으로 debian/changelog를 업데이트합니다.${NC}"
-        
+        DO_MANUAL_UPDATE=true
+    fi
+
+    if [ "$DO_MANUAL_UPDATE" = true ]; then
+        echo -e "${YELLOW}dch 실행에 실패했거나 사용할 수 없어, 수동으로 debian/changelog를 업데이트합니다.${NC}"
+
         # 현재 날짜를 debian changelog 형식으로
         CHANGELOG_DATE=$(date -R)
-        
+
         # 새 changelog 엔트리 생성
         NEW_ENTRY="$PKG_NAME (${NEW_VERSION}) $DISTRIBUTION; urgency=medium\n\n"
         if [ -n "$CHANGELOG_ENTRIES" ]; then
@@ -175,10 +179,10 @@ if [ -f "debian/changelog" ]; then
             NEW_ENTRY="${NEW_ENTRY}  * Release ${NEW_TAG}\n"
         fi
         NEW_ENTRY="${NEW_ENTRY}\n -- ${DEBFULLNAME:-HamoniKR} <${DEBEMAIL:-pkg@hamonikr.org}>  $CHANGELOG_DATE\n\n"
-        
+
         # 기존 changelog 백업
         cp debian/changelog debian/changelog.bak
-        
+
         # 새 엔트리를 파일 맨 위에 추가
         echo -e "$NEW_ENTRY" > debian/changelog.tmp
         cat debian/changelog.bak >> debian/changelog.tmp
