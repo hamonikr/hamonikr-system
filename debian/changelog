@@ -1,3 +1,10 @@
+hamonikr-system (8.3.2) unstable; urgency=medium
+
+  * Fix applet voice-recognition@cinnamon.org
+   - cs_keyboard.py 에서 cinnamon.org 가 없는 애필릿은 로컬 경로를 찾아서 오류 발생
+
+ -- HamoniKR <pkg@hamonikr.org>  Wed, 13 Aug 2025 23:20:03 +0900
+
 hamonikr-system (8.3.1) unstable; urgency=medium
 
   * Release v8.3.1

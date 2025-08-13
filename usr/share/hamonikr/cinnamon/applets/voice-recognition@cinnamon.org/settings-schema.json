@@ -5,7 +5,7 @@
         "page1": {
             "type": "page",
             "title": "Settings",
-            "sections": ["engine-section", "api-section", "shortcut-section"]
+            "sections": ["engine-section", "api-section", "shortcut-section", "behavior-section"]
         },
         "engine-section": {
             "type": "section",
@@ -21,6 +21,11 @@
             "type": "section",
             "title": "Keyboard Shortcut",
             "keys": ["toggle-shortcut"]
+        },
+        "behavior-section": {
+            "type": "section",
+            "title": "Output Behavior",
+            "keys": ["output-method", "auto-input-delay"]
         }
     },
     "recognition-engine": {
@@ -73,5 +78,26 @@
         "default": "<Control><Alt>v",
         "description": "Keyboard Shortcut",
         "tooltip": "Keyboard shortcut to start/stop voice recognition"
+    },
+    "output-method": {
+        "type": "combobox",
+        "default": "clipboard",
+        "description": "Output Method",
+        "tooltip": "Choose how recognized text should be output",
+        "options": {
+            "Copy to Clipboard": "clipboard",
+            "Auto-type in Focused Window": "auto-type"
+        }
+    },
+    "auto-input-delay": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 0,
+        "max": 1000,
+        "step": 50,
+        "units": "ms",
+        "description": "Auto-type Delay",
+        "tooltip": "Delay between keystrokes when auto-typing (milliseconds)",
+        "dependency": "output-method=auto-type"
     }
 } 

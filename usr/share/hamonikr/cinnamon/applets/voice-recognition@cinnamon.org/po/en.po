@@ -1,11 +1,11 @@
 # VOICE RECOGNITION APPLET - English Translation
 # Copyright (C) 2024 HamoniKR
-# This file is distributed under the same license as the voice-recognition@hamonikr package.
+# This file is distributed under the same license as the voice-recognition@cinnamon.org package.
 # HamoniKR Team, 2024
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: voice-recognition@hamonikr\n"
+"Project-Id-Version: voice-recognition@cinnamon.org\n"
 "Report-Msgid-Bugs-To: https://github.com/hamonikr/airun/issues\n"
 "POT-Creation-Date: 2024-07-20 17:15+0900\n"
 "PO-Revision-Date: 2024-07-20 17:20+0900\n"

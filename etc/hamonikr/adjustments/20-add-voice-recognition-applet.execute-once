@@ -14,17 +14,17 @@ err() {
 
 if [ -f "/etc/hamonikr/info" ] ; then
     # 음성인식 애플릿 설치
-    if [ -d /usr/share/hamonikr/cinnamon/applets/voice-recognition@hamonikr ] ; then
+    if [ -d /usr/share/hamonikr/cinnamon/applets/voice-recognition@cinnamon.org ] ; then
         # 시스템 전역 애플릿 디렉토리에 복사
-        cp -ar /usr/share/hamonikr/cinnamon/applets/voice-recognition@hamonikr /usr/share/cinnamon/applets/
+        cp -ar /usr/share/hamonikr/cinnamon/applets/voice-recognition@cinnamon.org /usr/share/cinnamon/applets/
         log "Voice recognition applet installed to /usr/share/cinnamon/applets/"
         
         # 권한 설정
-        chmod +x /usr/share/cinnamon/applets/voice-recognition@hamonikr/applet.js 2>/dev/null || true
+        chmod +x /usr/share/cinnamon/applets/voice-recognition@cinnamon.org/applet.js 2>/dev/null || true
         
         # 번역 파일 설치
-        if [ -d /usr/share/hamonikr/cinnamon/applets/voice-recognition@hamonikr/po ]; then
-            for po_file in /usr/share/hamonikr/cinnamon/applets/voice-recognition@hamonikr/po/*.po; do
+        if [ -d /usr/share/hamonikr/cinnamon/applets/voice-recognition@cinnamon.org/po ]; then
+            for po_file in /usr/share/hamonikr/cinnamon/applets/voice-recognition@cinnamon.org/po/*.po; do
                 if [ -f "$po_file" ]; then
                     # 언어 코드 추출 (예: ko.po -> ko)
                     lang=$(basename "$po_file" .po)
@@ -34,7 +34,7 @@ if [ -f "/etc/hamonikr/info" ] ; then
                     
                     # .po 파일을 .mo 파일로 컴파일
                     if command -v msgfmt >/dev/null 2>&1; then
-                        msgfmt "$po_file" -o "/usr/share/locale/$lang/LC_MESSAGES/voice-recognition@hamonikr.mo"
+                        msgfmt "$po_file" -o "/usr/share/locale/$lang/LC_MESSAGES/voice-recognition@cinnamon.org.mo"
                         log "Voice recognition applet translation for $lang installed"
                     fi
                 fi

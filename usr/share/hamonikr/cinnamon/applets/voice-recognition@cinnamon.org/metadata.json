@@ -1,5 +1,5 @@
 {
-    "uuid": "voice-recognition@hamonikr",
+    "uuid": "voice-recognition@cinnamon.org",
     "name": "Voice Recognition",
     "description": "음성을 텍스트로 변환하여 클립보드에 복사하는 애플릿",
     "version": "1.0",

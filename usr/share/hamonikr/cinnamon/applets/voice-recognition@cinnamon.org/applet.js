@@ -13,10 +13,10 @@ const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const Settings = imports.ui.settings;
 
-const UUID = "voice-recognition@hamonikr";
+const UUID = "voice-recognition@cinnamon.org";
 
 // 다국어 지원 설정
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain(UUID, "/usr/share/locale");
 
 function _(str) {
     return Gettext.dgettext(UUID, str);
@@ -267,8 +267,11 @@ VoiceRecognitionApplet.prototype = {
 
     _checkDependencies: function() {
         let dependencies = ['/usr/bin/arecord', '/usr/bin/xclip'];
+        let optionalDeps = ['/usr/bin/xdotool', '/usr/bin/wmctrl'];
         let missing = [];
+        let missingOptional = [];
         
+        // 필수 의존성 체크
         for (let dep of dependencies) {
             try {
                 let file = Gio.File.new_for_path(dep);
@@ -280,11 +283,26 @@ VoiceRecognitionApplet.prototype = {
             }
         }
         
+        // 선택적 의존성 체크 (자동 입력용)
+        for (let dep of optionalDeps) {
+            try {
+                let file = Gio.File.new_for_path(dep);
+                if (!file.query_exists(null)) {
+                    missingOptional.push(dep.split('/').pop());
+                }
+            } catch (e) {
+                missingOptional.push(dep.split('/').pop());
+            }
+        }
+        
         if (missing.length > 0) {
             this._showNotification("Missing Dependencies", 
                 "다음 패키지를 설치해주세요: " + missing.join(', ') + 
                 "\nsudo apt install alsa-utils xclip");
             this._updateStatus("의존성 누락: " + missing.join(', '));
+        } else if (missingOptional.length > 0 && this.settings.getValue("output-method") === "auto-type") {
+            global.log("Voice Recognition: Optional dependencies missing for auto-type: " + missingOptional.join(', '));
+            global.log("Install with: sudo apt install " + missingOptional.join(' '));
         }
     },
 
@@ -304,6 +322,11 @@ VoiceRecognitionApplet.prototype = {
         if (this.isRecording) return;
 
         try {
+            // 음성 인식 시작 전 현재 활성 창 저장
+            if (this.settings.getValue("output-method") === "auto-type") {
+                this._saveActiveWindow();
+            }
+            
             this.isRecording = true;
             this._updateIcon();
             this._updateStatus(_("Recording..."));
@@ -708,11 +731,18 @@ VoiceRecognitionApplet.prototype = {
                 throw new Error("음성이 인식되지 않았습니다.");
             }
             
-            // 클립보드에 복사
-            this._copyToClipboard(text.trim());
+            // 출력 방법에 따라 처리
             this.lastRecognizedText = text.trim();
             
-            this._showNotification("Voice Recognition Complete", "텍스트가 클립보드에 복사되었습니다:\n" + text.substring(0, 50) + (text.length > 50 ? "..." : ""));
+            if (this.settings.getValue("output-method") === "auto-type") {
+                // 포커스된 창에 자동 입력
+                this._autoTypeText(text.trim());
+                this._showNotification("Voice Recognition Complete", "텍스트가 자동 입력되었습니다:\n" + text.substring(0, 50) + (text.length > 50 ? "..." : ""));
+            } else {
+                // 클립보드에 복사 (기본)
+                this._copyToClipboard(text.trim());
+                this._showNotification("Voice Recognition Complete", "텍스트가 클립보드에 복사되었습니다:\n" + text.substring(0, 50) + (text.length > 50 ? "..." : ""));
+            }
             this._updateStatus(_("Complete: ") + text.substring(0, 30) + (text.length > 30 ? "..." : ""));
             
         } catch (e) {
@@ -968,10 +998,129 @@ except Exception as e:
         }
     },
 
+    _saveActiveWindow: function() {
+        try {
+            // xdotool로 현재 활성 창 ID 저장
+            let [success, output] = GLib.spawn_command_line_sync("/usr/bin/xdotool getactivewindow");
+            if (success && output) {
+                this.savedWindowId = output.toString().trim();
+                global.log("Voice Recognition: Saved active window ID: " + this.savedWindowId);
+                
+                // 창 제목도 저장 (디버깅용)
+                let [titleSuccess, titleOutput] = GLib.spawn_command_line_sync(
+                    "/usr/bin/xdotool getwindowname " + this.savedWindowId
+                );
+                if (titleSuccess && titleOutput) {
+                    global.log("Voice Recognition: Active window title: " + titleOutput.toString().trim());
+                }
+            } else {
+                // wmctrl 대체 시도
+                let [wmSuccess, wmOutput] = GLib.spawn_command_line_sync("/usr/bin/wmctrl -a :ACTIVE:");
+                if (wmSuccess) {
+                    global.log("Voice Recognition: Using wmctrl for window management");
+                }
+            }
+        } catch (e) {
+            global.log("Voice Recognition: Failed to save active window: " + e);
+        }
+    },
+
+    _restoreActiveWindow: function() {
+        try {
+            if (this.savedWindowId) {
+                // 저장된 창으로 포커스 복원
+                let [success] = GLib.spawn_command_line_sync(
+                    "/usr/bin/xdotool windowactivate " + this.savedWindowId
+                );
+                if (success) {
+                    global.log("Voice Recognition: Restored focus to window ID: " + this.savedWindowId);
+                    return true;
+                }
+            }
+        } catch (e) {
+            global.log("Voice Recognition: Failed to restore window focus: " + e);
+        }
+        return false;
+    },
+
+    _autoTypeText: function(text) {
+        try {
+            if (!text || typeof text !== 'string') {
+                global.log("Voice Recognition: Invalid text for auto-typing");
+                return;
+            }
+            
+            // xdotool 사용 가능 여부 확인
+            let [xdotoolExists] = GLib.spawn_command_line_sync("/usr/bin/which xdotool");
+            if (!xdotoolExists) {
+                global.log("Voice Recognition: xdotool not installed, falling back to clipboard");
+                this._copyToClipboard(text);
+                this._showNotification("Auto-type Unavailable", "xdotool이 설치되지 않았습니다. 클립보드에 복사되었습니다.");
+                return;
+            }
+            
+            // 입력 지연 시간 설정
+            let delay = this.settings.getValue("auto-input-delay") || 100;
+            
+            // 저장된 창으로 포커스 복원 후 텍스트 입력
+            GLib.timeout_add(GLib.PRIORITY_DEFAULT, 200, Lang.bind(this, function() {
+                try {
+                    // 창 포커스 복원
+                    if (this.savedWindowId) {
+                        this._restoreActiveWindow();
+                        
+                        // 창 활성화 후 추가 대기
+                        GLib.timeout_add(GLib.PRIORITY_DEFAULT, 300, Lang.bind(this, function() {
+                            try {
+                                // 텍스트를 안전하게 이스케이프
+                                let escapedText = text.replace(/'/g, "'\\''");
+                                
+                                // xdotool type 명령으로 텍스트 입력
+                                let typeCommand = "/usr/bin/xdotool type --delay " + delay + " '" + escapedText + "'";
+                                let [typeSuccess] = GLib.spawn_command_line_sync(typeCommand);
+                                
+                                if (typeSuccess) {
+                                    global.log("Voice Recognition: Text auto-typed successfully");
+                                } else {
+                                    throw new Error("xdotool type command failed");
+                                }
+                            } catch (e) {
+                                global.log("Voice Recognition: Auto-type error: " + e);
+                                this._copyToClipboard(text);
+                                this._showNotification("Auto-type Failed", "텍스트가 대신 클립보드에 복사되었습니다.");
+                            }
+                            return GLib.SOURCE_REMOVE;
+                        }));
+                    } else {
+                        // 저장된 창 ID가 없으면 현재 창에 입력
+                        let escapedText = text.replace(/'/g, "'\\''");
+                        let typeCommand = "/usr/bin/xdotool type --delay " + delay + " '" + escapedText + "'";
+                        GLib.spawn_command_line_sync(typeCommand);
+                        global.log("Voice Recognition: Text typed to current window");
+                    }
+                } catch (e) {
+                    global.log("Voice Recognition: Auto-type process error: " + e);
+                    this._copyToClipboard(text);
+                    this._showNotification("Auto-type Failed", "텍스트가 대신 클립보드에 복사되었습니다.");
+                }
+                return GLib.SOURCE_REMOVE;
+            }));
+            
+        } catch (e) {
+            global.log("Voice Recognition: Auto-type setup error: " + e);
+            this._copyToClipboard(text);
+        }
+    },
+
     _copyLastText: function() {
         if (this.lastRecognizedText) {
-            this._copyToClipboard(this.lastRecognizedText);
-            this._showNotification("Copy Complete", "마지막 텍스트를 다시 복사했습니다:\n" + this.lastRecognizedText);
+            if (this.settings.getValue("output-method") === "auto-type") {
+                this._autoTypeText(this.lastRecognizedText);
+                this._showNotification("Auto-type Complete", "마지막 텍스트를 다시 입력했습니다:\n" + this.lastRecognizedText);
+            } else {
+                this._copyToClipboard(this.lastRecognizedText);
+                this._showNotification("Copy Complete", "마지막 텍스트를 다시 복사했습니다:\n" + this.lastRecognizedText);
+            }
         } else {
             this._showNotification("Notification", "No text to copy.");
         }
