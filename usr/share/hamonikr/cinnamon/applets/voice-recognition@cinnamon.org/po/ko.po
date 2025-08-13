@@ -203,3 +203,41 @@ msgstr "Vosk 모델 디렉토리 경로를 선택하세요"
 
 msgid "Keyboard shortcut to start/stop voice recognition"
 msgstr "음성 인식 시작/중지 키보드 단축키"
+
+# Output behavior settings
+msgid "Output Behavior"
+msgstr "출력 동작"
+
+msgid "Output Method"
+msgstr "출력 방법"
+
+msgid "Choose how recognized text should be output"
+msgstr "인식된 텍스트를 어떻게 출력할지 선택하세요"
+
+msgid "Copy to Clipboard"
+msgstr "클립보드에 복사"
+
+msgid "Auto-type in Focused Window"
+msgstr "포커스된 창에 자동 입력"
+
+msgid "Auto-type Delay"
+msgstr "자동 입력 지연"
+
+msgid "Delay between keystrokes when auto-typing (milliseconds)"
+msgstr "자동 입력 시 키 입력 간격 (밀리초)"
+
+# Additional missing translations
+msgid "Auto-type Unavailable"
+msgstr "자동 입력 사용 불가"
+
+msgid "Auto-type Failed"
+msgstr "자동 입력 실패"
+
+msgid "Auto-type Complete"
+msgstr "자동 입력 완료"
+
+msgid " API call failed: "
+msgstr " API 호출 실패: "
+
+msgid "Voice Recognition Applet"
+msgstr "음성 인식 애플릿"

@@ -91,9 +91,6 @@ msgstr "Clipboard is empty."
 msgid "Clipboard Content"
 msgstr "Clipboard Content"
 
-msgid "Error"
-msgstr "Error"
-
 msgid "Failed to start recording: "
 msgstr "Failed to start recording: "
 
@@ -133,8 +130,50 @@ msgstr "Clipboard reading failed"
 msgid "Clipboard check failed: "
 msgstr "Clipboard check failed: "
 
-msgid "Missing Dependencies"
-msgstr "Missing Dependencies"
+msgid "OpenAI API call failed: "
+msgstr "OpenAI API call failed: "
 
-msgid "The following packages are required:\\n"
-msgstr "The following packages are required:\\n" 
+msgid "Google Speech API call failed: "
+msgstr "Google Speech API call failed: "
+
+msgid "Vosk API call failed: "
+msgstr "Vosk API call failed: "
+
+msgid "Local Whisper API call failed: "
+msgstr "Local Whisper API call failed: "
+
+msgid " API call failed: "
+msgstr " API call failed: "
+
+msgid "Auto-type Unavailable"
+msgstr "Auto-type Unavailable"
+
+msgid "Auto-type Failed"
+msgstr "Auto-type Failed"
+
+msgid "Auto-type Complete"
+msgstr "Auto-type Complete"
+
+msgid "Output Behavior"
+msgstr "Output Behavior"
+
+msgid "Output Method"
+msgstr "Output Method"
+
+msgid "Choose how recognized text should be output"
+msgstr "Choose how recognized text should be output"
+
+msgid "Copy to Clipboard"
+msgstr "Copy to Clipboard"
+
+msgid "Auto-type in Focused Window"
+msgstr "Auto-type in Focused Window"
+
+msgid "Auto-type Delay"
+msgstr "Auto-type Delay"
+
+msgid "Delay between keystrokes when auto-typing (milliseconds)"
+msgstr "Delay between keystrokes when auto-typing (milliseconds)"
+
+msgid "Voice Recognition Applet"
+msgstr "Voice Recognition Applet"

@@ -296,7 +296,7 @@ VoiceRecognitionApplet.prototype = {
         }
         
         if (missing.length > 0) {
-            this._showNotification("Missing Dependencies", 
+            this._showNotification(_("Missing Dependencies"), 
                 "다음 패키지를 설치해주세요: " + missing.join(', ') + 
                 "\nsudo apt install alsa-utils xclip");
             this._updateStatus("의존성 누락: " + missing.join(', '));
@@ -396,7 +396,7 @@ VoiceRecognitionApplet.prototype = {
             
         } catch (e) {
             global.logError("Recording start error: " + e);
-            this._showNotification("Error", "Failed to start recording: " + e.message);
+            this._showNotification(_("Error"), _("Failed to start recording: ") + e.message);
             this._resetRecordingState();
         }
     },
@@ -432,7 +432,7 @@ VoiceRecognitionApplet.prototype = {
             
         } catch (e) {
             global.logError("Recording stop error: " + e);
-            this._showNotification("Error", "Failed to stop recording: " + e.message);
+            this._showNotification(_("Error"), _("Failed to stop recording: ") + e.message);
             this._resetRecordingState();
         }
     },
@@ -469,7 +469,7 @@ VoiceRecognitionApplet.prototype = {
                             errorMsg.includes("Device or resource busy") ||
                             errorMsg.includes("Invalid argument") ||
                             errorMsg.includes("No such device")) {
-                            this._showNotification("Recording Error", "Microphone access failed: " + errorMsg);
+                            this._showNotification(_("Recording Error"), _("Microphone access failed: ") + errorMsg);
                             this._resetRecordingState();
                             return;
                         }
@@ -550,7 +550,7 @@ VoiceRecognitionApplet.prototype = {
             
         } catch (e) {
             global.logError("Audio processing error: " + e);
-            this._showNotification("Error", "Audio processing failed: " + e.message);
+            this._showNotification(_("Error"), _("Audio processing failed: ") + e.message);
             this._resetRecordingState();
         }
     },
@@ -590,7 +590,7 @@ VoiceRecognitionApplet.prototype = {
             
         } catch (e) {
             global.logError("API call error: " + e);
-            this._showNotification("Error", "API call failed: " + e.message);
+            this._showNotification(_("Error"), _("API call failed: ") + e.message);
             this._resetRecordingState();
         }
     },
@@ -605,7 +605,7 @@ VoiceRecognitionApplet.prototype = {
         // 타임아웃 설정 (30초)
         let timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 30000, Lang.bind(this, function() {
             global.log("Voice Recognition: API call timeout");
-            this._showNotification("Error", "API response timeout");
+            this._showNotification(_("Error"), _("API response timeout"));
             this._resetRecordingState();
             if (pid > 0) {
                 try {
@@ -676,7 +676,7 @@ VoiceRecognitionApplet.prototype = {
                         }
                     } else {
                         // 응답이 없으면 에러 처리
-                        this._showNotification("Error", "No API response received.");
+                        this._showNotification(_("Error"), _("No API response received."));
                         this._resetRecordingState();
                         if (pid > 0) {
                             try {
@@ -688,7 +688,7 @@ VoiceRecognitionApplet.prototype = {
                     }
                 } catch (e) {
                     global.log("Voice Recognition: API response read error: " + e);
-                    this._showNotification("Error", "API response processing failed: " + e.message);
+                    this._showNotification(_("Error"), _("API response processing failed: ") + e.message);
                     this._resetRecordingState();
                     if (pid > 0) {
                         try {
@@ -705,7 +705,7 @@ VoiceRecognitionApplet.prototype = {
                 GLib.source_remove(timeoutId);
             }
             global.log("Voice Recognition: API response read setup error: " + e);
-            this._showNotification("Error", "API response reading failed: " + e.message);
+            this._showNotification(_("Error"), _("API response reading failed: ") + e.message);
             this._resetRecordingState();
         }
     },
@@ -737,17 +737,19 @@ VoiceRecognitionApplet.prototype = {
             if (this.settings.getValue("output-method") === "auto-type") {
                 // 포커스된 창에 자동 입력
                 this._autoTypeText(text.trim());
-                this._showNotification("Voice Recognition Complete", "텍스트가 자동 입력되었습니다:\n" + text.substring(0, 50) + (text.length > 50 ? "..." : ""));
+                // this._showNotification("Voice Recognition Complete", "텍스트가 자동 입력되었습니다:\n" + text.substring(0, 50) + (text.length > 50 ? "..." : ""));
+                this._showNotification(_("Voice Recognition Complete"), "");
             } else {
                 // 클립보드에 복사 (기본)
                 this._copyToClipboard(text.trim());
-                this._showNotification("Voice Recognition Complete", "텍스트가 클립보드에 복사되었습니다:\n" + text.substring(0, 50) + (text.length > 50 ? "..." : ""));
+                // this._showNotification("Voice Recognition Complete", "텍스트가 클립보드에 복사되었습니다:\n" + text.substring(0, 50) + (text.length > 50 ? "..." : ""));
+                this._showNotification(_("Voice Recognition Complete"), "텍스트가 클립보드에 복사되었습니다");
             }
             this._updateStatus(_("Complete: ") + text.substring(0, 30) + (text.length > 30 ? "..." : ""));
             
         } catch (e) {
             global.logError("API response error: " + e);
-            this._showNotification("Error", "Voice recognition failed: " + e.message);
+            this._showNotification(_("Error"), _("Voice recognition failed: ") + e.message);
             this._updateStatus(_("Recognition Failed"));
         } finally {
             this._resetRecordingState();
@@ -776,7 +778,7 @@ VoiceRecognitionApplet.prototype = {
             
         } catch (e) {
             global.logError("OpenAI API call error: " + e);
-            this._showNotification("Error", "OpenAI API call failed: " + e.message);
+            this._showNotification(_("Error"), _("OpenAI API call failed: ") + e.message);
             this._resetRecordingState();
         }
     },
@@ -826,7 +828,7 @@ VoiceRecognitionApplet.prototype = {
             
         } catch (e) {
             global.logError("Google Speech API call error: " + e);
-            this._showNotification("Error", "Google Speech API call failed: " + e.message);
+            this._showNotification(_("Error"), _("Google Speech API call failed: ") + e.message);
             this._resetRecordingState();
         }
     },
@@ -883,7 +885,7 @@ except Exception as e:
             
         } catch (e) {
             global.logError("Vosk API call error: " + e);
-            this._showNotification("Error", "Vosk API call failed: " + e.message);
+            this._showNotification(_("Error"), _("Vosk API call failed: ") + e.message);
             this._resetRecordingState();
         }
     },
@@ -900,7 +902,7 @@ except Exception as e:
             
         } catch (e) {
             global.logError("Local Whisper API call error: " + e);
-            this._showNotification("Error", "Local Whisper API call failed: " + e.message);
+            this._showNotification(_("Error"), _("Local Whisper API call failed: ") + e.message);
             this._resetRecordingState();
         }
     },
@@ -930,7 +932,7 @@ except Exception as e:
             
         } catch (e) {
             global.logError(engineName + " API call error: " + e);
-            this._showNotification("Error", engineName + " API call failed: " + e.message);
+            this._showNotification(_("Error"), engineName + _(" API call failed: ") + e.message);
             this._resetRecordingState();
             
             // 임시 파일 정리
@@ -1055,7 +1057,7 @@ except Exception as e:
             if (!xdotoolExists) {
                 global.log("Voice Recognition: xdotool not installed, falling back to clipboard");
                 this._copyToClipboard(text);
-                this._showNotification("Auto-type Unavailable", "xdotool이 설치되지 않았습니다. 클립보드에 복사되었습니다.");
+                this._showNotification(_("Auto-type Unavailable"), "xdotool이 설치되지 않았습니다. 클립보드에 복사되었습니다.");
                 return;
             }
             
@@ -1087,7 +1089,7 @@ except Exception as e:
                             } catch (e) {
                                 global.log("Voice Recognition: Auto-type error: " + e);
                                 this._copyToClipboard(text);
-                                this._showNotification("Auto-type Failed", "텍스트가 대신 클립보드에 복사되었습니다.");
+                                this._showNotification(_("Auto-type Failed"), "텍스트가 대신 클립보드에 복사되었습니다.");
                             }
                             return GLib.SOURCE_REMOVE;
                         }));
@@ -1101,7 +1103,7 @@ except Exception as e:
                 } catch (e) {
                     global.log("Voice Recognition: Auto-type process error: " + e);
                     this._copyToClipboard(text);
-                    this._showNotification("Auto-type Failed", "텍스트가 대신 클립보드에 복사되었습니다.");
+                    this._showNotification(_("Auto-type Failed"), "텍스트가 대신 클립보드에 복사되었습니다.");
                 }
                 return GLib.SOURCE_REMOVE;
             }));
@@ -1116,13 +1118,13 @@ except Exception as e:
         if (this.lastRecognizedText) {
             if (this.settings.getValue("output-method") === "auto-type") {
                 this._autoTypeText(this.lastRecognizedText);
-                this._showNotification("Auto-type Complete", "마지막 텍스트를 다시 입력했습니다:\n" + this.lastRecognizedText);
+                this._showNotification(_("Auto-type Complete"), "마지막 텍스트를 다시 입력했습니다:\n" + this.lastRecognizedText);
             } else {
                 this._copyToClipboard(this.lastRecognizedText);
-                this._showNotification("Copy Complete", "마지막 텍스트를 다시 복사했습니다:\n" + this.lastRecognizedText);
+                this._showNotification(_("Copy Complete"), "마지막 텍스트를 다시 복사했습니다:\n" + this.lastRecognizedText);
             }
         } else {
-            this._showNotification("Notification", "No text to copy.");
+            this._showNotification(_("Notification"), _("No text to copy."));
         }
     },
 
@@ -1132,15 +1134,15 @@ except Exception as e:
             if (success) {
                 let clipboardText = output.toString();
                 if (clipboardText.trim() === "") {
-                    this._showNotification("Clipboard", "Clipboard is empty.");
+                    this._showNotification(_("Clipboard"), _("Clipboard is empty."));
                 } else {
-                    this._showNotification("Clipboard Content", clipboardText.substring(0, 100) + (clipboardText.length > 100 ? "..." : ""));
+                    this._showNotification(_("Clipboard Content"), clipboardText.substring(0, 100) + (clipboardText.length > 100 ? "..." : ""));
                 }
             } else {
-                this._showNotification("Error", "Clipboard reading failed");
+                this._showNotification(_("Error"), _("Clipboard reading failed"));
             }
         } catch (e) {
-            this._showNotification("Error", "Clipboard check failed: " + e.message);
+            this._showNotification(_("Error"), _("Clipboard check failed: ") + e.message);
         }
     },
 
@@ -1234,7 +1236,7 @@ except Exception as e:
             let safeTitle = title.replace(/'/g, "\\'").replace(/"/g, '\\"');
             let safeMessage = message.replace(/'/g, "\\'").replace(/"/g, '\\"');
             
-            let command = ["notify-send", safeTitle, safeMessage, "--icon=audio-input-microphone", "--expire-time=3000"];
+            let command = ["notify-send", safeTitle, safeMessage, "--icon=audio-input-microphone", "--expire-time=2000"];
             
             let [success] = GLib.spawn_async(
                 null, // working directory
