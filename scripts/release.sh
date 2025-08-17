@@ -136,12 +136,15 @@ if [ -f "debian/changelog" ]; then
     DISTRIBUTION=$(head -n1 debian/changelog | awk '{print $3}' | tr -d ';' || echo "unstable")
     
     # 변경사항 수집 (master와 dev 브랜치 간 차이)
-    CHANGELOG_ENTRIES=""
+    CHANGELOG_ENTRIES_FOR_DCH=""    # dch용 (* 없이)
+    CHANGELOG_ENTRIES_FOR_MANUAL="" # 수동 업데이트용 (* 포함)
+    
     while IFS= read -r line; do
         # 커밋 메시지에서 feat:, fix:, chore: 등을 제거하고 정리
         CLEAN_MSG=$(echo "$line" | sed -E 's/^[a-f0-9]+ //' | sed -E 's/^(feat|fix|chore|docs|style|refactor|test|build):\s*//')
         if [ -n "$CLEAN_MSG" ]; then
-            CHANGELOG_ENTRIES="${CHANGELOG_ENTRIES}  * ${CLEAN_MSG}\n"
+            CHANGELOG_ENTRIES_FOR_DCH="${CHANGELOG_ENTRIES_FOR_DCH}${CLEAN_MSG}\n"
+            CHANGELOG_ENTRIES_FOR_MANUAL="${CHANGELOG_ENTRIES_FOR_MANUAL}  * ${CLEAN_MSG}\n"
         fi
     done < <(git --no-pager log --oneline origin/master..origin/dev --pretty=format:"%h %s")
     
@@ -153,13 +156,13 @@ if [ -f "debian/changelog" ]; then
         DEBFULLNAME="${DEBFULLNAME:-HamoniKR}" \
         dch --newversion "${NEW_VERSION}" --distribution "$DISTRIBUTION" "Release ${NEW_TAG}" || DO_MANUAL_UPDATE=true
 
-        # 변경사항 추가 (dch가 성공했을 때만 시도)
-        if [ "$DO_MANUAL_UPDATE" = false ] && [ -n "$CHANGELOG_ENTRIES" ]; then
+        # 변경사항 추가 (dch가 성공했을 때만 시도) - dch는 자동으로 * 를 추가하므로 * 없이 전달
+        if [ "$DO_MANUAL_UPDATE" = false ] && [ -n "$CHANGELOG_ENTRIES_FOR_DCH" ]; then
             while IFS= read -r entry; do
                 if [ -n "$entry" ]; then
                     dch --append "$entry" || DO_MANUAL_UPDATE=true
                 fi
-            done < <(echo -e "$CHANGELOG_ENTRIES")
+            done < <(echo -e "$CHANGELOG_ENTRIES_FOR_DCH")
         fi
     else
         DO_MANUAL_UPDATE=true
@@ -173,8 +176,8 @@ if [ -f "debian/changelog" ]; then
 
         # 새 changelog 엔트리 생성
         NEW_ENTRY="$PKG_NAME (${NEW_VERSION}) $DISTRIBUTION; urgency=medium\n\n"
-        if [ -n "$CHANGELOG_ENTRIES" ]; then
-            NEW_ENTRY="${NEW_ENTRY}${CHANGELOG_ENTRIES}"
+        if [ -n "$CHANGELOG_ENTRIES_FOR_MANUAL" ]; then
+            NEW_ENTRY="${NEW_ENTRY}${CHANGELOG_ENTRIES_FOR_MANUAL}"
         else
             NEW_ENTRY="${NEW_ENTRY}  * Release ${NEW_TAG}\n"
         fi
