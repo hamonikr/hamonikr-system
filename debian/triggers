@@ -3,3 +3,5 @@ interest-noawait /etc/os-release
 interest-noawait /etc/issue
 interest-noawait /etc/issue.net
 interest-noawait /etc/hamonikr/adjustments
+interest-noawait /boot/grub/grub.cfg
+interest-noawait /etc/default/grub
