@@ -1,0 +1,68 @@
+#!/bin/bash
+# HamoniKR update-grub wrapper installer
+# This script installs the update-grub wrapper to automatically adjust GRUB title
+
+readonly SCRIPT_NAME=$(basename $0)
+readonly WRAPPER_SOURCE="/usr/lib/hamonikr/hamonikr-system/update-grub-wrapper"
+readonly UPDATE_GRUB_PATH="/usr/sbin/update-grub"
+readonly ORIGINAL_BACKUP="/usr/sbin/update-grub.original"
+
+log() {
+    echo "$@"
+    logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+    echo "$@" >&2
+    logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+# Check if wrapper source exists
+if [ ! -f "$WRAPPER_SOURCE" ]; then
+    err "Wrapper source not found: $WRAPPER_SOURCE"
+    exit 1
+fi
+
+# Check if update-grub exists
+if [ ! -f "$UPDATE_GRUB_PATH" ]; then
+    err "update-grub not found: $UPDATE_GRUB_PATH"
+    exit 1
+fi
+
+# Skip if wrapper is already installed
+if grep -q "HamoniKR update-grub wrapper" "$UPDATE_GRUB_PATH" 2>/dev/null; then
+    log "HamoniKR update-grub wrapper is already installed"
+    exit 0
+fi
+
+# Backup original update-grub if not already backed up
+if [ ! -f "$ORIGINAL_BACKUP" ]; then
+    log "Backing up original update-grub to $ORIGINAL_BACKUP"
+    cp "$UPDATE_GRUB_PATH" "$ORIGINAL_BACKUP"
+    if [ $? -ne 0 ]; then
+        err "Failed to backup original update-grub"
+        exit 1
+    fi
+fi
+
+# Install the wrapper
+log "Installing HamoniKR update-grub wrapper"
+cp "$WRAPPER_SOURCE" "$UPDATE_GRUB_PATH"
+if [ $? -ne 0 ]; then
+    err "Failed to install wrapper"
+    # Restore original if copy failed
+    [ -f "$ORIGINAL_BACKUP" ] && cp "$ORIGINAL_BACKUP" "$UPDATE_GRUB_PATH"
+    exit 1
+fi
+
+# Set execute permissions
+chmod +x "$UPDATE_GRUB_PATH"
+if [ $? -ne 0 ]; then
+    err "Failed to set execute permissions"
+    exit 1
+fi
+
+log "HamoniKR update-grub wrapper installed successfully"
+log "Now update-grub will automatically adjust GRUB title after execution"
+
+exit 0

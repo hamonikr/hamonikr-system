@@ -30,6 +30,11 @@ case "$1" in
             systemctl daemon-reload
         fi
 
+        # Remove HamoniKR update-grub wrapper
+        if [ -f /etc/hamonikr/adjustments/15-remove-update-grub-wrapper.remove ]; then
+            /etc/hamonikr/adjustments/15-remove-update-grub-wrapper.remove || true
+        fi
+
         # Apply HamoniKR OS infomation in system
         [ -f /etc/hamonikr/.bak/issue.bak ] && cp -f /etc/hamonikr/.bak/issue.bak /etc/issue
         [ -f /etc/hamonikr/.bak/issue.net.bak ] && cp -f /etc/hamonikr/.bak/issue.net.bak /etc/issue.net

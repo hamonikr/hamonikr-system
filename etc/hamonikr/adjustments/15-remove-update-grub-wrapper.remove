@@ -1,0 +1,48 @@
+#!/bin/bash
+# HamoniKR update-grub wrapper remover
+# This script removes the update-grub wrapper and restores the original
+
+readonly SCRIPT_NAME=$(basename $0)
+readonly UPDATE_GRUB_PATH="/usr/sbin/update-grub"
+readonly ORIGINAL_BACKUP="/usr/sbin/update-grub.original"
+
+log() {
+    echo "$@"
+    logger -p user.notice -t $SCRIPT_NAME "$@"
+}
+
+err() {
+    echo "$@" >&2
+    logger -p user.error -t $SCRIPT_NAME [ERROR] "$@"
+}
+
+# Check if wrapper is installed
+if [ ! -f "$UPDATE_GRUB_PATH" ]; then
+    log "update-grub not found, nothing to restore"
+    exit 0
+fi
+
+if ! grep -q "HamoniKR update-grub wrapper" "$UPDATE_GRUB_PATH" 2>/dev/null; then
+    log "HamoniKR wrapper is not installed, nothing to restore"
+    exit 0
+fi
+
+# Restore original if backup exists
+if [ -f "$ORIGINAL_BACKUP" ]; then
+    log "Restoring original update-grub from $ORIGINAL_BACKUP"
+    cp "$ORIGINAL_BACKUP" "$UPDATE_GRUB_PATH"
+    if [ $? -eq 0 ]; then
+        log "Original update-grub restored successfully"
+        # Remove backup file
+        rm -f "$ORIGINAL_BACKUP"
+        log "Backup file removed"
+    else
+        err "Failed to restore original update-grub"
+        exit 1
+    fi
+else
+    log "No backup found, cannot restore original update-grub"
+    log "You may need to reinstall grub-common package"
+fi
+
+exit 0

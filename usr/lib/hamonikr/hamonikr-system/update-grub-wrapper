@@ -1,0 +1,37 @@
+#!/bin/bash
+# HamoniKR update-grub wrapper with automatic title adjustment
+# This wrapper ensures GRUB title is always correctly set after update-grub
+
+# Store original update-grub location
+ORIGINAL_UPDATE_GRUB="/usr/sbin/update-grub.original"
+
+# If original doesn't exist, this is the first time - backup the original
+if [ ! -f "$ORIGINAL_UPDATE_GRUB" ]; then
+    if [ -f "/usr/sbin/update-grub" ] && [ ! -L "/usr/sbin/update-grub" ]; then
+        cp /usr/sbin/update-grub "$ORIGINAL_UPDATE_GRUB"
+    else
+        # Fallback to grub-mkconfig
+        ORIGINAL_UPDATE_GRUB="/usr/sbin/grub-mkconfig"
+    fi
+fi
+
+# Run the original update-grub command with all arguments
+"$ORIGINAL_UPDATE_GRUB" "$@"
+UPDATE_GRUB_EXIT_CODE=$?
+
+# If update-grub was successful, adjust the GRUB title
+if [ $UPDATE_GRUB_EXIT_CODE -eq 0 ]; then
+    # Wait a moment for file operations to complete
+    sleep 0.5
+    
+    # Run HamoniKR title adjustment
+    if [ -f /etc/hamonikr/adjustments/10-adjust-grub-title.execute ]; then
+        /etc/hamonikr/adjustments/10-adjust-grub-title.execute
+        if [ $? -eq 0 ]; then
+            echo "HamoniKR GRUB title adjusted successfully."
+        fi
+    fi
+fi
+
+# Exit with the same code as update-grub
+exit $UPDATE_GRUB_EXIT_CODE
