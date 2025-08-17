@@ -13,7 +13,7 @@ const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const Settings = imports.ui.settings;
 
-const UUID = "voice-recognition@cinnamon.org";
+const UUID = "voice-recognition@hamonikr.org";
 
 // 다국어 지원 설정
 Gettext.bindtextdomain(UUID, "/usr/share/locale");
@@ -1337,6 +1337,10 @@ except Exception as e:
             
             // 단축키 설정
             this.settings.bind("toggle-shortcut", "toggleShortcut", this._onShortcutChanged);
+            
+            // 출력 방식 설정
+            this.settings.bind("output-method", "outputMethod", this._onSettingsChanged);
+            this.settings.bind("auto-input-delay", "autoInputDelay", this._onSettingsChanged);
             
             // 초기 단축키 설정
             this._setupGlobalShortcut();

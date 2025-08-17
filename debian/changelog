@@ -1,3 +1,14 @@
+hamonikr-system (8.3.3) unstable; urgency=medium
+
+  * Replace ask_openai command with hamonikr-chatbot -c
+   - Updated keyboard shortcut settings in set-user-env script
+   - Changed Ctrl+Alt+A shortcut to use hamonikr-chatbot -c instead of ask_openai
+  * Fix voice-recognition applet installation for existing users
+   - Added code to copy applet from /etc/skel/ to existing user home directories
+   - Fixed issue where existing users couldn't see the voice recognition applet
+
+ -- HamoniKR <pkg@hamonikr.org>  Thu, 14 Aug 2025 10:30:00 +0900
+
 hamonikr-system (8.3.2) unstable; urgency=medium
 
   * Fix applet voice-recognition@cinnamon.org

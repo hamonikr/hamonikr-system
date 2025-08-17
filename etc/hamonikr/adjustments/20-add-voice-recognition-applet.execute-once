@@ -13,36 +13,49 @@ err() {
 }
 
 if [ -f "/etc/hamonikr/info" ] ; then
-    # 음성인식 애플릿 설치
-    if [ -d /usr/share/hamonikr/cinnamon/applets/voice-recognition@cinnamon.org ] ; then
-        # 시스템 전역 애플릿 디렉토리에 복사
-        cp -ar /usr/share/hamonikr/cinnamon/applets/voice-recognition@cinnamon.org /usr/share/cinnamon/applets/
-        log "Voice recognition applet installed to /usr/share/cinnamon/applets/"
-        
-        # 권한 설정
-        chmod +x /usr/share/cinnamon/applets/voice-recognition@cinnamon.org/applet.js 2>/dev/null || true
-        
-        # 번역 파일 설치
-        if [ -d /usr/share/hamonikr/cinnamon/applets/voice-recognition@cinnamon.org/po ]; then
-            for po_file in /usr/share/hamonikr/cinnamon/applets/voice-recognition@cinnamon.org/po/*.po; do
-                if [ -f "$po_file" ]; then
-                    # 언어 코드 추출 (예: ko.po -> ko)
-                    lang=$(basename "$po_file" .po)
-                    
-                    # 로케일 디렉토리 생성
-                    mkdir -p "/usr/share/locale/$lang/LC_MESSAGES"
-                    
-                    # .po 파일을 .mo 파일로 컴파일
-                    if command -v msgfmt >/dev/null 2>&1; then
-                        msgfmt "$po_file" -o "/usr/share/locale/$lang/LC_MESSAGES/voice-recognition@cinnamon.org.mo"
-                        log "Voice recognition applet translation for $lang installed"
-                    fi
-                fi
-            done
-        fi
-        
-        log "Voice recognition applet setup completed"
-    else
-        log "Voice recognition applet source not found in /usr/share/hamonikr/cinnamon/applets/"
+    # 음성인식 애플릿은 이제 /etc/skel/.local/share/cinnamon/applets/에서 배포됩니다.
+    # 사용자 홈 디렉토리에 자동으로 복사되도록 skel 템플릿으로 관리됩니다.
+    
+    # 기존 시스템 전역 애플릿이 있다면 제거 (마이그레이션)
+    if [ -d /usr/share/cinnamon/applets/voice-recognition@cinnamon.org ]; then
+        rm -rf /usr/share/cinnamon/applets/voice-recognition@cinnamon.org
+        log "Removed old voice recognition applet from system directory"
     fi
+    
+    # 기존 사용자들을 위해 애플릿을 홈 디렉토리에 복사
+    for user_home in /home/*; do
+        if [ -d "$user_home" ] && [ "$(basename "$user_home")" != "lost+found" ]; then
+            username=$(basename "$user_home")
+            user_applet_dir="$user_home/.local/share/cinnamon/applets/voice-recognition@hamonikr.org"
+            
+            # 애플릿이 아직 설치되지 않은 경우에만 복사
+            if [ ! -d "$user_applet_dir" ] && [ -d "/etc/skel/.local/share/cinnamon/applets/voice-recognition@hamonikr.org" ]; then
+                mkdir -p "$user_home/.local/share/cinnamon/applets"
+                cp -r "/etc/skel/.local/share/cinnamon/applets/voice-recognition@hamonikr.org" "$user_applet_dir"
+                chown -R "$username":"$username" "$user_applet_dir"
+                log "Voice recognition applet copied to $username's home directory"
+            fi
+        fi
+    done
+    
+    # 번역 파일 설치 (새로운 이름으로)
+    if [ -d /etc/skel/.local/share/cinnamon/applets/voice-recognition@hamonikr.org/po ]; then
+        for po_file in /etc/skel/.local/share/cinnamon/applets/voice-recognition@hamonikr.org/po/*.po; do
+            if [ -f "$po_file" ]; then
+                # 언어 코드 추출 (예: ko.po -> ko)
+                lang=$(basename "$po_file" .po)
+                
+                # 로케일 디렉토리 생성
+                mkdir -p "/usr/share/locale/$lang/LC_MESSAGES"
+                
+                # .po 파일을 .mo 파일로 컴파일
+                if command -v msgfmt >/dev/null 2>&1; then
+                    msgfmt "$po_file" -o "/usr/share/locale/$lang/LC_MESSAGES/voice-recognition@hamonikr.org.mo"
+                    log "Voice recognition applet translation for $lang installed"
+                fi
+            fi
+        done
+    fi
+    
+    log "Voice recognition applet (voice-recognition@hamonikr.org) setup completed"
 fi
