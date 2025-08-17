@@ -1,3 +1,12 @@
+hamonikr-system (8.3.5) unstable; urgency=medium
+
+  * Release v8.3.5
+  *   * Implement HamoniKR update-grub wrapper installation and removal
+    scripts
+  *   * Remove GRUB title adjustment hook for HamoniKR
+
+ -- HamoniKR <pkg@hamonikr.org>  Sun, 17 Aug 2025 23:12:42 +0900
+
 hamonikr-system (8.3.4) unstable; urgency=medium
 
   * Release v8.3.4
