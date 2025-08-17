@@ -1,3 +1,13 @@
+hamonikr-system (8.3.4) unstable; urgency=medium
+
+  * Release v8.3.4
+  *   * Enhance touchpad functionality with new applet and configuration
+  *   * Update hamonikr-system to version 8.3.3
+  *   * 다국어 지원을 위한 알림 메시지 번역 추가 및 수정
+  *   * Update voice recognition applet to version 8.3.2
+
+ -- HamoniKR <pkg@hamonikr.org>  Sun, 17 Aug 2025 22:26:17 +0900
+
 hamonikr-system (8.3.3) unstable; urgency=medium
 
   * Replace ask_openai command with hamonikr-chatbot -c
